@@ -75,8 +75,15 @@ const educationData: Education[] = [
 ];
 
 const Education: FC = () => {
+  // Sort education by date (most recent first)
+  const sortedEducation = [...educationData].sort((a, b) => {
+    const dateA = new Date(a.period.split(' - ')[1] || a.period);
+    const dateB = new Date(b.period.split(' - ')[1] || b.period);
+    return dateB.getTime() - dateA.getTime();
+  });
+
   return (
-    <section id="education" className="py-16 sm:py-20 md:py-24 bg-gradient-to-br from-gray-50 to-blue-50">
+    <section id="education" className="py-16 sm:py-20 md:py-24 bg-gradient-to-br from-indigo-900 via-purple-900 to-blue-900">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial="initial"
@@ -88,8 +95,8 @@ const Education: FC = () => {
           {/* Section Header */}
           <div className="text-center mb-10 sm:mb-12 md:mb-16">
             <motion.div variants={fadeInUp}>
-              <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-3 sm:mb-4">Education</h2>
-              <p className="text-gray-600 text-sm sm:text-base leading-relaxed max-w-2xl mx-auto">
+              <h2 className="text-3xl sm:text-4xl font-bold text-white mb-3 sm:mb-4">Education</h2>
+              <p className="text-gray-300 text-sm sm:text-base leading-relaxed max-w-2xl mx-auto">
                 A strong foundation in engineering and environmental science, complemented by continuous learning
               </p>
             </motion.div>
@@ -98,9 +105,9 @@ const Education: FC = () => {
           {/* Education Timeline */}
           <div className="relative space-y-8">
             {/* Timeline Line */}
-            <div className="absolute left-0 sm:left-1/2 top-0 h-full w-px bg-blue-200 transform -translate-x-1/2" />
+            <div className="absolute left-0 sm:left-1/2 top-0 h-full w-px bg-purple-400/30 transform -translate-x-1/2" />
 
-            {educationData.map((education, index) => (
+            {sortedEducation.map((education, index) => (
               <motion.div
                 key={index}
                 variants={fadeInUp}
@@ -109,45 +116,45 @@ const Education: FC = () => {
                 }`}
               >
                 {/* Timeline Dot */}
-                <div className="absolute left-0 sm:left-1/2 top-0 w-4 h-4 rounded-full bg-blue-500 border-4 border-white shadow-md transform -translate-x-1/2" />
+                <div className="absolute left-0 sm:left-1/2 top-0 w-4 h-4 rounded-full bg-purple-400 border-4 border-indigo-900 shadow-md transform -translate-x-1/2" />
 
                 {/* Education Card */}
-                <div className="sm:w-[calc(100%-2rem)] bg-white rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden">
+                <div className="sm:w-[calc(100%-2rem)] bg-white/10 backdrop-blur-lg rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 group hover:bg-white/20">
                   <div className="p-4 sm:p-6 md:p-8">
                     {/* Card Header */}
                     <div className="flex flex-col sm:flex-row sm:items-start gap-4 mb-4 sm:mb-6">
-                      <div className="p-3 bg-blue-50 rounded-xl text-blue-600 w-fit">
+                      <div className="p-3 bg-purple-500/20 rounded-xl text-purple-300 w-fit group-hover:bg-purple-500/30 transition-colors">
                         <GraduationCap className="w-6 h-6 sm:w-8 sm:h-8" />
                       </div>
                       <div className="flex-grow">
-                        <h3 className="text-lg sm:text-xl font-semibold text-gray-900">{education.degree}</h3>
+                        <h3 className="text-lg sm:text-xl font-semibold text-white group-hover:text-purple-200 transition-colors">{education.degree}</h3>
                         <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-3 mt-1 sm:mt-2">
-                          <span className="text-blue-600 font-medium">{education.institution}</span>
+                          <span className="text-purple-300 font-medium group-hover:text-purple-200 transition-colors">{education.institution}</span>
                           <span className="hidden sm:block text-gray-400">•</span>
-                          <div className="flex items-center gap-1 text-sm text-gray-500">
+                          <div className="flex items-center gap-1 text-sm text-gray-300">
                             <Calendar className="w-4 h-4" />
                             <span>{education.period}</span>
                           </div>
                         </div>
                         <div className="flex items-center gap-2 mt-1">
-                          <MapPin className="w-4 h-4 text-gray-500" />
-                          <span className="text-sm text-gray-500">{education.location}</span>
+                          <MapPin className="w-4 h-4 text-gray-300" />
+                          <span className="text-sm text-gray-300">{education.location}</span>
                         </div>
                         <div className="flex items-center gap-2 mt-2">
-                          <Award className="w-4 h-4 text-blue-600" />
-                          <span className="text-sm font-medium text-blue-600">{education.score}</span>
+                          <Award className="w-4 h-4 text-purple-300" />
+                          <span className="text-sm font-medium text-purple-300">{education.score}</span>
                         </div>
                       </div>
                     </div>
 
                     {/* Achievements */}
                     <div className="mb-4 sm:mb-6">
-                      <h4 className="text-sm font-semibold text-gray-900 mb-2">Key Achievements</h4>
+                      <h4 className="text-sm font-semibold text-purple-300 mb-2 group-hover:text-purple-200 transition-colors">Key Achievements</h4>
                       <ul className="space-y-2 sm:space-y-3">
                         {education.achievements.map((achievement, i) => (
                           <li key={i} className="flex items-start gap-2 sm:gap-3">
-                            <div className="w-1.5 h-1.5 rounded-full bg-blue-500 mt-2 flex-shrink-0" />
-                            <span className="text-sm text-gray-600">{achievement}</span>
+                            <div className="w-1.5 h-1.5 rounded-full bg-purple-400 mt-2 flex-shrink-0" />
+                            <span className="text-sm text-gray-300 group-hover:text-gray-200 transition-colors">{achievement}</span>
                           </li>
                         ))}
                       </ul>
@@ -155,12 +162,12 @@ const Education: FC = () => {
 
                     {/* Courses */}
                     <div>
-                      <h4 className="text-sm font-semibold text-gray-900 mb-2">Key Courses</h4>
+                      <h4 className="text-sm font-semibold text-purple-300 mb-2 group-hover:text-purple-200 transition-colors">Key Courses</h4>
                       <div className="flex flex-wrap gap-2">
                         {education.courses.map((course, i) => (
                           <span
                             key={i}
-                            className="px-2 py-1 bg-gray-100 text-gray-700 rounded text-xs font-medium"
+                            className="px-2 py-1 bg-purple-500/20 text-purple-300 rounded text-xs font-medium group-hover:bg-purple-500/30 group-hover:text-purple-200 transition-colors"
                           >
                             {course}
                           </span>

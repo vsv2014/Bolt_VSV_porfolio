@@ -15,18 +15,22 @@ interface Experience {
 
 const experiences: Experience[] = [
   {
-    title: 'Full Stack Developer',
-    company: 'Yellow.ai',
-    period: 'July 2021 - Present',
-    location: 'Bangalore, India',
+    title: 'Software Engineer',
+    company: 'Kore.ai',
+    period: 'July 2022 - Present',
+    location: 'Hyderabad, India',
     description: 'Leading development of enterprise-grade conversational AI solutions.',
     achievements: [
       'Developed proactive web campaigns feature for enhanced user engagement',
       'Built comprehensive UI components for the bot builder platform',
       'Implemented AI-powered contact center solutions',
-      'Created automated dialing system for outbound campaigns'
+      'Created automated dialing system for outbound campaigns',
+      'Developed SmartAssist AI, improving query resolution time by 40%',
+      'Led the implementation of Unified-XO-Platform with modular UI components',
+      'Implemented Outbound Campaign Dialer system with predictive analytics',
+      'Optimized agent productivity through AI-driven automation'
     ],
-    technologies: ['Angular', 'Node.js', 'MongoDB', 'WebSocket', 'TypeScript']
+    technologies: ['Angular', 'Node.js', 'MongoDB', 'WebSocket', 'TypeScript', 'AI/ML']
   },
   {
     title: 'Research Assistant',
@@ -38,7 +42,10 @@ const experiences: Experience[] = [
       'Published research on dissolved oxygen saturation in Krishna River Basin',
       'Developed machine learning models for water quality prediction',
       'Created GIS-based watershed analysis tools',
-      'Implemented environmental data visualization systems'
+      'Implemented environmental data visualization systems',
+      'Developed regression models for water temperature prediction',
+      'Created QGIS-based watershed delineation tools',
+      'Implemented data analysis pipelines for environmental monitoring'
     ],
     technologies: ['Python', 'MATLAB', 'GIS', 'Machine Learning', 'Data Analysis']
   },
