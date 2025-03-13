@@ -88,8 +88,14 @@ const Experience: FC = () => {
   });
 
   return (
-    <section id="experience" className="py-16 sm:py-20 md:py-24 bg-gradient-to-br from-indigo-900 via-purple-900 to-blue-900">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="experience" className="py-16 sm:py-20 md:py-24 bg-gradient-to-br from-[#1a0b2e] via-[#2b1055] to-[#16213e] relative overflow-hidden">
+      {/* Glass Background Shapes */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute -top-1/2 -left-1/2 w-full h-full bg-[#7928ca]/10 rounded-full blur-3xl"></div>
+        <div className="absolute -bottom-1/2 -right-1/2 w-full h-full bg-[#00d4ff]/10 rounded-full blur-3xl"></div>
+      </div>
+
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div
           initial="initial"
           whileInView="animate"
@@ -110,7 +116,7 @@ const Experience: FC = () => {
           {/* Experience Timeline */}
           <div className="relative space-y-8">
             {/* Timeline Line */}
-            <div className="absolute left-0 sm:left-1/2 top-0 h-full w-px bg-purple-400/30 transform -translate-x-1/2" />
+            <div className="absolute left-0 sm:left-1/2 top-0 h-full w-px bg-gradient-to-b from-[#7928ca]/50 via-[#ff0080]/50 to-[#00d4ff]/50 transform -translate-x-1/2" />
 
             {sortedExperiences.map((experience, index) => (
               <motion.div
@@ -121,22 +127,22 @@ const Experience: FC = () => {
                 }`}
               >
                 {/* Timeline Dot */}
-                <div className="absolute left-0 sm:left-1/2 top-0 w-4 h-4 rounded-full bg-purple-400 border-4 border-indigo-900 shadow-md transform -translate-x-1/2" />
+                <div className="absolute left-0 sm:left-1/2 top-0 w-4 h-4 rounded-full bg-gradient-to-br from-[#7928ca] via-[#ff0080] to-[#00d4ff] border-4 border-[#1a0b2e]/50 shadow-lg transform -translate-x-1/2" />
 
                 {/* Experience Card */}
-                <div className="sm:w-[calc(100%-2rem)] bg-white/10 backdrop-blur-lg rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 group hover:bg-white/20">
+                <div className="sm:w-[calc(100%-2rem)] bg-white/10 backdrop-blur-lg rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 group hover:bg-white/20 border border-white/20">
                   <div className="p-4 sm:p-6 md:p-8">
                     {/* Card Header */}
                     <div className="flex flex-col sm:flex-row sm:items-start gap-4 mb-4 sm:mb-6">
-                      <div className="p-3 bg-purple-500/20 rounded-xl text-purple-300 w-fit group-hover:bg-purple-500/30 transition-colors">
+                      <div className="p-3 bg-gradient-to-br from-[#7928ca]/20 via-[#ff0080]/20 to-[#00d4ff]/20 rounded-xl text-[#e2c4ff] w-fit group-hover:from-[#7928ca]/30 group-hover:via-[#ff0080]/30 group-hover:to-[#00d4ff]/30 transition-colors backdrop-blur-sm border border-white/10">
                         <Building2 className="w-6 h-6 sm:w-8 sm:h-8" />
                       </div>
                       <div className="flex-grow">
-                        <h3 className="text-lg sm:text-xl font-semibold text-white group-hover:text-purple-200 transition-colors">{experience.title}</h3>
+                        <h3 className="text-lg sm:text-xl font-semibold text-white group-hover:text-[#e2c4ff] transition-colors">{experience.title}</h3>
                         <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-3 mt-1 sm:mt-2">
-                          <span className="text-purple-300 font-medium group-hover:text-purple-200 transition-colors">{experience.company}</span>
+                          <span className="text-[#e2c4ff] font-medium group-hover:text-[#ffb3d9] transition-colors">{experience.company}</span>
                           <span className="hidden sm:block text-gray-400">•</span>
-                          <div className="flex items-center gap-1 text-sm text-gray-300">
+                          <div className="flex items-center gap-1 text-sm text-[#b3e6ff]">
                             <Calendar className="w-4 h-4" />
                             <span>{experience.period}</span>
                           </div>
@@ -147,11 +153,11 @@ const Experience: FC = () => {
 
                     {/* Achievements */}
                     <div className="mb-4 sm:mb-6">
-                      <h4 className="text-sm font-semibold text-purple-300 mb-2 group-hover:text-purple-200 transition-colors">Key Achievements</h4>
+                      <h4 className="text-sm font-semibold text-[#e2c4ff] mb-2 group-hover:text-[#ffb3d9] transition-colors">Key Achievements</h4>
                       <ul className="space-y-2 sm:space-y-3">
                         {experience.achievements.map((achievement, i) => (
                           <li key={i} className="flex items-start gap-2 sm:gap-3">
-                            <div className="w-1.5 h-1.5 rounded-full bg-purple-400 mt-2 flex-shrink-0" />
+                            <div className="w-1.5 h-1.5 rounded-full bg-gradient-to-br from-[#7928ca] via-[#ff0080] to-[#00d4ff] mt-2 flex-shrink-0" />
                             <span className="text-sm text-gray-300 group-hover:text-gray-200 transition-colors">{achievement}</span>
                           </li>
                         ))}
@@ -160,12 +166,12 @@ const Experience: FC = () => {
 
                     {/* Technologies */}
                     <div>
-                      <h4 className="text-sm font-semibold text-purple-300 mb-2 group-hover:text-purple-200 transition-colors">Technologies Used</h4>
+                      <h4 className="text-sm font-semibold text-[#e2c4ff] mb-2 group-hover:text-[#ffb3d9] transition-colors">Technologies Used</h4>
                       <div className="flex flex-wrap gap-2">
                         {experience.technologies.map((tech, i) => (
                           <span
                             key={i}
-                            className="px-2 py-1 bg-purple-500/20 text-purple-300 rounded text-xs font-medium group-hover:bg-purple-500/30 group-hover:text-purple-200 transition-colors"
+                            className="px-2 py-1 bg-gradient-to-br from-[#7928ca]/20 via-[#ff0080]/20 to-[#00d4ff]/20 text-[#e2c4ff] rounded text-xs font-medium border border-white/10 group-hover:from-[#7928ca]/30 group-hover:via-[#ff0080]/30 group-hover:to-[#00d4ff]/30 group-hover:text-[#ffb3d9] transition-colors"
                           >
                             {tech}
                           </span>
