@@ -1,0 +1,86 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --base-url: "";
+}
+
+/* iOS Safe Area Support */
+.pt-safe {
+  padding-top: env(safe-area-inset-top);
+}
+
+.pb-safe {
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+/* Global Styles */
+body {
+  padding-top: 64px; /* Header height */
+  @apply bg-gray-50 text-gray-900;
+}
+
+/* Glass Card Effect */
+.glass-card {
+  @apply bg-white/10 backdrop-blur-lg border border-white/20 rounded-lg shadow-lg;
+}
+
+/* Gradient Text */
+.gradient-text {
+  @apply bg-gradient-to-r from-[#7928ca] via-[#ff0080] to-[#00d4ff] bg-clip-text text-transparent;
+}
+
+/* Navigation Links */
+.nav-link {
+  @apply text-gray-600 hover:text-blue-600 transition-colors;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  .container {
+    @apply px-4;
+  }
+  
+  .grid {
+    @apply grid-cols-1;
+  }
+}
+
+/* Image Loading */
+img {
+  @apply opacity-0 transition-opacity duration-300;
+}
+
+img.loaded {
+  @apply opacity-100;
+}
+
+/* Animation Classes */
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+/* Project Card Hover Effects */
+.project-card {
+  @apply transform transition-all duration-300;
+}
+
+.project-card:hover {
+  @apply -translate-y-2 shadow-xl;
+}
+
+/* Ensure images maintain aspect ratio */
+.aspect-square {
+  aspect-ratio: 1/1;
+  object-fit: cover;
+}

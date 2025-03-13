@@ -5,28 +5,29 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer base {
-  :root {
-    --primary: #7928ca;
-    --primary-hover: #9333ea;
-    --secondary: #00d4ff;
-    --secondary-hover: #38bdf8;
-    --accent: #ff0080;
-    --accent-hover: #f43f5e;
-    --text-primary: #e2c4ff;
-    --text-secondary: #b3e6ff;
-    --text-accent: #ffb3d9;
-    --bg-start: #1a0b2e;
-    --bg-middle: #2b1055;
-    --bg-end: #16213e;
-  }
+:root {
+  --primary: #7928ca;
+  --primary-hover: #9333ea;
+  --secondary: #00d4ff;
+  --secondary-hover: #38bdf8;
+  --accent: #ff0080;
+  --accent-hover: #f43f5e;
+  --text-primary: #e2c4ff;
+  --text-secondary: #b3e6ff;
+  --text-accent: #ffb3d9;
+  --bg-start: #1a0b2e;
+  --bg-middle: #2b1055;
+  --bg-end: #16213e;
+}
 
+@layer base {
   html {
     scroll-behavior: smooth;
   }
 
   body {
-    @apply bg-gradient-to-br from-[var(--bg-start)] via-[var(--bg-middle)] to-[var(--bg-end)] text-[var(--text-primary)];
+    background: linear-gradient(to bottom right, var(--bg-start), var(--bg-middle), var(--bg-end));
+    color: var(--text-primary);
     font-family: 'Space Grotesk', system-ui, sans-serif;
     margin: 0;
     line-height: 1.5;
@@ -40,32 +41,48 @@
 
 @layer components {
   .glass-card {
-    @apply bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl transition-all duration-300 ease-in-out hover:bg-white/15 hover:border-white/30 hover:-translate-y-1;
+    @apply bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl transition-all duration-300 ease-in-out;
+  }
+
+  .glass-card:hover {
+    @apply bg-white/20 border-white/30 -translate-y-1;
   }
 
   .gradient-text {
-    @apply bg-gradient-to-r from-[var(--primary)] via-[var(--accent)] to-[var(--secondary)] bg-clip-text text-transparent;
+    background: linear-gradient(to right, var(--primary), var(--accent), var(--secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
   }
 
   .gradient-button {
-    @apply bg-gradient-to-r from-[var(--primary)] via-[var(--accent)] to-[var(--secondary)] text-white px-6 py-3 rounded-lg border-none cursor-pointer transition-all duration-300 ease-in-out hover:from-[var(--primary-hover)] hover:via-[var(--accent-hover)] hover:to-[var(--secondary-hover)] hover:-translate-y-1;
+    background: linear-gradient(to right, var(--primary), var(--accent), var(--secondary));
+    @apply text-white px-6 py-3 rounded-lg border-none cursor-pointer transition-all duration-300 ease-in-out;
+  }
+
+  .gradient-button:hover {
+    background: linear-gradient(to right, var(--primary-hover), var(--accent-hover), var(--secondary-hover));
+    @apply -translate-y-1;
   }
 
   h1, h2, h3, h4, h5, h6 {
     font-family: 'Space Grotesk', system-ui, sans-serif;
     font-weight: 600;
     line-height: 1.2;
-    @apply gradient-text;
   }
 
   a {
-    @apply text-[var(--secondary)] transition-colors duration-300 ease-in-out hover:text-[var(--secondary-hover)];
+    color: var(--secondary);
+    @apply transition-colors duration-300 ease-in-out;
+  }
+
+  a:hover {
+    color: var(--secondary-hover);
   }
 
   p {
     font-size: 1.125rem;
     line-height: 1.6;
-    @apply text-[var(--text-secondary)];
+    color: var(--text-secondary);
   }
 
   .container {
@@ -94,14 +111,14 @@
   }
 
   h1 {
-    @apply text-3xl;
+    font-size: 1.875rem;
   }
 
   h2 {
-    @apply text-2xl;
+    font-size: 1.5rem;
   }
 
   p {
-    @apply text-base;
+    font-size: 1rem;
   }
 }
