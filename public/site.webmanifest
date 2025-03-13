@@ -17,7 +17,9 @@
   ],
   "start_url": "/Bolt_VSV_porfolio/",
   "scope": "/Bolt_VSV_porfolio/",
-  "theme_color": "#4338ca",
-  "background_color": "#312e81",
-  "display": "standalone"
+  "theme_color": "#2563eb",
+  "background_color": "#ffffff",
+  "display": "standalone",
+  "orientation": "portrait",
+  "description": "Professional portfolio showcasing full-stack development and environmental research"
 }

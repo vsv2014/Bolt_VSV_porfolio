@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { motion } from 'framer-motion';
 import { fadeInUp, staggerChildren, bounceIn } from '../../utils/animations';
-import { Github, Linkedin, Mail, Facebook } from 'lucide-react';
+import { Github, Linkedin, Mail, Facebook, Code2, Brain, Database } from 'lucide-react';
 import profilePic from '../../assets/VSV-portfolio-pp.jpeg';
 
 const Hero: FC = () => {
@@ -28,6 +28,27 @@ const Hero: FC = () => {
     }
   ];
 
+  const expertise = [
+    {
+      icon: <Code2 className="w-6 h-6" />,
+      title: 'Full Stack Development',
+      description: 'Building scalable web applications with modern technologies',
+      color: 'from-[#7928ca] to-[#ff0080]'
+    },
+    {
+      icon: <Brain className="w-6 h-6" />,
+      title: 'AI/ML Research',
+      description: 'Applying machine learning to environmental challenges',
+      color: 'from-[#ff0080] to-[#00d4ff]'
+    },
+    {
+      icon: <Database className="w-6 h-6" />,
+      title: 'Data Science',
+      description: 'Transforming environmental data into actionable insights',
+      color: 'from-[#00d4ff] to-[#7928ca]'
+    }
+  ];
+
   return (
     <motion.section
       initial="initial"
@@ -42,86 +63,121 @@ const Hero: FC = () => {
       </div>
 
       <div className="container mx-auto relative z-10">
-        <motion.div
-          variants={staggerChildren}
-          className="max-w-4xl mx-auto text-center"
-        >
-          {/* Profile Picture */}
-          <motion.div 
-            variants={bounceIn}
-            className="relative w-40 h-40 sm:w-48 sm:h-48 md:w-56 md:h-56 mx-auto mb-6 sm:mb-8"
+        <div className="grid md:grid-cols-2 gap-8 items-center max-w-6xl mx-auto">
+          {/* Left Side Content */}
+          <motion.div
+            variants={staggerChildren}
+            className="text-left space-y-6"
           >
-            <motion.img
-              initial={{ scale: 0.5, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              src={profilePic}
-              alt="Santhosh Vishal Veerannapet"
-              className="w-full h-full object-cover rounded-full border-8 border-white/10 shadow-2xl backdrop-blur-sm"
-            />
-            <div className="absolute -inset-4 border-4 border-purple-400/20 rounded-full animate-pulse"></div>
-          </motion.div>
-
-          <motion.div className="space-y-4 sm:space-y-6 mb-6 sm:mb-8">
             <motion.h1
               variants={fadeInUp}
-              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white px-4"
+              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white"
             >
-              Hi, I'm{' '}
-              <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#7928ca] via-[#ff0080] to-[#00d4ff]">
-                Veerannapet Santhosh Vishal
+              Innovating at the
+              <span className="block mt-2 bg-clip-text text-transparent bg-gradient-to-r from-[#7928ca] via-[#ff0080] to-[#00d4ff]">
+                Intersection of AI & Environment
               </span>
             </motion.h1>
 
-            <motion.div
-              variants={fadeInUp}
-              className="flex flex-col items-center gap-3 sm:gap-4"
-            >
-              <h2 className="text-lg sm:text-xl md:text-2xl text-gray-300 font-semibold px-4">
-                Full Stack Developer & Environmental Researcher
-              </h2>
-              <div className="flex flex-wrap justify-center gap-2 sm:gap-3 px-4">
-                <span className="px-3 py-1.5 sm:px-4 sm:py-2 bg-white/10 backdrop-blur-sm text-[#e2c4ff] rounded-full text-sm font-medium border border-[#7928ca]/20 hover:bg-white/20 transition-colors">
-                  Full Stack Development
-                </span>
-                <span className="px-3 py-1.5 sm:px-4 sm:py-2 bg-white/10 backdrop-blur-sm text-[#b3e6ff] rounded-full text-sm font-medium border border-[#00d4ff]/20 hover:bg-white/20 transition-colors">
-                  Environmental Research
-                </span>
-                <span className="px-3 py-1.5 sm:px-4 sm:py-2 bg-white/10 backdrop-blur-sm text-[#ffb3d9] rounded-full text-sm font-medium border border-[#ff0080]/20 hover:bg-white/20 transition-colors">
-                  Data Science
-                </span>
-              </div>
-            </motion.div>
-
             <motion.p
               variants={fadeInUp}
-              className="text-gray-300 max-w-2xl mx-auto leading-relaxed text-base sm:text-lg px-4"
+              className="text-gray-300 text-lg sm:text-xl leading-relaxed"
             >
-              Passionate about building innovative solutions at the intersection of technology and environmental science.
-              Currently focused on developing environmental monitoring systems and data-driven applications.
+              Full Stack Developer specializing in AI-driven environmental solutions. Building intelligent systems that bridge technology and sustainability.
             </motion.p>
+
+            <motion.div
+              variants={staggerChildren}
+              className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4"
+            >
+              {expertise.map((item, index) => (
+                <motion.div
+                  key={index}
+                  variants={fadeInUp}
+                  className="bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/20 hover:bg-white/20 transition-all group"
+                >
+                  <div className={`w-12 h-12 rounded-lg bg-gradient-to-r ${item.color} p-3 mb-3`}>
+                    {item.icon}
+                  </div>
+                  <h3 className="text-[#e2c4ff] font-semibold mb-2 group-hover:text-white transition-colors">
+                    {item.title}
+                  </h3>
+                  <p className="text-gray-400 text-sm group-hover:text-gray-300 transition-colors">
+                    {item.description}
+                  </p>
+                </motion.div>
+              ))}
+            </motion.div>
           </motion.div>
 
+          {/* Right Side Content */}
           <motion.div
             variants={staggerChildren}
-            className="flex justify-center items-center space-x-4 sm:space-x-6"
+            className="text-center"
           >
-            {socialLinks.map((link, index) => (
-              <motion.a
-                key={index}
-                href={link.href}
-                target="_blank"
-                rel="noopener noreferrer"
+            {/* Profile Picture */}
+            <motion.div 
+              variants={bounceIn}
+              className="relative w-40 h-40 sm:w-48 sm:h-48 md:w-56 md:h-56 mx-auto mb-6"
+            >
+              <motion.img
+                initial={{ scale: 0.5, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                transition={{ duration: 0.5, delay: 0.2 }}
+                src={profilePic}
+                alt="Santhosh Vishal Veerannapet"
+                className="w-full h-full object-cover rounded-full border-8 border-white/10 shadow-2xl backdrop-blur-sm"
+              />
+              <div className="absolute -inset-4 border-4 border-purple-400/20 rounded-full animate-pulse"></div>
+            </motion.div>
+
+            <motion.div className="space-y-4 mb-6">
+              <motion.h2
                 variants={fadeInUp}
-                whileHover={{ scale: 1.1, backgroundColor: 'rgba(255, 255, 255, 0.15)' }}
-                whileTap={{ scale: 0.9 }}
-                className={`p-3 bg-white/20 backdrop-blur-sm rounded-xl text-white transition-all duration-300 border border-white/10 ${link.color}`}
+                className="text-2xl sm:text-3xl font-bold text-white"
               >
-                {link.icon}
-              </motion.a>
-            ))}
+                <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#7928ca] via-[#ff0080] to-[#00d4ff]">
+                  Veerannapet Santhosh Vishal
+                </span>
+              </motion.h2>
+
+              <motion.div
+                variants={fadeInUp}
+                className="flex flex-wrap justify-center gap-2"
+              >
+                <span className="px-3 py-1.5 bg-white/10 backdrop-blur-sm text-[#e2c4ff] rounded-full text-sm font-medium border border-[#7928ca]/20 hover:bg-white/20 transition-colors">
+                  Full Stack Development
+                </span>
+                <span className="px-3 py-1.5 bg-white/10 backdrop-blur-sm text-[#b3e6ff] rounded-full text-sm font-medium border border-[#00d4ff]/20 hover:bg-white/20 transition-colors">
+                  Environmental Research
+                </span>
+                <span className="px-3 py-1.5 bg-white/10 backdrop-blur-sm text-[#ffb3d9] rounded-full text-sm font-medium border border-[#ff0080]/20 hover:bg-white/20 transition-colors">
+                  Data Science
+                </span>
+              </motion.div>
+            </motion.div>
+
+            <motion.div
+              variants={staggerChildren}
+              className="flex justify-center items-center space-x-4"
+            >
+              {socialLinks.map((link, index) => (
+                <motion.a
+                  key={index}
+                  href={link.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  variants={fadeInUp}
+                  whileHover={{ scale: 1.1, backgroundColor: 'rgba(255, 255, 255, 0.15)' }}
+                  whileTap={{ scale: 0.9 }}
+                  className={`p-3 bg-white/20 backdrop-blur-sm rounded-xl text-white transition-all duration-300 border border-white/10 ${link.color}`}
+                >
+                  {link.icon}
+                </motion.a>
+              ))}
+            </motion.div>
           </motion.div>
-        </motion.div>
+        </div>
       </div>
     </motion.section>
   );

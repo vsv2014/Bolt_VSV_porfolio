@@ -7,13 +7,12 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Inter', 'system-ui', 'sans-serif'],
+        sans: ['Space Grotesk', 'system-ui', 'sans-serif'],
+        mono: ['JetBrains Mono', 'monospace'],
       },
       animation: {
         'float': 'float 6s ease-in-out infinite',
         'fadeIn': 'fadeIn 0.5s ease-out forwards',
-        'slideUp': 'slideUp 0.5s ease-out forwards',
-        'pulse': 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
       },
       keyframes: {
         float: {
@@ -23,36 +22,37 @@ export default {
         fadeIn: {
           from: { opacity: '0' },
           to: { opacity: '1' },
-        },
-        slideUp: {
-          from: { 
-            opacity: '0',
-            transform: 'translateY(20px)',
-          },
-          to: { 
-            opacity: '1',
-            transform: 'translateY(0)',
-          },
-        },
-        pulse: {
-          '0%, 100%': { transform: 'scale(1)' },
-          '50%': { transform: 'scale(1.1)' },
-        },
+        }
       },
       colors: {
-        background: 'rgb(var(--background) / <alpha-value>)',
-        foreground: 'rgb(var(--foreground) / <alpha-value>)',
+        primary: {
+          DEFAULT: '#2563eb',
+          hover: '#1d4ed8',
+        },
+        secondary: {
+          DEFAULT: '#64748b',
+          hover: '#475569',
+        },
+        background: {
+          DEFAULT: '#ffffff',
+          alt: '#f8fafc',
+        },
+        text: {
+          DEFAULT: '#1a1a1a',
+          muted: '#4a5568',
+        }
       },
       container: {
         center: true,
         padding: '1rem',
         screens: {
-          '2xl': '1400px',
+          sm: '640px',
+          md: '768px',
+          lg: '1024px',
+          xl: '1280px',
         },
       },
     },
   },
-  plugins: [
-    require('tailwindcss-animate')
-  ],
+  plugins: [],
 }

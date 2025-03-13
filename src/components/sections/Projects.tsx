@@ -14,6 +14,7 @@ interface Project {
   category: ProjectCategory;
   githubUrl?: string;
   demoUrl?: string;
+  bgGradient: string;
 }
 
 const projects: Project[] = [
@@ -26,7 +27,8 @@ const projects: Project[] = [
     impact: 'Enhanced campaign effectiveness and user engagement through precise targeting',
     techStack: ['Angular', 'Node.js', 'MongoDB', 'WebSocket', 'TypeScript'],
     category: 'professional',
-    demoUrl: '#'
+    demoUrl: '#',
+    bgGradient: 'from-[#7928ca] via-[#ff0080] to-[#00d4ff]'
   },
   {
     title: 'Unified-XO-Platform',
@@ -36,7 +38,8 @@ const projects: Project[] = [
     impact: 'Streamlined virtual assistant development process',
     techStack: ['Angular', 'TypeScript', 'Node.js', 'WebSocket'],
     category: 'professional',
-    demoUrl: '#'
+    demoUrl: '#',
+    bgGradient: 'from-[#00d4ff] via-[#7928ca] to-[#ff0080]'
   },
   {
     title: 'SmartAssist AI',
@@ -46,7 +49,8 @@ const projects: Project[] = [
     techStack: ['Angular', 'AI/ML', 'Node.js', 'WebSocket'],
     impact: 'Improved query resolution time and agent efficiency',
     category: 'professional',
-    demoUrl: '#'
+    demoUrl: '#',
+    bgGradient: 'from-[#ff0080] via-[#00d4ff] to-[#7928ca]'
   },
   {
     title: 'Outbound Campaign Dialer',
@@ -56,7 +60,8 @@ const projects: Project[] = [
     techStack: ['Angular', 'Node.js', 'MongoDB', 'WebSocket'],
     impact: 'Increased agent productivity by 40% and improved connection rates',
     category: 'professional',
-    demoUrl: '#'
+    demoUrl: '#',
+    bgGradient: 'from-[#7928ca] to-[#00d4ff]'
   },
 
   // Research Projects
@@ -68,7 +73,8 @@ const projects: Project[] = [
     techStack: ['Python', 'Machine Learning', 'Data Analysis', 'R'],
     impact: 'Provided insights for treatment plant optimization',
     category: 'research',
-    githubUrl: 'https://github.com/vsv2014'
+    githubUrl: 'https://github.com/vsv2014',
+    bgGradient: 'from-[#00d4ff] to-[#7928ca]'
   },
   {
     title: 'River Water Temperature Estimation',
@@ -78,7 +84,8 @@ const projects: Project[] = [
     techStack: ['MATLAB', 'Python', 'Data Analysis', 'Machine Learning'],
     impact: 'Provided accurate temperature predictions for environmental monitoring',
     category: 'research',
-    githubUrl: 'https://github.com/vsv2014'
+    githubUrl: 'https://github.com/vsv2014',
+    bgGradient: 'from-[#ff0080] to-[#00d4ff]'
   },
   {
     title: 'Watershed Delineation Model',
@@ -88,7 +95,8 @@ const projects: Project[] = [
     techStack: ['QGIS', 'Python', 'Spatial Analysis'],
     impact: 'Streamlined watershed analysis process',
     category: 'research',
-    githubUrl: 'https://github.com/vsv2014'
+    githubUrl: 'https://github.com/vsv2014',
+    bgGradient: 'from-[#7928ca] to-[#ff0080]'
   },
 
   // Academic Projects
@@ -100,7 +108,8 @@ const projects: Project[] = [
     techStack: ['React', 'TypeScript', 'D3.js'],
     impact: 'Used by 500+ students with improved learning outcomes',
     category: 'academic',
-    githubUrl: 'https://github.com/vsv2014'
+    githubUrl: 'https://github.com/vsv2014',
+    bgGradient: 'from-[#00d4ff] via-[#7928ca] to-[#ff0080]'
   },
   {
     title: 'Ultimate Tic-Tac-Toe AI Bot',
@@ -110,7 +119,8 @@ const projects: Project[] = [
     techStack: ['Python', 'TensorFlow', 'Flask'],
     impact: 'Achieved 85% win rate against human players',
     category: 'academic',
-    githubUrl: 'https://github.com/vsv2014'
+    githubUrl: 'https://github.com/vsv2014',
+    bgGradient: 'from-[#ff0080] via-[#00d4ff] to-[#7928ca]'
   }
 ];
 
@@ -194,74 +204,75 @@ const Projects: FC = () => {
                 }`}
                 onClick={() => setSelectedProject(selectedProject === project.title ? null : project.title)}
               >
+                {/* Project Preview */}
+                <div className="relative aspect-video overflow-hidden">
+                  <div className={`absolute inset-0 bg-gradient-to-br ${project.bgGradient} opacity-50 group-hover:opacity-70 transition-opacity duration-300`}></div>
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="p-4 text-center">
+                      <div className="w-16 h-16 mx-auto mb-4 rounded-xl bg-white/10 backdrop-blur-sm flex items-center justify-center border border-white/20">
+                        {project.category === 'professional' && (
+                          <svg className="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                          </svg>
+                        )}
+                        {project.category === 'research' && (
+                          <svg className="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+                          </svg>
+                        )}
+                        {project.category === 'academic' && (
+                          <svg className="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                          </svg>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
                 <div className="p-6">
                   <h3 className="text-xl font-semibold text-white group-hover:text-[#e2c4ff] transition-colors mb-2">{project.title}</h3>
                   <p className="text-gray-300 text-sm mb-4 group-hover:text-gray-200 transition-colors">{project.description}</p>
                   
                   {/* Tech Stack */}
                   <div className="flex flex-wrap gap-2 mb-4">
-                    {project.techStack.map((tech) => (
+                    {project.techStack.map((tech, index) => (
                       <span
-                        key={tech}
-                        className="px-2 py-1 text-xs rounded-full bg-gradient-to-br from-[#7928ca]/20 via-[#ff0080]/20 to-[#00d4ff]/20 text-[#e2c4ff] border border-white/10 group-hover:from-[#7928ca]/30 group-hover:via-[#ff0080]/30 group-hover:to-[#00d4ff]/30 group-hover:text-[#ffb3d9] transition-colors"
+                        key={index}
+                        className="px-2 py-1 bg-white/10 backdrop-blur-sm text-[#e2c4ff] rounded text-xs font-medium border border-white/10 group-hover:bg-white/20 transition-all"
                       >
                         {tech}
                       </span>
                     ))}
                   </div>
 
-                  {/* Expandable Content */}
-                  <AnimatePresence>
-                    {selectedProject === project.title && (
-                      <motion.div
-                        initial={{ opacity: 0, height: 0 }}
-                        animate={{ opacity: 1, height: 'auto' }}
-                        exit={{ opacity: 0, height: 0 }}
-                        className="space-y-3"
+                  {/* Links */}
+                  <div className="flex items-center gap-3 mt-auto pt-4 border-t border-white/10">
+                    {project.githubUrl && (
+                      <a
+                        href={project.githubUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1.5 text-sm text-[#b3e6ff] hover:text-[#ffb3d9] transition-colors"
+                        onClick={(e) => e.stopPropagation()}
                       >
-                        <div>
-                          <h4 className="text-[#e2c4ff] font-medium mb-1">Problem</h4>
-                          <p className="text-gray-300 text-sm group-hover:text-gray-200 transition-colors">{project.problem}</p>
-                        </div>
-                        <div>
-                          <h4 className="text-[#b3e6ff] font-medium mb-1">Solution</h4>
-                          <p className="text-gray-300 text-sm group-hover:text-gray-200 transition-colors">{project.solution}</p>
-                        </div>
-                        <div>
-                          <h4 className="text-[#ffb3d9] font-medium mb-1">Impact</h4>
-                          <p className="text-gray-300 text-sm group-hover:text-gray-200 transition-colors">{project.impact}</p>
-                        </div>
-                      </motion.div>
+                        <Github className="w-4 h-4" />
+                        <span>View Code</span>
+                      </a>
                     )}
-                  </AnimatePresence>
-                </div>
-
-                {/* Project Links */}
-                <div className="mt-auto p-4 pt-0 flex gap-3">
-                  {project.githubUrl && (
-                    <motion.a
-                      href={project.githubUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-gray-300 hover:text-[#e2c4ff] transition-colors"
-                      whileHover={{ scale: 1.1 }}
-                      whileTap={{ scale: 0.9 }}
-                    >
-                      <Github className="w-5 h-5" />
-                    </motion.a>
-                  )}
-                  {project.demoUrl && (
-                    <motion.a
-                      href={project.demoUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-gray-300 hover:text-[#b3e6ff] transition-colors"
-                      whileHover={{ scale: 1.1 }}
-                      whileTap={{ scale: 0.9 }}
-                    >
-                      <ExternalLink className="w-5 h-5" />
-                    </motion.a>
-                  )}
+                    {project.demoUrl && (
+                      <a
+                        href={project.demoUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1.5 text-sm text-[#b3e6ff] hover:text-[#ffb3d9] transition-colors"
+                        onClick={(e) => e.stopPropagation()}
+                      >
+                        <ExternalLink className="w-4 h-4" />
+                        <span>Live Demo</span>
+                      </a>
+                    )}
+                  </div>
                 </div>
               </motion.div>
             ))}

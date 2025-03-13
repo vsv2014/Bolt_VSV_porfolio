@@ -18,7 +18,17 @@ export default defineConfig({
       input: {
         main: path.resolve(__dirname, 'index.html'),
       },
+      output: {
+        manualChunks: {
+          vendor: ['react', 'react-dom', 'framer-motion'],
+          ui: ['lucide-react']
+        }
+      }
     },
   },
   publicDir: 'public',
+  server: {
+    port: 3000,
+    open: true
+  }
 });
