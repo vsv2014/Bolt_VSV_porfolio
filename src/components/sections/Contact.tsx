@@ -5,37 +5,37 @@ import { Linkedin, Instagram, Twitter, Mail, Phone } from 'lucide-react';
 const Contact: FC = () => {
   const contacts = [
     {
-      icon: <Linkedin className="w-6 h-6 sm:w-8 sm:h-8 text-blue-600" />,
+      icon: <Linkedin className="w-6 h-6 sm:w-8 sm:h-8 text-purple-300" />,
       href: 'https://www.linkedin.com/in/santhoshvishal',
       label: 'LinkedIn',
       value: 'linkedin.com/in/santhoshvishal'
     },
     {
-      icon: <Phone className="w-6 h-6 sm:w-8 sm:h-8 text-blue-600" />,
+      icon: <Phone className="w-6 h-6 sm:w-8 sm:h-8 text-blue-300" />,
       href: 'tel:+917702771465',
       label: 'Phone/WhatsApp',
       value: '+91 770-277-1465'
     },
     {
-      icon: <Instagram className="w-6 h-6 sm:w-8 sm:h-8 text-blue-600" />,
+      icon: <Instagram className="w-6 h-6 sm:w-8 sm:h-8 text-purple-300" />,
       href: 'https://www.instagram.com/santhoshvishal',
       label: 'Instagram',
       value: '@santhoshvishal'
     },
     {
-      icon: <Twitter className="w-6 h-6 sm:w-8 sm:h-8 text-blue-600" />,
+      icon: <Twitter className="w-6 h-6 sm:w-8 sm:h-8 text-blue-300" />,
       href: 'https://twitter.com/santhoshvishal3',
       label: 'Twitter',
       value: '@santhoshvishal3'
     },
     {
-      icon: <Mail className="w-6 h-6 sm:w-8 sm:h-8 text-blue-600" />,
+      icon: <Mail className="w-6 h-6 sm:w-8 sm:h-8 text-purple-300" />,
       href: 'mailto:santhoshvishal.v@research.iiit.ac.in',
       label: 'Primary Email',
       value: 'santhoshvishal.v@research.iiit.ac.in'
     },
     {
-      icon: <Mail className="w-6 h-6 sm:w-8 sm:h-8 text-blue-600" />,
+      icon: <Mail className="w-6 h-6 sm:w-8 sm:h-8 text-blue-300" />,
       href: 'mailto:gombugadu@gmail.com',
       label: 'Alternative Email',
       value: 'gombugadu@gmail.com'
@@ -43,16 +43,22 @@ const Contact: FC = () => {
   ];
 
   return (
-    <section id="contact" className="py-16 sm:py-20 md:py-24 bg-gradient-to-br from-gray-50 to-blue-50">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="contact" className="py-16 sm:py-20 md:py-24 bg-gradient-to-br from-indigo-900 via-purple-900 to-blue-900 relative overflow-hidden">
+      {/* Glass Background Shapes */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute -top-1/2 -left-1/2 w-full h-full bg-purple-500/10 rounded-full blur-3xl"></div>
+        <div className="absolute -bottom-1/2 -right-1/2 w-full h-full bg-blue-500/10 rounded-full blur-3xl"></div>
+      </div>
+
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           className="max-w-3xl mx-auto text-center"
         >
-          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-3 sm:mb-4">Get in Touch</h2>
-          <p className="text-gray-600 text-sm sm:text-base leading-relaxed mb-8 sm:mb-10">
+          <h2 className="text-3xl sm:text-4xl font-bold text-white mb-3 sm:mb-4">Get in Touch</h2>
+          <p className="text-gray-300 text-sm sm:text-base leading-relaxed mb-8 sm:mb-10">
             Feel free to reach out for collaborations, opportunities, or just to say hello!
             I'm always excited to connect with fellow developers and researchers.
           </p>
@@ -64,16 +70,16 @@ const Contact: FC = () => {
                 href={contact.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                whileHover={{ scale: 1.05 }}
+                whileHover={{ scale: 1.05, backgroundColor: 'rgba(255, 255, 255, 0.15)' }}
                 whileTap={{ scale: 0.95 }}
-                className="group bg-white p-4 sm:p-6 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 flex flex-col items-center gap-3 sm:gap-4"
+                className="group bg-white/10 backdrop-blur-sm p-4 sm:p-6 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 flex flex-col items-center gap-3 sm:gap-4 border border-white/20"
               >
-                <div className="p-3 bg-blue-50 rounded-xl group-hover:bg-blue-100 transition-colors">
+                <div className="p-3 bg-white/10 rounded-xl group-hover:bg-white/20 transition-colors backdrop-blur-sm border border-white/10">
                   {contact.icon}
                 </div>
                 <div className="text-center">
-                  <h3 className="font-semibold text-gray-900 mb-1">{contact.label}</h3>
-                  <p className="text-sm text-gray-600 break-all">{contact.value}</p>
+                  <h3 className="font-semibold text-white mb-1">{contact.label}</h3>
+                  <p className="text-sm text-gray-300 break-all">{contact.value}</p>
                 </div>
               </motion.a>
             ))}
@@ -84,7 +90,7 @@ const Contact: FC = () => {
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
-            className="mt-8 sm:mt-10 text-sm sm:text-base text-gray-600"
+            className="mt-8 sm:mt-10 text-sm sm:text-base text-gray-300"
           >
             Based in Hyderabad, India<br />
             Open to remote opportunities worldwide
