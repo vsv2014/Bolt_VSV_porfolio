@@ -5,13 +5,4 @@ import react from '@vitejs/plugin-react';
 export default defineConfig({
   plugins: [react()],
   base: '/Bolt_VSV_porfolio/',
-  server: {
-    port: 3001,
-    host: true,
-  },
-  resolve: {
-    alias: {
-      '@': '/src',
-    },
-  },
 });

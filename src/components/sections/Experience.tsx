@@ -1,165 +1,227 @@
 import { FC } from 'react';
-import { Briefcase, Calendar, MapPin, ChevronRight } from 'lucide-react';
+import { Building2, Calendar, ChevronRight } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 interface Experience {
+  title: string;
   company: string;
-  role: string;
   period: string;
-  location: string;
-  description: string[];
-  skills: string[];
-  highlights?: string[];
+  type: 'professional' | 'academic' | 'research' | 'freelance';
+  description: string;
+  achievements: string[];
+  technologies: string[];
 }
 
 const experiences: Experience[] = [
   {
-    company: 'Kore.ai Software India Pvt Ltd',
-    role: 'Associate Software Engineer',
+    title: 'Software Engineer',
+    company: 'Kore.ai',
     period: 'July 2022 - Present',
-    location: 'India',
-    description: [
-      'Developed and modified 25+ components, optimizing application performance',
-      'Built user interface components using Angular for enhanced functionality',
-      'Implemented Jenkins CI/CD pipeline for automated testing and reporting',
-      'Resolved 350+ critical and medium bugs ensuring system reliability',
-      'Provided continuous client support with 800+ additions to the project'
+    type: 'professional',
+    description: 'Leading development of AI-powered virtual assistant platforms and contact center solutions.',
+    achievements: [
+      'Designed and executed campaign creation with messaging options, template selection, and configuration',
+      'Implemented rule-based targeting and goal tracking for precise campaign management',
+      'Ensured user-friendly interface and seamless workflow for enhanced efficiency',
+      'Collaborated with cross-functional teams for requirements and specifications',
+      'Conducted user training sessions and provided ongoing support',
+      'Designed and developed virtual assistant UI components using Angular',
+      'Enhanced virtual assistant applications with improved functionality',
+      'Implemented Angular best practices for optimal performance',
+      'Integrated components through cross-team collaboration',
+      'Contributed to architecture discussions and code reviews'
     ],
-    skills: ['Angular', 'Jenkins', 'CI/CD', 'TypeScript', 'Component Development'],
-    highlights: [
-      'Reduced application load time by 40%',
-      'Achieved 98% test coverage',
-      'Improved user satisfaction by 35%'
-    ]
+    technologies: ['Angular', 'Node.js', 'TypeScript', 'MongoDB', 'WebSocket', 'AI/ML']
   },
   {
-    company: 'Sri Satya Sai Vidyalayam',
-    role: 'Web Developer',
-    period: 'July 2020 - September 2020',
-    location: 'Mahabubnagar',
-    description: [
-      'Developed school website for conducting online classes during Covid-19',
-      'Implemented responsive design using HTML5 and CSS3',
-      'Deployed and maintained the website for seamless online learning'
+    title: 'Research Assistant',
+    company: 'Lab for Spatial Informatics, IIIT-H',
+    period: 'January 2021 - January 2024',
+    type: 'research',
+    description: 'Conducted research on environmental monitoring and water quality analysis.',
+    achievements: [
+      'Published research on dissolved oxygen saturation in Krishna River Basin',
+      'Developed regression models for water temperature prediction',
+      'Created QGIS-based watershed delineation tools',
+      'Implemented data analysis pipelines for environmental monitoring',
+      'Analyzed performance of 339 MLD Sewage Treatment Plant using ML algorithms',
+      'Conducted comprehensive research on water quality parameters',
+      'Developed predictive models for treatment plant optimization'
     ],
-    skills: ['PHP', 'HTML5', 'CSS3', 'Web Development', 'Deployment'],
-    highlights: [
-      'Enabled online learning for 500+ students',
-      'Achieved 99.9% uptime',
-      'Reduced administrative workload by 60%'
-    ]
+    technologies: ['Python', 'MATLAB', 'GIS', 'Data Analysis', 'Machine Learning', 'R', 'Statistical Analysis']
   },
   {
+    title: 'Developer',
     company: 'IIIT Hyderabad',
-    role: 'Developer',
     period: 'December 2017',
-    location: 'Hyderabad',
-    description: [
-      'Built virtual lab for MergeSort Data Structure visualization',
-      'Implemented interactive learning features using JavaScript',
-      'Successfully deployed the application for student use'
+    type: 'professional',
+    description: 'Built a virtual lab for teaching MergeSort algorithm through interactive visualization.',
+    achievements: [
+      'Developed an interactive visualization platform for MergeSort algorithm',
+      'Implemented step-by-step execution with visual feedback',
+      'Used data analysis to track and improve student performance',
+      'Successfully deployed the platform for student use'
     ],
-    skills: ['JavaScript', 'Python', 'Flask', 'Data Structures', 'Educational Technology'],
-    highlights: [
-      'Improved student understanding by 45%',
-      'Used by 1000+ students',
-      'Featured in educational tech showcase'
-    ]
+    technologies: ['JavaScript', 'Python', 'Flask', 'Data Analysis', 'Machine Learning']
+  },
+  {
+    title: 'Web Developer',
+    company: 'Sri Satya Sai Vidyalayam',
+    period: 'July 2020 - September 2020',
+    type: 'professional',
+    description: 'Developed a website for conducting online classes during the Covid-19 pandemic.',
+    achievements: [
+      'Built a complete online learning platform from scratch',
+      'Implemented secure user authentication for students and teachers',
+      'Created an intuitive interface for conducting virtual classes',
+      'Successfully deployed and maintained the platform during peak usage'
+    ],
+    technologies: ['PHP', 'HTML5', 'CSS3', 'JavaScript', 'MySQL']
   }
 ];
 
 const Experience: FC = () => {
+  const professionalExp = experiences.filter(exp => exp.type === 'professional');
+  const researchExp = experiences.filter(exp => exp.type === 'research');
+
   return (
-    <section id="experience" className="py-20 bg-gradient-to-b from-white to-gray-50">
-      <div className="container mx-auto px-6">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-gray-900 mb-4">Professional Experience</h2>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            A journey through my professional career, showcasing my growth and achievements
-            in software development and technology.
-          </p>
-        </div>
-
-        <div className="relative">
-          {/* Timeline Line */}
-          <div className="hidden md:block absolute left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-blue-500 to-purple-500"></div>
-
-          <div className="space-y-16">
-            {experiences.map((exp, index) => (
-              <div 
-                key={index}
-                className={`relative flex flex-col ${
-                  index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'
-                } gap-8 animate-fade-in-up`}
-                style={{ animationDelay: `${index * 200}ms` }}
-              >
-                {/* Timeline Dot */}
-                <div className="hidden md:block absolute left-1/2 top-0 -translate-x-1/2 w-4 h-4 rounded-full bg-gradient-to-r from-blue-500 to-purple-500"></div>
-
-                <div className={`md:w-1/2 ${index % 2 === 0 ? 'md:pr-12' : 'md:pl-12'}`}>
-                  <div className="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
-                    <div className="flex items-center mb-6">
-                      <div className="p-3 bg-gradient-to-br from-blue-500 to-purple-500 rounded-lg text-white mr-4">
-                        <Briefcase className="w-6 h-6" />
-                      </div>
-                      <div>
-                        <h3 className="text-xl font-bold text-gray-900">{exp.role}</h3>
-                        <p className="text-gray-600">{exp.company}</p>
-                      </div>
+    <section id="experience" className="py-20 bg-gradient-to-br from-[#0B1120] via-[#1E1B4B] to-[#4C1D95]">
+      <div className="container mx-auto px-4">
+        <h2 className="text-4xl font-bold text-center mb-12 text-white">Professional Experience</h2>
+        
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          {/* Professional Experience */}
+          <div className="space-y-8">
+            <h3 className="text-2xl font-semibold mb-8 text-purple-400 border-b border-purple-400/20 pb-2">Industry Experience</h3>
+            <div className="space-y-8">
+              {professionalExp.map((exp, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  className="bg-white/10 backdrop-blur-lg rounded-xl p-6 hover:bg-white/20 transition-all duration-300 group"
+                >
+                  <div className="flex items-start gap-4 mb-4">
+                    <div className="p-3 bg-purple-500/20 rounded-lg group-hover:bg-purple-500/30 transition-colors mt-1">
+                      <Building2 className="w-6 h-6 text-purple-400 group-hover:text-purple-300" />
                     </div>
-
-                    <div className="space-y-3 mb-6">
-                      <div className="flex items-center text-gray-600">
-                        <Calendar className="w-4 h-4 mr-2" />
-                        {exp.period}
-                      </div>
-                      <div className="flex items-center text-gray-600">
-                        <MapPin className="w-4 h-4 mr-2" />
-                        {exp.location}
-                      </div>
-                    </div>
-
-                    <div className="space-y-4">
-                      {exp.highlights && (
-                        <div className="bg-blue-50 p-4 rounded-lg">
-                          <h4 className="font-semibold text-blue-900 mb-2">Key Achievements</h4>
-                          <ul className="space-y-2">
-                            {exp.highlights.map((highlight, idx) => (
-                              <li key={idx} className="flex items-start">
-                                <ChevronRight className="w-4 h-4 text-blue-500 mt-1 mr-2 flex-shrink-0" />
-                                <span className="text-blue-800">{highlight}</span>
-                              </li>
-                            ))}
-                          </ul>
+                    <div className="flex-1">
+                      <div className="flex items-center justify-between mb-1">
+                        <h4 className="text-xl font-semibold text-white group-hover:text-purple-200 transition-colors">{exp.title}</h4>
+                        <div className="flex items-center gap-2 text-gray-300 text-sm">
+                          <Calendar className="w-4 h-4" />
+                          <span>{exp.period}</span>
                         </div>
-                      )}
-
-                      <div>
-                        <h4 className="font-semibold text-gray-900 mb-2">Responsibilities</h4>
-                        <ul className="space-y-2">
-                          {exp.description.map((item, idx) => (
-                            <li key={idx} className="flex items-start">
-                              <ChevronRight className="w-4 h-4 text-gray-400 mt-1 mr-2 flex-shrink-0" />
-                              <span className="text-gray-600">{item}</span>
-                            </li>
-                          ))}
-                        </ul>
                       </div>
-
-                      <div className="flex flex-wrap gap-2 pt-4">
-                        {exp.skills.map((skill, idx) => (
-                          <span
-                            key={idx}
-                            className="px-3 py-1 bg-gradient-to-r from-blue-500/10 to-purple-500/10 text-blue-700 rounded-full text-sm font-medium"
-                          >
-                            {skill}
-                          </span>
-                        ))}
-                      </div>
+                      <p className="text-purple-300 text-base group-hover:text-purple-200 transition-colors">{exp.company}</p>
                     </div>
                   </div>
-                </div>
-              </div>
-            ))}
+
+                  <p className="text-gray-300 mb-6 leading-relaxed group-hover:text-gray-200 transition-colors">{exp.description}</p>
+
+                  <div className="space-y-4 mb-6">
+                    <h5 className="text-lg font-semibold text-purple-400 group-hover:text-purple-300 transition-colors flex items-center gap-2">
+                      <span className="w-8 h-[2px] bg-purple-400/50"></span>
+                      Key Achievements
+                    </h5>
+                    <ul className="space-y-3 pl-4">
+                      {exp.achievements.map((achievement, i) => (
+                        <li key={i} className="flex items-start gap-3 text-gray-300 group-hover:text-gray-200 transition-colors">
+                          <ChevronRight className="w-5 h-5 text-purple-400 mt-0.5 flex-shrink-0 group-hover:text-purple-300" />
+                          <span className="leading-relaxed">{achievement}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <div>
+                    <h5 className="text-lg font-semibold text-purple-400 mb-3 group-hover:text-purple-300 transition-colors flex items-center gap-2">
+                      <span className="w-8 h-[2px] bg-purple-400/50"></span>
+                      Technologies
+                    </h5>
+                    <div className="flex flex-wrap gap-2">
+                      {exp.technologies.map((tech, i) => (
+                        <span
+                          key={i}
+                          className="px-3 py-1.5 bg-purple-500/20 text-purple-300 rounded-lg text-sm font-medium group-hover:bg-purple-500/30 group-hover:text-purple-200 transition-colors"
+                        >
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+
+          {/* Research Experience */}
+          <div className="space-y-8">
+            <h3 className="text-2xl font-semibold mb-8 text-purple-400 border-b border-purple-400/20 pb-2">Research Experience</h3>
+            <div className="space-y-8">
+              {researchExp.map((exp, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  className="bg-white/10 backdrop-blur-lg rounded-xl p-6 hover:bg-white/20 transition-all duration-300 group"
+                >
+                  <div className="flex items-start gap-4 mb-4">
+                    <div className="p-3 bg-purple-500/20 rounded-lg group-hover:bg-purple-500/30 transition-colors mt-1">
+                      <Building2 className="w-6 h-6 text-purple-400 group-hover:text-purple-300" />
+                    </div>
+                    <div className="flex-1">
+                      <div className="flex items-center justify-between mb-1">
+                        <h4 className="text-xl font-semibold text-white group-hover:text-purple-200 transition-colors">{exp.title}</h4>
+                        <div className="flex items-center gap-2 text-gray-300 text-sm">
+                          <Calendar className="w-4 h-4" />
+                          <span>{exp.period}</span>
+                        </div>
+                      </div>
+                      <p className="text-purple-300 text-base group-hover:text-purple-200 transition-colors">{exp.company}</p>
+                    </div>
+                  </div>
+
+                  <p className="text-gray-300 mb-6 leading-relaxed group-hover:text-gray-200 transition-colors">{exp.description}</p>
+
+                  <div className="space-y-4 mb-6">
+                    <h5 className="text-lg font-semibold text-purple-400 group-hover:text-purple-300 transition-colors flex items-center gap-2">
+                      <span className="w-8 h-[2px] bg-purple-400/50"></span>
+                      Key Achievements
+                    </h5>
+                    <ul className="space-y-3 pl-4">
+                      {exp.achievements.map((achievement, i) => (
+                        <li key={i} className="flex items-start gap-3 text-gray-300 group-hover:text-gray-200 transition-colors">
+                          <ChevronRight className="w-5 h-5 text-purple-400 mt-0.5 flex-shrink-0 group-hover:text-purple-300" />
+                          <span className="leading-relaxed">{achievement}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <div>
+                    <h5 className="text-lg font-semibold text-purple-400 mb-3 group-hover:text-purple-300 transition-colors flex items-center gap-2">
+                      <span className="w-8 h-[2px] bg-purple-400/50"></span>
+                      Technologies
+                    </h5>
+                    <div className="flex flex-wrap gap-2">
+                      {exp.technologies.map((tech, i) => (
+                        <span
+                          key={i}
+                          className="px-3 py-1.5 bg-purple-500/20 text-purple-300 rounded-lg text-sm font-medium group-hover:bg-purple-500/30 group-hover:text-purple-200 transition-colors"
+                        >
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
           </div>
         </div>
       </div>

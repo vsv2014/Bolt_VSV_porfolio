@@ -1,32 +1,19 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
+  content: [
+    "./index.html",
+    "./src/**/*.{js,ts,jsx,tsx}",
+  ],
   theme: {
     extend: {
-      container: {
-        center: true,
-        padding: '1rem',
-      },
       fontFamily: {
         sans: ['Inter', 'system-ui', 'sans-serif'],
       },
-      colors: {
-        blue: {
-          50: '#f0f7ff',
-          100: '#e0efff',
-          200: '#bddcff',
-          300: '#84c0ff',
-          400: '#449eff',
-          500: '#1a7aff',
-          600: '#0062ff',
-          700: '#004ece',
-          800: '#0040a8',
-          900: '#003687',
-        },
-      },
       animation: {
-        float: 'float 3s ease-in-out infinite',
-        fadeIn: 'fadeIn 0.5s ease-out forwards',
+        'float': 'float 6s ease-in-out infinite',
+        'fadeIn': 'fadeIn 0.5s ease-out forwards',
+        'slideUp': 'slideUp 0.5s ease-out forwards',
+        'pulse': 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
       },
       keyframes: {
         float: {
@@ -34,17 +21,38 @@ export default {
           '50%': { transform: 'translateY(-10px)' },
         },
         fadeIn: {
+          from: { opacity: '0' },
+          to: { opacity: '1' },
+        },
+        slideUp: {
           from: { 
             opacity: '0',
-            transform: 'translateY(10px)'
+            transform: 'translateY(20px)',
           },
           to: { 
             opacity: '1',
-            transform: 'translateY(0)'
+            transform: 'translateY(0)',
           },
+        },
+        pulse: {
+          '0%, 100%': { transform: 'scale(1)' },
+          '50%': { transform: 'scale(1.1)' },
+        },
+      },
+      colors: {
+        background: 'rgb(var(--background) / <alpha-value>)',
+        foreground: 'rgb(var(--foreground) / <alpha-value>)',
+      },
+      container: {
+        center: true,
+        padding: '1rem',
+        screens: {
+          '2xl': '1400px',
         },
       },
     },
   },
-  plugins: [],
-};
+  plugins: [
+    require('tailwindcss-animate')
+  ],
+}

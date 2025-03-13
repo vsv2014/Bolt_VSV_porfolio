@@ -1,69 +1,100 @@
 import { FC } from 'react';
+import { motion } from 'framer-motion';
+import { fadeInUp, staggerChildren, bounceIn } from '../../utils/animations';
 import { Github, Linkedin, Mail } from 'lucide-react';
 
 const Hero: FC = () => {
   return (
-    <section id="hero" className="min-h-screen flex items-center bg-gradient-to-b from-gray-50 to-white">
-      <div className="container mx-auto px-6 py-20">
-        <div className="flex flex-col lg:flex-row items-center gap-12">
-          <div className="lg:w-1/2 space-y-8 text-center lg:text-left">
-            <h1 className="text-4xl lg:text-6xl font-bold leading-tight">
-              Hi, I'm{' '}
-              <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                Veerannapet Santhosh Vishal
-              </span>
-            </h1>
-            
-            <p className="text-xl text-gray-600 leading-relaxed">
-              A passionate Software Engineer with expertise in Full Stack Development, 
-              Machine Learning, and Environmental Data Analysis. Currently focused on 
-              building innovative solutions at Kore.ai.
-            </p>
+    <motion.section
+      initial="initial"
+      animate="animate"
+      variants={staggerChildren}
+      className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-50 to-blue-50 py-20"
+    >
+      <div className="container mx-auto px-4">
+        <motion.div
+          variants={staggerChildren}
+          className="max-w-4xl mx-auto text-center"
+        >
+          {/* Profile Picture */}
+          <motion.div 
+            variants={bounceIn}
+            className="relative w-48 h-48 sm:w-56 sm:h-56 mx-auto mb-8"
+          >
+            <motion.img
+              initial={{ scale: 0.5, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              src="/assets/VSV-portfolio-pp.jpeg"
+              alt="Santhosh Vishal Veerannapet"
+              className="w-full h-full object-cover rounded-full border-8 border-white shadow-2xl"
+            />
+          </motion.div>
 
-            <div className="flex justify-center lg:justify-start gap-4">
-              <a
-                href="https://github.com/vsv2014"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn btn-primary"
-              >
-                <Github className="w-5 h-5 mr-2" />
-                GitHub
-              </a>
-              <a
-                href="https://www.linkedin.com/in/santhosh-vishal-veerannapet-14a54313a/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn btn-primary"
-              >
-                <Linkedin className="w-5 h-5 mr-2" />
-                LinkedIn
-              </a>
-              <a
-                href="mailto:contact@youremail.com"
-                className="btn btn-secondary"
-              >
-                <Mail className="w-5 h-5 mr-2" />
-                Contact
-              </a>
-            </div>
-          </div>
+          <motion.h1
+            variants={fadeInUp}
+            className="text-4xl sm:text-5xl md:text-6xl font-bold text-gray-900 mb-6"
+          >
+            Hi, I'm{' '}
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600">
+              Santhosh Vishal Veerannapet
+            </span>
+          </motion.h1>
 
-          <div className="lg:w-1/2 flex justify-center">
-            <div className="relative">
-              <div className="w-64 h-64 lg:w-80 lg:h-80 rounded-full overflow-hidden border-4 border-white shadow-xl animate-float">
-                <img
-                  src="/profile.jpg"
-                  alt="Veerannapet Santhosh Vishal"
-                  className="w-full h-full object-cover"
-                />
-              </div>
-              <div className="absolute inset-0 rounded-full bg-gradient-to-br from-blue-600/20 to-purple-600/20"></div>
-            </div>
-          </div>
-        </div>
+          <motion.p
+            variants={fadeInUp}
+            className="text-xl sm:text-2xl text-gray-600 mb-8 leading-relaxed"
+          >
+            Full Stack Developer & AI Enthusiast
+          </motion.p>
+
+          <motion.p
+            variants={fadeInUp}
+            className="text-gray-600 mb-12 max-w-2xl mx-auto leading-relaxed"
+          >
+            Passionate about building innovative solutions at the intersection of technology and environmental science.
+            Currently focused on developing AI-powered applications and environmental monitoring systems.
+          </motion.p>
+
+          <motion.div
+            variants={staggerChildren}
+            className="flex justify-center items-center space-x-6"
+          >
+            <motion.a
+              href="https://github.com/vsv2014"
+              target="_blank"
+              rel="noopener noreferrer"
+              variants={fadeInUp}
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+              className="text-gray-600 hover:text-blue-600 transition-colors"
+            >
+              <Github className="w-8 h-8" />
+            </motion.a>
+            <motion.a
+              href="https://www.linkedin.com/in/santhosh-veerannapet/"
+              target="_blank"
+              rel="noopener noreferrer"
+              variants={fadeInUp}
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+              className="text-gray-600 hover:text-blue-600 transition-colors"
+            >
+              <Linkedin className="w-8 h-8" />
+            </motion.a>
+            <motion.a
+              href="mailto:santhoshveerannapet@gmail.com"
+              variants={fadeInUp}
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+              className="text-gray-600 hover:text-blue-600 transition-colors"
+            >
+              <Mail className="w-8 h-8" />
+            </motion.a>
+          </motion.div>
+        </motion.div>
       </div>
-    </section>
+    </motion.section>
   );
 };
 

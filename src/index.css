@@ -1,43 +1,32 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes float {
-  0% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
-  100% {
-    transform: translateY(0px);
-  }
-}
-
 @layer base {
   html {
+    font-family: 'Inter', system-ui, sans-serif;
     scroll-behavior: smooth;
   }
 
   body {
-    @apply text-gray-900 bg-white;
+    @apply text-gray-900 leading-relaxed;
+  }
+
+  /* Improved Typography */
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-bold tracking-tight;
+  }
+
+  p {
+    @apply text-base md:text-lg leading-relaxed;
   }
 }
 
 @layer components {
   .container {
-    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+    @apply max-w-7xl mx-auto;
   }
 
   .btn {
@@ -51,10 +40,131 @@
   .btn-secondary {
     @apply bg-white text-gray-700 border-gray-300 hover:bg-gray-50;
   }
+
+  .nav-link {
+    @apply text-gray-600 hover:text-blue-600 transition-colors;
+  }
 }
 
 @layer utilities {
+  /* Animations */
   .animate-float {
-    animation: float 3s ease-in-out infinite;
+    animation: float 6s ease-in-out infinite;
   }
+
+  .animate-fadeIn {
+    animation: fadeIn 0.5s ease-out forwards;
+  }
+
+  .animate-slideUp {
+    animation: slideUp 0.5s ease-out forwards;
+  }
+
+  .animate-pulse {
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  .animate-gradient {
+    background-size: 200% auto;
+    animation: gradient 8s linear infinite;
+  }
+
+  .animate-border-glow {
+    animation: border-glow 6s linear infinite;
+  }
+
+  .animate-scroll {
+    animation: scroll 1.5s infinite;
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: .7;
+  }
+}
+
+@keyframes gradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes border-glow {
+  0% { border-color: rgba(139, 92, 246, 0.5); }
+  50% { border-color: rgba(236, 72, 153, 0.5); }
+  100% { border-color: rgba(59, 130, 246, 0.5); }
+}
+
+@keyframes scroll {
+  0% { transform: translateY(0); opacity: 1; }
+  100% { transform: translateY(10px); opacity: 0; }
+}
+
+/* Smooth Scrolling */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
+}
+
+/* Better Link Hover Effects */
+a {
+  @apply transition-all duration-300;
+}
+
+/* Card Hover Effects */
+.hover-card {
+  @apply transition-all duration-300 hover:shadow-lg hover:-translate-y-1;
+}
+
+/* Glass Effect */
+.glass {
+  @apply bg-white bg-opacity-70 backdrop-blur-lg;
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+  .glass {
+    @apply bg-gray-900 bg-opacity-70;
+  }
+}
+
+.section-title {
+  @apply text-4xl font-bold text-center mb-16;
+}
+
+.card {
+  @apply bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300;
 }
