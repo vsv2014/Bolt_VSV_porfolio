@@ -3,13 +3,13 @@
   "short_name": "VSV Portfolio",
   "icons": [
     {
-      "src": "/Bolt_VSV_porfolio/android-chrome-192x192.svg",
+      "src": "android-chrome-192x192.svg",
       "sizes": "192x192",
       "type": "image/svg+xml",
       "purpose": "any maskable"
     },
     {
-      "src": "/Bolt_VSV_porfolio/android-chrome-512x512.svg",
+      "src": "android-chrome-512x512.svg",
       "sizes": "512x512",
       "type": "image/svg+xml",
       "purpose": "any maskable"
@@ -17,9 +17,9 @@
   ],
   "start_url": "/Bolt_VSV_porfolio/",
   "scope": "/Bolt_VSV_porfolio/",
-  "theme_color": "#2563eb",
-  "background_color": "#ffffff",
+  "theme_color": "#7928ca",
+  "background_color": "#1a0b2e",
   "display": "standalone",
   "orientation": "portrait",
-  "description": "Professional portfolio showcasing full-stack development and environmental research"
+  "description": "Professional portfolio showcasing AI/ML expertise and full-stack development"
 }

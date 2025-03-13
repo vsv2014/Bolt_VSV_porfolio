@@ -13,8 +13,8 @@ export default defineConfig({
   },
   build: {
     outDir: 'dist',
-    sourcemap: true,
     assetsDir: 'assets',
+    sourcemap: true,
     rollupOptions: {
       output: {
         manualChunks: {
@@ -22,6 +22,12 @@ export default defineConfig({
           ui: ['lucide-react']
         }
       }
+    }
+  },
+  css: {
+    postcss: './postcss.config.js',
+    modules: {
+      localsConvention: 'camelCase'
     }
   },
   server: {

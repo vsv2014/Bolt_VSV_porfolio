@@ -26,20 +26,26 @@ export default {
       },
       colors: {
         primary: {
-          DEFAULT: '#2563eb',
-          hover: '#1d4ed8',
+          DEFAULT: '#7928ca',
+          hover: '#9333ea',
         },
         secondary: {
-          DEFAULT: '#64748b',
-          hover: '#475569',
+          DEFAULT: '#00d4ff',
+          hover: '#38bdf8',
+        },
+        accent: {
+          DEFAULT: '#ff0080',
+          hover: '#f43f5e',
         },
         background: {
-          DEFAULT: '#ffffff',
-          alt: '#f8fafc',
+          start: '#1a0b2e',
+          middle: '#2b1055',
+          end: '#16213e',
         },
         text: {
-          DEFAULT: '#1a1a1a',
-          muted: '#4a5568',
+          primary: '#e2c4ff',
+          secondary: '#b3e6ff',
+          accent: '#ffb3d9',
         }
       },
       container: {
@@ -52,6 +58,9 @@ export default {
           xl: '1280px',
         },
       },
+      backdropBlur: {
+        'sm': '4px',
+      }
     },
   },
   plugins: [],
