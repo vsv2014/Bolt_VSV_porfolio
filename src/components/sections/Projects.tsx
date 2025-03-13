@@ -202,8 +202,7 @@ const Projects: FC = () => {
                 onClick={() => setSelectedProject(selectedProject === project.title ? null : project.title)}
               >
                 <div className="relative">
-                  <div className="aspect-w-16 aspect-h-9 bg-gradient-to-br p-6 flex items-center justify-center text-white">
-                    <div className={`absolute inset-0 bg-gradient-to-br ${getCategoryColor(project.category)} opacity-90`} />
+                  <div className={`aspect-w-16 aspect-h-9 bg-gradient-to-br ${getCategoryColor(project.category)} p-6 flex items-center justify-center text-white`}>
                     <div className="relative z-10 text-center">
                       <h3 className="text-xl font-semibold mb-2">{project.title}</h3>
                       <p className="text-sm text-gray-100 line-clamp-2">{project.description}</p>

@@ -15,43 +15,62 @@ interface Education {
 
 const educationData: Education[] = [
   {
-    degree: 'M.Tech in Computer Science',
+    degree: 'Dual Degree - B.Tech in Civil Engineering & MS in Building Science',
     institution: 'International Institute of Information Technology, Hyderabad',
     location: 'Hyderabad, India',
-    period: '2021 - 2024',
-    description: 'Specializing in AI/ML and Environmental Informatics with a focus on water quality analysis and environmental monitoring systems.',
+    period: '2016 - 2021',
+    description: 'Dual Degree program combining Civil Engineering fundamentals with advanced Building Science concepts, focusing on sustainable development and environmental monitoring.',
     achievements: [
-      'Research on dissolved oxygen saturation in river basins',
-      'Development of ML models for environmental monitoring',
-      'Published research papers in environmental informatics'
+      'Research on environmental monitoring systems',
+      'Development of water quality analysis tools',
+      'Published papers in environmental science',
+      'CGPA - 7.3/10'
     ],
     courses: [
-      'Machine Learning',
-      'Deep Learning',
-      'Computer Vision',
-      'Natural Language Processing',
-      'Environmental Informatics',
-      'Data Science'
+      'Environmental Engineering',
+      'Building Science',
+      'Structural Engineering',
+      'Water Resources',
+      'Environmental Monitoring',
+      'Sustainable Development'
     ]
   },
   {
-    degree: 'B.Tech in Computer Science',
-    institution: 'Sreenidhi Institute of Science and Technology',
+    degree: 'Higher Secondary School',
+    institution: 'Sri Gayatri Jr College',
     location: 'Hyderabad, India',
-    period: '2017 - 2021',
-    description: 'Focused on core computer science fundamentals and software engineering principles.',
+    period: '2014 - 2016',
+    description: 'Telangana State Board of Intermediate Education with focus on Mathematics, Physics, and Chemistry.',
     achievements: [
-      'Developed virtual lab for algorithm visualization',
-      'Led team projects in web development',
-      'Academic excellence in programming courses'
+      'Secured 98.1% in board examinations',
+      'Active participation in science exhibitions',
+      'Merit scholarship recipient'
     ],
     courses: [
-      'Data Structures',
-      'Algorithms',
-      'Database Systems',
-      'Web Technologies',
-      'Operating Systems',
-      'Software Engineering'
+      'Mathematics',
+      'Physics',
+      'Chemistry',
+      'English',
+      'Second Language'
+    ]
+  },
+  {
+    degree: 'Secondary School Education',
+    institution: 'Chaitanya High School',
+    location: 'Mahabubnagar, India',
+    period: '2014',
+    description: 'APSSC board with strong foundation in sciences and mathematics.',
+    achievements: [
+      'Achieved 9.3/10 GPA',
+      'School topper in mathematics',
+      'Active in extracurricular activities'
+    ],
+    courses: [
+      'Mathematics',
+      'Science',
+      'Social Studies',
+      'English',
+      'Second Language'
     ]
   }
 ];
@@ -69,7 +88,7 @@ const Education: FC = () => {
         <motion.div variants={fadeInUp} className="text-center mb-16">
           <h2 className="text-4xl font-bold text-gray-900 mb-4">Education</h2>
           <p className="text-gray-600 max-w-2xl mx-auto">
-            Academic journey focused on computer science, AI/ML, and environmental informatics
+            Academic journey focused on Civil Engineering and Building Science
           </p>
         </motion.div>
 

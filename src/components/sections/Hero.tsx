@@ -12,13 +12,6 @@ const Hero: FC = () => {
       variants={staggerChildren}
       className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-50 to-blue-50 py-20 relative overflow-hidden"
     >
-      {/* AI/ML Text Background */}
-      <div className="absolute inset-0 flex items-center justify-center opacity-5 pointer-events-none select-none">
-        <div className="text-9xl font-bold text-gray-900 whitespace-nowrap transform -rotate-12">
-          AI • ML • FULL STACK
-        </div>
-      </div>
-
       <div className="container mx-auto px-4 relative z-10">
         <motion.div
           variants={staggerChildren}
@@ -47,7 +40,7 @@ const Hero: FC = () => {
             >
               Hi, I'm{' '}
               <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600">
-                Santhosh Vishal
+                Veerannapet Santhosh Vishal
               </span>
             </motion.h1>
 
@@ -56,17 +49,17 @@ const Hero: FC = () => {
               className="flex flex-col items-center gap-4"
             >
               <h2 className="text-xl sm:text-2xl text-gray-600 font-semibold">
-                Full Stack Developer & AI Enthusiast
+                Full Stack Developer & Environmental Researcher
               </h2>
               <div className="flex flex-wrap justify-center gap-3">
                 <span className="px-4 py-2 bg-blue-100 text-blue-800 rounded-full text-sm font-medium">
-                  AI/ML Development
+                  Full Stack Development
                 </span>
                 <span className="px-4 py-2 bg-purple-100 text-purple-800 rounded-full text-sm font-medium">
                   Environmental Research
                 </span>
                 <span className="px-4 py-2 bg-green-100 text-green-800 rounded-full text-sm font-medium">
-                  Web Applications
+                  Data Science
                 </span>
               </div>
             </motion.div>
@@ -76,7 +69,7 @@ const Hero: FC = () => {
               className="text-gray-600 max-w-2xl mx-auto leading-relaxed text-lg"
             >
               Passionate about building innovative solutions at the intersection of technology and environmental science.
-              Currently focused on developing AI-powered applications and environmental monitoring systems.
+              Currently focused on developing environmental monitoring systems and data-driven applications.
             </motion.p>
           </motion.div>
 
