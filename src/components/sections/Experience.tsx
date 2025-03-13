@@ -85,7 +85,7 @@ const Experience: FC = () => {
   const researchExp = experiences.filter(exp => exp.type === 'research');
 
   return (
-    <section id="experience" className="py-20 bg-gradient-to-br from-[#0B1120] via-[#1E1B4B] to-[#4C1D95]">
+    <section id="experience" className="py-20 bg-gradient-to-br from-gray-900 via-purple-900 to-blue-900">
       <div className="container mx-auto px-4">
         <h2 className="text-4xl font-bold text-center mb-12 text-white">Professional Experience</h2>
         
