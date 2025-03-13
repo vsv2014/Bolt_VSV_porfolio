@@ -9,6 +9,9 @@ export default defineConfig({
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
+      '@components': path.resolve(__dirname, './src/components'),
+      '@assets': path.resolve(__dirname, './src/assets'),
+      '@styles': path.resolve(__dirname, './src/styles'),
     },
   },
   build: {
@@ -25,9 +28,10 @@ export default defineConfig({
     }
   },
   css: {
-    postcss: './postcss.config.js',
+    postcss: './postcss.config.cjs',
     modules: {
-      localsConvention: 'camelCase'
+      localsConvention: 'camelCase',
+      generateScopedName: '[name]__[local]__[hash:base64:5]'
     }
   },
   server: {

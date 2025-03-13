@@ -21,11 +21,16 @@
     --bg-end: #16213e;
   }
 
+  html {
+    scroll-behavior: smooth;
+  }
+
   body {
-    @apply bg-gradient-to-br from-[#1a0b2e] via-[#2b1055] to-[#16213e] text-[#e2c4ff];
+    @apply bg-gradient-to-br from-[var(--bg-start)] via-[var(--bg-middle)] to-[var(--bg-end)] text-[var(--text-primary)];
     font-family: 'Space Grotesk', system-ui, sans-serif;
     margin: 0;
     line-height: 1.5;
+    min-height: 100vh;
   }
 
   code, pre {
@@ -35,50 +40,36 @@
 
 @layer components {
   .glass-card {
-    @apply bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl transition-all duration-300 ease-in-out;
-  }
-
-  .glass-card:hover {
-    @apply bg-white/15 border-white/30 transform -translate-y-1;
+    @apply bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl transition-all duration-300 ease-in-out hover:bg-white/15 hover:border-white/30 hover:-translate-y-1;
   }
 
   .gradient-text {
-    @apply bg-gradient-to-r from-[#7928ca] via-[#ff0080] to-[#00d4ff] bg-clip-text text-transparent;
+    @apply bg-gradient-to-r from-[var(--primary)] via-[var(--accent)] to-[var(--secondary)] bg-clip-text text-transparent;
   }
 
   .gradient-button {
-    @apply bg-gradient-to-r from-[#7928ca] via-[#ff0080] to-[#00d4ff] text-white px-6 py-3 rounded-lg border-none cursor-pointer transition-all duration-300 ease-in-out;
-  }
-
-  .gradient-button:hover {
-    @apply from-[#9333ea] via-[#f43f5e] to-[#38bdf8] transform -translate-y-1;
+    @apply bg-gradient-to-r from-[var(--primary)] via-[var(--accent)] to-[var(--secondary)] text-white px-6 py-3 rounded-lg border-none cursor-pointer transition-all duration-300 ease-in-out hover:from-[var(--primary-hover)] hover:via-[var(--accent-hover)] hover:to-[var(--secondary-hover)] hover:-translate-y-1;
   }
 
   h1, h2, h3, h4, h5, h6 {
     font-family: 'Space Grotesk', system-ui, sans-serif;
     font-weight: 600;
     line-height: 1.2;
-    @apply bg-gradient-to-r from-[#7928ca] via-[#ff0080] to-[#00d4ff] bg-clip-text text-transparent;
+    @apply gradient-text;
   }
 
   a {
-    @apply text-[#00d4ff] transition-colors duration-300 ease-in-out;
-  }
-
-  a:hover {
-    @apply text-[#38bdf8];
+    @apply text-[var(--secondary)] transition-colors duration-300 ease-in-out hover:text-[var(--secondary-hover)];
   }
 
   p {
     font-size: 1.125rem;
     line-height: 1.6;
-    @apply text-[#b3e6ff];
+    @apply text-[var(--text-secondary)];
   }
 
   .container {
-    max-width: 1280px;
-    margin: 0 auto;
-    padding: 0 1rem;
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
   }
 }
 
@@ -91,22 +82,26 @@
     0%, 100% { transform: translateY(0); }
     50% { transform: translateY(-10px); }
   }
+
+  .bg-blur {
+    backdrop-filter: blur(8px);
+  }
 }
 
 @media (max-width: 640px) {
   .container {
-    padding: 0 1rem;
+    @apply px-4;
   }
 
   h1 {
-    font-size: 2rem;
+    @apply text-3xl;
   }
 
   h2 {
-    font-size: 1.5rem;
+    @apply text-2xl;
   }
 
   p {
-    font-size: 1rem;
+    @apply text-base;
   }
 }
