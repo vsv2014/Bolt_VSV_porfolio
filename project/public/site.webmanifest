@@ -1,0 +1,25 @@
+{
+  "name": "Vishal Veerannapet Portfolio",
+  "short_name": "VSV Portfolio",
+  "icons": [
+    {
+      "src": "/Bolt_VSV_porfolio/android-chrome-192x192.svg",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/Bolt_VSV_porfolio/android-chrome-512x512.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "start_url": "/Bolt_VSV_porfolio/",
+  "scope": "/Bolt_VSV_porfolio/",
+  "theme_color": "#2563eb",
+  "background_color": "#ffffff",
+  "display": "standalone",
+  "orientation": "portrait",
+  "description": "Professional portfolio showcasing full-stack development and environmental research"
+}

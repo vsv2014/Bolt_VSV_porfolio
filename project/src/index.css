@@ -1,0 +1,112 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --primary: #7928ca;
+    --primary-hover: #9333ea;
+    --secondary: #00d4ff;
+    --secondary-hover: #38bdf8;
+    --accent: #ff0080;
+    --accent-hover: #f43f5e;
+    --text-primary: #e2c4ff;
+    --text-secondary: #b3e6ff;
+    --text-accent: #ffb3d9;
+    --bg-start: #1a0b2e;
+    --bg-middle: #2b1055;
+    --bg-end: #16213e;
+  }
+
+  body {
+    @apply bg-gradient-to-br from-[#1a0b2e] via-[#2b1055] to-[#16213e] text-[#e2c4ff];
+    font-family: 'Space Grotesk', system-ui, sans-serif;
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  code, pre {
+    font-family: 'JetBrains Mono', monospace;
+  }
+}
+
+@layer components {
+  .glass-card {
+    @apply bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl transition-all duration-300 ease-in-out;
+  }
+
+  .glass-card:hover {
+    @apply bg-white/15 border-white/30 transform -translate-y-1;
+  }
+
+  .gradient-text {
+    @apply bg-gradient-to-r from-[#7928ca] via-[#ff0080] to-[#00d4ff] bg-clip-text text-transparent;
+  }
+
+  .gradient-button {
+    @apply bg-gradient-to-r from-[#7928ca] via-[#ff0080] to-[#00d4ff] text-white px-6 py-3 rounded-lg border-none cursor-pointer transition-all duration-300 ease-in-out;
+  }
+
+  .gradient-button:hover {
+    @apply from-[#9333ea] via-[#f43f5e] to-[#38bdf8] transform -translate-y-1;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Space Grotesk', system-ui, sans-serif;
+    font-weight: 600;
+    line-height: 1.2;
+    @apply bg-gradient-to-r from-[#7928ca] via-[#ff0080] to-[#00d4ff] bg-clip-text text-transparent;
+  }
+
+  a {
+    @apply text-[#00d4ff] transition-colors duration-300 ease-in-out;
+  }
+
+  a:hover {
+    @apply text-[#38bdf8];
+  }
+
+  p {
+    font-size: 1.125rem;
+    line-height: 1.6;
+    @apply text-[#b3e6ff];
+  }
+
+  .container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 1rem;
+  }
+}
+
+@layer utilities {
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+}
+
+@media (max-width: 640px) {
+  .container {
+    padding: 0 1rem;
+  }
+
+  h1 {
+    font-size: 2rem;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+  }
+
+  p {
+    font-size: 1rem;
+  }
+}
