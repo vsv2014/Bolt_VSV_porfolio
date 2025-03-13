@@ -1,10 +1,33 @@
 import { FC } from 'react';
 import { motion } from 'framer-motion';
 import { fadeInUp, staggerChildren, bounceIn } from '../../utils/animations';
-import { Github, Linkedin, Mail } from 'lucide-react';
+import { Github, Linkedin, Mail, Facebook } from 'lucide-react';
 import profilePic from '../../assets/VSV-portfolio-pp.jpeg';
 
 const Hero: FC = () => {
+  const socialLinks = [
+    {
+      icon: <Github className="w-6 h-6 sm:w-8 sm:h-8" />,
+      href: 'https://github.com/vsv2014',
+      color: 'hover:text-purple-300'
+    },
+    {
+      icon: <Linkedin className="w-6 h-6 sm:w-8 sm:h-8" />,
+      href: 'https://www.linkedin.com/in/santhosh-veerannapet/',
+      color: 'hover:text-blue-300'
+    },
+    {
+      icon: <Facebook className="w-6 h-6 sm:w-8 sm:h-8" />,
+      href: 'https://www.facebook.com/santhosh.vishal.98',
+      color: 'hover:text-purple-300'
+    },
+    {
+      icon: <Mail className="w-6 h-6 sm:w-8 sm:h-8" />,
+      href: 'mailto:santhoshveerannapet@gmail.com',
+      color: 'hover:text-emerald-300'
+    }
+  ];
+
   return (
     <motion.section
       initial="initial"
@@ -83,37 +106,20 @@ const Hero: FC = () => {
             variants={staggerChildren}
             className="flex justify-center items-center space-x-4 sm:space-x-6"
           >
-            <motion.a
-              href="https://github.com/vsv2014"
-              target="_blank"
-              rel="noopener noreferrer"
-              variants={fadeInUp}
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
-              className="text-gray-300 hover:text-purple-300 transition-colors p-2"
-            >
-              <Github className="w-6 h-6 sm:w-8 sm:h-8" />
-            </motion.a>
-            <motion.a
-              href="https://www.linkedin.com/in/santhosh-veerannapet/"
-              target="_blank"
-              rel="noopener noreferrer"
-              variants={fadeInUp}
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
-              className="text-gray-300 hover:text-blue-300 transition-colors p-2"
-            >
-              <Linkedin className="w-6 h-6 sm:w-8 sm:h-8" />
-            </motion.a>
-            <motion.a
-              href="mailto:santhoshveerannapet@gmail.com"
-              variants={fadeInUp}
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
-              className="text-gray-300 hover:text-emerald-300 transition-colors p-2"
-            >
-              <Mail className="w-6 h-6 sm:w-8 sm:h-8" />
-            </motion.a>
+            {socialLinks.map((link, index) => (
+              <motion.a
+                key={index}
+                href={link.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                variants={fadeInUp}
+                whileHover={{ scale: 1.1, backgroundColor: 'rgba(255, 255, 255, 0.15)' }}
+                whileTap={{ scale: 0.9 }}
+                className={`p-3 bg-white/20 backdrop-blur-sm rounded-xl text-white transition-all duration-300 border border-white/10 ${link.color}`}
+              >
+                {link.icon}
+              </motion.a>
+            ))}
           </motion.div>
         </motion.div>
       </div>
