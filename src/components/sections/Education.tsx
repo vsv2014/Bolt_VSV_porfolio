@@ -83,8 +83,14 @@ const Education: FC = () => {
   });
 
   return (
-    <section id="education" className="py-16 sm:py-20 md:py-24 bg-gradient-to-br from-indigo-900 via-purple-900 to-blue-900">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="education" className="py-16 sm:py-20 md:py-24 bg-gradient-to-br from-indigo-900 via-purple-900 to-blue-900 relative overflow-hidden">
+      {/* Glass Background Shapes */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute -top-1/2 -left-1/2 w-full h-full bg-purple-500/10 rounded-full blur-3xl"></div>
+        <div className="absolute -bottom-1/2 -right-1/2 w-full h-full bg-blue-500/10 rounded-full blur-3xl"></div>
+      </div>
+
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div
           initial="initial"
           whileInView="animate"
@@ -105,7 +111,7 @@ const Education: FC = () => {
           {/* Education Timeline */}
           <div className="relative space-y-8">
             {/* Timeline Line */}
-            <div className="absolute left-0 sm:left-1/2 top-0 h-full w-px bg-purple-400/30 transform -translate-x-1/2" />
+            <div className="absolute left-0 sm:left-1/2 top-0 h-full w-px bg-gradient-to-b from-purple-400/50 via-blue-400/50 to-purple-400/50 transform -translate-x-1/2" />
 
             {sortedEducation.map((education, index) => (
               <motion.div
@@ -116,14 +122,14 @@ const Education: FC = () => {
                 }`}
               >
                 {/* Timeline Dot */}
-                <div className="absolute left-0 sm:left-1/2 top-0 w-4 h-4 rounded-full bg-purple-400 border-4 border-indigo-900 shadow-md transform -translate-x-1/2" />
+                <div className="absolute left-0 sm:left-1/2 top-0 w-4 h-4 rounded-full bg-gradient-to-br from-purple-400 to-blue-400 border-4 border-indigo-900/50 shadow-lg transform -translate-x-1/2" />
 
                 {/* Education Card */}
-                <div className="sm:w-[calc(100%-2rem)] bg-white/10 backdrop-blur-lg rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 group hover:bg-white/20">
+                <div className="sm:w-[calc(100%-2rem)] bg-white/10 backdrop-blur-lg rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 group hover:bg-white/20 border border-white/20">
                   <div className="p-4 sm:p-6 md:p-8">
                     {/* Card Header */}
                     <div className="flex flex-col sm:flex-row sm:items-start gap-4 mb-4 sm:mb-6">
-                      <div className="p-3 bg-purple-500/20 rounded-xl text-purple-300 w-fit group-hover:bg-purple-500/30 transition-colors">
+                      <div className="p-3 bg-white/10 backdrop-blur-sm rounded-xl text-purple-300 w-fit group-hover:bg-white/20 transition-colors border border-white/10">
                         <GraduationCap className="w-6 h-6 sm:w-8 sm:h-8" />
                       </div>
                       <div className="flex-grow">
@@ -153,7 +159,7 @@ const Education: FC = () => {
                       <ul className="space-y-2 sm:space-y-3">
                         {education.achievements.map((achievement, i) => (
                           <li key={i} className="flex items-start gap-2 sm:gap-3">
-                            <div className="w-1.5 h-1.5 rounded-full bg-purple-400 mt-2 flex-shrink-0" />
+                            <div className="w-1.5 h-1.5 rounded-full bg-gradient-to-br from-purple-400 to-blue-400 mt-2 flex-shrink-0" />
                             <span className="text-sm text-gray-300 group-hover:text-gray-200 transition-colors">{achievement}</span>
                           </li>
                         ))}
@@ -167,7 +173,7 @@ const Education: FC = () => {
                         {education.courses.map((course, i) => (
                           <span
                             key={i}
-                            className="px-2 py-1 bg-purple-500/20 text-purple-300 rounded text-xs font-medium group-hover:bg-purple-500/30 group-hover:text-purple-200 transition-colors"
+                            className="px-2 py-1 bg-white/10 backdrop-blur-sm text-purple-300 rounded text-xs font-medium border border-white/10 group-hover:bg-white/20 group-hover:text-purple-200 transition-colors"
                           >
                             {course}
                           </span>

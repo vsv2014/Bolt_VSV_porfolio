@@ -14,7 +14,7 @@ const Contact: FC = () => {
       icon: <Phone className="w-6 h-6 sm:w-8 sm:h-8 text-blue-300" />,
       href: 'tel:+917702771465',
       label: 'Phone/WhatsApp',
-      value: '+91 770-277-1465'
+      value: '+91 7702771465'
     },
     {
       icon: <Instagram className="w-6 h-6 sm:w-8 sm:h-8 text-purple-300" />,
