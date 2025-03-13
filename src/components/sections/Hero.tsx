@@ -33,12 +33,12 @@ const Hero: FC = () => {
       initial="initial"
       animate="animate"
       variants={staggerChildren}
-      className="min-h-screen flex items-center justify-center bg-gradient-to-br from-indigo-900 via-purple-900 to-blue-900 py-20 px-4 relative overflow-hidden"
+      className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#1a0b2e] via-[#2b1055] to-[#16213e] py-20 px-4 relative overflow-hidden"
     >
       {/* Glass Background Shapes */}
       <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute -top-1/2 -left-1/2 w-full h-full bg-purple-500/10 rounded-full blur-3xl"></div>
-        <div className="absolute -bottom-1/2 -right-1/2 w-full h-full bg-blue-500/10 rounded-full blur-3xl"></div>
+        <div className="absolute -top-1/2 -left-1/2 w-full h-full bg-[#7928ca]/10 rounded-full blur-3xl"></div>
+        <div className="absolute -bottom-1/2 -right-1/2 w-full h-full bg-[#00d4ff]/10 rounded-full blur-3xl"></div>
       </div>
 
       <div className="container mx-auto relative z-10">
@@ -68,7 +68,7 @@ const Hero: FC = () => {
               className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white px-4"
             >
               Hi, I'm{' '}
-              <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-blue-400">
+              <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#7928ca] via-[#ff0080] to-[#00d4ff]">
                 Veerannapet Santhosh Vishal
               </span>
             </motion.h1>
@@ -81,13 +81,13 @@ const Hero: FC = () => {
                 Full Stack Developer & Environmental Researcher
               </h2>
               <div className="flex flex-wrap justify-center gap-2 sm:gap-3 px-4">
-                <span className="px-3 py-1.5 sm:px-4 sm:py-2 bg-white/10 backdrop-blur-sm text-purple-200 rounded-full text-sm font-medium border border-purple-500/20 hover:bg-white/20 transition-colors">
+                <span className="px-3 py-1.5 sm:px-4 sm:py-2 bg-white/10 backdrop-blur-sm text-[#e2c4ff] rounded-full text-sm font-medium border border-[#7928ca]/20 hover:bg-white/20 transition-colors">
                   Full Stack Development
                 </span>
-                <span className="px-3 py-1.5 sm:px-4 sm:py-2 bg-white/10 backdrop-blur-sm text-blue-200 rounded-full text-sm font-medium border border-blue-500/20 hover:bg-white/20 transition-colors">
+                <span className="px-3 py-1.5 sm:px-4 sm:py-2 bg-white/10 backdrop-blur-sm text-[#b3e6ff] rounded-full text-sm font-medium border border-[#00d4ff]/20 hover:bg-white/20 transition-colors">
                   Environmental Research
                 </span>
-                <span className="px-3 py-1.5 sm:px-4 sm:py-2 bg-white/10 backdrop-blur-sm text-emerald-200 rounded-full text-sm font-medium border border-emerald-500/20 hover:bg-white/20 transition-colors">
+                <span className="px-3 py-1.5 sm:px-4 sm:py-2 bg-white/10 backdrop-blur-sm text-[#ffb3d9] rounded-full text-sm font-medium border border-[#ff0080]/20 hover:bg-white/20 transition-colors">
                   Data Science
                 </span>
               </div>

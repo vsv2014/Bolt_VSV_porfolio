@@ -49,11 +49,11 @@ const Contact: FC = () => {
   ];
 
   return (
-    <section id="contact" className="py-16 sm:py-20 md:py-24 bg-gradient-to-br from-indigo-900 via-purple-900 to-blue-900 relative overflow-hidden">
+    <section id="contact" className="py-16 sm:py-20 md:py-24 bg-gradient-to-br from-[#1a0b2e] via-[#2b1055] to-[#16213e] relative overflow-hidden">
       {/* Glass Background Shapes */}
       <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute -top-1/2 -left-1/2 w-full h-full bg-purple-500/10 rounded-full blur-3xl"></div>
-        <div className="absolute -bottom-1/2 -right-1/2 w-full h-full bg-blue-500/10 rounded-full blur-3xl"></div>
+        <div className="absolute -top-1/2 -left-1/2 w-full h-full bg-[#7928ca]/10 rounded-full blur-3xl"></div>
+        <div className="absolute -bottom-1/2 -right-1/2 w-full h-full bg-[#00d4ff]/10 rounded-full blur-3xl"></div>
       </div>
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -80,12 +80,12 @@ const Contact: FC = () => {
                 whileTap={{ scale: 0.95 }}
                 className="group bg-white/10 backdrop-blur-sm p-4 sm:p-6 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 flex flex-col items-center gap-3 sm:gap-4 border border-white/20"
               >
-                <div className="p-3 bg-white/20 rounded-xl group-hover:bg-white/30 transition-colors backdrop-blur-sm border border-white/10">
+                <div className="p-3 bg-gradient-to-br from-[#7928ca]/20 via-[#ff0080]/20 to-[#00d4ff]/20 rounded-xl group-hover:from-[#7928ca]/30 group-hover:via-[#ff0080]/30 group-hover:to-[#00d4ff]/30 transition-colors backdrop-blur-sm border border-white/10">
                   {contact.icon}
                 </div>
                 <div className="text-center">
-                  <h3 className="font-semibold text-white mb-1">{contact.label}</h3>
-                  <p className="text-sm text-gray-300 break-all">{contact.value}</p>
+                  <h3 className="font-semibold text-white group-hover:text-[#e2c4ff] transition-colors mb-1">{contact.label}</h3>
+                  <p className="text-sm text-[#b3e6ff] break-all group-hover:text-[#ffb3d9] transition-colors">{contact.value}</p>
                 </div>
               </motion.a>
             ))}
@@ -96,7 +96,7 @@ const Contact: FC = () => {
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
-            className="mt-8 sm:mt-10 text-sm sm:text-base text-gray-300"
+            className="mt-8 sm:mt-10 text-sm sm:text-base text-[#e2c4ff]"
           >
             Based in Hyderabad, India<br />
             Open to remote opportunities worldwide
