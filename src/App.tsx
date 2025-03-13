@@ -14,7 +14,7 @@ const App: FC = () => {
   return (
     <div className="bg-gray-50">
       <Header />
-      <main>
+      <main className="space-y-16 sm:space-y-24 md:space-y-32">
         <Hero />
         <Experience />
         <Education />
