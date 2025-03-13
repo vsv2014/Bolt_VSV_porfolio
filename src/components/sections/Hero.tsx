@@ -2,6 +2,7 @@ import { FC } from 'react';
 import { motion } from 'framer-motion';
 import { fadeInUp, staggerChildren, bounceIn } from '../../utils/animations';
 import { Github, Linkedin, Mail } from 'lucide-react';
+import profilePic from '../../assets/VSV-portfolio-pp.jpeg';
 
 const Hero: FC = () => {
   return (
@@ -25,7 +26,7 @@ const Hero: FC = () => {
               initial={{ scale: 0.5, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               transition={{ duration: 0.5, delay: 0.2 }}
-              src="/assets/VSV-portfolio-pp.jpeg"
+              src={profilePic}
               alt="Santhosh Vishal Veerannapet"
               className="w-full h-full object-cover rounded-full border-8 border-white shadow-2xl"
             />
