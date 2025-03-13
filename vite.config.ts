@@ -5,7 +5,7 @@ import path from 'path';
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
-  base: '/Bolt_VSV_porfolio/',
+  base: process.env.NODE_ENV === 'production' ? '/Bolt_VSV_porfolio/' : '/',
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
@@ -13,6 +13,7 @@ export default defineConfig({
   },
   build: {
     outDir: 'dist',
+    sourcemap: true,
     assetsDir: 'assets',
     rollupOptions: {
       input: {
