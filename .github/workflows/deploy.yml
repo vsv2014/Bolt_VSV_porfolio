@@ -24,13 +24,13 @@ jobs:
 
       - name: Install Dependencies
         run: |
-          cd project
           npm ci
+        working-directory: project
 
       - name: Build
         run: |
-          cd project
           npm run build
+        working-directory: project
 
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
