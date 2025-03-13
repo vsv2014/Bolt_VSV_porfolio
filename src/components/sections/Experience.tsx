@@ -15,24 +15,18 @@ interface Experience {
 
 const experiences: Experience[] = [
   {
-    title: 'Software Engineer',
-    company: 'Kore.ai',
-    period: 'July 2022 - Present',
-    location: 'Hyderabad, India',
-    description: 'Leading development of AI-powered virtual assistant platforms and contact center solutions.',
+    title: 'Full Stack Developer',
+    company: 'Yellow.ai',
+    period: 'July 2021 - Present',
+    location: 'Bangalore, India',
+    description: 'Leading development of enterprise-grade conversational AI solutions.',
     achievements: [
-      'Designed and executed campaign creation with messaging options, template selection, and configuration',
-      'Implemented rule-based targeting and goal tracking for precise campaign management',
-      'Ensured user-friendly interface and seamless workflow for enhanced efficiency',
-      'Collaborated with cross-functional teams for requirements and specifications',
-      'Conducted user training sessions and provided ongoing support',
-      'Designed and developed virtual assistant UI components using Angular',
-      'Enhanced virtual assistant applications with improved functionality',
-      'Implemented Angular best practices for optimal performance',
-      'Integrated components through cross-team collaboration',
-      'Contributed to architecture discussions and code reviews'
+      'Developed proactive web campaigns feature for enhanced user engagement',
+      'Built comprehensive UI components for the bot builder platform',
+      'Implemented AI-powered contact center solutions',
+      'Created automated dialing system for outbound campaigns'
     ],
-    technologies: ['Angular', 'Node.js', 'TypeScript', 'MongoDB', 'WebSocket', 'AI/ML']
+    technologies: ['Angular', 'Node.js', 'MongoDB', 'WebSocket', 'TypeScript']
   },
   {
     title: 'Research Assistant',
@@ -42,28 +36,11 @@ const experiences: Experience[] = [
     description: 'Conducted research on environmental monitoring and water quality analysis.',
     achievements: [
       'Published research on dissolved oxygen saturation in Krishna River Basin',
-      'Developed regression models for water temperature prediction',
-      'Created QGIS-based watershed delineation tools',
-      'Implemented data analysis pipelines for environmental monitoring',
-      'Analyzed performance of 339 MLD Sewage Treatment Plant using ML algorithms',
-      'Conducted comprehensive research on water quality parameters',
-      'Developed predictive models for treatment plant optimization'
+      'Developed machine learning models for water quality prediction',
+      'Created GIS-based watershed analysis tools',
+      'Implemented environmental data visualization systems'
     ],
-    technologies: ['Python', 'MATLAB', 'GIS', 'Data Analysis', 'Machine Learning', 'R', 'Statistical Analysis']
-  },
-  {
-    title: 'Developer',
-    company: 'IIIT Hyderabad',
-    period: 'December 2017',
-    location: 'Hyderabad, India',
-    description: 'Built a virtual lab for teaching MergeSort algorithm through interactive visualization.',
-    achievements: [
-      'Developed an interactive visualization platform for MergeSort algorithm',
-      'Implemented step-by-step execution with visual feedback',
-      'Used data analysis to track and improve student performance',
-      'Successfully deployed the platform for student use'
-    ],
-    technologies: ['JavaScript', 'Python', 'Flask', 'Data Analysis', 'Machine Learning']
+    technologies: ['Python', 'MATLAB', 'GIS', 'Machine Learning', 'Data Analysis']
   },
   {
     title: 'Web Developer',
@@ -73,15 +50,36 @@ const experiences: Experience[] = [
     description: 'Developed a website for conducting online classes during the Covid-19 pandemic.',
     achievements: [
       'Built a complete online learning platform from scratch',
-      'Implemented secure user authentication for students and teachers',
-      'Created an intuitive interface for conducting virtual classes',
-      'Successfully deployed and maintained the platform during peak usage'
+      'Integrated video conferencing capabilities',
+      'Implemented secure authentication system',
+      'Created user-friendly interface for teachers and students'
     ],
-    technologies: ['PHP', 'HTML5', 'CSS3', 'JavaScript', 'MySQL']
+    technologies: ['React', 'Node.js', 'MongoDB', 'WebRTC', 'OAuth']
+  },
+  {
+    title: 'Developer',
+    company: 'IIIT Hyderabad',
+    period: 'December 2017',
+    location: 'Hyderabad, India',
+    description: 'Built a virtual lab for teaching MergeSort algorithm through interactive visualization.',
+    achievements: [
+      'Developed an interactive visualization platform for MergeSort algorithm',
+      'Created step-by-step animation system',
+      'Implemented user progress tracking',
+      'Added comprehensive documentation'
+    ],
+    technologies: ['JavaScript', 'D3.js', 'HTML5', 'CSS3']
   }
 ];
 
 const Experience: FC = () => {
+  // Sort experiences by date (most recent first)
+  const sortedExperiences = [...experiences].sort((a, b) => {
+    const dateA = new Date(a.period.split(' - ')[1] === 'Present' ? Date.now() : a.period.split(' - ')[1]);
+    const dateB = new Date(b.period.split(' - ')[1] === 'Present' ? Date.now() : b.period.split(' - ')[1]);
+    return dateB.getTime() - dateA.getTime();
+  });
+
   return (
     <section id="experience" className="py-16 sm:py-20 md:py-24 bg-gradient-to-br from-gray-50 to-blue-50">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -107,7 +105,7 @@ const Experience: FC = () => {
             {/* Timeline Line */}
             <div className="absolute left-0 sm:left-1/2 top-0 h-full w-px bg-blue-200 transform -translate-x-1/2" />
 
-            {experiences.map((experience, index) => (
+            {sortedExperiences.map((experience, index) => (
               <motion.div
                 key={index}
                 variants={fadeInUp}
