@@ -130,11 +130,11 @@ const Projects: FC = () => {
   );
 
   return (
-    <section className="py-16 sm:py-20 md:py-24 bg-gradient-to-br from-indigo-900 via-purple-900 to-blue-900 relative overflow-hidden" id="projects">
+    <section className="py-16 sm:py-20 md:py-24 bg-gradient-to-br from-[#1a0b2e] via-[#2b1055] to-[#16213e] relative overflow-hidden" id="projects">
       {/* Glass Background Shapes */}
       <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute -top-1/2 -left-1/2 w-full h-full bg-purple-500/10 rounded-full blur-3xl"></div>
-        <div className="absolute -bottom-1/2 -right-1/2 w-full h-full bg-blue-500/10 rounded-full blur-3xl"></div>
+        <div className="absolute -top-1/2 -left-1/2 w-full h-full bg-[#7928ca]/10 rounded-full blur-3xl"></div>
+        <div className="absolute -bottom-1/2 -right-1/2 w-full h-full bg-[#00d4ff]/10 rounded-full blur-3xl"></div>
       </div>
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -162,7 +162,7 @@ const Projects: FC = () => {
                 }}
                 className={`px-3 sm:px-4 md:px-6 py-2 rounded-lg transition-colors whitespace-nowrap text-sm ${
                   activeCategory === category.value
-                    ? 'bg-gradient-to-r from-purple-500 to-blue-500 text-white shadow-md'
+                    ? 'bg-gradient-to-br from-[#7928ca] via-[#ff0080] to-[#00d4ff] text-white shadow-md'
                     : 'text-gray-300 hover:text-white hover:bg-white/10'
                 }`}
                 whileHover={{ scale: 1.05 }}
@@ -190,20 +190,20 @@ const Projects: FC = () => {
                   layout: { duration: 0.3 }
                 }}
                 className={`bg-white/10 backdrop-blur-sm rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 flex flex-col border border-white/20 group ${
-                  selectedProject === project.title ? 'ring-2 ring-purple-400' : ''
+                  selectedProject === project.title ? 'ring-2 ring-[#7928ca]' : ''
                 }`}
                 onClick={() => setSelectedProject(selectedProject === project.title ? null : project.title)}
               >
                 <div className="p-6">
-                  <h3 className="text-xl font-semibold text-white mb-2">{project.title}</h3>
-                  <p className="text-gray-300 text-sm mb-4">{project.description}</p>
+                  <h3 className="text-xl font-semibold text-white group-hover:text-[#e2c4ff] transition-colors mb-2">{project.title}</h3>
+                  <p className="text-gray-300 text-sm mb-4 group-hover:text-gray-200 transition-colors">{project.description}</p>
                   
                   {/* Tech Stack */}
                   <div className="flex flex-wrap gap-2 mb-4">
                     {project.techStack.map((tech) => (
                       <span
                         key={tech}
-                        className="px-2 py-1 text-xs rounded-full bg-white/10 text-gray-300 border border-white/20"
+                        className="px-2 py-1 text-xs rounded-full bg-gradient-to-br from-[#7928ca]/20 via-[#ff0080]/20 to-[#00d4ff]/20 text-[#e2c4ff] border border-white/10 group-hover:from-[#7928ca]/30 group-hover:via-[#ff0080]/30 group-hover:to-[#00d4ff]/30 group-hover:text-[#ffb3d9] transition-colors"
                       >
                         {tech}
                       </span>
@@ -220,16 +220,16 @@ const Projects: FC = () => {
                         className="space-y-3"
                       >
                         <div>
-                          <h4 className="text-purple-300 font-medium mb-1">Problem</h4>
-                          <p className="text-gray-300 text-sm">{project.problem}</p>
+                          <h4 className="text-[#e2c4ff] font-medium mb-1">Problem</h4>
+                          <p className="text-gray-300 text-sm group-hover:text-gray-200 transition-colors">{project.problem}</p>
                         </div>
                         <div>
-                          <h4 className="text-blue-300 font-medium mb-1">Solution</h4>
-                          <p className="text-gray-300 text-sm">{project.solution}</p>
+                          <h4 className="text-[#b3e6ff] font-medium mb-1">Solution</h4>
+                          <p className="text-gray-300 text-sm group-hover:text-gray-200 transition-colors">{project.solution}</p>
                         </div>
                         <div>
-                          <h4 className="text-emerald-300 font-medium mb-1">Impact</h4>
-                          <p className="text-gray-300 text-sm">{project.impact}</p>
+                          <h4 className="text-[#ffb3d9] font-medium mb-1">Impact</h4>
+                          <p className="text-gray-300 text-sm group-hover:text-gray-200 transition-colors">{project.impact}</p>
                         </div>
                       </motion.div>
                     )}
@@ -243,7 +243,7 @@ const Projects: FC = () => {
                       href={project.githubUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-gray-300 hover:text-purple-300 transition-colors"
+                      className="text-gray-300 hover:text-[#e2c4ff] transition-colors"
                       whileHover={{ scale: 1.1 }}
                       whileTap={{ scale: 0.9 }}
                     >
@@ -255,7 +255,7 @@ const Projects: FC = () => {
                       href={project.demoUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-gray-300 hover:text-blue-300 transition-colors"
+                      className="text-gray-300 hover:text-[#b3e6ff] transition-colors"
                       whileHover={{ scale: 1.1 }}
                       whileTap={{ scale: 0.9 }}
                     >

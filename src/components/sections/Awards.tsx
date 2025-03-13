@@ -11,14 +11,15 @@ interface Recognition {
 
 const recognitions: Recognition[] = [
   {
-    title: 'Academic Excellence Award',
-    period: '2014 - 2016',
-    description: 'Achieved outstanding academic performance in Higher Secondary Education at Sri Gayatri Jr College',
+    title: 'Outstanding Performance Award',
+    period: 'July 2024 - September 2024',
+    description: 'Recognized for exceptional performance in Web SDK development and customer support at Kore.ai',
     metrics: [
-      'Secured 98.1% in board examinations',
-      'Ranked among top performers in the institution',
-      'Excelled in Mathematics and Sciences',
-      'Merit scholarship recipient'
+      'Led Web SDK issue resolution and code-level debugging',
+      'Resolved 120+ customer tickets in 3 months',
+      'Conducted adhoc working sessions with customers',
+      'Provided deep technical analysis and solutions',
+      'Collaborated with platform teams for comprehensive fixes'
     ],
     icon: 'trophy'
   },
@@ -34,6 +35,35 @@ const recognitions: Recognition[] = [
     ],
     icon: 'star'
   },
+  {
+    title: 'All India Academic Excellence Award',
+    period: '2014 - 2016',
+    description: 'Achieved outstanding academic performance in IIT-JEE Enternace Examination',
+    metrics: [
+      'Secured 99.7% percentile in India',
+      'All India Rank 5625 among 14 lakhs+ students',
+      'OBC rank 1122 in OBC quota',
+      'Ranked among top performers in the India',
+      'Excelled in Mathematics and Sciences',
+      'Merit scholarship recipient',
+      'Seats in India\'s premium Institutions like IIIT Hyderabad, NIT Warangal'
+    ],
+    icon: 'trophy'
+  },
+  
+  {
+    title: 'Academic Excellence Award',
+    period: '2012 - 2014',
+    description: 'Achieved outstanding academic performance in Higher Secondary Education at Sri Gayatri Jr College',
+    metrics: [
+      'Secured 98.1% in board examinations',
+      'Ranked among top performers in the institution',
+      'Excelled in Mathematics and Sciences',
+      'Merit scholarship recipient'
+    ],
+    icon: 'trophy'
+  },
+  
   {
     title: 'Academic Achievement',
     period: '2014',
