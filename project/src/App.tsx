@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import React from 'react';
 import Header from './components/layout/Header';
 import Hero from './components/sections/Hero';
 import Experience from './components/sections/Experience';
@@ -10,7 +10,7 @@ import Awards from './components/sections/Awards';
 import Contact from './components/sections/Contact';
 import FloatingContact from './components/layout/FloatingContact';
 
-const App: FC = () => {
+const App: React.FC = () => {
   return (
     <div className="bg-gray-50">
       <Header />

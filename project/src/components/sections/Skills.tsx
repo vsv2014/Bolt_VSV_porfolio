@@ -1,11 +1,11 @@
-import { FC } from 'react';
+import React from 'react';
 import { Code2, Database, Brain, Server, Globe, ChartBar } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { fadeInUp, staggerChildren } from '../../utils/animations';
 
 interface SkillCategory {
   name: string;
-  icon: JSX.Element;
+  icon: React.ReactElement;
   description: string;
   skills: string[];
 }
@@ -49,7 +49,7 @@ const skillCategories: SkillCategory[] = [
   }
 ];
 
-const Skills: FC = () => {
+const Skills: React.FC = () => {
   return (
     <motion.section
       initial="initial"

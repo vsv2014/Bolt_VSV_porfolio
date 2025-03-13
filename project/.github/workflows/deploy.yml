@@ -28,19 +28,15 @@ jobs:
 
       - name: Install Dependencies
         run: |
-          rm -rf node_modules
+          cd project
           npm ci
-        working-directory: project
 
       - name: Build
         run: |
-          rm -rf dist
-          npm run build
-        working-directory: project
+          cd project
+          VITE_BASE_URL=/Bolt_VSV_porfolio npm run build
         env:
           NODE_ENV: production
-          PUBLIC_URL: /Bolt_VSV_porfolio
-          VITE_BASE_URL: /Bolt_VSV_porfolio
 
       - name: Setup Pages
         uses: actions/configure-pages@v3

@@ -1,11 +1,25 @@
 /** @type {import('tailwindcss').Config} */
-export default {
+module.exports = {
   content: [
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
     extend: {
+      colors: {
+        primary: 'var(--primary)',
+        'primary-hover': 'var(--primary-hover)',
+        secondary: 'var(--secondary)',
+        'secondary-hover': 'var(--secondary-hover)',
+        accent: 'var(--accent)',
+        'accent-hover': 'var(--accent-hover)',
+        'text-primary': 'var(--text-primary)',
+        'text-secondary': 'var(--text-secondary)',
+        'text-accent': 'var(--text-accent)',
+        'bg-start': 'var(--bg-start)',
+        'bg-middle': 'var(--bg-middle)',
+        'bg-end': 'var(--bg-end)',
+      },
       fontFamily: {
         sans: ['Space Grotesk', 'system-ui', 'sans-serif'],
         mono: ['JetBrains Mono', 'monospace'],
@@ -24,29 +38,8 @@ export default {
           to: { opacity: '1' },
         }
       },
-      colors: {
-        primary: {
-          DEFAULT: '#7928ca',
-          hover: '#9333ea',
-        },
-        secondary: {
-          DEFAULT: '#00d4ff',
-          hover: '#38bdf8',
-        },
-        accent: {
-          DEFAULT: '#ff0080',
-          hover: '#f43f5e',
-        },
-        background: {
-          start: '#1a0b2e',
-          middle: '#2b1055',
-          end: '#16213e',
-        },
-        text: {
-          primary: '#e2c4ff',
-          secondary: '#b3e6ff',
-          accent: '#ffb3d9',
-        }
+      backgroundImage: {
+        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
       },
       container: {
         center: true,
