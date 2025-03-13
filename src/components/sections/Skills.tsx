@@ -55,19 +55,25 @@ const Skills: FC = () => {
       initial="initial"
       whileInView="animate"
       viewport={{ once: true }}
-      className="py-20 bg-gradient-to-br from-gray-50 to-white"
+      className="py-16 sm:py-20 md:py-24 bg-gradient-to-br from-[#1a0b2e] via-[#2b1055] to-[#16213e] relative overflow-hidden"
       id="skills"
     >
+      {/* Glass Background Shapes */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute -top-1/2 -left-1/2 w-full h-full bg-[#7928ca]/10 rounded-full blur-3xl"></div>
+        <div className="absolute -bottom-1/2 -right-1/2 w-full h-full bg-[#00d4ff]/10 rounded-full blur-3xl"></div>
+      </div>
+
       <motion.div
         variants={staggerChildren}
-        className="container mx-auto px-4 sm:px-6"
+        className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10"
       >
         <motion.div
           variants={fadeInUp}
-          className="text-center mb-12"
+          className="text-center mb-10 sm:mb-12"
         >
-          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">Skills & Expertise</h2>
-          <p className="text-gray-600 max-w-2xl mx-auto">
+          <h2 className="text-3xl sm:text-4xl font-bold text-white mb-3 sm:mb-4">Skills & Expertise</h2>
+          <p className="text-gray-300 max-w-2xl mx-auto">
             Comprehensive technical expertise across various domains of software development and data science
           </p>
         </motion.div>
@@ -81,15 +87,15 @@ const Skills: FC = () => {
               key={category.name}
               variants={fadeInUp}
               whileHover={{ y: -5 }}
-              className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300"
+              className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-white/20 group"
             >
               <div className="flex items-start gap-4 mb-4">
-                <div className="p-3 bg-blue-50 text-blue-600 rounded-lg">
+                <div className="p-3 bg-gradient-to-br from-[#7928ca]/20 via-[#ff0080]/20 to-[#00d4ff]/20 rounded-xl text-[#e2c4ff] group-hover:from-[#7928ca]/30 group-hover:via-[#ff0080]/30 group-hover:to-[#00d4ff]/30 transition-colors backdrop-blur-sm border border-white/10">
                   {category.icon}
                 </div>
                 <div>
-                  <h3 className="text-xl font-semibold text-gray-900">{category.name}</h3>
-                  <p className="text-gray-600 text-sm mt-1">{category.description}</p>
+                  <h3 className="text-xl font-semibold text-white group-hover:text-[#e2c4ff] transition-colors">{category.name}</h3>
+                  <p className="text-gray-300 text-sm mt-1 group-hover:text-gray-200 transition-colors">{category.description}</p>
                 </div>
               </div>
 
@@ -97,7 +103,7 @@ const Skills: FC = () => {
                 {category.skills.map((skill) => (
                   <span
                     key={skill}
-                    className="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm font-medium hover:bg-gray-200 transition-colors"
+                    className="px-3 py-1 bg-white/10 backdrop-blur-sm text-[#e2c4ff] rounded-full text-sm font-medium border border-white/10 group-hover:bg-white/20 group-hover:text-[#ffb3d9] transition-colors"
                   >
                     {skill}
                   </span>
