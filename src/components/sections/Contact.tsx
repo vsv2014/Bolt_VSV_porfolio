@@ -1,41 +1,47 @@
 import { FC } from 'react';
 import { motion } from 'framer-motion';
-import { Linkedin, Instagram, Twitter, Mail, Phone } from 'lucide-react';
+import { Linkedin, Instagram, Twitter, Mail, Phone, Facebook } from 'lucide-react';
 
 const Contact: FC = () => {
   const contacts = [
     {
-      icon: <Linkedin className="w-6 h-6 sm:w-8 sm:h-8 text-purple-300" />,
+      icon: <Linkedin className="w-6 h-6 sm:w-8 sm:h-8 text-white" />,
       href: 'https://www.linkedin.com/in/santhoshvishal',
       label: 'LinkedIn',
       value: 'linkedin.com/in/santhoshvishal'
     },
     {
-      icon: <Phone className="w-6 h-6 sm:w-8 sm:h-8 text-blue-300" />,
-      href: 'tel:+917702771465',
-      label: 'Phone/WhatsApp',
-      value: '+91 7702771465'
+      icon: <Facebook className="w-6 h-6 sm:w-8 sm:h-8 text-white" />,
+      href: 'https://www.facebook.com/santhosh.vishal.98',
+      label: 'Facebook',
+      value: 'santhosh.vishal.98'
     },
     {
-      icon: <Instagram className="w-6 h-6 sm:w-8 sm:h-8 text-purple-300" />,
+      icon: <Phone className="w-6 h-6 sm:w-8 sm:h-8 text-white" />,
+      href: 'tel:+917702771465',
+      label: 'Phone/WhatsApp',
+      value: '+91 770-277-1465'
+    },
+    {
+      icon: <Instagram className="w-6 h-6 sm:w-8 sm:h-8 text-white" />,
       href: 'https://www.instagram.com/santhoshvishal',
       label: 'Instagram',
       value: '@santhoshvishal'
     },
     {
-      icon: <Twitter className="w-6 h-6 sm:w-8 sm:h-8 text-blue-300" />,
+      icon: <Twitter className="w-6 h-6 sm:w-8 sm:h-8 text-white" />,
       href: 'https://twitter.com/santhoshvishal3',
       label: 'Twitter',
       value: '@santhoshvishal3'
     },
     {
-      icon: <Mail className="w-6 h-6 sm:w-8 sm:h-8 text-purple-300" />,
+      icon: <Mail className="w-6 h-6 sm:w-8 sm:h-8 text-white" />,
       href: 'mailto:santhoshvishal.v@research.iiit.ac.in',
       label: 'Primary Email',
       value: 'santhoshvishal.v@research.iiit.ac.in'
     },
     {
-      icon: <Mail className="w-6 h-6 sm:w-8 sm:h-8 text-blue-300" />,
+      icon: <Mail className="w-6 h-6 sm:w-8 sm:h-8 text-white" />,
       href: 'mailto:gombugadu@gmail.com',
       label: 'Alternative Email',
       value: 'gombugadu@gmail.com'
@@ -74,7 +80,7 @@ const Contact: FC = () => {
                 whileTap={{ scale: 0.95 }}
                 className="group bg-white/10 backdrop-blur-sm p-4 sm:p-6 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 flex flex-col items-center gap-3 sm:gap-4 border border-white/20"
               >
-                <div className="p-3 bg-white/10 rounded-xl group-hover:bg-white/20 transition-colors backdrop-blur-sm border border-white/10">
+                <div className="p-3 bg-white/20 rounded-xl group-hover:bg-white/30 transition-colors backdrop-blur-sm border border-white/10">
                   {contact.icon}
                 </div>
                 <div className="text-center">
