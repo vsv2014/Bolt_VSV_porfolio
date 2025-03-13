@@ -5,7 +5,7 @@ import path from 'path';
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
-  base: process.env.NODE_ENV === 'production' ? '/Bolt_VSV_porfolio/' : '/',
+  base: '/Bolt_VSV_porfolio/',
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
@@ -16,16 +16,13 @@ export default defineConfig({
     sourcemap: true,
     assetsDir: 'assets',
     rollupOptions: {
-      input: {
-        main: path.resolve(__dirname, 'index.html'),
-      },
       output: {
         manualChunks: {
           vendor: ['react', 'react-dom', 'framer-motion'],
           ui: ['lucide-react']
         }
       }
-    },
+    }
   },
   publicDir: 'public',
   server: {
