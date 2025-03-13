@@ -25,11 +25,15 @@ jobs:
           cache: 'npm'
 
       - name: Install Dependencies
-        run: npm ci
+        run: |
+          rm -rf node_modules
+          npm ci
         working-directory: project
 
       - name: Build
-        run: npm run build
+        run: |
+          rm -rf dist
+          npm run build
         working-directory: project
         env:
           NODE_ENV: production
@@ -44,3 +48,4 @@ jobs:
           clean-exclude: |
             .nojekyll
             CNAME
+          force: true
