@@ -125,41 +125,34 @@ const Projects: FC = () => {
     { value: 'academic', label: 'Academic' }
   ];
 
-  const getCategoryColor = (category: ProjectCategory) => {
-    switch (category) {
-      case 'professional':
-        return 'from-blue-600 to-indigo-600';
-      case 'research':
-        return 'from-green-600 to-teal-600';
-      case 'academic':
-        return 'from-purple-600 to-pink-600';
-      default:
-        return 'from-gray-600 to-gray-700';
-    }
-  };
-
   const filteredProjects = projects.filter(project => 
     activeCategory === 'all' || project.category === activeCategory
   );
 
   return (
-    <section className="py-16 sm:py-20 md:py-24 bg-gray-50" id="projects">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="py-16 sm:py-20 md:py-24 bg-gradient-to-br from-indigo-900 via-purple-900 to-blue-900 relative overflow-hidden" id="projects">
+      {/* Glass Background Shapes */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute -top-1/2 -left-1/2 w-full h-full bg-purple-500/10 rounded-full blur-3xl"></div>
+        <div className="absolute -bottom-1/2 -right-1/2 w-full h-full bg-blue-500/10 rounded-full blur-3xl"></div>
+      </div>
+
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           className="text-center mb-10 sm:mb-12 md:mb-16"
         >
-          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-3 sm:mb-4">Featured Projects</h2>
-          <p className="text-gray-600 max-w-2xl mx-auto text-sm sm:text-base leading-relaxed">
+          <h2 className="text-3xl sm:text-4xl font-bold text-white mb-3 sm:mb-4">Featured Projects</h2>
+          <p className="text-gray-300 max-w-2xl mx-auto text-sm sm:text-base leading-relaxed">
             Showcasing innovative solutions at the intersection of technology and environmental science.
           </p>
         </motion.div>
 
         {/* Category Filter */}
         <div className="flex justify-center mb-8 sm:mb-10 md:mb-12">
-          <div className="inline-flex bg-white rounded-lg p-1 shadow-md overflow-x-auto max-w-full no-scrollbar">
+          <div className="inline-flex bg-white/10 backdrop-blur-sm rounded-lg p-1 shadow-lg overflow-x-auto max-w-full no-scrollbar border border-white/20">
             {categories.map((category) => (
               <motion.button
                 key={category.value}
@@ -169,8 +162,8 @@ const Projects: FC = () => {
                 }}
                 className={`px-3 sm:px-4 md:px-6 py-2 rounded-lg transition-colors whitespace-nowrap text-sm ${
                   activeCategory === category.value
-                    ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white'
-                    : 'text-gray-600 hover:text-blue-600'
+                    ? 'bg-gradient-to-r from-purple-500 to-blue-500 text-white shadow-md'
+                    : 'text-gray-300 hover:text-white hover:bg-white/10'
                 }`}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
@@ -196,74 +189,79 @@ const Projects: FC = () => {
                   scale: { duration: 0.2 },
                   layout: { duration: 0.3 }
                 }}
-                className={`bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 flex flex-col ${
-                  selectedProject === project.title ? 'ring-2 ring-blue-500' : ''
+                className={`bg-white/10 backdrop-blur-sm rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 flex flex-col border border-white/20 group ${
+                  selectedProject === project.title ? 'ring-2 ring-purple-400' : ''
                 }`}
-                onClick={() => setSelectedProject(project.title === selectedProject ? null : project.title)}
+                onClick={() => setSelectedProject(selectedProject === project.title ? null : project.title)}
               >
-                {/* Project Header */}
-                <div className={`p-4 sm:p-5 md:p-6 bg-gradient-to-r ${getCategoryColor(project.category)} text-white`}>
-                  <h3 className="text-lg sm:text-xl font-semibold mb-2">{project.title}</h3>
-                  <p className="text-sm sm:text-base opacity-90">{project.description}</p>
+                <div className="p-6">
+                  <h3 className="text-xl font-semibold text-white mb-2">{project.title}</h3>
+                  <p className="text-gray-300 text-sm mb-4">{project.description}</p>
+                  
+                  {/* Tech Stack */}
+                  <div className="flex flex-wrap gap-2 mb-4">
+                    {project.techStack.map((tech) => (
+                      <span
+                        key={tech}
+                        className="px-2 py-1 text-xs rounded-full bg-white/10 text-gray-300 border border-white/20"
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+
+                  {/* Expandable Content */}
+                  <AnimatePresence>
+                    {selectedProject === project.title && (
+                      <motion.div
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: 'auto' }}
+                        exit={{ opacity: 0, height: 0 }}
+                        className="space-y-3"
+                      >
+                        <div>
+                          <h4 className="text-purple-300 font-medium mb-1">Problem</h4>
+                          <p className="text-gray-300 text-sm">{project.problem}</p>
+                        </div>
+                        <div>
+                          <h4 className="text-blue-300 font-medium mb-1">Solution</h4>
+                          <p className="text-gray-300 text-sm">{project.solution}</p>
+                        </div>
+                        <div>
+                          <h4 className="text-emerald-300 font-medium mb-1">Impact</h4>
+                          <p className="text-gray-300 text-sm">{project.impact}</p>
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
                 </div>
 
-                {/* Project Details */}
-                <div className="p-4 sm:p-5 md:p-6 flex-grow">
-                  <div className="space-y-3 sm:space-y-4">
-                    <div>
-                      <h4 className="text-sm font-semibold text-gray-900 mb-1">Problem</h4>
-                      <p className="text-sm text-gray-600">{project.problem}</p>
-                    </div>
-                    <div>
-                      <h4 className="text-sm font-semibold text-gray-900 mb-1">Solution</h4>
-                      <p className="text-sm text-gray-600">{project.solution}</p>
-                    </div>
-                    <div>
-                      <h4 className="text-sm font-semibold text-gray-900 mb-1">Impact</h4>
-                      <p className="text-sm text-gray-600">{project.impact}</p>
-                    </div>
-                  </div>
-
-                  {/* Tech Stack */}
-                  <div className="mt-4 sm:mt-5">
-                    <h4 className="text-sm font-semibold text-gray-900 mb-2">Tech Stack</h4>
-                    <div className="flex flex-wrap gap-2">
-                      {project.techStack.map((tech) => (
-                        <span
-                          key={tech}
-                          className="px-2 py-1 bg-gray-100 text-gray-700 rounded text-xs font-medium"
-                        >
-                          {tech}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* Project Links */}
-                  <div className="mt-4 sm:mt-6 flex items-center gap-3">
-                    {project.githubUrl && (
-                      <a
-                        href={project.githubUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1 text-sm text-gray-600 hover:text-blue-600 transition-colors"
-                      >
-                        <Github className="w-4 h-4" />
-                        <span>View Code</span>
-                      </a>
-                    )}
-                    {project.demoUrl && (
-                      <a
-                        href={project.demoUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1 text-sm text-gray-600 hover:text-blue-600 transition-colors"
-                      >
-                        <ExternalLink className="w-4 h-4" />
-                        <span>Live Demo</span>
-                      </a>
-                    )}
-                  </div>
+                {/* Project Links */}
+                <div className="mt-auto p-4 pt-0 flex gap-3">
+                  {project.githubUrl && (
+                    <motion.a
+                      href={project.githubUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-gray-300 hover:text-purple-300 transition-colors"
+                      whileHover={{ scale: 1.1 }}
+                      whileTap={{ scale: 0.9 }}
+                    >
+                      <Github className="w-5 h-5" />
+                    </motion.a>
+                  )}
+                  {project.demoUrl && (
+                    <motion.a
+                      href={project.demoUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-gray-300 hover:text-blue-300 transition-colors"
+                      whileHover={{ scale: 1.1 }}
+                      whileTap={{ scale: 0.9 }}
+                    >
+                      <ExternalLink className="w-5 h-5" />
+                    </motion.a>
+                  )}
                 </div>
               </motion.div>
             ))}
