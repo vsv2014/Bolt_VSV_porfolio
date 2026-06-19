@@ -1,0 +1,125 @@
+@import 'tailwindcss';
+
+/* ------------------------------------------------------------------ *
+ * Design tokens — single source of truth for the Modern Minimal theme
+ * ------------------------------------------------------------------ */
+@theme {
+  /* Surfaces & text */
+  --color-bg: #08080b;
+  --color-bg-soft: #0d0d12;
+  --color-surface: rgba(255, 255, 255, 0.025);
+  --color-surface-hover: rgba(255, 255, 255, 0.05);
+  --color-line: rgba(255, 255, 255, 0.08);
+  --color-line-strong: rgba(255, 255, 255, 0.16);
+  --color-fg: #ededf2;
+  --color-muted: #a1a1aa;
+  --color-faint: #71717a;
+
+  /* Brand accents (used sparingly) */
+  --color-brand-purple: #a855f7;
+  --color-brand-pink: #ff0080;
+  --color-brand-cyan: #22d3ee;
+
+  /* Decorative grid dot colour (flips per theme) */
+  --grid-color: rgba(255, 255, 255, 0.05);
+
+  /* Typography */
+  --font-display: 'Space Grotesk', system-ui, sans-serif;
+  --font-sans: 'Inter', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+
+  /* Motion */
+  --animate-marquee: marquee 40s linear infinite;
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+/* ------------------------------------------------------------------ *
+ * Base
+ * ------------------------------------------------------------------ */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--color-bg);
+    color: var(--color-fg);
+    font-family: var(--font-sans);
+    font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    min-height: 100dvh;
+  }
+
+  ::selection {
+    background: color-mix(in oklab, var(--color-brand-purple) 35%, transparent);
+    color: #fff;
+  }
+
+  /* Fixed-nav scroll offset */
+  section[id],
+  [id='home'] {
+    scroll-margin-top: 5rem;
+  }
+
+  /* Tasteful focus rings for keyboard users */
+  :focus-visible {
+    outline: 2px solid var(--color-brand-cyan);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+    }
+  }
+}
+
+/* ------------------------------------------------------------------ *
+ * Reusable utilities
+ * ------------------------------------------------------------------ */
+@utility text-gradient {
+  background-image: linear-gradient(
+    100deg,
+    var(--color-brand-purple),
+    var(--color-brand-pink),
+    var(--color-brand-cyan)
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+/* Faint dotted grid backdrop for the page */
+@utility bg-grid {
+  background-image: radial-gradient(circle at 1px 1px, var(--grid-color) 1px, transparent 0);
+  background-size: 32px 32px;
+}
+
+/* ------------------------------------------------------------------ *
+ * Light theme — overrides the tokens when <html class="light">
+ * ------------------------------------------------------------------ */
+html.light {
+  --color-bg: #ffffff;
+  --color-bg-soft: #f4f4f5;
+  --color-surface: rgba(9, 9, 11, 0.03);
+  --color-surface-hover: rgba(9, 9, 11, 0.06);
+  --color-line: rgba(9, 9, 11, 0.1);
+  --color-line-strong: rgba(9, 9, 11, 0.18);
+  --color-fg: #0a0a0b;
+  --color-muted: #52525b;
+  --color-faint: #71717a;
+  --color-brand-purple: #7c3aed;
+  --color-brand-pink: #db2777;
+  --color-brand-cyan: #0891b2;
+  --grid-color: rgba(9, 9, 11, 0.05);
+}
