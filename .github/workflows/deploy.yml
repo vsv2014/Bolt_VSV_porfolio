@@ -1,8 +1,9 @@
- name: Deploy to GitHub Pages
+
+  name: Deploy to GitHub Pages
   on:
     push:
-      branches: [ main ]
-    workflow_dispatch: 
+      branches: [main]
+    workflow_dispatch:
   permissions:
     contents: read
     pages: write
@@ -16,16 +17,16 @@
       steps:
         - uses: actions/checkout@v4
         - uses: actions/setup-node@v4
-          with: 
+          with:
             node-version: '24'
-            cache: 'npm'
+            cache: npm
         - run: npm ci
         - run: npm run build
           env:
             NODE_ENV: production
         - uses: actions/configure-pages@v5
         - uses: actions/upload-pages-artifact@v3
-          with: 
+          with:
             path: dist
     deploy:
       needs: build
@@ -36,3 +37,4 @@
       steps:
         - id: deployment
           uses: actions/deploy-pages@v4
+
