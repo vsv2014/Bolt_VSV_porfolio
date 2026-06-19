@@ -1,186 +1,133 @@
-import { FC } from 'react';
-import { motion } from 'framer-motion';
-import { fadeInUp, staggerChildren, bounceIn } from '../../utils/animations';
-import { Github, Linkedin, Mail, Facebook, Code2, Brain, Database } from 'lucide-react';
-import profilePic from '../../assets/VSV-portfolio-pp.jpeg';
+import { motion } from 'motion/react';
+import { ArrowDown, ArrowUpRight, FileText } from 'lucide-react';
+import { Container, ButtonLink, IconLink } from '@/components/ui';
+import { profile, socials, stats } from '@/data/site';
+import profilePic from '@/assets/VSV-portfolio-pp.jpeg';
 
-const Hero: FC = () => {
-  const socialLinks = [
-    {
-      icon: <Github className="w-6 h-6 sm:w-8 sm:h-8" />,
-      href: 'https://github.com/vsv2014',
-      color: 'hover:text-purple-300'
-    },
-    {
-      icon: <Linkedin className="w-6 h-6 sm:w-8 sm:h-8" />,
-      href: 'https://www.linkedin.com/in/santhosh-veerannapet/',
-      color: 'hover:text-blue-300'
-    },
-    {
-      icon: <Facebook className="w-6 h-6 sm:w-8 sm:h-8" />,
-      href: 'https://www.facebook.com/santhosh.vishal.98',
-      color: 'hover:text-purple-300'
-    },
-    {
-      icon: <Mail className="w-6 h-6 sm:w-8 sm:h-8" />,
-      href: 'mailto:santhoshveerannapet@gmail.com',
-      color: 'hover:text-emerald-300'
-    }
-  ];
+const resumeHref = `${import.meta.env.BASE_URL}${profile.resumeFile}`;
 
-  const expertise = [
-    {
-      icon: <Code2 className="w-6 h-6" />,
-      title: 'Full Stack Development',
-      description: 'Building scalable web applications with modern technologies',
-      color: 'from-[#7928ca] to-[#ff0080]'
-    },
-    {
-      icon: <Brain className="w-6 h-6" />,
-      title: 'AI/ML Research',
-      description: 'Applying machine learning to environmental challenges',
-      color: 'from-[#ff0080] to-[#00d4ff]'
-    },
-    {
-      icon: <Database className="w-6 h-6" />,
-      title: 'Data Science',
-      description: 'Transforming environmental data into actionable insights',
-      color: 'from-[#00d4ff] to-[#7928ca]'
-    }
-  ];
+const fadeUp = {
+  hidden: { opacity: 0, y: 18 },
+  show: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] as const },
+  }),
+};
 
+export function Hero() {
   return (
-    <motion.section
-      initial="initial"
-      animate="animate"
-      variants={staggerChildren}
-      className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#1a0b2e] via-[#2b1055] to-[#16213e] py-20 px-4 relative overflow-hidden"
-    >
-      {/* Glass Background Shapes */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute -top-1/2 -left-1/2 w-full h-full bg-[#7928ca]/10 rounded-full blur-3xl"></div>
-        <div className="absolute -bottom-1/2 -right-1/2 w-full h-full bg-[#00d4ff]/10 rounded-full blur-3xl"></div>
-      </div>
+    <section id="home" className="relative overflow-hidden">
+      {/* faint grid + single soft accent glow */}
+      <div className="bg-grid pointer-events-none absolute inset-0 opacity-60" aria-hidden />
+      <div
+        className="pointer-events-none absolute -top-40 right-0 h-[36rem] w-[36rem] rounded-full opacity-20 blur-[120px]"
+        style={{ background: 'radial-gradient(circle, #a855f7 0%, transparent 70%)' }}
+        aria-hidden
+      />
 
-      <div className="container mx-auto relative z-10">
-        <div className="grid md:grid-cols-2 gap-8 items-center max-w-6xl mx-auto">
-          {/* Left Side Content */}
-          <motion.div
-            variants={staggerChildren}
-            className="text-left space-y-6"
-          >
-            <motion.h1
-              variants={fadeInUp}
-              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white"
+      <Container className="relative flex min-h-screen flex-col justify-center py-32">
+        <div className="grid items-center gap-12 md:grid-cols-[1.4fr_1fr]">
+          {/* Left — copy */}
+          <div>
+            <motion.p
+              custom={0}
+              variants={fadeUp}
+              initial="hidden"
+              animate="show"
+              className="font-mono text-xs uppercase tracking-[0.22em] text-brand-cyan"
             >
-              Innovating at the
-              <span className="block mt-2 bg-clip-text text-transparent bg-gradient-to-r from-[#7928ca] via-[#ff0080] to-[#00d4ff]">
-                Intersection of AI & Environment
-              </span>
+              {profile.role}
+            </motion.p>
+
+            <motion.h1
+              custom={1}
+              variants={fadeUp}
+              initial="hidden"
+              animate="show"
+              className="mt-5 font-display text-4xl font-semibold leading-[1.05] tracking-tight text-fg sm:text-5xl lg:text-6xl"
+            >
+              {profile.shortName}
             </motion.h1>
 
             <motion.p
-              variants={fadeInUp}
-              className="text-gray-300 text-lg sm:text-xl leading-relaxed"
+              custom={2}
+              variants={fadeUp}
+              initial="hidden"
+              animate="show"
+              className="mt-6 max-w-xl text-lg leading-relaxed text-muted"
             >
-              Full Stack Developer specializing in AI-driven environmental solutions. Building intelligent systems that bridge technology and sustainability.
+              {profile.tagline}
             </motion.p>
 
             <motion.div
-              variants={staggerChildren}
-              className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4"
+              custom={3}
+              variants={fadeUp}
+              initial="hidden"
+              animate="show"
+              className="mt-8 flex flex-wrap items-center gap-3"
             >
-              {expertise.map((item, index) => (
-                <motion.div
-                  key={index}
-                  variants={fadeInUp}
-                  className="bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/20 hover:bg-white/20 transition-all group"
-                >
-                  <div className={`w-12 h-12 rounded-lg bg-gradient-to-r ${item.color} p-3 mb-3`}>
-                    {item.icon}
-                  </div>
-                  <h3 className="text-[#e2c4ff] font-semibold mb-2 group-hover:text-white transition-colors">
-                    {item.title}
-                  </h3>
-                  <p className="text-gray-400 text-sm group-hover:text-gray-300 transition-colors">
-                    {item.description}
-                  </p>
-                </motion.div>
-              ))}
-            </motion.div>
-          </motion.div>
-
-          {/* Right Side Content */}
-          <motion.div
-            variants={staggerChildren}
-            className="text-center"
-          >
-            {/* Profile Picture */}
-            <motion.div 
-              variants={bounceIn}
-              className="relative w-40 h-40 sm:w-48 sm:h-48 md:w-56 md:h-56 mx-auto mb-6"
-            >
-              <motion.img
-                initial={{ scale: 0.5, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                transition={{ duration: 0.5, delay: 0.2 }}
-                src={profilePic}
-                alt="Santhosh Vishal Veerannapet"
-                className="w-full h-full object-cover rounded-full border-8 border-white/10 shadow-2xl backdrop-blur-sm"
-              />
-              <div className="absolute -inset-4 border-4 border-purple-400/20 rounded-full animate-pulse"></div>
-            </motion.div>
-
-            <motion.div className="space-y-4 mb-6">
-              <motion.h2
-                variants={fadeInUp}
-                className="text-2xl sm:text-3xl font-bold text-white"
-              >
-                <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#7928ca] via-[#ff0080] to-[#00d4ff]">
-                  Veerannapet Santhosh Vishal
-                </span>
-              </motion.h2>
-
-              <motion.div
-                variants={fadeInUp}
-                className="flex flex-wrap justify-center gap-2"
-              >
-                <span className="px-3 py-1.5 bg-white/10 backdrop-blur-sm text-[#e2c4ff] rounded-full text-sm font-medium border border-[#7928ca]/20 hover:bg-white/20 transition-colors">
-                  Full Stack Development
-                </span>
-                <span className="px-3 py-1.5 bg-white/10 backdrop-blur-sm text-[#b3e6ff] rounded-full text-sm font-medium border border-[#00d4ff]/20 hover:bg-white/20 transition-colors">
-                  Environmental Research
-                </span>
-                <span className="px-3 py-1.5 bg-white/10 backdrop-blur-sm text-[#ffb3d9] rounded-full text-sm font-medium border border-[#ff0080]/20 hover:bg-white/20 transition-colors">
-                  Data Science
-                </span>
-              </motion.div>
+              <ButtonLink href="#projects" variant="primary">
+                View work <ArrowDown className="h-4 w-4" />
+              </ButtonLink>
+              <ButtonLink href={resumeHref} target="_blank" rel="noopener noreferrer" variant="secondary">
+                Résumé <FileText className="h-4 w-4" />
+              </ButtonLink>
+              <ButtonLink href="#contact" variant="secondary">
+                Get in touch <ArrowUpRight className="h-4 w-4" />
+              </ButtonLink>
             </motion.div>
 
             <motion.div
-              variants={staggerChildren}
-              className="flex justify-center items-center space-x-4"
+              custom={4}
+              variants={fadeUp}
+              initial="hidden"
+              animate="show"
+              className="mt-8 flex items-center gap-1"
             >
-              {socialLinks.map((link, index) => (
-                <motion.a
-                  key={index}
-                  href={link.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  variants={fadeInUp}
-                  whileHover={{ scale: 1.1, backgroundColor: 'rgba(255, 255, 255, 0.15)' }}
-                  whileTap={{ scale: 0.9 }}
-                  className={`p-3 bg-white/20 backdrop-blur-sm rounded-xl text-white transition-all duration-300 border border-white/10 ${link.color}`}
-                >
-                  {link.icon}
-                </motion.a>
+              {socials.map(({ label, href, icon }) => (
+                <IconLink key={label} href={href} label={label} icon={icon} className="border-transparent hover:border-line" />
               ))}
             </motion.div>
+          </div>
+
+          {/* Right — portrait */}
+          <motion.div
+            custom={2}
+            variants={fadeUp}
+            initial="hidden"
+            animate="show"
+            className="order-first mx-auto md:order-none"
+          >
+            <div className="relative w-44 sm:w-56 md:w-full md:max-w-xs">
+              <div className="absolute -inset-px rounded-2xl bg-gradient-to-br from-brand-purple/40 via-brand-pink/30 to-brand-cyan/40" aria-hidden />
+              <img
+                src={profilePic}
+                alt={profile.name}
+                width={320}
+                height={320}
+                className="relative aspect-square w-full rounded-2xl object-cover"
+              />
+            </div>
           </motion.div>
         </div>
-      </div>
-    </motion.section>
-  );
-};
 
-export default Hero;
+        {/* Stat strip */}
+        <motion.dl
+          custom={5}
+          variants={fadeUp}
+          initial="hidden"
+          animate="show"
+          className="mt-16 grid grid-cols-2 gap-px overflow-hidden rounded-xl border border-line bg-line sm:grid-cols-4"
+        >
+          {stats.map((s) => (
+            <div key={s.label} className="bg-bg px-5 py-5">
+              <dt className="font-display text-2xl font-semibold text-fg sm:text-3xl">{s.value}</dt>
+              <dd className="mt-1 font-mono text-[11px] uppercase tracking-wider text-faint">{s.label}</dd>
+            </div>
+          ))}
+        </motion.dl>
+      </Container>
+    </section>
+  );
+}

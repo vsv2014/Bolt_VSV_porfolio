@@ -1,192 +1,47 @@
-import { FC } from 'react';
-import { motion } from 'framer-motion';
-import { fadeInUp, staggerChildren } from '../../utils/animations';
-import { Building2, Calendar } from 'lucide-react';
+import { Section, Reveal, Tag } from '@/components/ui';
+import { experiences } from '@/data/experience';
 
-interface Experience {
-  title: string;
-  company: string;
-  period: string;
-  location: string;
-  description: string;
-  achievements: string[];
-  technologies: string[];
-}
-
-const experiences: Experience[] = [
-  {
-    title: 'Software Engineer',
-    company: 'Kore.ai',
-    period: 'July 2022 - Present',
-    location: 'Hyderabad, India',
-    description: 'Leading development of enterprise-grade conversational AI solutions.',
-    achievements: [
-      'Developed proactive web campaigns feature for enhanced user engagement',
-      'Built comprehensive UI components for the bot builder platform',
-      'Implemented AI-powered contact center solutions',
-      'Created automated dialing system for outbound campaigns',
-      'Developed SmartAssist AI, improving query resolution time by 40%',
-      'Led the implementation of Unified-XO-Platform with modular UI components',
-      'Implemented Outbound Campaign Dialer system with predictive analytics',
-      'Optimized agent productivity through AI-driven automation'
-    ],
-    technologies: ['Angular', 'Node.js', 'MongoDB', 'WebSocket', 'TypeScript', 'AI/ML']
-  },
-  {
-    title: 'Research Assistant',
-    company: 'Lab for Spatial Informatics, IIIT-H',
-    period: 'January 2021 - January 2024',
-    location: 'Hyderabad, India',
-    description: 'Conducted research on environmental monitoring and water quality analysis.',
-    achievements: [
-      'Published research on dissolved oxygen saturation in Krishna River Basin',
-      'Developed machine learning models for water quality prediction',
-      'Created GIS-based watershed analysis tools',
-      'Implemented environmental data visualization systems',
-      'Developed regression models for water temperature prediction',
-      'Created QGIS-based watershed delineation tools',
-      'Implemented data analysis pipelines for environmental monitoring'
-    ],
-    technologies: ['Python', 'MATLAB', 'GIS', 'Machine Learning', 'Data Analysis']
-  },
-  {
-    title: 'Web Developer',
-    company: 'Sri Satya Sai Vidyalayam',
-    period: 'July 2020 - September 2020',
-    location: 'Hyderabad, India',
-    description: 'Developed a website for conducting online classes during the Covid-19 pandemic.',
-    achievements: [
-      'Built a complete online learning platform from scratch',
-      'Integrated video conferencing capabilities',
-      'Implemented secure authentication system',
-      'Created user-friendly interface for teachers and students'
-    ],
-    technologies: ['React', 'Node.js', 'MongoDB', 'WebRTC', 'OAuth']
-  },
-  {
-    title: 'Developer',
-    company: 'IIIT Hyderabad',
-    period: 'December 2017',
-    location: 'Hyderabad, India',
-    description: 'Built a virtual lab for teaching MergeSort algorithm through interactive visualization.',
-    achievements: [
-      'Developed an interactive visualization platform for MergeSort algorithm',
-      'Created step-by-step animation system',
-      'Implemented user progress tracking',
-      'Added comprehensive documentation'
-    ],
-    technologies: ['JavaScript', 'D3.js', 'HTML5', 'CSS3']
-  }
-];
-
-const Experience: FC = () => {
-  // Sort experiences by date (most recent first)
-  const sortedExperiences = [...experiences].sort((a, b) => {
-    const dateA = new Date(a.period.split(' - ')[1] === 'Present' ? Date.now() : a.period.split(' - ')[1]);
-    const dateB = new Date(b.period.split(' - ')[1] === 'Present' ? Date.now() : b.period.split(' - ')[1]);
-    return dateB.getTime() - dateA.getTime();
-  });
-
+export function Experience() {
   return (
-    <section id="experience" className="py-16 sm:py-20 md:py-24 bg-gradient-to-br from-[#1a0b2e] via-[#2b1055] to-[#16213e] relative overflow-hidden">
-      {/* Glass Background Shapes */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute -top-1/2 -left-1/2 w-full h-full bg-[#7928ca]/10 rounded-full blur-3xl"></div>
-        <div className="absolute -bottom-1/2 -right-1/2 w-full h-full bg-[#00d4ff]/10 rounded-full blur-3xl"></div>
-      </div>
+    <Section
+      id="experience"
+      index="02"
+      eyebrow="Experience"
+      title="Where I've worked"
+      description="From conversational-AI products to environmental research labs."
+    >
+      <ol className="relative border-l border-line">
+        {experiences.map((exp, i) => (
+          <li key={exp.company} className="relative pl-8 pb-12 last:pb-0">
+            <span className="absolute -left-[5px] top-1.5 h-2.5 w-2.5 rounded-full border border-brand-cyan bg-bg" aria-hidden />
+            <Reveal delay={i * 0.05}>
+              <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+                <h3 className="text-lg font-medium text-fg">
+                  {exp.role} <span className="text-muted">· {exp.company}</span>
+                </h3>
+                <span className="font-mono text-xs text-faint">{exp.period}</span>
+              </div>
+              <p className="mt-1 font-mono text-xs text-faint">{exp.location}</p>
+              <p className="mt-3 text-sm leading-relaxed text-muted">{exp.summary}</p>
 
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <motion.div
-          initial="initial"
-          whileInView="animate"
-          viewport={{ once: true }}
-          variants={staggerChildren}
-          className="max-w-4xl mx-auto"
-        >
-          {/* Section Header */}
-          <div className="text-center mb-10 sm:mb-12 md:mb-16">
-            <motion.div variants={fadeInUp}>
-              <h2 className="text-3xl sm:text-4xl font-bold text-white mb-3 sm:mb-4">Professional Experience</h2>
-              <p className="text-gray-300 text-sm sm:text-base leading-relaxed max-w-2xl mx-auto">
-                Building innovative solutions at the intersection of technology and environmental science
-              </p>
-            </motion.div>
-          </div>
+              <ul className="mt-4 space-y-2">
+                {exp.achievements.map((item) => (
+                  <li key={item} className="flex gap-3 text-sm leading-relaxed text-muted">
+                    <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-brand-pink" aria-hidden />
+                    {item}
+                  </li>
+                ))}
+              </ul>
 
-          {/* Experience Timeline */}
-          <div className="relative space-y-8">
-            {/* Timeline Line */}
-            <div className="absolute left-0 sm:left-1/2 top-0 h-full w-px bg-gradient-to-b from-[#7928ca]/50 via-[#ff0080]/50 to-[#00d4ff]/50 transform -translate-x-1/2" />
-
-            {sortedExperiences.map((experience, index) => (
-              <motion.div
-                key={index}
-                variants={fadeInUp}
-                className={`relative flex flex-col sm:flex-row gap-4 sm:gap-8 ${
-                  index % 2 === 0 ? 'sm:pr-1/2' : 'sm:pl-1/2 sm:flex-row-reverse'
-                }`}
-              >
-                {/* Timeline Dot */}
-                <div className="absolute left-0 sm:left-1/2 top-0 w-4 h-4 rounded-full bg-gradient-to-br from-[#7928ca] via-[#ff0080] to-[#00d4ff] border-4 border-[#1a0b2e]/50 shadow-lg transform -translate-x-1/2" />
-
-                {/* Experience Card */}
-                <div className="sm:w-[calc(100%-2rem)] bg-white/10 backdrop-blur-lg rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 group hover:bg-white/20 border border-white/20">
-                  <div className="p-4 sm:p-6 md:p-8">
-                    {/* Card Header */}
-                    <div className="flex flex-col sm:flex-row sm:items-start gap-4 mb-4 sm:mb-6">
-                      <div className="p-3 bg-gradient-to-br from-[#7928ca]/20 via-[#ff0080]/20 to-[#00d4ff]/20 rounded-xl text-[#e2c4ff] w-fit group-hover:from-[#7928ca]/30 group-hover:via-[#ff0080]/30 group-hover:to-[#00d4ff]/30 transition-colors backdrop-blur-sm border border-white/10">
-                        <Building2 className="w-6 h-6 sm:w-8 sm:h-8" />
-                      </div>
-                      <div className="flex-grow">
-                        <h3 className="text-lg sm:text-xl font-semibold text-white group-hover:text-[#e2c4ff] transition-colors">{experience.title}</h3>
-                        <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-3 mt-1 sm:mt-2">
-                          <span className="text-[#e2c4ff] font-medium group-hover:text-[#ffb3d9] transition-colors">{experience.company}</span>
-                          <span className="hidden sm:block text-gray-400">•</span>
-                          <div className="flex items-center gap-1 text-sm text-[#b3e6ff]">
-                            <Calendar className="w-4 h-4" />
-                            <span>{experience.period}</span>
-                          </div>
-                        </div>
-                        <p className="text-gray-300 text-sm sm:text-base mt-2 group-hover:text-gray-200 transition-colors">{experience.description}</p>
-                      </div>
-                    </div>
-
-                    {/* Achievements */}
-                    <div className="mb-4 sm:mb-6">
-                      <h4 className="text-sm font-semibold text-[#e2c4ff] mb-2 group-hover:text-[#ffb3d9] transition-colors">Key Achievements</h4>
-                      <ul className="space-y-2 sm:space-y-3">
-                        {experience.achievements.map((achievement, i) => (
-                          <li key={i} className="flex items-start gap-2 sm:gap-3">
-                            <div className="w-1.5 h-1.5 rounded-full bg-gradient-to-br from-[#7928ca] via-[#ff0080] to-[#00d4ff] mt-2 flex-shrink-0" />
-                            <span className="text-sm text-gray-300 group-hover:text-gray-200 transition-colors">{achievement}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-
-                    {/* Technologies */}
-                    <div>
-                      <h4 className="text-sm font-semibold text-[#e2c4ff] mb-2 group-hover:text-[#ffb3d9] transition-colors">Technologies Used</h4>
-                      <div className="flex flex-wrap gap-2">
-                        {experience.technologies.map((tech, i) => (
-                          <span
-                            key={i}
-                            className="px-2 py-1 bg-gradient-to-br from-[#7928ca]/20 via-[#ff0080]/20 to-[#00d4ff]/20 text-[#e2c4ff] rounded text-xs font-medium border border-white/10 group-hover:from-[#7928ca]/30 group-hover:via-[#ff0080]/30 group-hover:to-[#00d4ff]/30 group-hover:text-[#ffb3d9] transition-colors"
-                          >
-                            {tech}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
-      </div>
-    </section>
+              <div className="mt-4 flex flex-wrap gap-2">
+                {exp.stack.map((tech) => (
+                  <Tag key={tech}>{tech}</Tag>
+                ))}
+              </div>
+            </Reveal>
+          </li>
+        ))}
+      </ol>
+    </Section>
   );
-};
-
-export default Experience;
+}

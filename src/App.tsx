@@ -1,21 +1,25 @@
-import { FC } from 'react';
-import Header from './components/layout/Header';
-import Hero from './components/sections/Hero';
-import Experience from './components/sections/Experience';
-import Projects from './components/sections/Projects';
-import Research from './components/sections/Research';
-import Skills from './components/sections/Skills';
-import Education from './components/sections/Education';
-import Awards from './components/sections/Awards';
-import Contact from './components/sections/Contact';
-import FloatingContact from './components/layout/FloatingContact';
+import { MotionConfig } from 'motion/react';
+import { Navbar } from './components/layout/Navbar';
+import { FloatingSocials } from './components/layout/FloatingSocials';
+import { Footer } from './components/layout/Footer';
+import { Hero } from './components/sections/Hero';
+import { About } from './components/sections/About';
+import { Experience } from './components/sections/Experience';
+import { Education } from './components/sections/Education';
+import { Skills } from './components/sections/Skills';
+import { Projects } from './components/sections/Projects';
+import { Research } from './components/sections/Research';
+import { Awards } from './components/sections/Awards';
+import { Contact } from './components/sections/Contact';
 
-const App: FC = () => {
+export default function App() {
   return (
-    <div className="bg-gray-50">
-      <Header />
-      <main className="space-y-16 sm:space-y-24 md:space-y-32">
+    <MotionConfig reducedMotion="user">
+      <Navbar />
+      <FloatingSocials />
+      <main>
         <Hero />
+        <About />
         <Experience />
         <Education />
         <Skills />
@@ -24,9 +28,7 @@ const App: FC = () => {
         <Awards />
         <Contact />
       </main>
-      <FloatingContact />
-    </div>
+      <Footer />
+    </MotionConfig>
   );
-};
-
-export default App;
+}
