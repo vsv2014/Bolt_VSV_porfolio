@@ -58,7 +58,7 @@
 
   ::selection {
     background: color-mix(in oklab, var(--color-brand-purple) 35%, transparent);
-    color: #fff;
+    color: var(--color-fg);
   }
 
   /* Fixed-nav scroll offset */

@@ -1,26 +1,20 @@
-import { useEffect, useState } from 'react';
+import { useSyncExternalStore } from 'react';
 import { Sun, Moon } from 'lucide-react';
+import { subscribe, getTheme, toggleTheme } from '@/lib/theme';
 import { cn } from '@/lib/utils';
 
-/** Light/dark toggle. Persists to localStorage; initial state is set pre-paint in index.html. */
+/**
+ * Light/dark toggle. State is shared via the theme store, so every mounted
+ * instance (desktop + mobile) stays in sync. Initial theme is set pre-paint in index.html.
+ */
 export function ThemeToggle({ className }: { className?: string }) {
-  const [light, setLight] = useState(
-    () => typeof document !== 'undefined' && document.documentElement.classList.contains('light'),
-  );
-
-  useEffect(() => {
-    document.documentElement.classList.toggle('light', light);
-    try {
-      localStorage.setItem('theme', light ? 'light' : 'dark');
-    } catch {
-      /* storage unavailable — ignore */
-    }
-  }, [light]);
+  const theme = useSyncExternalStore(subscribe, getTheme, () => 'dark' as const);
+  const light = theme === 'light';
 
   return (
     <button
       type="button"
-      onClick={() => setLight((v) => !v)}
+      onClick={toggleTheme}
       aria-label={light ? 'Switch to dark theme' : 'Switch to light theme'}
       aria-pressed={light}
       className={cn(

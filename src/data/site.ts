@@ -2,6 +2,11 @@ import { Mail, Phone, Workflow, Bot, Layers } from 'lucide-react';
 import { GithubIcon, LinkedinIcon, FacebookIcon, InstagramIcon, XIcon } from '@/components/ui/brand-icons';
 import type { NavLink, SocialLink, Stat, Highlight } from '@/types';
 
+// Single source of truth for contact identifiers (derive everything else from these).
+const EMAIL = 'santhoshvishalveerannapet@gmail.com';
+const LINKEDIN_URL = 'https://www.linkedin.com/in/santhosh-vishal/';
+const GITHUB_URL = 'https://github.com/vsv2014';
+
 export const profile = {
   name: 'Veerannapet Santhosh Vishal',
   shortName: 'Santhosh Veerannapet',
@@ -11,7 +16,7 @@ export const profile = {
     'I build AI-native distributed systems — conversational-AI agents, durable workflow engines, document intelligence and microfrontends — shipped to 1,000+ enterprise tenants at Kore.ai.',
   location: 'Hyderabad, India',
   availability: 'Open to senior full-stack & AI-platform roles',
-  email: 'santhoshvishalveerannapet@gmail.com',
+  email: EMAIL,
   resumeFile: 'resume.pdf',
 } as const;
 
@@ -26,10 +31,10 @@ export const navLinks: NavLink[] = [
 ];
 
 export const socials: SocialLink[] = [
-  { label: 'GitHub', href: 'https://github.com/vsv2014', icon: GithubIcon },
-  { label: 'LinkedIn', href: 'https://www.linkedin.com/in/santhosh-vishal/', icon: LinkedinIcon },
+  { label: 'GitHub', href: GITHUB_URL, icon: GithubIcon },
+  { label: 'LinkedIn', href: LINKEDIN_URL, icon: LinkedinIcon },
   { label: 'Facebook', href: 'https://www.facebook.com/santhosh.vishal.98', icon: FacebookIcon },
-  { label: 'Email', href: 'mailto:santhoshvishalveerannapet@gmail.com', icon: Mail },
+  { label: 'Email', href: `mailto:${EMAIL}`, icon: Mail },
 ];
 
 export const stats: Stat[] = [
@@ -70,9 +75,9 @@ export interface ContactChannel {
 }
 
 export const contactChannels: ContactChannel[] = [
-  { label: 'Email', value: 'santhoshvishalveerannapet@gmail.com', href: 'mailto:santhoshvishalveerannapet@gmail.com', icon: Mail },
-  { label: 'LinkedIn', value: 'in/santhosh-vishal', href: 'https://www.linkedin.com/in/santhosh-vishal/', icon: LinkedinIcon },
-  { label: 'GitHub', value: 'github.com/vsv2014', href: 'https://github.com/vsv2014', icon: GithubIcon },
+  { label: 'Email', value: EMAIL, href: `mailto:${EMAIL}`, icon: Mail },
+  { label: 'LinkedIn', value: 'in/santhosh-vishal', href: LINKEDIN_URL, icon: LinkedinIcon },
+  { label: 'GitHub', value: 'github.com/vsv2014', href: GITHUB_URL, icon: GithubIcon },
   { label: 'Phone / WhatsApp', value: '+91 770-277-1465', href: 'tel:+917702771465', icon: Phone },
   { label: 'Instagram', value: '@santhoshvishal', href: 'https://www.instagram.com/santhoshvishal', icon: InstagramIcon },
   { label: 'Twitter / X', value: '@santhoshvishal3', href: 'https://twitter.com/santhoshvishal3', icon: XIcon },
