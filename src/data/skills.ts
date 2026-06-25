@@ -1,45 +1,50 @@
-import { Code2, Globe, Database, Brain, Server, ChartBar, Sparkles, FlaskConical } from 'lucide-react';
+import { Code2, Globe, Database, Brain, Server, ChartBar, Sparkles, FlaskConical, Rocket } from 'lucide-react';
 import type { SkillGroup } from '@/types';
 
 export const skillGroups: SkillGroup[] = [
   {
-    name: 'Languages',
-    icon: Code2,
-    skills: ['TypeScript', 'JavaScript', 'Python', 'Java', 'SQL', 'Bash', 'C', 'C++', 'MATLAB'],
+    name: 'AI & LLMs',
+    icon: Sparkles,
+    skills: ['OpenAI', 'Anthropic', 'Gemini', 'Groq', 'AWS Bedrock', 'LangChain', 'LangGraph', 'MCP', 'RAG', 'RAGAS', 'Pinecone', 'Prompt engineering', 'Agentic workflows'],
+  },
+  {
+    name: 'Voice & Conversational',
+    icon: Brain,
+    skills: ['Deepgram', 'Whisper', 'ASR/TTS', 'Web Speech API', 'Real-time voice agents', 'Docling OCR', 'Kore.ai XO & SmartAssist'],
   },
   {
     name: 'Frontend',
     icon: Globe,
-    skills: ['React', 'Next.js', 'Angular', 'RxJS', 'NgRx', 'Redux', 'Module Federation', 'Three.js', 'Monaco', 'D3.js', 'Tailwind'],
+    skills: ['React', 'Next.js', 'Angular', 'RxJS', 'NgRx', 'Module Federation', 'Three.js', 'Monaco', 'D3.js', 'shadcn/ui', 'Tailwind', 'Electron'],
   },
   {
     name: 'Backend & APIs',
     icon: Server,
-    skills: ['Node.js', 'Express', 'Spring Boot', 'REST', 'GraphQL', 'WebSockets', 'Socket.IO', 'OAuth2', 'JWT', 'Microservices'],
+    skills: ['Node.js', 'Express', 'FastAPI', 'Spring Boot', 'REST', 'GraphQL', 'tRPC', 'gRPC', 'WebSockets', 'OAuth2', 'JWT', 'Microservices'],
   },
   {
     name: 'Data & Messaging',
     icon: Database,
-    skills: ['MongoDB', 'PostgreSQL', 'Redis', 'Kafka', 'BullMQ', 'Restate'],
-  },
-  {
-    name: 'AI & Conversational',
-    icon: Sparkles,
-    skills: ['OpenAI', 'Anthropic', 'Azure AI', 'RAG pipelines', 'MCP', 'LLM tool-use', 'Docling OCR', 'ASR/TTS', 'Prompt engineering'],
+    skills: ['MongoDB', 'PostgreSQL', 'Redis', 'OpenSearch', 'Trino/Presto', 'Kafka', 'RabbitMQ', 'BullMQ', 'Restate'],
   },
   {
     name: 'Cloud & DevOps',
-    icon: Brain,
-    skills: ['AWS', 'Azure', 'Docker', 'Kubernetes', 'Helm', 'ArgoCD', 'Jenkins', 'Grafana', 'Prometheus'],
+    icon: Code2,
+    skills: ['AWS', 'Azure', 'Docker', 'Kubernetes', 'Helm', 'ArgoCD', 'Jenkins', 'GitHub Actions', 'CI/CD'],
   },
   {
-    name: 'Testing & Architecture',
+    name: 'Observability & Testing',
     icon: FlaskConical,
-    skills: ['Jest', 'Vitest', 'Playwright', 'System Design', 'Design Patterns', 'SOLID'],
+    skills: ['Grafana', 'Prometheus', 'OpenTelemetry', 'ELK Stack', 'LangSmith', 'Jest', 'Vitest', 'Playwright'],
   },
   {
     name: 'Data Science',
     icon: ChartBar,
-    skills: ['Pandas', 'NumPy', 'scikit-learn', 'OpenCV', 'Matplotlib', 'QGIS'],
+    skills: ['Python', 'Pandas', 'NumPy', 'scikit-learn', 'OpenCV', 'QGIS', 'MATLAB'],
+  },
+  {
+    name: 'Currently Expanding',
+    icon: Rocket,
+    skills: ['C# / .NET', 'Go', 'Rails', 'Django', 'Terraform', 'GCP', 'iPaaS (Workato / Boomi)'],
   },
 ];

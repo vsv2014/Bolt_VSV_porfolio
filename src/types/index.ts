@@ -50,7 +50,7 @@ export interface SkillGroup {
   skills: string[];
 }
 
-export type ProjectCategory = 'professional' | 'research' | 'academic';
+export type ProjectCategory = 'professional' | 'research' | 'academic' | 'personal';
 
 export interface Project {
   title: string;

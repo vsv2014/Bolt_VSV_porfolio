@@ -7,9 +7,9 @@ export const experiences: Experience[] = [
     period: 'Jul 2022 — Present',
     location: 'Hyderabad, India',
     summary:
-      'AI-for-Process team — building AI-native distributed systems: agent platforms, durable workflow engines and conversational-AI products shipped to 1,000+ enterprise tenants. Rapid promotion to SDE 2, among the fastest in cohort.',
+      'AI-for-Process team — shipping production LLM systems and multi-tenant agentic workflow platforms to 1,000+ enterprise tenants. Rapid promotion to SDE 2, among the fastest in cohort.',
     achievements: [
-      'Owned the ABL Workflow Canvas end to end — Monaco IntelliSense, ELK auto-layout, live WebSocket debug — powering 15+ node-type AI workflows across 50+ connectors.',
+      'Engineered Artemis, a declarative agentic-workflow platform — Monaco canvas, ELK auto-layout and a live WebSocket debug panel over a Restate durable runtime — with an MCP surface exposing 50+ services as agent-callable tools.',
       'Led distributed frontend across 4 Angular microfrontends (Module Federation, 5,800+ files on Nx) shipped to GA at enterprise scale.',
       'Architected a document-processing pipeline across 4 OCR engines (Docling, Azure, OpenAI, Anthropic) for files up to 512 MB — recognised with the Kore.ai Global Spotlight.',
       'Cut the WebSDK bundle 60% (2.3 MB → 920 KB) across 1,000+ tenants and shipped 350+ production fixes.',

@@ -3,12 +3,12 @@ import type { Project } from '@/types';
 // Add `githubUrl` / `demoUrl` to a project to surface its links in the UI.
 export const projects: Project[] = [
   {
-    title: 'ABL Platform — Studio, Workflow Engine & Runtime',
+    title: 'Artemis — Agentic Workflow Platform',
     category: 'professional',
     description:
-      'Visual workflow studio and durable runtime for AI agents — Monaco-powered canvas with {{context}} IntelliSense, ELK auto-layout, expression engine and live debugging.',
-    impact: 'Powers 15+ node-type AI workflows across 50+ third-party connectors with MCP integrations.',
-    stack: ['Next.js', 'TypeScript', 'Monaco', 'Restate', 'Express', 'Kafka', 'Kubernetes'],
+      'Kore.ai’s declarative agentic-AI workflow platform — Monaco canvas with agent-context IntelliSense, ELK auto-layout, expression engine, and a live WebSocket debug panel, over a Restate durable-execution runtime.',
+    impact: 'Powers 15+ node-type workflows; MCP surface exposes 50+ third-party services as agent-callable tools.',
+    stack: ['Next.js', 'TypeScript', 'Monaco', 'Restate', 'Kafka', 'MCP', 'Kubernetes'],
   },
   {
     title: 'ProcessAI Microfrontend & Visual Flow Designer',
@@ -23,7 +23,7 @@ export const projects: Project[] = [
     category: 'professional',
     description:
       'Document-processing pipeline plus a browser-automation studio with a custom Quill Delta editor, AI instruction parser and pod-deployment wizard.',
-    impact: '4 OCR engines, files up to 512 MB — recognised with the Kore.ai Global Spotlight (Jan 2026).',
+    impact: '4-engine OCR with confidence-based routing lifted extraction accuracy 75% → 91% — Kore.ai Global Spotlight (Jan 2026).',
     stack: ['Angular', 'Quill', 'Socket.IO', 'AG-Grid', 'Docker', 'Kubernetes'],
   },
   {
@@ -113,5 +113,29 @@ export const projects: Project[] = [
     category: 'academic',
     description: 'Implemented a UNIX shell — process control, I/O redirection and signal handling.',
     stack: ['C', 'Operating Systems', 'Systems Programming'],
+  },
+  {
+    title: 'MockMate — AI Mock-Interview Simulator',
+    category: 'personal',
+    description:
+      'Multi-turn voice practice simulator with a LangGraph rubric-grader scoring answers on correctness, depth and communication, plus adaptive difficulty and a multi-provider LLM gateway.',
+    impact: 'Cross-platform Electron app with streaming inference and real-time STT (Deepgram/Whisper).',
+    stack: ['Electron', 'LangGraph', 'OpenAI', 'Anthropic', 'Deepgram'],
+  },
+  {
+    title: 'ShopSphere — Agentic Refund Copilot',
+    category: 'personal',
+    description:
+      'Full-stack AI agent that processes refunds via a function-calling loop over 4 validation tools, with per-step reasoning logged and a defensive policy-guard overriding any unsafe LLM approval.',
+    impact: 'Voice-input refunds with auditable, policy-safe agent decisions.',
+    stack: ['React', 'tRPC', 'Drizzle', 'MySQL', 'Groq'],
+  },
+  {
+    title: 'Emma — AI Voice Receptionist',
+    category: 'personal',
+    description:
+      'Voice-AI pipeline (STT → tool-calling LLM → TTS) for routine clinical enquiries, with multi-provider failover and an offline mock-brain fallback.',
+    impact: 'Resilient real-time voice agent with graceful provider degradation.',
+    stack: ['FastAPI', 'Web Speech API', 'Gemini', 'Groq'],
   },
 ];

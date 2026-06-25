@@ -12,6 +12,7 @@ type Filter = 'all' | ProjectCategory;
 const filters: { value: Filter; label: string }[] = [
   { value: 'all', label: 'All' },
   { value: 'professional', label: 'Professional' },
+  { value: 'personal', label: 'Personal' },
   { value: 'research', label: 'Research' },
   { value: 'academic', label: 'Academic' },
 ];

@@ -13,10 +13,14 @@ export const profile = {
   initials: 'SV',
   role: 'SDE 2 · Full-Stack · Conversational AI & Agent Platforms',
   tagline:
-    'I build AI-native distributed systems — conversational-AI agents, durable workflow engines, document intelligence and microfrontends — shipped to 1,000+ enterprise tenants at Kore.ai.',
+    'I ship production LLM systems and multi-tenant agentic-workflow platforms — like Artemis and ProcessAI — to 1,000+ enterprise tenants at Kore.ai.',
   location: 'Hyderabad, India',
   availability: 'Open to senior full-stack & AI-platform roles',
   email: EMAIL,
+  // Résumé link. Set `resumeUrl` to an external, update-in-place link (e.g. a
+  // Google Drive share URL) to make it "dynamic" — change the file there and the
+  // button always serves the latest, no rebuild. Falls back to the bundled PDF.
+  resumeUrl: '',
   resumeFile: 'resume.pdf',
 } as const;
 
