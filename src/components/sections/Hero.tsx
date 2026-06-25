@@ -4,7 +4,8 @@ import { Container, ButtonLink, IconLink } from '@/components/ui';
 import { profile, socials, stats } from '@/data/site';
 import profilePic from '@/assets/VSV-portfolio-pp.jpeg';
 
-const resumeHref = `${import.meta.env.BASE_URL}${profile.resumeFile}`;
+// Prefer an external (update-in-place) résumé URL; fall back to the bundled PDF.
+const resumeHref = profile.resumeUrl || `${import.meta.env.BASE_URL}${profile.resumeFile}`;
 
 const fadeUp = {
   hidden: { opacity: 0, y: 18 },
