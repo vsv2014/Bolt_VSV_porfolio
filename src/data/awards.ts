@@ -1,41 +1,59 @@
-import { Trophy, Star, Award as AwardIcon, GraduationCap, Sparkles, TrendingUp } from 'lucide-react';
+import { Trophy, Star, Award as AwardIcon, GraduationCap, Sparkles, TrendingUp, Users } from 'lucide-react';
 import type { Award } from '@/types';
 
 export const awards: Award[] = [
   {
-    title: 'Global Spotlight',
-    period: 'Jan 2026 · Kore.ai',
-    description: 'Company-wide recognition for shaping the Browser Automation UI — making complex automation accessible to technical and non-technical users.',
+    title: 'Global Spotlight — Artemis Support Readiness',
+    period: 'Jul 2026 · Kore.ai',
+    description:
+      'Company-wide recognition for rapidly ramping up on XOCC and Artemis production support, handling customer issues, and helping establish Artemis platform support readiness.',
     icon: Sparkles,
+    featured: true,
+  },
+  {
+    title: 'Global Spotlight — Browser Automation UI',
+    period: 'Jan 2026 · Kore.ai',
+    description:
+      'Company-wide recognition for shaping the Browser Automation UI — translating complex automation workflows into an interface both technical and non-technical users can drive.',
+    icon: Sparkles,
+    featured: true,
   },
   {
     title: 'Shining Star Award',
     period: 'Q3 2024 · Kore.ai',
-    description: '60% WebSDK performance optimization and 350+ production fixes shipped to enterprise tenants.',
+    description: '60% WebSDK performance optimisation (2.3 MB → 920 KB) plus 350+ production fixes shipped to enterprise tenants.',
     icon: Star,
-  },
-  {
-    title: 'Rapid Promotion to SDE 2',
-    period: 'Kore.ai',
-    description: 'Associate Software Engineer → SDE 2 — among the fastest in cohort for platform delivery and ownership.',
-    icon: TrendingUp,
-  },
-  {
-    title: 'JEE Main 2016 — AIR 5460',
-    period: 'Top 0.5% of ~1.2M',
-    description: 'Secured direct admission to IIIT Hyderabad’s flagship dual-degree programme.',
-    icon: Trophy,
+    featured: true,
   },
   {
     title: 'Outstanding Performance Award',
     period: '2024 · Kore.ai',
-    description: 'Recognised for Web SDK development and customer support — 120+ tickets resolved in a quarter.',
+    description: 'Recognised for WebSDK development and customer support — 120+ enterprise tickets resolved in a single quarter.',
     icon: Trophy,
+    featured: true,
+  },
+  {
+    title: 'Rapid Promotion to SDE 2',
+    period: 'Kore.ai · Associate → SWE → SDE 2',
+    description: 'Promoted Associate Software Engineer → SWE → SDE 2, Grade A2, among the fastest in the cohort; mentors juniors and drives code reviews.',
+    icon: TrendingUp,
+  },
+  {
+    title: 'Customer Partnership',
+    period: 'Kore.ai',
+    description: 'Discovery calls, technical demos, onboarding workshops and hands-on issue triage directly with enterprise customers.',
+    icon: Users,
+  },
+  {
+    title: 'JEE Main 2016 — AIR 5460',
+    period: 'AIR 5460 · top 0.5% of 1.2M+',
+    description: 'Secured direct admission to IIIT Hyderabad’s flagship dual degree (B.Tech Civil + MS by Research).',
+    icon: GraduationCap,
   },
   {
     title: 'Research Recognition',
     period: '2020–2021 · IIIT Hyderabad',
-    description: 'For contributions to environmental monitoring and building-science research.',
+    description: 'For contributions to environmental monitoring and building-science research, including two peer-reviewed publications.',
     icon: Star,
   },
   {
@@ -47,7 +65,7 @@ export const awards: Award[] = [
   {
     title: 'Secondary School Achievement',
     period: '2014 · Chaitanya',
-    description: '9.3/10 GPA (APSSC board) and school topper in mathematics.',
-    icon: GraduationCap,
+    description: 'GPA 9.3/10 (APSSC board) and school topper in mathematics.',
+    icon: AwardIcon,
   },
 ];

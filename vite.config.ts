@@ -16,5 +16,14 @@ export default defineConfig(({ mode }) => ({
   },
   server: {
     port: 3001,
+    // Bind all interfaces so sandboxed / proxied previews can reach the dev server.
+    host: true,
+    allowedHosts: true,
+    // When the dev server sits behind an HTTPS proxy (e.g. the Arena preview),
+    // the HMR socket must be told to use wss on the public port. Opt-in via env
+    // so a normal `npm run dev` on localhost keeps the default behaviour.
+    ...(process.env.VITE_PREVIEW_HMR === '1'
+      ? { hmr: { protocol: 'wss' as const, clientPort: 443 } }
+      : {}),
   },
 }));

@@ -3,7 +3,7 @@ import { education } from '@/data/education';
 
 export function Education() {
   return (
-    <Section id="education" index="03" eyebrow="Education" title="Academic foundation">
+    <Section id="education" index="03" eyebrow="Education" title="Academic foundation" accent="foundation">
       <div className="grid gap-4">
         {education.map((edu, i) => (
           <Reveal key={edu.institution} delay={i * 0.06}>

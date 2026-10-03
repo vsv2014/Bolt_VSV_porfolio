@@ -12,10 +12,15 @@ type Filter = 'all' | ProjectCategory;
 const filters: { value: Filter; label: string }[] = [
   { value: 'all', label: 'All' },
   { value: 'professional', label: 'Professional' },
-  { value: 'personal', label: 'Personal' },
+  { value: 'personal', label: 'Solo builds' },
   { value: 'research', label: 'Research' },
   { value: 'academic', label: 'Academic' },
 ];
+
+const notes: Partial<Record<Filter, string>> = {
+  personal:
+    'Built solo on evenings and weekends to explore agentic-AI patterns end to end — engineering builds rather than claims of commercial adoption.',
+};
 
 export function Projects() {
   const [active, setActive] = useState<Filter>('all');
@@ -27,28 +32,43 @@ export function Projects() {
   return (
     <Section
       id="projects"
-      index="05"
+      index="06"
       eyebrow="Selected work"
-      title="Things I've built"
-      description="Products, research tooling and academic projects across the stack."
+      title="Things I&rsquo;ve built"
+      accent="built"
+      description="Enterprise products from Kore.ai, solo engineering builds, and research tooling across the stack."
     >
-      <div className="mb-8 flex flex-wrap gap-2">
-        {filters.map((f) => (
-          <button
-            key={f.value}
-            type="button"
-            onClick={() => setActive(f.value)}
-            className={cn(
-              'rounded-md border px-3 py-1.5 font-mono text-xs transition-colors',
-              active === f.value
-                ? 'border-line-strong bg-surface text-fg'
-                : 'border-line text-muted hover:text-fg',
-            )}
-          >
-            {f.label}
-          </button>
-        ))}
+      <div className="mb-8 flex flex-wrap items-center gap-2">
+        {filters.map((f) => {
+          const count = f.value === 'all' ? projects.length : projects.filter((p) => p.category === f.value).length;
+          return (
+            <button
+              key={f.value}
+              type="button"
+              onClick={() => setActive(f.value)}
+              aria-pressed={active === f.value}
+              className={cn(
+                'inline-flex items-center gap-2 rounded-md border px-3 py-1.5 font-mono text-xs transition-colors',
+                active === f.value
+                  ? 'border-line-strong bg-surface text-fg'
+                  : 'border-line text-muted hover:text-fg',
+              )}
+            >
+              {f.label}
+              <span className={cn('text-[10px]', active === f.value ? 'text-brand-cyan' : 'text-faint')}>{count}</span>
+            </button>
+          );
+        })}
+        <span className="ml-auto font-mono text-[11px] text-faint">
+          {visible.length} of {projects.length} shown
+        </span>
       </div>
+
+      {notes[active] && (
+        <p className="mb-6 max-w-3xl rounded-lg border border-line bg-surface px-4 py-3 text-xs leading-relaxed text-muted">
+          {notes[active]}
+        </p>
+      )}
 
       <motion.div layout className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         <AnimatePresence mode="popLayout">
@@ -61,7 +81,7 @@ export function Projects() {
               exit={{ opacity: 0, scale: 0.97 }}
               transition={{ duration: 0.25 }}
             >
-              <Card interactive className="flex h-full flex-col">
+              <Card interactive tilt className="flex h-full flex-col">
                 <div className="flex items-start justify-between gap-3">
                   <h3 className="font-medium text-fg">{project.title}</h3>
                   <span className="font-mono text-[11px] uppercase tracking-wider text-faint">

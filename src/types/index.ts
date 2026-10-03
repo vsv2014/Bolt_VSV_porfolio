@@ -15,8 +15,15 @@ export interface SocialLink {
 }
 
 export interface Stat {
+  /** Display value — also the fallback when CountUp animation is off. */
   value: string;
   label: string;
+  /** Optional numeric target: when present the value counts up on scroll. */
+  countTo?: number;
+  prefix?: string;
+  suffix?: string;
+  /** Small caption under the label, e.g. "verified in production". */
+  note?: string;
 }
 
 export interface Highlight {
@@ -32,6 +39,18 @@ export interface Experience {
   location: string;
   summary: string;
   achievements: string[];
+  stack: string[];
+  /** Optional grade / promotion line, e.g. "Grade A2 since December 2024". */
+  grade?: string;
+  /** Named sub-phases of one long tenure (e.g. each product at Kore.ai). */
+  phases?: ExperiencePhase[];
+}
+
+export interface ExperiencePhase {
+  name: string;
+  period: string;
+  summary: string;
+  bullets: string[];
   stack: string[];
 }
 
@@ -75,4 +94,47 @@ export interface Award {
   period: string;
   description: string;
   icon: IconType;
+  /** Shown in the impact section's recognition panel. */
+  featured?: boolean;
+}
+
+/** A headline metric rendered in the Impact section. */
+export interface ImpactMetric {
+  label: string;
+  value: string;
+  countTo: number;
+  prefix?: string;
+  suffix?: string;
+  detail: string;
+  icon: IconType;
+  /** Optional before → after bar visual. */
+  progress?: { from: number; to: number; fromLabel: string; toLabel: string };
+}
+
+/** One entry in the agent console's knowledge base. */
+export interface AgentDoc {
+  id: string;
+  /** Stable URL-ish citation shown on the source chip. */
+  source: string;
+  /** Lowercase keywords used by the retriever — longer phrases score higher. */
+  keywords: string[];
+  answer: string;
+  /** Simulated tool call rendered in the reasoning trace. */
+  tool: { name: string; args: string; detail: string };
+}
+
+export type TraceKind = 'embed' | 'retrieve' | 'tool' | 'compose';
+
+export interface TraceStep {
+  kind: TraceKind;
+  label: string;
+  detail: string;
+  /** Milliseconds this step "takes" in the console animation. */
+  ms: number;
+}
+
+/** A retrieved document with its similarity score, as shown on source chips. */
+export interface AgentSource {
+  id: string;
+  score: number;
 }
