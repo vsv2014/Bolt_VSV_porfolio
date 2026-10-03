@@ -5,9 +5,7 @@ import { ButtonLink, Container, CountUp, IconLink, Typewriter } from '@/componen
 import { openPalette } from '@/lib/agent';
 import { profile, socials, stats } from '@/data/site';
 import profilePic from '@/assets/VSV-portfolio-pp.jpeg';
-
-// Prefer an external (update-in-place) résumé URL; fall back to the bundled PDF.
-const resumeHref = profile.resumeUrl || `${import.meta.env.BASE_URL}${profile.resumeFile}`;
+import { resumeHref } from '@/lib/resume';
 
 const fadeUp = {
   hidden: { opacity: 0, y: 18 },

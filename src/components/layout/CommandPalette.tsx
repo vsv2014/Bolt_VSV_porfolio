@@ -15,6 +15,7 @@ import { navLinks, profile, socials } from '@/data/site';
 import { projects } from '@/data/projects';
 import { suggestedPrompts } from '@/data/agent';
 import { askAgent, PALETTE_EVENT } from '@/lib/agent';
+import { resumeHref, resumeIsExternal } from '@/lib/resume';
 import { getTheme, subscribe, toggleTheme } from '@/lib/theme';
 import { cn } from '@/lib/utils';
 import type { IconType } from '@/types';
@@ -28,8 +29,6 @@ interface Command {
   keywords?: string;
   action: () => void;
 }
-
-const resumeHref = `${import.meta.env.BASE_URL}${profile.resumeFile}`;
 
 function close() {
   window.dispatchEvent(new CustomEvent('vsv:close-palette'));
@@ -73,8 +72,8 @@ const baseCommands: Command[] = [
   {
     id: 'resume',
     group: 'Links',
-    label: 'Download résumé (PDF)',
-    hint: 'resume.pdf',
+    label: 'Open résumé (PDF)',
+    hint: resumeIsExternal ? 'Google Drive · always current' : profile.resumeFile,
     icon: FileText,
     action: () => window.open(resumeHref, '_blank', 'noopener,noreferrer'),
   },

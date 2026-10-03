@@ -39,10 +39,10 @@ export const profile = {
   location: 'Hyderabad, India',
   availability: 'Open to senior AI-platform & full-stack roles',
   email: EMAIL,
-  // Résumé link. Set `resumeUrl` to an external, update-in-place link (e.g. a
-  // Google Drive share URL) to make it "dynamic" — change the file there and the
-  // button always serves the latest, no rebuild. Falls back to the bundled PDF.
-  resumeUrl: '',
+  // Résumé link. `resumeUrl` wins when set — an external, update-in-place link
+  // (Google Drive share URL etc.) means the button always serves the newest file
+  // with no rebuild. Clear it to fall back to the bundled `public/resume.pdf`.
+  resumeUrl: 'https://drive.google.com/file/d/1VVc2EkMfXf8LD62IHdS0LvKMMy2Chwzi/view?usp=sharing',
   resumeFile: 'resume.pdf',
 } as const;
 
