@@ -42,7 +42,11 @@ where arrow keys nudge nodes and ports link with `Enter`.
 | Body / mono | Inter · JetBrains Mono (tabular numerals for metrics) |
 | Palette (dark) | near-black indigo `#05060a` with **violet `#7c5cff`**, **rose `#ff4d9d`**, **electric cyan `#35e0ff`** and a signature **chartreuse `#c8f65d`** |
 | Palette (light) | warm paper `#f7f5f0` with ink type and contrast-tuned accents |
-| Texture | SVG `feTurbulence` film grain (soft-light), drifting aurora orbs, fading dot grid, vignette |
+| Background | **Hand-written WebGL aurora** — one fullscreen triangle, one fragment shader: domain-warped fBm (4 octaves) folded into the palette with a pointer-following ember. Rendered at 45 fps, below device resolution (hard cap 1100 px) and paused when the tab is hidden; a single static frame under reduced motion. CSS orbs take over when WebGL is unavailable, blocked or lost mid-session. |
+| Texture | SVG `feTurbulence` film grain (soft-light), fading dot grid, vignette |
+| Cursor | Difference-blended ring + dot that contracts over interactive elements and can print a label (`data-cursor-label`); `data-magnetic` targets lean toward the pointer. Additive only — the native cursor stays, and touch/reduced-motion users see none of it. |
+| Intro | One-time 1.15 s sequence (per session) that counts up behind a translucent panel — translucent on purpose so the hero remains the LCP element. Skipped for reduced motion or when storage is unavailable. |
+| Details | Scroll-velocity skew on marquees, scroll-linked timeline rail, terminal-style eyebrow decode, editorial outlined section numerals. |
 | Motion | Cinematic blur-and-rise reveals, word-split clip reveals on every section title, pointer spotlight, scroll parallax in the hero |
 
 **Theme flip:** where the browser supports the View Transitions API the new theme

@@ -274,6 +274,8 @@ export function CommandPalette() {
             exit={{ opacity: 0, y: -8, scale: 0.98 }}
             transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
             className="glass relative w-full max-w-xl overflow-hidden rounded-2xl border border-line-strong shadow-2xl shadow-black/40"
+            data-cursor
+            data-cursor-label="palette"
           >
             <div className="flex items-center gap-3 border-b border-line px-4 py-3">
               <Search className="h-4 w-4 shrink-0 text-faint" />

@@ -77,9 +77,9 @@ export function PerfPanel() {
 
   const craft = [
     { icon: Keyboard, label: 'Keyboard first', detail: 'Every control reachable, visible focus rings, ⌘K palette, arrow-key node editing.' },
-    { icon: Waves, label: 'Reduced motion', detail: 'Typewriter, marquee, aurora and counters all stand down when the OS asks.' },
+    { icon: Waves, label: 'Reduced motion', detail: 'Typewriter, marquee, aurora, counters and the WebGL background all stand down when the OS asks.' },
     { icon: Sparkles, label: 'Theme system', detail: 'One token layer flips both themes; the choice is applied pre-paint, no flash.' },
-    { icon: Gauge, label: 'Budget', detail: '~150 kB gzip JS + 12 kB CSS, no UI kit, icons tree-shaken per import.' },
+    { icon: Gauge, label: 'Budget', detail: 'Entry ~156 kB gzip JS + 14 kB CSS, no UI kit, five lazily-loaded sections, icons tree-shaken per import.' },
   ];
 
   return (

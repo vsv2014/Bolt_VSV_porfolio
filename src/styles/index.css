@@ -262,6 +262,12 @@
   );
 }
 
+/* When the WebGL aurora is live it replaces the CSS orbs entirely. */
+html[data-shader='on'] .css-aurora {
+  opacity: 0;
+  transition: opacity 0.8s ease;
+}
+
 /* ------------------------------------------------------------------ *
  * View transitions — the theme flip blooms from the toggle button.
  * ------------------------------------------------------------------ */

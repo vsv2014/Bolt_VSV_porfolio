@@ -8,3 +8,4 @@ export { IconLink } from './IconLink';
 export { CountUp } from './CountUp';
 export { Typewriter } from './Typewriter';
 export { SplitWords } from './SplitWords';
+export { Scramble } from './Scramble';

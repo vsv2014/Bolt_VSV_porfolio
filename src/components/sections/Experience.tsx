@@ -1,4 +1,5 @@
-import { useMemo, useState } from 'react';
+import { useMemo, useRef, useState } from 'react';
+import { motion, useScroll, useSpring } from 'motion/react';
 import { ChevronDown, Layers } from 'lucide-react';
 import { Reveal, Section, Tag } from '@/components/ui';
 import { experiences } from '@/data/experience';
@@ -49,6 +50,9 @@ function Phase({ phase, defaultOpen }: { phase: NonNullable<(typeof experiences)
 }
 
 export function Experience() {
+  const listRef = useRef<HTMLOListElement>(null);
+  const { scrollYProgress } = useScroll({ target: listRef, offset: ['start 75%', 'end 65%'] });
+  const railScale = useSpring(scrollYProgress, { stiffness: 90, damping: 26, restDelta: 0.001 });
   const totalPhases = useMemo(
     () => experiences.reduce((count, exp) => count + (exp.phases?.length ?? 0), 0),
     [],
@@ -67,7 +71,13 @@ export function Experience() {
           : 'From conversational-AI products to environmental research labs.'
       }
     >
-      <ol className="relative border-l border-line">
+      <ol ref={listRef} className="relative border-l border-line">
+        {/* Scroll-linked progress rail */}
+        <motion.span
+          aria-hidden
+          style={{ scaleY: railScale }}
+          className="absolute top-0 -left-px h-full w-[2px] origin-top bg-gradient-to-b from-brand-cyan via-brand-purple to-brand-lime"
+        />
         {experiences.map((exp, i) => (
           <li key={exp.company} className="relative pl-8 pb-12 last:pb-0">
             <span className="absolute -left-[5px] top-1.5 h-2.5 w-2.5 rounded-full border border-brand-cyan bg-bg" aria-hidden />

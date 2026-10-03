@@ -3,6 +3,7 @@ import { cn } from '@/lib/utils';
 import { Container } from './Container';
 import { Reveal } from './Reveal';
 import { SplitWords } from './SplitWords';
+import { Scramble } from './Scramble';
 
 interface SectionProps {
   id: string;
@@ -41,7 +42,9 @@ export function Section({ id, index, eyebrow, title, accent, description, childr
               <div className="min-w-0 flex-1 pb-1.5 sm:pb-2">
                 <div className="flex items-center gap-3">
                   {eyebrow && (
-                    <p className="font-mono text-[11px] uppercase tracking-[0.24em] text-brand-lime">{eyebrow}</p>
+                    <p className="font-mono text-[11px] uppercase tracking-[0.24em] text-brand-lime">
+                      <Scramble text={eyebrow} />
+                    </p>
                   )}
                   <span className="hairline flex-1" aria-hidden />
                 </div>

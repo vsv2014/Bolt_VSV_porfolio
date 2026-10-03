@@ -47,7 +47,7 @@ export function Impact() {
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {impactMetrics.map((metric, index) => (
           <Reveal key={metric.label} delay={(index % 3) * 0.06}>
-            <Card interactive className="flex h-full flex-col">
+            <Card interactive tilt className="flex h-full flex-col">
               <div className="flex items-start justify-between gap-3">
                 <span className="flex h-9 w-9 items-center justify-center rounded-lg border border-line text-brand-cyan">
                   <metric.icon className="h-[18px] w-[18px]" strokeWidth={1.75} />

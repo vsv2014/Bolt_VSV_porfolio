@@ -3,6 +3,8 @@ import { MotionConfig } from 'motion/react';
 import { Navbar } from './components/layout/Navbar';
 import { ScrollProgress } from './components/layout/ScrollProgress';
 import { Atmosphere } from './components/layout/Atmosphere';
+import { Cursor } from './components/layout/Cursor';
+import { Intro } from './components/layout/Intro';
 import { CommandPalette } from './components/layout/CommandPalette';
 import { FloatingSocials } from './components/layout/FloatingSocials';
 import { Footer } from './components/layout/Footer';
@@ -35,6 +37,8 @@ export default function App() {
   return (
     <MotionConfig reducedMotion="user">
       <Atmosphere />
+      <Intro />
+      <Cursor />
       <ScrollProgress />
       <Navbar />
       <CommandPalette />

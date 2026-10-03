@@ -72,7 +72,7 @@ export function Skills() {
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {groups.map((group, index) => (
           <Reveal key={group.name} delay={(index % 3) * 0.06}>
-            <Card interactive className="h-full">
+            <Card interactive tilt className="h-full">
               <div className="flex items-center gap-3">
                 <span className="flex h-9 w-9 items-center justify-center rounded-lg border border-line text-brand-cyan">
                   <group.icon className="h-[18px] w-[18px]" strokeWidth={1.75} />

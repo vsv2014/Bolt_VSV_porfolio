@@ -3,6 +3,7 @@ import { motion, useMotionTemplate, useMotionValue, useReducedMotion, useScroll,
 import { ArrowDown, ArrowUpRight, Award, Command, FileText, Sparkles } from 'lucide-react';
 import { ButtonLink, Container, CountUp, IconLink, SplitWords, Typewriter } from '@/components/ui';
 import { openPalette } from '@/lib/agent';
+import { useVelocitySkew } from '@/lib/useVelocitySkew';
 import { resumeHref } from '@/lib/resume';
 import { profile, socials, stats } from '@/data/site';
 import profilePic from '@/assets/VSV-portfolio-pp.jpeg';
@@ -27,6 +28,7 @@ const orbitChips = [
 export function Hero() {
   const reduceMotion = useReducedMotion();
   const { scrollY } = useScroll();
+  const skewY = useVelocitySkew(2.4);
 
   // Parallax: the copy drifts up and fades as the page scrolls away.
   const contentY = useTransform(scrollY, [0, 700], [0, 130]);
@@ -61,14 +63,14 @@ export function Hero() {
           className="mb-10 overflow-hidden border-y border-line/70 py-2.5"
           aria-hidden
         >
-          <div className="animate-marquee flex w-max items-center">
+          <motion.div className="animate-marquee flex w-max items-center" style={reduceMotion ? undefined : { skewY }}>
             {[...profile.keywords, ...profile.keywords].map((keyword, index) => (
               <span key={`${keyword}-${index}`} className="flex items-center">
                 <span className="px-4 font-mono text-[11px] whitespace-nowrap text-muted">{keyword}</span>
                 <span className="text-brand-lime/70">✦</span>
               </span>
             ))}
-          </div>
+          </motion.div>
         </motion.div>
 
         <div className="grid items-center gap-14 md:grid-cols-[1.35fr_1fr]">
@@ -132,10 +134,10 @@ export function Hero() {
             </motion.p>
 
             <motion.div custom={5} variants={fadeUp} initial="hidden" animate="show" className="mt-9 flex flex-wrap items-center gap-3">
-              <ButtonLink href="#agent" variant="primary">
+              <ButtonLink href="#agent" variant="primary" data-cursor data-cursor-label="ask" data-magnetic>
                 Ask my AI console <Sparkles className="h-4 w-4" />
               </ButtonLink>
-              <ButtonLink href="#craft" variant="secondary">
+              <ButtonLink href="#craft" variant="secondary" data-cursor data-cursor-label="demos">
                 Frontend craft <ArrowDown className="h-4 w-4" />
               </ButtonLink>
               <ButtonLink href={resumeHref} target="_blank" rel="noopener noreferrer" variant="ghost">

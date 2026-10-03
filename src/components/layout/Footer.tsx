@@ -1,4 +1,6 @@
 import { useEffect, useState } from 'react';
+import { motion, useReducedMotion } from 'motion/react';
+import { useVelocitySkew } from '@/lib/useVelocitySkew';
 import { Container } from '@/components/ui';
 import { profile, socials } from '@/data/site';
 
@@ -32,11 +34,14 @@ function LocalClock() {
 }
 
 export function Footer() {
+  const reduceMotion = useReducedMotion();
+  const skewY = useVelocitySkew(3.6);
+
   return (
     <footer className="relative overflow-hidden border-t border-line">
       {/* Marquee wordmark */}
       <div className="overflow-hidden border-b border-line py-6" aria-hidden>
-        <div className="animate-marquee-reverse flex w-max items-center">
+        <motion.div className="animate-marquee-reverse flex w-max items-center" style={reduceMotion ? undefined : { skewY }}>
           {Array.from({ length: 8 }, (_, index) => (
             <span key={index} className="flex items-center">
               <span className="px-6 font-display text-3xl font-bold tracking-tight whitespace-nowrap text-faint/35 sm:text-4xl">
@@ -45,7 +50,7 @@ export function Footer() {
               <span className="text-brand-lime/40">✦</span>
             </span>
           ))}
-        </div>
+        </motion.div>
       </div>
 
       <Container className="flex flex-col gap-6 py-10">

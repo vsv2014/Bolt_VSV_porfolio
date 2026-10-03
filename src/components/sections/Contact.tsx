@@ -33,7 +33,7 @@ export function Contact() {
           </p>
 
           <div className="mt-6 flex flex-wrap items-center gap-3">
-            <ButtonLink href={`mailto:${profile.email}`} variant="primary">
+            <ButtonLink href={`mailto:${profile.email}`} variant="primary" data-cursor data-cursor-label="email" data-magnetic>
               {profile.email} <ArrowUpRight className="h-4 w-4" />
             </ButtonLink>
             <button
