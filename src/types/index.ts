@@ -40,6 +40,18 @@ export interface Experience {
   summary: string;
   achievements: string[];
   stack: string[];
+  /** Optional grade / promotion line, e.g. "Grade A2 since December 2024". */
+  grade?: string;
+  /** Named sub-phases of one long tenure (e.g. each product at Kore.ai). */
+  phases?: ExperiencePhase[];
+}
+
+export interface ExperiencePhase {
+  name: string;
+  period: string;
+  summary: string;
+  bullets: string[];
+  stack: string[];
 }
 
 export interface Education {
@@ -82,6 +94,8 @@ export interface Award {
   period: string;
   description: string;
   icon: IconType;
+  /** Shown in the impact section's recognition panel. */
+  featured?: boolean;
 }
 
 /** A headline metric rendered in the Impact section. */

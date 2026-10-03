@@ -1,7 +1,7 @@
 import { motion } from 'motion/react';
 import { BadgeCheck } from 'lucide-react';
 import { Card, CountUp, Reveal, Section } from '@/components/ui';
-import { impactMetrics } from '@/data/impact';
+import { impactMetrics, scopeFacts } from '@/data/impact';
 import { awards } from '@/data/awards';
 import { experiences } from '@/data/experience';
 
@@ -33,9 +33,7 @@ function ProgressBar({ from, to, fromLabel, toLabel }: { from: number; to: numbe
 }
 
 export function Impact() {
-  const recognitions = awards.filter((award) =>
-    ['Global Spotlight', 'Shining Star Award', 'Rapid Promotion to SDE 2', 'Outstanding Performance Award'].includes(award.title),
-  );
+  const recognitions = awards.filter((award) => award.featured);
 
   return (
     <Section
@@ -89,15 +87,19 @@ export function Impact() {
                 Shipped scope, and the recognition that came with it.
               </h3>
               <p className="mt-4 text-sm leading-relaxed text-muted">
-                Platform ownership across Studio, Workflow Engine, Runtime and Connectors — coordinated across 4 teams,
-                with HLDs, LLDs, data-flow audits and code reviews. Everything above is reproducible from the résumé,
-                LinkedIn or the published papers.
+                Platform ownership across Studio, Runtime, Workflow Engine and Connectors — HLDs and LLDs aligning four
+                engineering teams, data-flow audits and code reviews, plus direct customer work through discovery calls,
+                demos, onboarding workshops and issue triage. Every figure here is reproducible from the résumé or the
+                published papers.
               </p>
-              <ul className="mt-6 space-y-2 font-mono text-[11px] text-faint">
-                <li>· 50+ third-party connectors with MCP-based integrations</li>
-                <li>· 15+ node-type AI workflows on the ABL canvas</li>
-                <li>· 25+ reusable components standardised across 3 product suites</li>
-              </ul>
+              <dl className="mt-6 grid grid-cols-2 gap-4">
+                {scopeFacts.map((fact) => (
+                  <div key={fact.label} className="rounded-xl border border-line bg-surface p-3">
+                    <dt className="font-display text-xl font-semibold text-fg">{fact.value}</dt>
+                    <dd className="mt-1 text-[11px] leading-relaxed text-faint">{fact.label}</dd>
+                  </div>
+                ))}
+              </dl>
             </div>
 
             <ul className="grid gap-3">

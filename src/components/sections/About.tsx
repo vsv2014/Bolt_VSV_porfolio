@@ -4,8 +4,8 @@ import { aboutParagraphs, highlights, profile } from '@/data/site';
 
 const signals = [
   { icon: MapPin, label: 'Based in', value: profile.location },
-  { icon: Target, label: 'Currently', value: 'SDE 2 · AI-for-Process @ Kore.ai' },
-  { icon: Compass, label: 'Next up', value: 'Senior full-stack & AI-platform roles' },
+  { icon: Target, label: 'Currently', value: 'SDE 2 (Grade A2) · AI platform & production support @ Kore.ai' },
+  { icon: Compass, label: 'Next up', value: 'Senior AI-platform & full-stack roles' },
 ];
 
 export function About() {

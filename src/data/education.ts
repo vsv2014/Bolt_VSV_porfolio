@@ -6,11 +6,12 @@ export const education: Education[] = [
     institution: 'IIIT Hyderabad',
     period: '2016 — 2021',
     location: 'Hyderabad, India',
-    score: 'One of India’s premier CS research institutes',
+    score: 'CGPA 7.3 / 10',
     highlights: [
-      'Completed the full CS curriculum: DSA (Java), OS, OOP, DBMS & SQL, Computer Networks, ML, AI and Software Engineering.',
-      'MS by Research in Building Science at the Lab for Spatial Informatics (2018–2021).',
-      'Built ML pipelines for water-temperature modelling, sewage-plant capacity optimisation and automated watershed delineation.',
+      'Dual degree: B.Tech (Civil) + MS by Research (Building Science), at one of India’s premier CS research institutes.',
+      'Completed the full CS curriculum: DSA (Java), OS, OOP, DBMS, Computer Networks, ML, AI and Software Engineering.',
+      'Research Scholar at the Lab for Spatial Informatics (2018–2021) — two peer-reviewed publications.',
+      'Entered via JEE Main 2016 AIR 5460 — top 0.5% of 1.2M+ candidates.',
     ],
   },
   {

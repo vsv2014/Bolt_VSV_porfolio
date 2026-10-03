@@ -12,10 +12,15 @@ type Filter = 'all' | ProjectCategory;
 const filters: { value: Filter; label: string }[] = [
   { value: 'all', label: 'All' },
   { value: 'professional', label: 'Professional' },
-  { value: 'personal', label: 'Personal' },
+  { value: 'personal', label: 'Solo builds' },
   { value: 'research', label: 'Research' },
   { value: 'academic', label: 'Academic' },
 ];
+
+const notes: Partial<Record<Filter, string>> = {
+  personal:
+    'Built solo on evenings and weekends to explore agentic-AI patterns end to end — engineering builds rather than claims of commercial adoption.',
+};
 
 export function Projects() {
   const [active, setActive] = useState<Filter>('all');
@@ -30,7 +35,7 @@ export function Projects() {
       index="06"
       eyebrow="Selected work"
       title="Things I've built"
-      description="Products, research tooling and academic projects across the stack."
+      description="Enterprise products from Kore.ai, solo engineering builds, and research tooling across the stack."
     >
       <div className="mb-8 flex flex-wrap items-center gap-2">
         {filters.map((f) => {
@@ -57,6 +62,12 @@ export function Projects() {
           {visible.length} of {projects.length} shown
         </span>
       </div>
+
+      {notes[active] && (
+        <p className="mb-6 max-w-3xl rounded-lg border border-line bg-surface px-4 py-3 text-xs leading-relaxed text-muted">
+          {notes[active]}
+        </p>
+      )}
 
       <motion.div layout className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         <AnimatePresence mode="popLayout">

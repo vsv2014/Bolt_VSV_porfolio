@@ -3,8 +3,8 @@
 A modern, minimal portfolio built with React 19, Vite, Tailwind CSS v4 and Motion.
 Live at **[vsv2014.github.io/Bolt_VSV_porfolio](https://vsv2014.github.io/Bolt_VSV_porfolio/)**.
 
-Content mirrors the current résumé (Kore.ai SDE 2, Grade A2); two of the sections are
-working software, and every number on the page traces back to a shipped feature.
+Content mirrors the current résumé (Kore.ai SDE 2, Grade A2, 4+ years, 5 product phases);
+two of the sections are working software, and every number traces back to a shipped feature.
 
 ## What makes it different
 
@@ -13,7 +13,7 @@ working software, and every number on the page traces back to a shipped feature.
 | **Ask my agent** | `#agent` | A scripted RAG console (embed → retrieve → tool → compose) that answers questions about the résumé, streams the answer and cites its sources. 100% client-side: no API key, no network request. |
 | **⌘K command palette** | everywhere | Search sections, projects and links, or type a question and send it straight to the agent console. `/` also opens it, `↑↓` + `↵` navigate. |
 | **Impact ledger** | `#impact` | Six production metrics with scroll-triggered counters and before/after bars, alongside the recognition they earned (Global Spotlight, Shining Star, promotion). |
-| **Live skill filter** | `#skills` | Type `kafka`, `mcp` or `angular` and the 100+ technologies filter instantly, with the matching slice highlighted. |
+| **Live skill filter** | `#skills` | Type `kafka`, `mcp` or `angular` and the 150+ technologies filter instantly, with the matching slice highlighted. |
 | **Hero that performs** | `#home` | Aurora gradient backdrop, pointer-tracking spotlight, rotating typewriter headline, orbiting capability chips, counting stats and a keyword marquee. |
 | **Reading progress + active nav** | global | Gradient scroll-progress bar, animated active-section pill, and a pre-paint theme switch that respects the OS setting. |
 
@@ -97,8 +97,9 @@ automatically.
 
 ### Editing the agent console
 
-The console is intentionally data-driven. To teach it something new, append a
-document to `src/data/agent.ts`:
+The console is intentionally data-driven (19 documents covering Artemis, reliability,
+contact centre, research, solo builds, hiring). To teach it something new, append a document
+to `src/data/agent.ts`:
 
 ```ts
 {

@@ -7,7 +7,7 @@ const fallbackDoc: AgentDoc = {
   source: 'index#no-match',
   keywords: [],
   answer:
-    'That one is outside my index — I only answer from Santhosh’s résumé, project and publication data. Try asking about the ABL platform, his AI systems, the impact numbers, his recognition, or how to reach him.',
+    'That one is outside my index — I only answer from Santhosh’s résumé, project and publication data. Try asking about Artemis, his AI systems, reliability work, the impact numbers, or how to reach him.',
   tool: { name: 'refuse_out_of_scope', args: 'reason="no_match"', detail: 'no document crossed the similarity floor' },
 };
 

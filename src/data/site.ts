@@ -1,4 +1,4 @@
-import { Mail, Phone, Workflow, Bot, Layers } from 'lucide-react';
+import { Mail, Phone, Workflow, Bot, Layers, ShieldCheck } from 'lucide-react';
 import { GithubIcon, LinkedinIcon, FacebookIcon, InstagramIcon, XIcon } from '@/components/ui/brand-icons';
 import type { NavLink, SocialLink, Stat, Highlight } from '@/types';
 
@@ -11,32 +11,33 @@ export const profile = {
   name: 'Veerannapet Santhosh Vishal',
   shortName: 'Santhosh Veerannapet',
   initials: 'SV',
-  role: 'SDE 2 · Full-Stack · Conversational AI, Agent Platforms & Workflow Engines',
-  /** Factual recognition line shown as a chip in the hero (source: résumé achievements). */
-  recognition: 'Kore.ai Global Spotlight · Jan 2026',
+  role: 'Software Engineer · AI/LLM Platforms · Distributed Systems · Full Stack',
+  /** Factual recognition line shown as a chip in the hero (source: résumé awards). */
+  recognition: '2× Kore.ai Global Spotlight · 2026',
   tagline:
-    'I ship AI-native distributed systems at Kore.ai — workflow engines, agent platforms and conversational-AI products — to 1,000+ enterprise tenants.',
+    '4+ years building production enterprise AI at Kore.ai — agentic workflow platforms with durable execution, MCP and tool calling, typed authorization-aware integrations, and multi-tenant systems serving 1,000+ tenants.',
   /** Cycled after "I build …" in the hero. Keep each one short. */
   heroPhrases: [
-    'workflow engines for 1,000+ tenants',
-    'production LLM systems — RAG, tool-use, MCP',
-    'voice and chat agents at 10K+ concurrency',
-    'AI-native UIs that stay fast at scale',
+    'agentic workflows that replay safely',
+    'MCP integrations over 50+ services',
+    'voice & contact-centre AI at 10K+ concurrency',
+    'typed, authorization-aware AI platforms',
   ],
   /** Scan-friendly capability keywords for the hero marquee. */
   keywords: [
-    'LLM Systems',
     'Agentic Workflows',
-    'RAG & MCP',
-    'Voice & Conversational AI',
-    'Multi-tenant SaaS',
-    'Next.js / Angular',
-    'Node · Restate · Kafka',
-    'Kubernetes',
+    'Durable Execution',
+    'MCP & Tool Calling',
+    'RAG',
     'Distributed Systems',
+    'Event-Driven Services',
+    'Tenant Isolation',
+    'TypeScript / Node.js',
+    'Angular / Next.js',
+    'Kafka · Restate · Kubernetes',
   ],
   location: 'Hyderabad, India',
-  availability: 'Open to senior full-stack & AI-platform roles',
+  availability: 'Open to senior AI-platform & full-stack roles',
   email: EMAIL,
   // Résumé link. Set `resumeUrl` to an external, update-in-place link (e.g. a
   // Google Drive share URL) to make it "dynamic" — change the file there and the
@@ -66,33 +67,42 @@ export const socials: SocialLink[] = [
 ];
 
 export const stats: Stat[] = [
-  { value: '~4', countTo: 4, prefix: '~', label: 'Years at Kore.ai', note: 'Jul 2022 → now' },
+  { value: '4+', countTo: 4, suffix: '+', label: 'Years at Kore.ai', note: 'Jul 2022 → now' },
   { value: '1,000+', countTo: 1000, suffix: '+', label: 'Enterprise tenants', note: 'multi-tenant platform' },
   { value: '10K+', countTo: 10000, suffix: '+', label: 'Concurrent agents', note: 'voice, chat & dialer' },
-  { value: '60%', countTo: 60, suffix: '%', label: 'WebSDK bundle cut', note: '2.3 MB → 920 KB' },
+  { value: '50+', countTo: 50, suffix: '+', label: 'Services as agent tools', note: 'MCP integrations' },
 ];
 
 export const highlights: Highlight[] = [
   {
-    icon: Layers,
-    title: 'Full-Stack & Distributed Systems',
-    description: 'React, Next.js & Angular on the front; Node, Express, Restate, Kafka & Kubernetes behind it.',
-  },
-  {
     icon: Bot,
-    title: 'Conversational AI & Agents',
-    description: 'LLM tool-use, RAG and MCP integrations; ASR/TTS voice agents with intent, entity and dialogue handling.',
+    title: 'Agentic AI & LLM Platforms',
+    description:
+      'MCP and tool calling, RAG, prompt engineering, LLM gateways and guardrails — with permissions and irreversible operations kept in typed backend services, not prompts.',
   },
   {
     icon: Workflow,
-    title: 'Workflow Engines & DevEx',
-    description: 'Durable workflows, visual flow designers and microfrontends at enterprise scale.',
+    title: 'Durable Execution & Reliability',
+    description:
+      'Restate orchestration, Redis atomic queue claims, BullMQ continuations, transactional outbox, bounded retries, watchdogs, recovery and tenant-aware state.',
+  },
+  {
+    icon: ShieldCheck,
+    title: 'Type-Safe Multi-Tenant Systems',
+    description:
+      'Service-token JWT, authorization boundaries, correlation IDs, idempotency, backpressure, rate limits and noisy-neighbour controls across 1,000+ tenants.',
+  },
+  {
+    icon: Layers,
+    title: 'Frontend & Product Engineering',
+    description:
+      'Next.js and Angular at enterprise scale — Module Federation microfrontends, Monaco and ReteJS editors, WebSocket streaming and design systems.',
   },
 ];
 
 export const aboutParagraphs: string[] = [
-  'I’m a full-stack software engineer (SDE 2, Grade A2) on Kore.ai’s AI-for-Process team in Hyderabad. Over nearly four years I’ve built AI-native distributed systems — workflow engines and agent platforms, conversational-AI agents, document intelligence and microfrontends — shipped to 1,000+ enterprise tenants. I was promoted to SDE 2 among the fastest in my cohort and recognised with the company-wide Global Spotlight in January 2026.',
-  'I work end to end: LLM tool-use, RAG pipelines and MCP integrations on the AI side; Next.js, Angular, Module Federation and Monaco on the frontend; Node/Express, Restate and Kafka on the backend. Strong CS fundamentals from IIIT Hyderabad, plus a research background applying ML to environmental science.',
+  'I’m a software engineer at Kore.ai (SDE 2, Grade A2 since December 2024), promoted Associate SWE → SWE → SDE 2 among the fastest in my cohort. Over 4+ years I’ve shipped production enterprise AI: agentic workflow platforms with durable execution, voice and contact-centre AI, OCR-driven document intelligence and multi-tenant systems serving 1,000+ tenants.',
+  'My work sits at the reliability layer of AI products — durable Restate orchestration, Redis atomic queue claims and deduplication, BullMQ continuation workers, transactional outbox and reconciliation watchdogs — plus the authoring surfaces on top: Monaco IntelliSense over agent context, ELK auto-layout for multi-handle graphs and WebSocket step streaming. Recently I transitioned into product support, ramping up on XOCC and Artemis tickets and joining the pilot team establishing Artemis platform support readiness.',
 ];
 
 export const contactChannels = [
