@@ -23,6 +23,7 @@ export function Contact() {
       index="11"
       eyebrow="Contact"
       title="Let’s build something"
+      accent="something"
       description="Open to senior full-stack and AI-platform roles, plus collaborations on agentic systems and applied-ML problems."
     >
       <div className="grid gap-10 md:grid-cols-[1fr_1.1fr] md:items-start">

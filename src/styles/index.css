@@ -1,93 +1,104 @@
 @import 'tailwindcss';
 
-/* ------------------------------------------------------------------ *
- * Design tokens — single source of truth for the Modern Minimal theme
- * ------------------------------------------------------------------ */
+/* The theme is a class on <html> (set pre-paint), not a media query. */
+@custom-variant light (&:where(html.light, html.light *));
+
+/* ==================================================================
+ * AURORA — the design system for this portfolio.
+ *
+ * One token layer drives both themes: deep space violet for dark,
+ * warm paper for light. Type is editorial — a characterful grotesque
+ * for display, a serif italic for accent words, mono for facts.
+ * ================================================================== */
+
 @theme {
   /* Surfaces & text */
-  --color-bg: #08080b;
-  --color-bg-soft: #0d0d12;
-  --color-surface: rgba(255, 255, 255, 0.025);
-  --color-surface-hover: rgba(255, 255, 255, 0.05);
-  --color-line: rgba(255, 255, 255, 0.08);
-  --color-line-strong: rgba(255, 255, 255, 0.16);
-  --color-fg: #ededf2;
-  --color-muted: #a1a1aa;
-  --color-faint: #71717a;
+  --color-bg: #05060a;
+  --color-bg-soft: #0a0b12;
+  --color-surface: rgba(255, 255, 255, 0.03);
+  --color-surface-hover: rgba(255, 255, 255, 0.065);
+  --color-line: rgba(255, 255, 255, 0.09);
+  --color-line-strong: rgba(255, 255, 255, 0.2);
+  --color-fg: #f2f3f7;
+  --color-muted: #a3a7ba;
+  --color-faint: #7d8296;
 
-  /* Brand accents (used sparingly) */
-  --color-brand-purple: #a855f7;
-  --color-brand-pink: #ff0080;
-  --color-brand-cyan: #22d3ee;
-  --color-brand-lime: #a3e635;
-  --color-brand-amber: #fbbf24;
+  /* Signature accents */
+  --color-brand-purple: #7c5cff; /* violet — the primary */
+  --color-brand-pink: #ff4d9d;   /* rose — heat */
+  --color-brand-cyan: #35e0ff;   /* electric cyan — signal */
+  --color-brand-lime: #c8f65d;   /* chartreuse — the signature pop */
+  --color-brand-amber: #ffb454;
 
-  /* Decorative grid dot colour (flips per theme) */
-  --grid-color: rgba(255, 255, 255, 0.05);
+  /* Decorative dot colour (flips per theme) */
+  --grid-color: rgba(255, 255, 255, 0.055);
 
   /* Typography */
-  --font-display: 'Space Grotesk', system-ui, sans-serif;
+  --font-display: 'Bricolage Grotesque', 'Inter', system-ui, sans-serif;
+  --font-serif: 'Instrument Serif', Georgia, serif;
   --font-sans: 'Inter', system-ui, sans-serif;
   --font-mono: 'JetBrains Mono', ui-monospace, monospace;
 
   /* Motion */
-  --animate-marquee: marquee 40s linear infinite;
-  --animate-aurora: aurora 18s ease-in-out infinite alternate;
+  --animate-marquee: marquee 42s linear infinite;
+  --animate-marquee-reverse: marquee-reverse 52s linear infinite;
+  --animate-aurora: aurora 22s ease-in-out infinite alternate;
+  --animate-drift: drift 28s ease-in-out infinite alternate;
   --animate-float: float 7s ease-in-out infinite;
   --animate-float-slow: float 11s ease-in-out infinite;
-  --animate-spin-slow: spin 14s linear infinite;
+  --animate-spin-slow: spin 16s linear infinite;
   --animate-shimmer: shimmer 3.5s linear infinite;
   --animate-blink: blink 1.05s step-end infinite;
   --animate-pulse-ring: pulse-ring 2.4s ease-out infinite;
-  --animate-scan: scan 6s linear infinite;
-  --animate-gradient: gradient-pan 8s ease infinite;
   --animate-dash: dash 0.9s linear infinite;
+  --animate-gradient: gradient-pan 9s ease infinite;
+  --animate-scroll-cue: scroll-cue 2.2s ease-in-out infinite;
 }
 
 @keyframes marquee {
   from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
+  to   { transform: translateX(-50%); }
 }
-
+@keyframes marquee-reverse {
+  from { transform: translateX(-50%); }
+  to   { transform: translateX(0); }
+}
 @keyframes aurora {
-  0%   { transform: translate3d(0, 0, 0) scale(1); opacity: 0.55; }
-  50%  { transform: translate3d(4%, -3%, 0) scale(1.12); opacity: 0.8; }
-  100% { transform: translate3d(-3%, 4%, 0) scale(1.05); opacity: 0.6; }
+  0%   { transform: translate3d(0, 0, 0) scale(1); opacity: 0.5; }
+  50%  { transform: translate3d(5%, -4%, 0) scale(1.14); opacity: 0.78; }
+  100% { transform: translate3d(-4%, 5%, 0) scale(1.06); opacity: 0.56; }
 }
-
+@keyframes drift {
+  0%   { transform: translate3d(-3%, 2%, 0) scale(1.02); }
+  100% { transform: translate3d(4%, -3%, 0) scale(1.12); }
+}
 @keyframes float {
   0%, 100% { transform: translateY(0); }
   50%      { transform: translateY(-10px); }
 }
-
 @keyframes shimmer {
   0%   { background-position: -220% 0; }
   100% { background-position: 220% 0; }
 }
-
 @keyframes blink {
   0%, 100% { opacity: 1; }
   50%      { opacity: 0; }
 }
-
 @keyframes pulse-ring {
   0%   { transform: scale(0.85); opacity: 0.7; }
   70%  { transform: scale(2.1); opacity: 0; }
   100% { transform: scale(2.1); opacity: 0; }
 }
-
-@keyframes scan {
-  0%   { transform: translateY(-100%); }
-  100% { transform: translateY(400%); }
+@keyframes dash {
+  to { stroke-dashoffset: -20; }
 }
-
 @keyframes gradient-pan {
   0%, 100% { background-position: 0% 50%; }
   50%      { background-position: 100% 50%; }
 }
-
-@keyframes dash {
-  to { stroke-dashoffset: -20; }
+@keyframes scroll-cue {
+  0%, 100% { transform: translateY(0); opacity: 0.4; }
+  50%      { transform: translateY(6px); opacity: 1; }
 }
 
 /* ------------------------------------------------------------------ *
@@ -103,46 +114,46 @@
     background-color: var(--color-bg);
     color: var(--color-fg);
     font-family: var(--font-sans);
-    font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+    font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11', 'ss01';
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
     min-height: 100dvh;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3 {
+    font-family: var(--font-display);
+    letter-spacing: -0.025em;
+    text-wrap: balance;
   }
 
   ::selection {
-    background: color-mix(in oklab, var(--color-brand-purple) 35%, transparent);
-    color: var(--color-fg);
+    background: color-mix(in oklab, var(--color-brand-lime) 45%, transparent);
+    color: #08090d;
   }
 
-  /* Fixed-nav scroll offset */
   section[id],
   [id='home'] {
     scroll-margin-top: 5rem;
   }
 
-  /* Tasteful focus rings for keyboard users */
   :focus-visible {
     outline: 2px solid var(--color-brand-cyan);
-    outline-offset: 2px;
-    border-radius: 4px;
+    outline-offset: 3px;
+    border-radius: 6px;
   }
 
-  /* Slim, theme-aware scrollbars (chat console, palette) */
+  /* Slim, theme-aware scrollbars */
   .scrollbar-thin {
     scrollbar-width: thin;
     scrollbar-color: var(--color-line-strong) transparent;
   }
-  .scrollbar-thin::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
-  }
+  .scrollbar-thin::-webkit-scrollbar { width: 8px; height: 8px; }
   .scrollbar-thin::-webkit-scrollbar-thumb {
     background: var(--color-line-strong);
     border-radius: 9999px;
   }
-  .scrollbar-thin::-webkit-scrollbar-track {
-    background: transparent;
-  }
+  .scrollbar-thin::-webkit-scrollbar-track { background: transparent; }
 
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
@@ -155,8 +166,10 @@
 }
 
 /* ------------------------------------------------------------------ *
- * Reusable utilities
+ * Utilities
  * ------------------------------------------------------------------ */
+
+/* Signature gradient text — violet → rose → cyan. */
 @utility text-gradient {
   background-image: linear-gradient(
     100deg,
@@ -169,79 +182,137 @@
   color: transparent;
 }
 
-/* Animated version — the gradient slowly pans across the text. */
 @utility text-gradient-animated {
   background-image: linear-gradient(
     100deg,
     var(--color-brand-purple),
     var(--color-brand-pink),
+    var(--color-brand-lime),
     var(--color-brand-cyan),
     var(--color-brand-purple)
   );
-  background-size: 300% 100%;
+  background-size: 320% 100%;
   background-clip: text;
   -webkit-background-clip: text;
   color: transparent;
   animation: var(--animate-gradient);
 }
 
-/* Faint dotted grid backdrop for the page */
+/* Big outlined numerals for the editorial section headers. */
+@utility text-stroke {
+  color: transparent;
+  -webkit-text-stroke: 1px color-mix(in oklab, var(--color-fg) 42%, transparent);
+}
+
+/* Faint dotted grid. */
 @utility bg-grid {
   background-image: radial-gradient(circle at 1px 1px, var(--grid-color) 1px, transparent 0);
-  background-size: 32px 32px;
+  background-size: 34px 34px;
 }
 
-/* Fades the grid out towards the edges instead of hard-stopping it. */
 @utility bg-grid-fade {
-  mask-image: radial-gradient(ellipse 80% 60% at 50% 35%, #000 30%, transparent 100%);
-  -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 35%, #000 30%, transparent 100%);
+  mask-image: radial-gradient(ellipse 78% 58% at 50% 34%, #000 26%, transparent 100%);
+  -webkit-mask-image: radial-gradient(ellipse 78% 58% at 50% 34%, #000 26%, transparent 100%);
 }
 
-/* Frosted panel used by the console, palette and floating nav. */
+/* Frosted panel — the console, palette and floating bars. */
 @utility glass {
-  background: color-mix(in oklab, var(--color-bg) 72%, transparent);
-  backdrop-filter: blur(18px) saturate(140%);
-  -webkit-backdrop-filter: blur(18px) saturate(140%);
+  background: color-mix(in oklab, var(--color-bg) 74%, transparent);
+  backdrop-filter: blur(20px) saturate(150%);
+  -webkit-backdrop-filter: blur(20px) saturate(150%);
 }
 
-/* Hairline gradient border (works in both themes). */
-@utility ring-gradient {
+/* Film grain — the texture that makes dark UI feel photographed. */
+@utility noise {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+}
+
+/* Hairline that fades out — used under editorial headers. */
+@utility hairline {
   background-image: linear-gradient(
-    135deg,
-    color-mix(in oklab, var(--color-brand-purple) 70%, transparent),
-    color-mix(in oklab, var(--color-brand-cyan) 60%, transparent)
+    to right,
+    color-mix(in oklab, var(--color-fg) 26%, transparent),
+    transparent 78%
   );
+  height: 1px;
 }
 
-/* Shimmering sweep used on the "top 1%" badge. */
+/* Shimmer sweep for badges. */
 @utility shimmer-sweep {
   background-image: linear-gradient(
     110deg,
-    transparent 20%,
-    color-mix(in oklab, #ffffff 22%, transparent) 45%,
-    transparent 70%
+    transparent 22%,
+    color-mix(in oklab, #ffffff 20%, transparent) 46%,
+    transparent 72%
   );
   background-size: 220% 100%;
   animation: var(--animate-shimmer);
 }
 
+/* Animated conic border ring. */
+@utility ring-conic {
+  background: conic-gradient(
+    from var(--ring-angle, 0deg),
+    var(--color-brand-purple),
+    var(--color-brand-cyan),
+    var(--color-brand-lime),
+    var(--color-brand-pink),
+    var(--color-brand-purple)
+  );
+}
+
 /* ------------------------------------------------------------------ *
- * Light theme — overrides the tokens when <html class="light">
+ * View transitions — the theme flip blooms from the toggle button.
+ * ------------------------------------------------------------------ */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 0.62s;
+  animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+  mix-blend-mode: normal;
+}
+
+::view-transition-old(root) {
+  animation-name: vt-fade-out;
+}
+
+::view-transition-new(root) {
+  animation-name: vt-reveal;
+}
+
+@keyframes vt-fade-out {
+  to { opacity: 0.35; }
+}
+
+@keyframes vt-reveal {
+  from { clip-path: circle(0% at var(--vt-x, 92%) var(--vt-y, 4%)); }
+  to   { clip-path: circle(150% at var(--vt-x, 92%) var(--vt-y, 4%)); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none !important;
+  }
+}
+
+/* ------------------------------------------------------------------ *
+ * Light theme — warm paper, ink type, accents tuned for contrast.
  * ------------------------------------------------------------------ */
 html.light {
-  --color-bg: #ffffff;
-  --color-bg-soft: #f4f4f5;
-  --color-surface: rgba(9, 9, 11, 0.03);
-  --color-surface-hover: rgba(9, 9, 11, 0.06);
-  --color-line: rgba(9, 9, 11, 0.1);
-  --color-line-strong: rgba(9, 9, 11, 0.18);
-  --color-fg: #0a0a0b;
-  --color-muted: #52525b;
-  --color-faint: #71717a;
-  --color-brand-purple: #7c3aed;
-  --color-brand-pink: #db2777;
-  --color-brand-cyan: #0891b2;
-  --color-brand-lime: #4d7c0f;
-  --color-brand-amber: #b45309;
-  --grid-color: rgba(9, 9, 11, 0.05);
+  --color-bg: #f7f5f0;
+  --color-bg-soft: #efece4;
+  --color-surface: rgba(12, 13, 18, 0.035);
+  --color-surface-hover: rgba(12, 13, 18, 0.07);
+  --color-line: rgba(12, 13, 18, 0.12);
+  --color-line-strong: rgba(12, 13, 18, 0.24);
+  --color-fg: #0b0c11;
+  --color-muted: #4c5063;
+  --color-faint: #6f7488;
+  --color-brand-purple: #5b3df5;
+  --color-brand-pink: #d6246e;
+  --color-brand-cyan: #0a7f96;
+  --color-brand-lime: #4f7a10;
+  --color-brand-amber: #a2620a;
+  --grid-color: rgba(12, 13, 18, 0.06);
 }

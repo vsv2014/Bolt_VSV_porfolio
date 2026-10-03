@@ -40,11 +40,8 @@ export function Impact() {
       id="impact"
       index="05"
       eyebrow="Impact"
-      title={
-        <>
-          Numbers, <span className="text-gradient">not adjectives</span>
-        </>
-      }
+      title="Numbers, not adjectives"
+      accent="adjectives"
       description="Six production figures behind the work — each one traceable to a shipped feature, an award or a résumé bullet."
     >
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">

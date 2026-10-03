@@ -59,7 +59,8 @@ export function Experience() {
       id="experience"
       index="02"
       eyebrow="Experience"
-      title="Where I've worked"
+      title="Where I&rsquo;ve worked"
+      accent="worked"
       description={
         totalPhases > 0
           ? `${experiences[0].company} across ${totalPhases} product phases — from outbound voice bots to agentic workflow platforms — plus research and a pandemic-era teaching platform.`

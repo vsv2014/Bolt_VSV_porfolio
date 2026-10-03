@@ -10,7 +10,7 @@ const signals = [
 
 export function About() {
   return (
-    <Section id="about" index="01" eyebrow="About" title="Engineering meets research">
+    <Section id="about" index="01" eyebrow="About" title="Engineering meets research" accent="research">
       <div className="grid gap-12 md:grid-cols-[1.2fr_1fr]">
         <div className="space-y-8">
           <Reveal className="space-y-5">

@@ -9,6 +9,7 @@ export function Research() {
       index="09"
       eyebrow="Research"
       title="Published work"
+      accent="work"
       description="Data-driven environmental science from IIIT Hyderabad's Lab for Spatial Informatics."
     >
       <div className="grid gap-4">

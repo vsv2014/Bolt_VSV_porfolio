@@ -34,7 +34,8 @@ export function Projects() {
       id="projects"
       index="06"
       eyebrow="Selected work"
-      title="Things I've built"
+      title="Things I&rsquo;ve built"
+      accent="built"
       description="Enterprise products from Kore.ai, solo engineering builds, and research tooling across the stack."
     >
       <div className="mb-8 flex flex-wrap items-center gap-2">

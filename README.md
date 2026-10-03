@@ -33,6 +33,26 @@ where arrow keys nudge nodes and ports link with `Enter`.
 | `↑` `↓` `↵` | Navigate / run the highlighted command |
 | `Esc` | Close the palette |
 
+## Design system — "Aurora"
+
+| Layer | Choice |
+| ----- | ------ |
+| Display type | **Bricolage Grotesque** (variable 400–800, tight tracking) |
+| Accent type | **Instrument Serif italic** — accent words inside every section title |
+| Body / mono | Inter · JetBrains Mono (tabular numerals for metrics) |
+| Palette (dark) | near-black indigo `#05060a` with **violet `#7c5cff`**, **rose `#ff4d9d`**, **electric cyan `#35e0ff`** and a signature **chartreuse `#c8f65d`** |
+| Palette (light) | warm paper `#f7f5f0` with ink type and contrast-tuned accents |
+| Texture | SVG `feTurbulence` film grain (soft-light), drifting aurora orbs, fading dot grid, vignette |
+| Motion | Cinematic blur-and-rise reveals, word-split clip reveals on every section title, pointer spotlight, scroll parallax in the hero |
+
+**Theme flip:** where the browser supports the View Transitions API the new theme
+blooms as a circle from the toggle button (`--vt-x` / `--vt-y` set from the button's
+rect); otherwise it swaps instantly. Reduced motion opts out of the animation.
+
+**Bundle:** below-the-fold sections (`Projects`, `FrontendCraft`, `AgentConsole`,
+`Research`, `Awards`) are `React.lazy` — entry is ~472 kB (151 kB gzip) with
+five small async chunks, so the hero paints from a lean bundle.
+
 ## Tech stack
 
 | Area        | Choice                                  |

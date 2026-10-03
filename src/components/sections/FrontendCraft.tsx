@@ -28,11 +28,8 @@ export function FrontendCraft() {
       id="craft"
       index="07"
       eyebrow="Frontend craft"
-      title={
-        <>
-          Interfaces are the <span className="text-gradient">product</span>
-        </>
-      }
+      title="Interfaces are the product"
+      accent="product"
       description="Frontend-heavy by choice: I spend most of my time where rendering, state and interaction meet. Below are three live demos I built for this page — pointer events, SVG, virtualisation and PerformanceObserver, no UI kit and no canvas library."
     >
       <div className="grid gap-4 lg:grid-cols-[1.45fr_1fr]">

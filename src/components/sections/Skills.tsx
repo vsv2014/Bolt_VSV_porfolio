@@ -40,6 +40,7 @@ export function Skills() {
       index="04"
       eyebrow="Skills"
       title="A stack that spans the whole system"
+      accent="whole"
       description={`${total}+ technologies across ${skillGroups.length} groups — from LLM orchestration and durable backends to the pixels in front of them. Search it instead of scrolling.`}
     >
       <div className="mb-8 flex flex-wrap items-center gap-4">

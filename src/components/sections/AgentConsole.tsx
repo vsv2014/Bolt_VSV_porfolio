@@ -153,11 +153,8 @@ export function AgentConsole() {
       id="agent"
       index="08"
       eyebrow="Ask my agent"
-      title={
-        <>
-          Don’t read the résumé — <span className="text-gradient-animated">interrogate it</span>
-        </>
-      }
+      title="Don’t read the résumé — interrogate it"
+      accent="interrogate"
       description="A working demo of the pattern I ship: embed, retrieve, call a tool, then stream a grounded answer with citations. It runs entirely in your browser — no API key, no backend, nothing leaves this tab."
     >
       <span ref={sectionRef} className="block h-px w-px" aria-hidden />
