@@ -77,8 +77,16 @@ export const agentDocs: AgentDoc[] = [
     source: 'data/skills.ts#frontend',
     keywords: ['frontend', 'front-end', 'front end', 'ui', 'ux', 'react', 'next.js', 'nextjs', 'angular', 'tailwind', 'shadcn', 'design system', 'performance', 'monaco', 'elk.js', 'three.js', 'd3', 'electron', 'quill', 'rxjs', 'vue'],
     answer:
-      'Frontend is a strength: React and Next.js with Angular/RxJS/NgRx at enterprise scale, Nx and Module Federation microfrontends, Monaco Editor and ReteJS for visual tooling, ELK.js auto-layout, Quill Delta editing, D3.js and Three.js for visuals, Electron for desktop, and Tailwind / shadcn/ui / Angular Material for design systems. Proof points: the WebSDK bundle cut 60% (2.3 MB → 920 KB) across 15+ modules for 1,000+ tenants; 25+ reusable Unified-XO components standardised across three product suites; agent setup down from 2 hours to 15 minutes.',
+      'Frontend is his centre of gravity — he describes himself as frontend-heavy, full-stack by necessity. React and Next.js with Angular/RxJS/NgRx at enterprise scale, Nx and Module Federation microfrontends, Monaco Editor and ReteJS for visual tooling, ELK.js auto-layout, Quill Delta editing, D3.js and Three.js for visuals, Electron for desktop, and Tailwind / shadcn/ui / Angular Material for design systems. Proof points: the WebSDK bundle cut 60% (2.3 MB → 920 KB) across 15+ modules for 1,000+ tenants; 25+ reusable Unified-XO components standardised across three product suites; agent setup down from 2 hours to 15 minutes.',
     tool: { name: 'get_metrics', args: 'area="frontend"', detail: 'bundle −60% · 25+ shared components' },
+  },
+  {
+    id: 'frontend-craft',
+    source: 'src/components/sections/FrontendCraft.tsx',
+    keywords: ['frontend', 'front-end', 'craft', 'demo', 'demos', 'interaction', 'animation', 'motion', 'performance', 'lighthouse', 'web vitals', 'accessibility', 'a11y', 'design system', 'component library', 'canvas', 'svg', 'virtualisation', 'virtualization', 'micro-interaction', 'responsive', 'css'],
+    answer:
+      'The Craft section is three demos he built for this page with no UI kit and no canvas library: a node-graph flow designer (pointer events, pointer capture, SVG bezier edges, longest-path auto-layout, keyboard nudging and keyboard-only port linking), a virtualised table rendering 10,000 rows with rAF-batched windowing, and a live PerformanceObserver panel reading LCP, CLS, long tasks and FPS for the page you are looking at. Around them sits the craft checklist he works to: keyboard-first controls, visible focus rings, reduced-motion respect, a single token layer that flips both themes pre-paint, and a ~150 kB gzip JS budget. On the job that shows up as Monaco IntelliSense over agent context, ELK auto-layout for multi-handle graphs, ReteJS flow editing, Module Federation across four micro-frontends, 25+ shared components in the Unified-XO library and a 60% WebSDK bundle reduction.',
+    tool: { name: 'inspect_frontend', args: 'scope="craft"', detail: '3 live demos · 0 UI kits · measured, not claimed' },
   },
   {
     id: 'backend-and-apis',
@@ -147,7 +155,7 @@ export const agentDocs: AgentDoc[] = [
   {
     id: 'skills',
     source: 'data/skills.ts',
-    keywords: ['skill', 'skills', 'stack', 'tech', 'technology', 'technologies', 'tools', 'languages', 'frameworks', 'proficient', 'expertise', 'database', 'databases', 'python', 'typescript', 'patterns', 'solid', 'system design', 'matlab', 'c++'],
+    keywords: ['skill', 'skills', 'stack', 'tech', 'technology', 'technologies', 'tools', 'languages', 'frameworks', 'proficient', 'expertise', 'database', 'databases', 'python', 'typescript', 'patterns', 'solid', 'system design', 'matlab', 'c++', 'frontend skills'],
     answer:
       'Six groups on the résumé: core engineering (TypeScript, JavaScript, Python, Java, C++, C, SQL, MATLAB, Bash, system design, HLD/LLD, design patterns, mentoring); AI/LLM and agentic systems (OpenAI, Anthropic, Gemini, Groq, Azure AI, LangGraph, RAG, MCP, tool calling, guardrails, evaluation, embeddings, ASR/TTS, Docling OCR, XO/SmartAssist); frontend and product engineering; backend, APIs, security and distributed systems; data, cloud, DevOps, observability and testing; plus a familiarity list with Terraform, Bedrock, Pinecone, RAGAS, FAISS, LangSmith, Go, Rails, MuleSoft/Workato/Boomi and AI dev tools.',
     tool: { name: 'list_stack', args: 'grouped=true', detail: '6 groups · 150+ technologies' },
@@ -164,9 +172,9 @@ export const agentDocs: AgentDoc[] = [
 
 /** Starter prompts rendered as chips inside the console. */
 export const suggestedPrompts: string[] = [
+  'Is he frontend-heavy?',
   'What has he shipped at Kore.ai?',
   'Tell me about Artemis',
-  'How does he handle reliability?',
   'Show me the impact numbers',
   'What is his tech stack?',
   'How do I contact him?',

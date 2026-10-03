@@ -20,7 +20,7 @@ export function Contact() {
   return (
     <Section
       id="contact"
-      index="10"
+      index="11"
       eyebrow="Contact"
       title="Let’s build something"
       description="Open to senior full-stack and AI-platform roles, plus collaborations on agentic systems and applied-ML problems."

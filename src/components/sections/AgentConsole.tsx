@@ -151,7 +151,7 @@ export function AgentConsole() {
   return (
     <Section
       id="agent"
-      index="07"
+      index="08"
       eyebrow="Ask my agent"
       title={
         <>

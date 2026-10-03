@@ -3,14 +3,16 @@
 A modern, minimal portfolio built with React 19, Vite, Tailwind CSS v4 and Motion.
 Live at **[vsv2014.github.io/Bolt_VSV_porfolio](https://vsv2014.github.io/Bolt_VSV_porfolio/)**.
 
-Content mirrors the current résumé (Kore.ai SDE 2, Grade A2, 4+ years, 5 product phases);
-two of the sections are working software, and every number traces back to a shipped feature.
+Positioned as a **frontend-heavy full-stack** portfolio: the résumé content (Kore.ai SDE 2,
+Grade A2, 4+ years, 5 product phases) is presented through interfaces that are themselves
+the proof — three of the sections are working software, hand-built with no UI kit.
 
 ## What makes it different
 
 | Feature | Where | What it does |
 | ------- | ----- | ------------ |
 | **Ask my agent** | `#agent` | A scripted RAG console (embed → retrieve → tool → compose) that answers questions about the résumé, streams the answer and cites its sources. 100% client-side: no API key, no network request. |
+| **Frontend craft** | `#craft` | Three live demos built for this page with no UI kit and no canvas library: a **node-graph flow designer** (pointer events, pointer capture, SVG bézier edges, longest-path auto-layout, arrow-key nudging, keyboard-only port linking), a **virtualised table** windowing 10,000 rows with rAF-batched scroll, and a **live PerformanceObserver panel** reading LCP, CLS, long tasks and FPS — plus the craft checklist (keyboard, reduced motion, one-token theming, JS budget). |
 | **⌘K command palette** | everywhere | Search sections, projects and links, or type a question and send it straight to the agent console. `/` also opens it, `↑↓` + `↵` navigate. |
 | **Impact ledger** | `#impact` | Six production metrics with scroll-triggered counters and before/after bars, alongside the recognition they earned (Global Spotlight, Shining Star, promotion). |
 | **Live skill filter** | `#skills` | Type `kafka`, `mcp` or `angular` and the 150+ technologies filter instantly, with the matching slice highlighted. |
@@ -18,7 +20,9 @@ two of the sections are working software, and every number traces back to a ship
 | **Reading progress + active nav** | global | Gradient scroll-progress bar, animated active-section pill, and a pre-paint theme switch that respects the OS setting. |
 
 Everything degrades gracefully: `prefers-reduced-motion` disables the animation
-layer (aurora, marquee, typewriter, counters) without hiding any content.
+layer (aurora, marquee, typewriter, counters, card tilt) without hiding any content,
+and every interactive element is reachable by keyboard — including the flow canvas,
+where arrow keys nudge nodes and ports link with `Enter`.
 
 ### Keyboard shortcuts
 
@@ -78,6 +82,7 @@ src/
 ├── types/index.ts          # Shared types
 ├── data/                   # All content (profile, experience, projects, agent KB, …)
 └── components/
+    ├── demo/               # Hand-built demos (FlowCanvas, VirtualList, PerfPanel)
     ├── ui/                 # Primitives (Section, Card, Tag, CountUp, Typewriter, …)
     ├── layout/             # Navbar, Footer, FloatingSocials, ScrollProgress, CommandPalette
     └── sections/           # Page sections (Hero, About, …, Impact, AgentConsole, …)

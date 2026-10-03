@@ -11,29 +11,31 @@ export const profile = {
   name: 'Veerannapet Santhosh Vishal',
   shortName: 'Santhosh Veerannapet',
   initials: 'SV',
-  role: 'Software Engineer · AI/LLM Platforms · Distributed Systems · Full Stack',
+  role: 'Frontend-Heavy Full-Stack Engineer · AI/LLM Platforms · Interface Architecture',
   /** Factual recognition line shown as a chip in the hero (source: résumé awards). */
   recognition: '2× Kore.ai Global Spotlight · 2026',
   tagline:
-    '4+ years building production enterprise AI at Kore.ai — agentic workflow platforms with durable execution, MCP and tool calling, typed authorization-aware integrations, and multi-tenant systems serving 1,000+ tenants.',
+    '4+ years at Kore.ai building production enterprise AI — and I’m the one who makes it usable. I own the hard frontend surfaces: workflow canvases, flow designers and dashboards for 1,000+ tenants and 10,000+ concurrent agents, on durable backends I also write.',
   /** Cycled after "I build …" in the hero. Keep each one short. */
   heroPhrases: [
+    'interfaces people actually enjoy using',
+    'workflow canvases that stay at 60fps',
     'agentic workflows that replay safely',
-    'MCP integrations over 50+ services',
-    'voice & contact-centre AI at 10K+ concurrency',
-    'typed, authorization-aware AI platforms',
+    'design systems three product suites share',
   ],
   /** Scan-friendly capability keywords for the hero marquee. */
   keywords: [
+    'React · Next.js · Angular',
+    'Micro-frontends (Nx)',
+    'Design Systems',
+    'Monaco · ELK · ReteJS',
+    'Canvas & WebGL',
+    'Virtualised Data Grids',
+    'Motion & Micro-interactions',
+    'Web Performance',
+    'Accessibility',
     'Agentic Workflows',
-    'Durable Execution',
-    'MCP & Tool Calling',
-    'RAG',
-    'Distributed Systems',
-    'Event-Driven Services',
-    'Tenant Isolation',
     'TypeScript / Node.js',
-    'Angular / Next.js',
     'Kafka · Restate · Kubernetes',
   ],
   location: 'Hyderabad, India',
@@ -53,6 +55,7 @@ export const navLinks: NavLink[] = [
   { id: 'skills', label: 'Skills' },
   { id: 'impact', label: 'Impact' },
   { id: 'projects', label: 'Work' },
+  { id: 'craft', label: 'Craft' },
   { id: 'agent', label: 'Ask AI' },
   { id: 'research', label: 'Research' },
   { id: 'awards', label: 'Awards' },
@@ -68,12 +71,18 @@ export const socials: SocialLink[] = [
 
 export const stats: Stat[] = [
   { value: '4+', countTo: 4, suffix: '+', label: 'Years at Kore.ai', note: 'Jul 2022 → now' },
+  { value: '5,800+', countTo: 5800, suffix: '+', label: 'Files in the Nx monorepo I led', note: '4 micro-frontends' },
   { value: '1,000+', countTo: 1000, suffix: '+', label: 'Enterprise tenants', note: 'multi-tenant platform' },
-  { value: '10K+', countTo: 10000, suffix: '+', label: 'Concurrent agents', note: 'voice, chat & dialer' },
-  { value: '50+', countTo: 50, suffix: '+', label: 'Services as agent tools', note: 'MCP integrations' },
+  { value: '60%', countTo: 60, suffix: '%', label: 'WebSDK bundle cut', note: '2.3 MB → 920 KB' },
 ];
 
 export const highlights: Highlight[] = [
+  {
+    icon: Layers,
+    title: 'Frontend & Product Engineering',
+    description:
+      'React, Next.js and Angular at enterprise scale — Monaco and ReteJS editors, ELK auto-layout, virtualised tables for 10K+ rows, and motion that respects the user’s settings.',
+  },
   {
     icon: Bot,
     title: 'Agentic AI & LLM Platforms',
@@ -92,16 +101,10 @@ export const highlights: Highlight[] = [
     description:
       'Service-token JWT, authorization boundaries, correlation IDs, idempotency, backpressure, rate limits and noisy-neighbour controls across 1,000+ tenants.',
   },
-  {
-    icon: Layers,
-    title: 'Frontend & Product Engineering',
-    description:
-      'Next.js and Angular at enterprise scale — Module Federation microfrontends, Monaco and ReteJS editors, WebSocket streaming and design systems.',
-  },
 ];
 
 export const aboutParagraphs: string[] = [
-  'I’m a software engineer at Kore.ai (SDE 2, Grade A2 since December 2024), promoted Associate SWE → SWE → SDE 2 among the fastest in my cohort. Over 4+ years I’ve shipped production enterprise AI: agentic workflow platforms with durable execution, voice and contact-centre AI, OCR-driven document intelligence and multi-tenant systems serving 1,000+ tenants.',
+  'I’m a frontend-heavy software engineer at Kore.ai (SDE 2, Grade A2 since December 2024), promoted Associate SWE → SWE → SDE 2 among the fastest in my cohort. Over 4+ years I’ve shipped production enterprise AI: agentic workflow platforms with durable execution, voice and contact-centre AI, OCR-driven document intelligence and multi-tenant systems serving 1,000+ tenants — most of it judged by the interface in front of it.',
   'My work sits at the reliability layer of AI products — durable Restate orchestration, Redis atomic queue claims and deduplication, BullMQ continuation workers, transactional outbox and reconciliation watchdogs — plus the authoring surfaces on top: Monaco IntelliSense over agent context, ELK auto-layout for multi-handle graphs and WebSocket step streaming. Recently I transitioned into product support, ramping up on XOCC and Artemis tickets and joining the pilot team establishing Artemis platform support readiness.',
 ];
 

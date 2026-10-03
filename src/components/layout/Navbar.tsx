@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { AnimatePresence, motion } from 'motion/react';
-import { Menu, Search, X } from 'lucide-react';
+import { ChevronDown, Menu, Search, X } from 'lucide-react';
 import { GithubIcon, LinkedinIcon } from '@/components/ui/brand-icons';
 import { ThemeToggle } from './ThemeToggle';
 import { navLinks, profile, socials } from '@/data/site';
@@ -11,10 +11,18 @@ const sectionIds = ['home', ...navLinks.map((l) => l.id)];
 const github = socials.find((s) => s.label === 'GitHub')!;
 const linkedin = socials.find((s) => s.label === 'LinkedIn')!;
 
+/** Sections that earn a permanent slot in the bar. */
+const PRIMARY_IDS = ['about', 'experience', 'skills', 'impact', 'projects', 'craft', 'agent', 'contact'];
+
+const primaryLinks = PRIMARY_IDS.map((id) => navLinks.find((link) => link.id === id)!).filter(Boolean);
+const secondaryLinks = navLinks.filter((link) => !PRIMARY_IDS.includes(link.id));
+
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const [moreOpen, setMoreOpen] = useState(false);
   const [active, setActive] = useState('home');
+  const moreRef = useRef<HTMLLIElement>(null);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 16);
@@ -39,6 +47,25 @@ export function Navbar() {
     return () => observer.disconnect();
   }, []);
 
+  // Close the overflow menu on outside click or Escape.
+  useEffect(() => {
+    if (!moreOpen) return;
+    const onPointerDown = (event: PointerEvent) => {
+      if (!moreRef.current?.contains(event.target as Node)) setMoreOpen(false);
+    };
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') setMoreOpen(false);
+    };
+    document.addEventListener('pointerdown', onPointerDown);
+    document.addEventListener('keydown', onKeyDown);
+    return () => {
+      document.removeEventListener('pointerdown', onPointerDown);
+      document.removeEventListener('keydown', onKeyDown);
+    };
+  }, [moreOpen]);
+
+  const inOverflow = secondaryLinks.some((link) => link.id === active);
+
   return (
     <header
       className={cn(
@@ -60,7 +87,7 @@ export function Navbar() {
 
         {/* Desktop links */}
         <ul className="hidden items-center lg:flex">
-          {navLinks.map((link) => (
+          {primaryLinks.map((link) => (
             <li key={link.id}>
               <a
                 href={`#${link.id}`}
@@ -81,6 +108,55 @@ export function Navbar() {
               </a>
             </li>
           ))}
+
+          {secondaryLinks.length > 0 && (
+            <li ref={moreRef} className="relative">
+              <button
+                type="button"
+                onClick={() => setMoreOpen((value) => !value)}
+                aria-expanded={moreOpen}
+                aria-haspopup="menu"
+                className={cn(
+                  'flex items-center gap-1 rounded-md px-2 py-2 text-[12.5px] transition-colors xl:px-2.5',
+                  inOverflow || moreOpen ? 'text-fg' : 'text-muted hover:text-fg',
+                )}
+              >
+                More
+                <ChevronDown className={cn('h-3.5 w-3.5 transition-transform', moreOpen && 'rotate-180')} />
+              </button>
+
+              <AnimatePresence>
+                {moreOpen && (
+                  <motion.ul
+                    role="menu"
+                    aria-label="More sections"
+                    initial={{ opacity: 0, y: -6, scale: 0.98 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: -6, scale: 0.98 }}
+                    transition={{ duration: 0.16, ease: [0.22, 1, 0.36, 1] }}
+                    className="glass absolute right-0 top-[calc(100%+6px)] w-44 overflow-hidden rounded-xl border border-line-strong p-1 shadow-xl shadow-black/30"
+                  >
+                    {secondaryLinks.map((link) => (
+                      <li key={link.id} role="none">
+                        <a
+                          role="menuitem"
+                          href={`#${link.id}`}
+                          onClick={() => setMoreOpen(false)}
+                          aria-current={active === link.id ? 'true' : undefined}
+                          className={cn(
+                            'block rounded-lg px-3 py-2 text-[13px] transition-colors',
+                            active === link.id ? 'bg-surface text-fg' : 'text-muted hover:bg-surface hover:text-fg',
+                          )}
+                        >
+                          {link.label}
+                        </a>
+                      </li>
+                    ))}
+                  </motion.ul>
+                )}
+              </AnimatePresence>
+            </li>
+          )}
         </ul>
 
         <div className="hidden items-center gap-1 lg:flex">

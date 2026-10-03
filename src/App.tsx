@@ -11,6 +11,7 @@ import { Education } from './components/sections/Education';
 import { Skills } from './components/sections/Skills';
 import { Impact } from './components/sections/Impact';
 import { Projects } from './components/sections/Projects';
+import { FrontendCraft } from './components/sections/FrontendCraft';
 import { AgentConsole } from './components/sections/AgentConsole';
 import { Research } from './components/sections/Research';
 import { Awards } from './components/sections/Awards';
@@ -31,6 +32,7 @@ export default function App() {
         <Skills />
         <Impact />
         <Projects />
+        <FrontendCraft />
         <AgentConsole />
         <Research />
         <Awards />

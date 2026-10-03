@@ -80,7 +80,7 @@ export function Projects() {
               exit={{ opacity: 0, scale: 0.97 }}
               transition={{ duration: 0.25 }}
             >
-              <Card interactive className="flex h-full flex-col">
+              <Card interactive tilt className="flex h-full flex-col">
                 <div className="flex items-start justify-between gap-3">
                   <h3 className="font-medium text-fg">{project.title}</h3>
                   <span className="font-mono text-[11px] uppercase tracking-wider text-faint">

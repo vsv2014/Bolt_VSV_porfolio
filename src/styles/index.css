@@ -41,6 +41,7 @@
   --animate-pulse-ring: pulse-ring 2.4s ease-out infinite;
   --animate-scan: scan 6s linear infinite;
   --animate-gradient: gradient-pan 8s ease infinite;
+  --animate-dash: dash 0.9s linear infinite;
 }
 
 @keyframes marquee {
@@ -83,6 +84,10 @@
 @keyframes gradient-pan {
   0%, 100% { background-position: 0% 50%; }
   50%      { background-position: 100% 50%; }
+}
+
+@keyframes dash {
+  to { stroke-dashoffset: -20; }
 }
 
 /* ------------------------------------------------------------------ *
