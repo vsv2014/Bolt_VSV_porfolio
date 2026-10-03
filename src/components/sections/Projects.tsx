@@ -27,27 +27,35 @@ export function Projects() {
   return (
     <Section
       id="projects"
-      index="05"
+      index="06"
       eyebrow="Selected work"
       title="Things I've built"
       description="Products, research tooling and academic projects across the stack."
     >
-      <div className="mb-8 flex flex-wrap gap-2">
-        {filters.map((f) => (
-          <button
-            key={f.value}
-            type="button"
-            onClick={() => setActive(f.value)}
-            className={cn(
-              'rounded-md border px-3 py-1.5 font-mono text-xs transition-colors',
-              active === f.value
-                ? 'border-line-strong bg-surface text-fg'
-                : 'border-line text-muted hover:text-fg',
-            )}
-          >
-            {f.label}
-          </button>
-        ))}
+      <div className="mb-8 flex flex-wrap items-center gap-2">
+        {filters.map((f) => {
+          const count = f.value === 'all' ? projects.length : projects.filter((p) => p.category === f.value).length;
+          return (
+            <button
+              key={f.value}
+              type="button"
+              onClick={() => setActive(f.value)}
+              aria-pressed={active === f.value}
+              className={cn(
+                'inline-flex items-center gap-2 rounded-md border px-3 py-1.5 font-mono text-xs transition-colors',
+                active === f.value
+                  ? 'border-line-strong bg-surface text-fg'
+                  : 'border-line text-muted hover:text-fg',
+              )}
+            >
+              {f.label}
+              <span className={cn('text-[10px]', active === f.value ? 'text-brand-cyan' : 'text-faint')}>{count}</span>
+            </button>
+          );
+        })}
+        <span className="ml-auto font-mono text-[11px] text-faint">
+          {visible.length} of {projects.length} shown
+        </span>
       </div>
 
       <motion.div layout className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">

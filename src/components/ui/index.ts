@@ -5,3 +5,5 @@ export { Card } from './Card';
 export { Tag } from './Tag';
 export { ButtonLink } from './Button';
 export { IconLink } from './IconLink';
+export { CountUp } from './CountUp';
+export { Typewriter } from './Typewriter';

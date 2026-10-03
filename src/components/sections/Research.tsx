@@ -6,7 +6,7 @@ export function Research() {
   return (
     <Section
       id="research"
-      index="06"
+      index="08"
       eyebrow="Research"
       title="Published work"
       description="Data-driven environmental science from IIIT Hyderabad's Lab for Spatial Informatics."

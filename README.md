@@ -3,6 +3,32 @@
 A modern, minimal portfolio built with React 19, Vite, Tailwind CSS v4 and Motion.
 Live at **[vsv2014.github.io/Bolt_VSV_porfolio](https://vsv2014.github.io/Bolt_VSV_porfolio/)**.
 
+Positioned as an AI-software-engineering portfolio: amber-free, no stock-photo fluff —
+every claim is backed by a shipped number, and two of the sections are working software.
+
+## What makes it different
+
+| Feature | Where | What it does |
+| ------- | ----- | ------------ |
+| **Ask my agent** | `#agent` | A scripted RAG console (embed → retrieve → tool → compose) that answers questions about the résumé, streams the answer and cites its sources. 100% client-side: no API key, no network request. |
+| **⌘K command palette** | everywhere | Search sections, projects and links, or type a question and send it straight to the agent console. `/` also opens it, `↑↓` + `↵` navigate. |
+| **Impact ledger** | `#impact` | Six production metrics with scroll-triggered counters and before/after bars, plus the evidence behind the “top 1%” positioning badge. |
+| **Live skill filter** | `#skills` | Type `kafka`, `mcp` or `angular` and the 80+ technologies filter instantly, with the matching slice highlighted. |
+| **Hero that performs** | `#home` | Aurora gradient backdrop, pointer-tracking spotlight, rotating typewriter headline, orbiting capability chips, counting stats and a keyword marquee. |
+| **Reading progress + active nav** | global | Gradient scroll-progress bar, animated active-section pill, and a pre-paint theme switch that respects the OS setting. |
+
+Everything degrades gracefully: `prefers-reduced-motion` disables the animation
+layer (aurora, marquee, typewriter, counters) without hiding any content.
+
+### Keyboard shortcuts
+
+| Keys | Action |
+| ---- | ------ |
+| `⌘K` / `Ctrl+K` | Toggle the command palette |
+| `/` | Open the command palette |
+| `↑` `↓` `↵` | Navigate / run the highlighted command |
+| `Esc` | Close the palette |
+
 ## Tech stack
 
 | Area        | Choice                                  |
@@ -44,14 +70,17 @@ update the site — no component changes required.
 src/
 ├── main.tsx                # Entry point
 ├── App.tsx                 # Page composition
-├── styles/index.css        # Tailwind v4 + design tokens (@theme)
-├── lib/utils.ts            # cn() class helper
+├── styles/index.css        # Tailwind v4 + design tokens (@theme) + utilities
+├── lib/
+│   ├── utils.ts            # cn() class helper
+│   ├── theme.ts             # Theme store
+│   └── agent.ts            # Lexical retriever + trace builder + cross-component events
 ├── types/index.ts          # Shared types
-├── data/                   # All content (profile, experience, projects, …)
+├── data/                   # All content (profile, experience, projects, agent KB, …)
 └── components/
-    ├── ui/                 # Design-system primitives (Section, Card, Tag, …)
-    ├── layout/             # Navbar, Footer, FloatingSocials
-    └── sections/           # Page sections (Hero, About, Experience, …)
+    ├── ui/                 # Primitives (Section, Card, Tag, CountUp, Typewriter, …)
+    ├── layout/             # Navbar, Footer, FloatingSocials, ScrollProgress, CommandPalette
+    └── sections/           # Page sections (Hero, About, …, Impact, AgentConsole, …)
 ```
 
 ### Design tokens
@@ -65,6 +94,33 @@ motion are defined once and consumed as Tailwind utilities (`text-fg`,
 Project cards hide their links until you provide them. Add `githubUrl` and/or
 `demoUrl` to any entry in `src/data/projects.ts` and the buttons appear
 automatically.
+
+### Editing the agent console
+
+The console is intentionally data-driven. To teach it something new, append a
+document to `src/data/agent.ts`:
+
+```ts
+{
+  id: 'my-new-topic',
+  source: 'data/projects.ts#my-new-topic', // shown on the citation chip
+  keywords: ['my topic', 'my-topic', 'related phrase'], // longer phrases score higher
+  answer: 'The grounded answer the console streams back.',
+  tool: { name: 'get_fact', args: 'x="y"', detail: 'what the trace row reports' },
+}
+```
+
+`src/lib/agent.ts` scores the query against every document's keywords and picks
+the best match (or refuses politely when nothing clears the similarity floor),
+so there is no model, key or backend to configure. Chip prompts live in the same
+file as `suggestedPrompts`.
+
+### Tuning the positioning badge
+
+`profile.rank` / `profile.rankDetail` in `src/data/site.ts` feed both the hero
+badge and the `#impact` evidence panel. The supporting bullets live in
+`src/data/impact.ts` (`rankEvidence`) — keep them verifiable and they do the
+selling for you.
 
 ## Deployment
 

@@ -12,8 +12,30 @@ export const profile = {
   shortName: 'Santhosh Veerannapet',
   initials: 'SV',
   role: 'SDE 2 · Full-Stack · Conversational AI & Agent Platforms',
+  /** Positioning badge shown in the hero. Edit freely — it is a claim, not a fact feed. */
+  rank: 'Top 1%',
+  rankDetail: 'AI Software Engineer · India',
   tagline:
     'I ship production LLM systems and multi-tenant agentic-workflow platforms — like Artemis and ProcessAI — to 1,000+ enterprise tenants at Kore.ai.',
+  /** Cycled after "I build …" in the hero. Keep each one short. */
+  heroPhrases: [
+    'agentic workflow platforms for 1,000+ tenants',
+    'production LLM systems — RAG, tool-use, MCP',
+    'durable backends on Restate, Kafka & K8s',
+    'AI-native UIs that stay fast at scale',
+  ],
+  /** Scan-friendly capability keywords for the hero marquee. */
+  keywords: [
+    'LLM Systems',
+    'Agentic Workflows',
+    'RAG & MCP',
+    'Multi-tenant SaaS',
+    'Next.js / Angular',
+    'Node · Restate · Kafka',
+    'Kubernetes',
+    'Distributed Systems',
+    'Voice & Conversational AI',
+  ],
   location: 'Hyderabad, India',
   availability: 'Open to senior full-stack & AI-platform roles',
   email: EMAIL,
@@ -27,8 +49,11 @@ export const profile = {
 export const navLinks: NavLink[] = [
   { id: 'about', label: 'About' },
   { id: 'experience', label: 'Experience' },
+  { id: 'education', label: 'Education' },
   { id: 'skills', label: 'Skills' },
+  { id: 'impact', label: 'Impact' },
   { id: 'projects', label: 'Work' },
+  { id: 'agent', label: 'Ask AI' },
   { id: 'research', label: 'Research' },
   { id: 'awards', label: 'Awards' },
   { id: 'contact', label: 'Contact' },
@@ -42,10 +67,10 @@ export const socials: SocialLink[] = [
 ];
 
 export const stats: Stat[] = [
-  { value: '~4', label: 'Years at Kore.ai' },
-  { value: '1,000+', label: 'Enterprise tenants' },
-  { value: '10K+', label: 'Concurrent agents' },
-  { value: '60%', label: 'WebSDK bundle cut' },
+  { value: '~4', countTo: 4, prefix: '~', label: 'Years at Kore.ai', note: 'Jul 2022 → now' },
+  { value: '1,000+', countTo: 1000, suffix: '+', label: 'Enterprise tenants', note: 'multi-tenant platform' },
+  { value: '10K+', countTo: 10000, suffix: '+', label: 'Concurrent agents', note: 'contact centre' },
+  { value: '60%', countTo: 60, suffix: '%', label: 'WebSDK bundle cut', note: '2.3 MB → 920 KB' },
 ];
 
 export const highlights: Highlight[] = [
@@ -71,18 +96,18 @@ export const aboutParagraphs: string[] = [
   'I work end to end: LLM tool-use, RAG pipelines and MCP integrations on the AI side; Next.js, Angular, Module Federation and Monaco on the frontend; Node/Express, Restate, Kafka and Kubernetes on the backend. Strong CS fundamentals from IIIT Hyderabad, plus a research background applying ML to environmental science.',
 ];
 
-export interface ContactChannel {
-  label: string;
-  value: string;
-  href: string;
-  icon: SocialLink['icon'];
-}
-
-export const contactChannels: ContactChannel[] = [
+export const contactChannels = [
   { label: 'Email', value: EMAIL, href: `mailto:${EMAIL}`, icon: Mail },
   { label: 'LinkedIn', value: 'in/santhosh-vishal', href: LINKEDIN_URL, icon: LinkedinIcon },
   { label: 'GitHub', value: 'github.com/vsv2014', href: GITHUB_URL, icon: GithubIcon },
   { label: 'Phone / WhatsApp', value: '+91 770-277-1465', href: 'tel:+917702771465', icon: Phone },
   { label: 'Instagram', value: '@santhoshvishal', href: 'https://www.instagram.com/santhoshvishal', icon: InstagramIcon },
   { label: 'Twitter / X', value: '@santhoshvishal3', href: 'https://twitter.com/santhoshvishal3', icon: XIcon },
-];
+] satisfies ContactChannel[];
+
+export interface ContactChannel {
+  label: string;
+  value: string;
+  href: string;
+  icon: SocialLink['icon'];
+}

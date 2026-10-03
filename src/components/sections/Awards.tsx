@@ -3,7 +3,7 @@ import { awards } from '@/data/awards';
 
 export function Awards() {
   return (
-    <Section id="awards" index="07" eyebrow="Recognition" title="Awards & honours">
+    <Section id="awards" index="09" eyebrow="Recognition" title="Awards & honours">
       <div className="grid gap-4 sm:grid-cols-2">
         {awards.map((award, i) => (
           <Reveal key={award.title} delay={(i % 2) * 0.06}>

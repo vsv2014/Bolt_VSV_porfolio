@@ -19,6 +19,8 @@
   --color-brand-purple: #a855f7;
   --color-brand-pink: #ff0080;
   --color-brand-cyan: #22d3ee;
+  --color-brand-lime: #a3e635;
+  --color-brand-amber: #fbbf24;
 
   /* Decorative grid dot colour (flips per theme) */
   --grid-color: rgba(255, 255, 255, 0.05);
@@ -30,11 +32,57 @@
 
   /* Motion */
   --animate-marquee: marquee 40s linear infinite;
+  --animate-aurora: aurora 18s ease-in-out infinite alternate;
+  --animate-float: float 7s ease-in-out infinite;
+  --animate-float-slow: float 11s ease-in-out infinite;
+  --animate-spin-slow: spin 14s linear infinite;
+  --animate-shimmer: shimmer 3.5s linear infinite;
+  --animate-blink: blink 1.05s step-end infinite;
+  --animate-pulse-ring: pulse-ring 2.4s ease-out infinite;
+  --animate-scan: scan 6s linear infinite;
+  --animate-gradient: gradient-pan 8s ease infinite;
 }
 
 @keyframes marquee {
   from { transform: translateX(0); }
   to { transform: translateX(-50%); }
+}
+
+@keyframes aurora {
+  0%   { transform: translate3d(0, 0, 0) scale(1); opacity: 0.55; }
+  50%  { transform: translate3d(4%, -3%, 0) scale(1.12); opacity: 0.8; }
+  100% { transform: translate3d(-3%, 4%, 0) scale(1.05); opacity: 0.6; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-10px); }
+}
+
+@keyframes shimmer {
+  0%   { background-position: -220% 0; }
+  100% { background-position: 220% 0; }
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0; }
+}
+
+@keyframes pulse-ring {
+  0%   { transform: scale(0.85); opacity: 0.7; }
+  70%  { transform: scale(2.1); opacity: 0; }
+  100% { transform: scale(2.1); opacity: 0; }
+}
+
+@keyframes scan {
+  0%   { transform: translateY(-100%); }
+  100% { transform: translateY(400%); }
+}
+
+@keyframes gradient-pan {
+  0%, 100% { background-position: 0% 50%; }
+  50%      { background-position: 100% 50%; }
 }
 
 /* ------------------------------------------------------------------ *
@@ -74,6 +122,23 @@
     border-radius: 4px;
   }
 
+  /* Slim, theme-aware scrollbars (chat console, palette) */
+  .scrollbar-thin {
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-line-strong) transparent;
+  }
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    background: var(--color-line-strong);
+    border-radius: 9999px;
+  }
+  .scrollbar-thin::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
     *, *::before, *::after {
@@ -99,10 +164,60 @@
   color: transparent;
 }
 
+/* Animated version — the gradient slowly pans across the text. */
+@utility text-gradient-animated {
+  background-image: linear-gradient(
+    100deg,
+    var(--color-brand-purple),
+    var(--color-brand-pink),
+    var(--color-brand-cyan),
+    var(--color-brand-purple)
+  );
+  background-size: 300% 100%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  animation: var(--animate-gradient);
+}
+
 /* Faint dotted grid backdrop for the page */
 @utility bg-grid {
   background-image: radial-gradient(circle at 1px 1px, var(--grid-color) 1px, transparent 0);
   background-size: 32px 32px;
+}
+
+/* Fades the grid out towards the edges instead of hard-stopping it. */
+@utility bg-grid-fade {
+  mask-image: radial-gradient(ellipse 80% 60% at 50% 35%, #000 30%, transparent 100%);
+  -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 35%, #000 30%, transparent 100%);
+}
+
+/* Frosted panel used by the console, palette and floating nav. */
+@utility glass {
+  background: color-mix(in oklab, var(--color-bg) 72%, transparent);
+  backdrop-filter: blur(18px) saturate(140%);
+  -webkit-backdrop-filter: blur(18px) saturate(140%);
+}
+
+/* Hairline gradient border (works in both themes). */
+@utility ring-gradient {
+  background-image: linear-gradient(
+    135deg,
+    color-mix(in oklab, var(--color-brand-purple) 70%, transparent),
+    color-mix(in oklab, var(--color-brand-cyan) 60%, transparent)
+  );
+}
+
+/* Shimmering sweep used on the "top 1%" badge. */
+@utility shimmer-sweep {
+  background-image: linear-gradient(
+    110deg,
+    transparent 20%,
+    color-mix(in oklab, #ffffff 22%, transparent) 45%,
+    transparent 70%
+  );
+  background-size: 220% 100%;
+  animation: var(--animate-shimmer);
 }
 
 /* ------------------------------------------------------------------ *
@@ -121,5 +236,7 @@ html.light {
   --color-brand-purple: #7c3aed;
   --color-brand-pink: #db2777;
   --color-brand-cyan: #0891b2;
+  --color-brand-lime: #4d7c0f;
+  --color-brand-amber: #b45309;
   --grid-color: rgba(9, 9, 11, 0.05);
 }
