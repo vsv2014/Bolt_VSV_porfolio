@@ -11,17 +11,16 @@ export const profile = {
   name: 'Veerannapet Santhosh Vishal',
   shortName: 'Santhosh Veerannapet',
   initials: 'SV',
-  role: 'SDE 2 · Full-Stack · Conversational AI & Agent Platforms',
-  /** Positioning badge shown in the hero. Edit freely — it is a claim, not a fact feed. */
-  rank: 'Top 1%',
-  rankDetail: 'AI Software Engineer · India',
+  role: 'SDE 2 · Full-Stack · Conversational AI, Agent Platforms & Workflow Engines',
+  /** Factual recognition line shown as a chip in the hero (source: résumé achievements). */
+  recognition: 'Kore.ai Global Spotlight · Jan 2026',
   tagline:
-    'I ship production LLM systems and multi-tenant agentic-workflow platforms — like Artemis and ProcessAI — to 1,000+ enterprise tenants at Kore.ai.',
+    'I ship AI-native distributed systems at Kore.ai — workflow engines, agent platforms and conversational-AI products — to 1,000+ enterprise tenants.',
   /** Cycled after "I build …" in the hero. Keep each one short. */
   heroPhrases: [
-    'agentic workflow platforms for 1,000+ tenants',
+    'workflow engines for 1,000+ tenants',
     'production LLM systems — RAG, tool-use, MCP',
-    'durable backends on Restate, Kafka & K8s',
+    'voice and chat agents at 10K+ concurrency',
     'AI-native UIs that stay fast at scale',
   ],
   /** Scan-friendly capability keywords for the hero marquee. */
@@ -29,12 +28,12 @@ export const profile = {
     'LLM Systems',
     'Agentic Workflows',
     'RAG & MCP',
+    'Voice & Conversational AI',
     'Multi-tenant SaaS',
     'Next.js / Angular',
     'Node · Restate · Kafka',
     'Kubernetes',
     'Distributed Systems',
-    'Voice & Conversational AI',
   ],
   location: 'Hyderabad, India',
   availability: 'Open to senior full-stack & AI-platform roles',
@@ -69,7 +68,7 @@ export const socials: SocialLink[] = [
 export const stats: Stat[] = [
   { value: '~4', countTo: 4, prefix: '~', label: 'Years at Kore.ai', note: 'Jul 2022 → now' },
   { value: '1,000+', countTo: 1000, suffix: '+', label: 'Enterprise tenants', note: 'multi-tenant platform' },
-  { value: '10K+', countTo: 10000, suffix: '+', label: 'Concurrent agents', note: 'contact centre' },
+  { value: '10K+', countTo: 10000, suffix: '+', label: 'Concurrent agents', note: 'voice, chat & dialer' },
   { value: '60%', countTo: 60, suffix: '%', label: 'WebSDK bundle cut', note: '2.3 MB → 920 KB' },
 ];
 
@@ -77,12 +76,12 @@ export const highlights: Highlight[] = [
   {
     icon: Layers,
     title: 'Full-Stack & Distributed Systems',
-    description: 'React, Next.js & Angular on the front; Node, Restate, Kafka & Kubernetes behind it.',
+    description: 'React, Next.js & Angular on the front; Node, Express, Restate, Kafka & Kubernetes behind it.',
   },
   {
     icon: Bot,
     title: 'Conversational AI & Agents',
-    description: 'LLM tool-use, RAG and MCP integrations; ASR/TTS voice & chat agents on Kore.ai XO.',
+    description: 'LLM tool-use, RAG and MCP integrations; ASR/TTS voice agents with intent, entity and dialogue handling.',
   },
   {
     icon: Workflow,
@@ -92,8 +91,8 @@ export const highlights: Highlight[] = [
 ];
 
 export const aboutParagraphs: string[] = [
-  'I’m a full-stack software engineer (SDE 2) on Kore.ai’s AI-for-Process team. Over nearly four years I’ve built AI-native distributed systems — conversational-AI agents, agent platforms, durable workflow engines, document intelligence and microfrontends shipped to 1,000+ enterprise tenants.',
-  'I work end to end: LLM tool-use, RAG pipelines and MCP integrations on the AI side; Next.js, Angular, Module Federation and Monaco on the frontend; Node/Express, Restate, Kafka and Kubernetes on the backend. Strong CS fundamentals from IIIT Hyderabad, plus a research background applying ML to environmental science.',
+  'I’m a full-stack software engineer (SDE 2, Grade A2) on Kore.ai’s AI-for-Process team in Hyderabad. Over nearly four years I’ve built AI-native distributed systems — workflow engines and agent platforms, conversational-AI agents, document intelligence and microfrontends — shipped to 1,000+ enterprise tenants. I was promoted to SDE 2 among the fastest in my cohort and recognised with the company-wide Global Spotlight in January 2026.',
+  'I work end to end: LLM tool-use, RAG pipelines and MCP integrations on the AI side; Next.js, Angular, Module Federation and Monaco on the frontend; Node/Express, Restate and Kafka on the backend. Strong CS fundamentals from IIIT Hyderabad, plus a research background applying ML to environmental science.',
 ];
 
 export const contactChannels = [

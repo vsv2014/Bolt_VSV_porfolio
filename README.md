@@ -3,8 +3,8 @@
 A modern, minimal portfolio built with React 19, Vite, Tailwind CSS v4 and Motion.
 Live at **[vsv2014.github.io/Bolt_VSV_porfolio](https://vsv2014.github.io/Bolt_VSV_porfolio/)**.
 
-Positioned as an AI-software-engineering portfolio: amber-free, no stock-photo fluff —
-every claim is backed by a shipped number, and two of the sections are working software.
+Content mirrors the current résumé (Kore.ai SDE 2, Grade A2); two of the sections are
+working software, and every number on the page traces back to a shipped feature.
 
 ## What makes it different
 
@@ -12,8 +12,8 @@ every claim is backed by a shipped number, and two of the sections are working s
 | ------- | ----- | ------------ |
 | **Ask my agent** | `#agent` | A scripted RAG console (embed → retrieve → tool → compose) that answers questions about the résumé, streams the answer and cites its sources. 100% client-side: no API key, no network request. |
 | **⌘K command palette** | everywhere | Search sections, projects and links, or type a question and send it straight to the agent console. `/` also opens it, `↑↓` + `↵` navigate. |
-| **Impact ledger** | `#impact` | Six production metrics with scroll-triggered counters and before/after bars, plus the evidence behind the “top 1%” positioning badge. |
-| **Live skill filter** | `#skills` | Type `kafka`, `mcp` or `angular` and the 80+ technologies filter instantly, with the matching slice highlighted. |
+| **Impact ledger** | `#impact` | Six production metrics with scroll-triggered counters and before/after bars, alongside the recognition they earned (Global Spotlight, Shining Star, promotion). |
+| **Live skill filter** | `#skills` | Type `kafka`, `mcp` or `angular` and the 100+ technologies filter instantly, with the matching slice highlighted. |
 | **Hero that performs** | `#home` | Aurora gradient backdrop, pointer-tracking spotlight, rotating typewriter headline, orbiting capability chips, counting stats and a keyword marquee. |
 | **Reading progress + active nav** | global | Gradient scroll-progress bar, animated active-section pill, and a pre-paint theme switch that respects the OS setting. |
 
@@ -114,13 +114,6 @@ document to `src/data/agent.ts`:
 the best match (or refuses politely when nothing clears the similarity floor),
 so there is no model, key or backend to configure. Chip prompts live in the same
 file as `suggestedPrompts`.
-
-### Tuning the positioning badge
-
-`profile.rank` / `profile.rankDetail` in `src/data/site.ts` feed both the hero
-badge and the `#impact` evidence panel. The supporting bullets live in
-`src/data/impact.ts` (`rankEvidence`) — keep them verifiable and they do the
-selling for you.
 
 ## Deployment
 

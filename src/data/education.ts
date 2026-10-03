@@ -2,15 +2,15 @@ import type { Education } from '@/types';
 
 export const education: Education[] = [
   {
-    degree: 'Dual Degree — B.Tech (Civil) & MS (Building Science)',
+    degree: 'Dual Degree — B.Tech (Civil) & MS by Research (Building Science)',
     institution: 'IIIT Hyderabad',
     period: '2016 — 2021',
     location: 'Hyderabad, India',
-    score: 'CGPA 7.3 / 10',
+    score: 'One of India’s premier CS research institutes',
     highlights: [
-      'Completed the full CS curriculum: DSA, OS, OOP, DBMS, Computer Networks, ML, AI and Software Engineering.',
-      'MS by Research in Building Science at the Lab for Spatial Informatics.',
-      'Built ML models for environmental monitoring and water-quality analysis.',
+      'Completed the full CS curriculum: DSA (Java), OS, OOP, DBMS & SQL, Computer Networks, ML, AI and Software Engineering.',
+      'MS by Research in Building Science at the Lab for Spatial Informatics (2018–2021).',
+      'Built ML pipelines for water-temperature modelling, sewage-plant capacity optimisation and automated watershed delineation.',
     ],
   },
   {

@@ -7,11 +7,26 @@ const fallbackDoc: AgentDoc = {
   source: 'index#no-match',
   keywords: [],
   answer:
-    'That one is outside my index — I only answer from Santhosh’s résumé, project and publication data. Try asking about his AI systems, Artemis, the impact numbers, his awards, or how to reach him.',
+    'That one is outside my index — I only answer from Santhosh’s résumé, project and publication data. Try asking about the ABL platform, his AI systems, the impact numbers, his recognition, or how to reach him.',
   tool: { name: 'refuse_out_of_scope', args: 'reason="no_match"', detail: 'no document crossed the similarity floor' },
 };
 
 const SIMILARITY_FLOOR = 0.62;
+
+/** Conversational filler that carries no topical signal — stripped before scoring. */
+const FILLERS =
+  /^(hey|hi|hello|ok|okay|so|please|can you|could you|would you|tell me about|tell me|what can you tell me about|what do you know about|what is|what's|whats|who is|who's|show me|give me|explain|describe|i want to know about|about|the)\s+/;
+
+function stripFillers(input: string): string {
+  let out = input.trim();
+  let previous = '';
+  while (out !== previous && out.length > 0) {
+    previous = out;
+    out = out.replace(FILLERS, '').trim();
+  }
+  // Never strip a query down to nothing useful.
+  return out.length >= 3 ? out : input.trim();
+}
 
 function tokenize(input: string): string[] {
   return input
@@ -24,8 +39,9 @@ function keywordScore(query: string, tokens: string[], keywords: string[]): numb
   let score = 0;
   for (const keyword of keywords) {
     if (query.includes(keyword)) {
-      // Longer phrases are stronger evidence than single tokens.
-      score += 1 + keyword.split(/\s+/).length * 0.5;
+      // Longer phrases, and longer words, are stronger evidence than generic ones.
+      const specificity = 1 + Math.min(keyword.length, 16) / 16;
+      score += (1 + keyword.split(/\s+/).length * 0.5) * specificity;
       continue;
     }
     const hit = tokens.some((token) => token.length > 3 && (keyword.startsWith(token) || token.startsWith(keyword)));
@@ -48,8 +64,9 @@ export interface Retrieval {
  * without shipping an API key or a network call.
  */
 export function retrieve(query: string): Retrieval {
-  const normalised = ` ${query.toLowerCase().trim()} `;
-  const tokens = tokenize(query);
+  const trimmed = query.toLowerCase().trim();
+  const normalised = ` ${stripFillers(trimmed)} `;
+  const tokens = tokenize(normalised);
 
   const ranked = agentDocs
     .map((doc) => ({ doc, score: keywordScore(normalised, tokens, doc.keywords) }))

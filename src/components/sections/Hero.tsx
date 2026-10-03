@@ -1,6 +1,6 @@
 import type { MouseEvent } from 'react';
 import { motion, useMotionTemplate, useMotionValue, useReducedMotion, useSpring } from 'motion/react';
-import { ArrowDown, ArrowUpRight, BadgeCheck, Command, FileText, Sparkles } from 'lucide-react';
+import { ArrowDown, ArrowUpRight, Award, Command, FileText, Sparkles } from 'lucide-react';
 import { ButtonLink, Container, CountUp, IconLink, Typewriter } from '@/components/ui';
 import { openPalette } from '@/lib/agent';
 import { profile, socials, stats } from '@/data/site';
@@ -75,11 +75,9 @@ export function Hero() {
                 {profile.availability}
               </span>
 
-              {/* The positioning badge */}
-              <span className="relative inline-flex items-center gap-2 overflow-hidden rounded-full border border-brand-purple/40 bg-brand-purple/10 px-3 py-1 font-mono text-[11px] font-medium text-fg">
-                <BadgeCheck className="h-3.5 w-3.5 text-brand-cyan" />
-                {profile.rank} · {profile.rankDetail}
-                <span className="shimmer-sweep pointer-events-none absolute inset-0" aria-hidden />
+              <span className="inline-flex items-center gap-2 rounded-full border border-line bg-surface px-3 py-1 font-mono text-[11px] text-muted">
+                <Award className="h-3.5 w-3.5 text-brand-cyan" />
+                {profile.recognition}
               </span>
             </motion.div>
 

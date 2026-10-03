@@ -332,7 +332,7 @@ export function CommandPalette() {
 
               {flat.length === 0 && (
                 <p className="px-3 py-8 text-center text-sm text-faint">
-                  No matches. Try “impact”, “artemis”, “awards” or “contact”.
+                  No matches. Try “impact”, “ABL”, “awards” or “contact”.
                 </p>
               )}
             </div>

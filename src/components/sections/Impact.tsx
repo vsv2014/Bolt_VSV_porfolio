@@ -1,8 +1,9 @@
 import { motion } from 'motion/react';
-import { BadgeCheck, Quote } from 'lucide-react';
+import { BadgeCheck } from 'lucide-react';
 import { Card, CountUp, Reveal, Section } from '@/components/ui';
-import { impactMetrics, rankEvidence } from '@/data/impact';
-import { profile } from '@/data/site';
+import { impactMetrics } from '@/data/impact';
+import { awards } from '@/data/awards';
+import { experiences } from '@/data/experience';
 
 /** Animated before → after bar pair used inside the metric cards. */
 function ProgressBar({ from, to, fromLabel, toLabel }: { from: number; to: number; fromLabel: string; toLabel: string }) {
@@ -32,17 +33,21 @@ function ProgressBar({ from, to, fromLabel, toLabel }: { from: number; to: numbe
 }
 
 export function Impact() {
+  const recognitions = awards.filter((award) =>
+    ['Global Spotlight', 'Shining Star Award', 'Rapid Promotion to SDE 2', 'Outstanding Performance Award'].includes(award.title),
+  );
+
   return (
     <Section
       id="impact"
       index="05"
-      eyebrow="Impact ledger"
+      eyebrow="Impact"
       title={
         <>
           Numbers, <span className="text-gradient">not adjectives</span>
         </>
       }
-      description="Six production figures behind the work — every one traceable to a shipped feature, an award or a résumé bullet."
+      description="Six production figures behind the work — each one traceable to a shipped feature, an award or a résumé bullet."
     >
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {impactMetrics.map((metric, index) => (
@@ -67,7 +72,7 @@ export function Impact() {
         ))}
       </div>
 
-      {/* The ranking claim, with receipts */}
+      {/* Shipped scope + official recognition, straight from the résumé */}
       <Reveal delay={0.1}>
         <div className="relative mt-6 overflow-hidden rounded-2xl border border-line-strong">
           <div
@@ -78,35 +83,42 @@ export function Impact() {
           <div className="relative grid gap-8 p-6 sm:p-8 lg:grid-cols-[0.9fr_1.1fr]">
             <div>
               <p className="inline-flex items-center gap-2 rounded-full border border-line px-3 py-1 font-mono text-[10px] uppercase tracking-[0.18em] text-brand-cyan">
-                <BadgeCheck className="h-3.5 w-3.5" /> {profile.rank} · {profile.rankDetail}
+                <BadgeCheck className="h-3.5 w-3.5" /> Verified on the résumé
               </p>
               <h3 className="mt-5 font-display text-2xl font-semibold leading-tight tracking-tight text-fg sm:text-3xl">
-                A percentile claim only survives if the receipts do.
+                Shipped scope, and the recognition that came with it.
               </h3>
               <p className="mt-4 text-sm leading-relaxed text-muted">
-                Ranked credentials, a company-wide spotlight and research that shipped — the pattern is the same every
-                time: pick the hard problem, own it end to end, measure the outcome.
+                Platform ownership across Studio, Workflow Engine, Runtime and Connectors — coordinated across 4 teams,
+                with HLDs, LLDs, data-flow audits and code reviews. Everything above is reproducible from the résumé,
+                LinkedIn or the published papers.
               </p>
-              <p className="mt-6 flex items-start gap-2 font-mono text-[11px] leading-relaxed text-faint">
-                <Quote className="mt-0.5 h-3.5 w-3.5 shrink-0" />
-                Positioning statement — verify any line below against the résumé, LinkedIn or the publications.
-              </p>
+              <ul className="mt-6 space-y-2 font-mono text-[11px] text-faint">
+                <li>· 50+ third-party connectors with MCP-based integrations</li>
+                <li>· 15+ node-type AI workflows on the ABL canvas</li>
+                <li>· 25+ reusable components standardised across 3 product suites</li>
+              </ul>
             </div>
 
             <ul className="grid gap-3">
-              {rankEvidence.map((item, index) => (
-                <Reveal key={item.label} delay={0.05 + index * 0.05}>
+              {recognitions.map((award, index) => (
+                <Reveal key={award.title} delay={0.05 + index * 0.05}>
                   <li className="flex gap-4 rounded-xl border border-line bg-surface p-4">
                     <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-line text-brand-purple">
-                      <item.icon className="h-[18px] w-[18px]" strokeWidth={1.75} />
+                      <award.icon className="h-[18px] w-[18px]" strokeWidth={1.75} />
                     </span>
                     <div>
-                      <p className="text-sm font-medium text-fg">{item.label}</p>
-                      <p className="mt-1 text-xs leading-relaxed text-muted">{item.detail}</p>
+                      <p className="text-sm font-medium text-fg">{award.title}</p>
+                      <p className="mt-0.5 font-mono text-[10px] text-faint">{award.period}</p>
+                      <p className="mt-1 text-xs leading-relaxed text-muted">{award.description}</p>
                     </div>
                   </li>
                 </Reveal>
               ))}
+              <li className="flex items-center justify-between rounded-xl border border-line bg-surface p-4">
+                <span className="font-mono text-[11px] text-faint">Current role</span>
+                <span className="text-sm text-fg">{experiences[0].role} · {experiences[0].company}</span>
+              </li>
             </ul>
           </div>
         </div>

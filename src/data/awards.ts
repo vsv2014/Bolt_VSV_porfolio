@@ -5,25 +5,24 @@ export const awards: Award[] = [
   {
     title: 'Global Spotlight',
     period: 'Jan 2026 · Kore.ai',
-    description: 'Company-wide recognition for shaping the Browser Automation UI — making complex automation accessible to technical and non-technical users.',
+    description: 'Company-wide recognition for shaping the Browser Automation UI — translating complex automation workflows into an interface both technical and non-technical users can drive.',
     icon: Sparkles,
   },
   {
     title: 'Shining Star Award',
     period: 'Q3 2024 · Kore.ai',
-    description: '60% WebSDK performance optimization and 350+ production fixes shipped to enterprise tenants.',
+    description: '60% WebSDK performance optimisation (2.3 MB → 920 KB) plus 350+ production fixes shipped to 1,000+ enterprise tenants.',
     icon: Star,
   },
   {
     title: 'Rapid Promotion to SDE 2',
-    period: 'Kore.ai',
+    period: 'Kore.ai · Associate → SDE 2 (Grade A2)',
     description: 'Associate Software Engineer → SDE 2 — among the fastest in cohort for platform delivery and ownership.',
     icon: TrendingUp,
   },
   {
     title: 'JEE Main 2016 — AIR 5460',
-    period: 'Top 0.5% of ~1.2M',
-    description: 'Secured direct admission to IIIT Hyderabad’s flagship dual-degree programme.',
+    period: 'AIR 5460 · top 0.5% of ~1.2M',    description: 'Secured direct admission to IIIT Hyderabad’s flagship dual degree (B.Tech Civil + MS by Research).',
     icon: Trophy,
   },
   {
@@ -34,7 +33,7 @@ export const awards: Award[] = [
   },
   {
     title: 'Research Recognition',
-    period: '2020–2021 · IIIT Hyderabad',
+    period: '2018–2021 · IIIT Hyderabad',
     description: 'For contributions to environmental monitoring and building-science research.',
     icon: Star,
   },

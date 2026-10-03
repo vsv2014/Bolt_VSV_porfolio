@@ -54,7 +54,7 @@ export function Navbar() {
           </span>
           <span className="hidden items-center gap-1.5 rounded-full border border-line px-2.5 py-0.5 font-mono text-[10px] text-muted xl:inline-flex">
             <span className="h-1.5 w-1.5 rounded-full bg-brand-lime" />
-            {profile.rank} · India
+            {profile.location}
           </span>
         </a>
 
