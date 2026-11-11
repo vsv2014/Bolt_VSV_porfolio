@@ -35,14 +35,20 @@ try {
         for (const violation of serious) {
           console.error(`  ${violation.impact}: ${violation.id} — ${violation.nodes.slice(0, 3).map(n => n.target.join(',')).join(' | ')}`);
         }
-        assert.equal(serious.length, 0, `Serious accessibility issues at ${width}x${height} (${mode})`);
+        return serious.map(v => ({
+          rule: v.id,
+          impact: v.impact,
+          selectors: v.nodes.slice(0, 10).map(n => n.target.join(',')).join(' | '),
+        }));
       };
 
-      await scan('dark');
+      const dark = await scan('dark');
       const toggle = page.getByRole('button', { name: /switch to light theme/i });
       await toggle.first().click();
       await page.waitForTimeout(150);
-      await scan('light');
+      const light = await scan('light');
+      assert.deepEqual({ dark, light }, { dark: [], light: [] },
+        `Serious accessibility issues at ${width}x${height}`);
     } catch (error) {
       failures.push(`${width}x${height}: ${error.stack ?? error}`);
     } finally {
