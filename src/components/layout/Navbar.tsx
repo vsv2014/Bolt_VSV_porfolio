@@ -182,7 +182,7 @@ export function Navbar() {
             <Search className="h-3.5 w-3.5" />
             <kbd className="hidden text-[10px] xl:inline">⌘K</kbd>
           </button>
-          <a href={github.href} target="_blank" rel="noopener noreferrer" aria-label="GitHub" className="p-2 text-muted transition-colors hover:text-fg">
+          <a href={github.href} target="_blank" rel="noopener noreferrer" aria-label="GitHub" className="inline-flex h-11 w-11 items-center justify-center text-muted transition-colors hover:text-fg">
             <GithubIcon className="h-[18px] w-[18px]" />
           </a>
           <a href={linkedin.href} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="p-2 text-muted transition-colors hover:text-fg">
@@ -206,7 +206,7 @@ export function Navbar() {
             onClick={() => setOpen((v) => !v)}
             aria-label={open ? 'Close menu' : 'Open menu'}
             aria-expanded={open}
-            className="p-2 text-fg"
+            className="inline-flex h-11 w-11 items-center justify-center text-fg"
           >
             {open ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
           </button>
