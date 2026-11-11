@@ -27,7 +27,9 @@ export function Skills() {
     return skillGroups
       .map((group) => ({
         ...group,
-        skills: group.skills.filter((skill) => skill.toLowerCase().includes(normalised)),
+        skills: group.name.toLowerCase().includes(normalised)
+          ? group.skills
+          : group.skills.filter((skill) => skill.toLowerCase().includes(normalised)),
       }))
       .filter((group) => group.skills.length > 0 || group.name.toLowerCase().includes(normalised));
   }, [normalised]);
