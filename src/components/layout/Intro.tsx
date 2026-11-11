@@ -17,7 +17,7 @@ export function Intro() {
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
-    if (reduceMotion) return;
+    if (reduceMotion || window.matchMedia('(max-width: 767px), (pointer: coarse)').matches) return;
     try {
       if (sessionStorage.getItem(KEY) === '1') return;
     } catch {
