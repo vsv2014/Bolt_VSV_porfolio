@@ -40,6 +40,8 @@ const KINDS: Record<Kind, { accent: string; badge: string; step: number }> = {
 
 const DEFAULT_W = 640;
 
+const columnsFor = (width: number) => Math.max(1, Math.floor((Math.max(width, NODE_W + PAD * 2) - PAD * 2 + GAP_X) / (NODE_W + GAP_X)));
+
 const seed = (): { nodes: GraphNode[]; edges: GraphEdge[] } => {
   const nodes: GraphNode[] = [
     { id: 'n1', label: 'Parse intent', kind: 'llm', x: 0, y: 0 },
@@ -57,8 +59,9 @@ const seed = (): { nodes: GraphNode[]; edges: GraphEdge[] } => {
   return { nodes, edges };
 };
 
-/** Longest-path layering, tolerant of cycles — a tiny stand-in for ELK. */
-function autoLayout(nodes: GraphNode[], edges: GraphEdge[], height: number): GraphNode[] {
+/** Longest-path order, wrapped into readable rows instead of clipping nodes offscreen. */
+function autoLayout(nodes: GraphNode[], edges: GraphEdge[], width: number): GraphNode[] {
+  if (nodes.length === 0) return nodes;
   const depth = new Map<string, number>(nodes.map((node) => [node.id, 0]));
   for (let pass = 0; pass < nodes.length; pass += 1) {
     let changed = false;
@@ -72,37 +75,26 @@ function autoLayout(nodes: GraphNode[], edges: GraphEdge[], height: number): Gra
     }
     if (!changed) break;
   }
-
-  const layers = new Map<number, GraphNode[]>();
-  for (const node of nodes) {
-    const layer = depth.get(node.id) ?? 0;
-    layers.set(layer, [...(layers.get(layer) ?? []), node]);
-  }
-
-  const maxLayer = Math.max(...layers.keys());
-  const tallest = Math.max(...[...layers.values()].map((items) => items.length));
-  const stride = Math.min(GAP_Y + NODE_H, Math.max(GAP_Y + NODE_H, (height - PAD * 2 - NODE_H) / Math.max(tallest - 1, 1)));
-
-  return nodes.map((node) => {
-    const layer = depth.get(node.id) ?? 0;
-    const column = layers.get(layer) ?? [];
-    const row = column.findIndex((item) => item.id === node.id);
-    const offset = (Math.max(...[...layers.values()].map((items) => items.length)) - column.length) / 2;
-    return {
-      ...node,
-      x: PAD + Math.min(layer, maxLayer) * (NODE_W + GAP_X),
-      y: Math.max(PAD, PAD + (row + offset) * stride),
-    };
-  });
+  const columns = columnsFor(width);
+  const ordered = nodes.map((node, index) => ({ node, index }))
+    .sort((a, b) => (depth.get(a.node.id) ?? 0) - (depth.get(b.node.id) ?? 0) || a.index - b.index);
+  const positions = new Map(ordered.map(({ node }, index) => [
+    node.id,
+    { x: PAD + (index % columns) * (NODE_W + GAP_X), y: PAD + Math.floor(index / columns) * (NODE_H + GAP_Y) },
+  ]));
+  return nodes.map((node) => ({ ...node, ...positions.get(node.id)! }));
 }
 
 export function FlowCanvas() {
   const containerRef = useRef<HTMLDivElement>(null);
-  const [height, setHeight] = useState(372);
+  const [width, setWidth] = useState(DEFAULT_W);
   const [graph, setGraph] = useState(() => {
     const base = seed();
-    return { nodes: autoLayout(base.nodes, base.edges, 372), edges: base.edges };
+    return { nodes: autoLayout(base.nodes, base.edges, DEFAULT_W), edges: base.edges };
   });
+  const height = Math.max(380, PAD * 2 + Math.ceil(graph.nodes.length / columnsFor(width)) * (NODE_H + GAP_Y));
+  const hasManualPosition = useRef(false);
+  const previousWidth = useRef(DEFAULT_W);
   const [connecting, setConnecting] = useState<string | null>(null);
   /** Keyboard-only connection: pick an output, then activate an input. */
   const [keyboardSource, setKeyboardSource] = useState<string | null>(null);
@@ -120,6 +112,7 @@ export function FlowCanvas() {
   const addEdge = useCallback((from: string, to: string) => {
     if (!from || !to || from === to) return;
     setGraph((current) => {
+      if (!current.nodes.some((node) => node.id === from) || !current.nodes.some((node) => node.id === to)) return current;
       if (current.edges.some((edge) => edge.from === from && edge.to === to)) return current;
       counter.current += 1;
       return { ...current, edges: [...current.edges, { id: `e${counter.current}`, from, to }] };
@@ -144,6 +137,7 @@ export function FlowCanvas() {
     const maxY = Math.max(PAD, height - NODE_H - PAD);
     const nextX = Math.max(PAD, Math.min(maxX, x - drag.offsetX));
     const nextY = Math.max(PAD, Math.min(maxY, y - drag.offsetY));
+    hasManualPosition.current = true;
     setGraph((current) => ({
       ...current,
       nodes: current.nodes.map((node) => (node.id === drag.id ? { ...node, x: nextX, y: nextY } : node)),
@@ -216,25 +210,40 @@ export function FlowCanvas() {
     counter.current += 1;
     const id = `n${counter.current}`;
     setGraph((current) => {
-      const width = containerRef.current?.clientWidth || DEFAULT_W;
-      const node: GraphNode = {
-        id,
-        kind,
-        label: `New ${KINDS[kind].badge.toLowerCase()} step`,
-        x: PAD + ((current.nodes.length * 37) % Math.max(120, width - NODE_W - PAD * 2)),
-        y: PAD + ((current.nodes.length * 29) % Math.max(80, height - NODE_H - PAD * 2)),
-      };
+      const columns = columnsFor(containerRef.current?.clientWidth || width);
+      let slot = 0;
+      let x = PAD;
+      let y = PAD;
+      // Find an unoccupied slot; never cover an existing node when adding a step.
+      while (slot <= current.nodes.length + 100) {
+        x = PAD + (slot % columns) * (NODE_W + GAP_X);
+        y = PAD + Math.floor(slot / columns) * (NODE_H + GAP_Y);
+        if (current.nodes.every((node) => Math.abs(node.x - x) >= NODE_W || Math.abs(node.y - y) >= NODE_H)) break;
+        slot += 1;
+      }
+      const node: GraphNode = { id, kind, label: `New ${KINDS[kind].badge.toLowerCase()} step`, x, y };
       return { ...current, nodes: [...current.nodes, node] };
     });
+    hasManualPosition.current = true;
   };
 
   useEffect(() => {
     const element = containerRef.current;
     if (!element) return;
     const measure = () => {
-      const next = Math.max(300, Math.min(420, element.clientWidth * 0.46));
-      setHeight(next);
-      setGraph((current) => ({ ...current, nodes: autoLayout(current.nodes, current.edges, next) }));
+      const nextWidth = Math.max(NODE_W + PAD * 2, element.clientWidth || DEFAULT_W);
+      if (nextWidth === previousWidth.current) return;
+      previousWidth.current = nextWidth;
+      setWidth(nextWidth);
+      setGraph((current) => ({
+        ...current,
+        nodes: hasManualPosition.current
+          ? current.nodes.map((node) => ({
+              ...node,
+              x: Math.min(node.x, Math.max(PAD, nextWidth - NODE_W - PAD)),
+            }))
+          : autoLayout(current.nodes, current.edges, nextWidth),
+      }));
     };
     measure();
     const observer = new ResizeObserver(measure);
@@ -243,7 +252,7 @@ export function FlowCanvas() {
   }, []);
 
   return (
-    <div className="flex h-full flex-col">
+    <div className="flex min-w-0 flex-col">
       <div className="flex flex-wrap items-center gap-2 border-b border-line px-4 py-3">
         <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-faint">flow-designer.tsx</p>
         <span className="ml-auto flex flex-wrap items-center gap-1.5">
@@ -260,7 +269,7 @@ export function FlowCanvas() {
           ))}
           <button
             type="button"
-            onClick={() => setGraph((current) => ({ ...current, nodes: autoLayout(current.nodes, current.edges, height) }))}
+            onClick={() => { hasManualPosition.current = false; setGraph((current) => ({ ...current, nodes: autoLayout(current.nodes, current.edges, width) })); }}
             className="inline-flex items-center gap-1 rounded-md border border-line px-2 py-1 font-mono text-[10px] text-muted transition-colors hover:border-line-strong hover:text-fg"
           >
             <LayoutGrid className="h-3 w-3" /> auto-layout
@@ -269,7 +278,10 @@ export function FlowCanvas() {
             type="button"
             onClick={() => {
               const base = seed();
-              setGraph({ nodes: autoLayout(base.nodes, base.edges, height), edges: base.edges });
+              hasManualPosition.current = false;
+              setKeyboardSource(null);
+              setConnecting(null);
+              setGraph({ nodes: autoLayout(base.nodes, base.edges, width), edges: base.edges });
             }}
             className="inline-flex items-center gap-1 rounded-md border border-line px-2 py-1 font-mono text-[10px] text-muted transition-colors hover:border-line-strong hover:text-fg"
           >
@@ -280,13 +292,13 @@ export function FlowCanvas() {
 
       <div
         ref={containerRef}
-        className="bg-grid relative flex-1 touch-none overflow-hidden"
+        className="bg-grid relative w-full shrink-0 touch-none overflow-hidden"
         style={{ height }}
         onPointerMove={onNodePointerMove}
         onPointerUp={endDrag}
-        onPointerLeave={endDrag}
+        onPointerCancel={endDrag}
       >
-        <svg className="pointer-events-none absolute inset-0 h-full w-full" aria-hidden>
+        <svg className="absolute inset-0 h-full w-full" aria-label="Graph connections">
           {graph.edges.map((edge) => {
             const from = nodeById.get(edge.from);
             const to = nodeById.get(edge.to);
@@ -303,14 +315,23 @@ export function FlowCanvas() {
                   strokeWidth={1.6}
                   strokeOpacity={0.55}
                   strokeDasharray="4 6"
-                  className="animate-dash"
+                  className="pointer-events-none animate-dash"
                 />
                 <path
                   d={d}
                   fill="none"
                   stroke="transparent"
                   strokeWidth={16}
+                  role="button"
+                  tabIndex={0}
+                  aria-label={`Remove connection from ${from.label} to ${to.label}`}
                   style={{ pointerEvents: 'stroke', cursor: 'pointer' }}
+                  onKeyDown={(event) => {
+                    if (event.key === 'Enter' || event.key === ' ') {
+                      event.preventDefault();
+                      setGraph((current) => ({ ...current, edges: current.edges.filter((item) => item.id !== edge.id) }));
+                    }
+                  }}
                   onClick={() => setGraph((current) => ({ ...current, edges: current.edges.filter((item) => item.id !== edge.id) }))}
                 />
               </g>
@@ -337,7 +358,7 @@ export function FlowCanvas() {
               onKeyDown={(event) => onNodeKeyDown(event, node)}
               onPointerDown={(event) => onNodePointerDown(event, node)}
               className={cn(
-                'group absolute flex select-none items-center gap-2 rounded-xl border bg-bg/95 px-3 shadow-lg shadow-black/20 transition-[left,top] duration-500 ease-out',
+                'group absolute flex select-none items-center gap-2 rounded-xl border bg-bg/95 px-3 shadow-lg shadow-black/20',
                 'cursor-grab active:cursor-grabbing',
                 isSource ? 'border-brand-purple' : 'border-line-strong',
                 'hover:border-brand-cyan/70 focus-visible:border-brand-cyan',
@@ -357,14 +378,16 @@ export function FlowCanvas() {
               <button
                 type="button"
                 aria-label={`Delete ${node.label}`}
+                onPointerDown={(event) => event.stopPropagation()}
                 onClick={(event) => {
                   event.stopPropagation();
+                  if (keyboardSource === node.id) setKeyboardSource(null);
                   setGraph((current) => ({
                     nodes: current.nodes.filter((item) => item.id !== node.id),
                     edges: current.edges.filter((edge) => edge.from !== node.id && edge.to !== node.id),
                   }));
                 }}
-                className="absolute -top-2 -right-2 hidden h-5 w-5 items-center justify-center rounded-full border border-line bg-bg text-[11px] leading-none text-faint transition-colors hover:text-fg group-hover:flex"
+                className="absolute -top-2 -right-2 flex h-6 w-6 items-center justify-center rounded-full border border-line bg-bg text-[13px] leading-none text-faint transition-colors hover:text-fg focus-visible:text-fg sm:opacity-0 sm:group-hover:opacity-100 sm:group-focus-within:opacity-100"
               >
                 ×
               </button>
@@ -373,6 +396,7 @@ export function FlowCanvas() {
                 type="button"
                 data-port="in"
                 data-nodeid={node.id}
+                onPointerDown={(event) => event.stopPropagation()}
                 aria-label={`Connect into ${node.label}`}
                 onPointerUp={(event) => {
                   event.stopPropagation();
@@ -385,7 +409,7 @@ export function FlowCanvas() {
                   if (keyboardSource) addEdge(keyboardSource, node.id);
                   setKeyboardSource(null);
                 }}
-                className="absolute top-1/2 -left-[7px] h-3.5 w-3.5 -translate-y-1/2 rounded-full border border-brand-cyan/70 bg-bg transition-transform hover:scale-125"
+                className="absolute top-1/2 -left-2.5 h-5 w-5 -translate-y-1/2 rounded-full border border-brand-cyan/70 bg-bg transition-transform hover:scale-110"
               />
 
               <button
@@ -397,7 +421,7 @@ export function FlowCanvas() {
                   setConnecting(node.id);
                 }}
                 onClick={() => setKeyboardSource((current) => (current === node.id ? null : node.id))}
-                className="absolute top-1/2 -right-[7px] h-3.5 w-3.5 -translate-y-1/2 rounded-full border border-brand-purple/80 bg-bg transition-transform hover:scale-125"
+                className="absolute top-1/2 -right-2.5 h-5 w-5 -translate-y-1/2 rounded-full border border-brand-purple/80 bg-bg transition-transform hover:scale-110"
               />
             </div>
           );
