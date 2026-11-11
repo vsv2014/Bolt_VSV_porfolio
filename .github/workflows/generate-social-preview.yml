@@ -33,5 +33,19 @@ jobs:
             echo "Preview image unchanged"
           else
             git commit -m "chore: refresh social-preview PNG from vector source [skip ci]"
-            git push origin "HEAD:${TARGET_BRANCH}"
+            # Pages publishes generated /docs files to main independently.
+            # Replay our image-only commit over the latest remote head to avoid
+            # failing when those Pages commits land during rendering.
+            for attempt in 1 2 3 4 5; do
+              git fetch origin "${TARGET_BRANCH}"
+              git rebase "origin/${TARGET_BRANCH}"
+              if git push origin "HEAD:${TARGET_BRANCH}"; then
+                echo "Social preview published"
+                exit 0
+              fi
+              echo "Remote advanced during push; retrying: ${attempt}/5"
+              sleep 3
+            done
+            echo "Could not publish social preview after five attempts"
+            exit 1
           fi
