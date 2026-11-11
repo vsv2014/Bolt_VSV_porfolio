@@ -10,8 +10,8 @@ const FloatingContact: FC = () => {
     },
     {
       icon: <Phone className="w-5 h-5" />,
-      href: 'tel:+917702771465',
-      label: 'Phone/WhatsApp'
+      href: 'mailto:santhoshvishalveerannapet@gmail.com?subject=Call%20request%20via%20portfolio',
+      label: 'Request phone / WhatsApp (approval required)'
     },
     {
       icon: <Instagram className="w-5 h-5" />,

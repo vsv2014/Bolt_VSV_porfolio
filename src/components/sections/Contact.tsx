@@ -46,6 +46,11 @@ export function Contact() {
             </button>
           </div>
 
+          <p className="mt-4 max-w-lg text-sm leading-relaxed text-muted">
+            For phone or WhatsApp contact, use the request option below. I review the message and share
+            contact details privately when appropriate — they are never automatically revealed on this site.
+          </p>
+
           <p className="mt-4 inline-flex items-center gap-2 font-mono text-[11px] text-faint">
             <Clock className="h-3.5 w-3.5" /> Typically replies within 24 hours · IST (UTC+5:30)
           </p>
