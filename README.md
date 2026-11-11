@@ -1,155 +1,112 @@
-# Santhosh Veerannapet — Portfolio
+<div align="center">
 
-A modern, minimal portfolio built with React 19, Vite, Tailwind CSS v4 and Motion.
-Live at **[vsv2014.github.io/Bolt_VSV_porfolio](https://vsv2014.github.io/Bolt_VSV_porfolio/)**.
+# Aurora — Interactive Developer Portfolio
 
-Positioned as a **frontend-heavy full-stack** portfolio: the résumé content (Kore.ai SDE 2,
-Grade A2, 4+ years, 5 product phases) is presented through interfaces that are themselves
-the proof — three of the sections are working software, hand-built with no UI kit.
+**A React + TypeScript portfolio where the interfaces are the engineering proof.**
 
-## What makes it different
+Hand-built workflow editor · 10,000-row virtualized table · live performance metrics · keyboard command palette · accessible motion
 
-| Feature | Where | What it does |
-| ------- | ----- | ------------ |
-| **Ask my agent** | `#agent` | A scripted RAG console (embed → retrieve → tool → compose) that answers questions about the résumé, streams the answer and cites its sources. 100% client-side: no API key, no network request. |
-| **Frontend craft** | `#craft` | Three live demos built for this page with no UI kit and no canvas library: a **node-graph flow designer** (pointer events, pointer capture, SVG bézier edges, longest-path auto-layout, arrow-key nudging, keyboard-only port linking), a **virtualised table** windowing 10,000 rows with rAF-batched scroll, and a **live PerformanceObserver panel** reading LCP, CLS, long tasks and FPS — plus the craft checklist (keyboard, reduced motion, one-token theming, JS budget). |
-| **⌘K command palette** | everywhere | Search sections, projects and links, or type a question and send it straight to the agent console. `/` also opens it, `↑↓` + `↵` navigate. |
-| **Impact ledger** | `#impact` | Six production metrics with scroll-triggered counters and before/after bars, alongside the recognition they earned (Global Spotlight, Shining Star, promotion). |
-| **Live skill filter** | `#skills` | Type `kafka`, `mcp` or `angular` and the 150+ technologies filter instantly, with the matching slice highlighted. |
-| **Hero that performs** | `#home` | Aurora gradient backdrop, pointer-tracking spotlight, rotating typewriter headline, orbiting capability chips, counting stats and a keyword marquee. |
-| **Reading progress + active nav** | global | Gradient scroll-progress bar, animated active-section pill, and a pre-paint theme switch that respects the OS setting. |
+[**Explore the live site**](https://vsv2014.github.io/Bolt_VSV_porfolio/) · [**See the source**](https://github.com/vsv2014/Bolt_VSV_porfolio) · [**Report an issue**](https://github.com/vsv2014/Bolt_VSV_porfolio/issues/new/choose)
 
-Everything degrades gracefully: `prefers-reduced-motion` disables the animation
-layer (aurora, marquee, typewriter, counters, card tilt) without hiding any content,
-and every interactive element is reachable by keyboard — including the flow canvas,
-where arrow keys nudge nodes and ports link with `Enter`.
+[![Portfolio quality](https://github.com/vsv2014/Bolt_VSV_porfolio/actions/workflows/quality.yml/badge.svg)](https://github.com/vsv2014/Bolt_VSV_porfolio/actions/workflows/quality.yml)
+[![License: MIT (code)](https://img.shields.io/badge/code_license-MIT-blue.svg)](LICENSE)
 
-### Keyboard shortcuts
+</div>
 
-| Keys | Action |
-| ---- | ------ |
-| `⌘K` / `Ctrl+K` | Toggle the command palette |
-| `/` | Open the command palette |
-| `↑` `↓` `↵` | Navigate / run the highlighted command |
-| `Esc` | Close the palette |
+## Why explore this project?
 
-## Design system — "Aurora"
+Most portfolio templates *describe* frontend skills. This portfolio makes several of them **interactive**: move nodes in the workflow editor, scroll ten thousand simulated tenant rows without rendering them all, inspect performance readings in your own browser, or navigate the whole experience from the keyboard.
 
-| Layer | Choice |
-| ----- | ------ |
-| Display type | **Bricolage Grotesque** (variable 400–800, tight tracking) |
-| Accent type | **Instrument Serif italic** — accent words inside every section title |
-| Body / mono | Inter · JetBrains Mono (tabular numerals for metrics) |
-| Palette (dark) | near-black indigo `#05060a` with **violet `#7c5cff`**, **rose `#ff4d9d`**, **electric cyan `#35e0ff`** and a signature **chartreuse `#c8f65d`** |
-| Palette (light) | warm paper `#f7f5f0` with ink type and contrast-tuned accents |
-| Background | **Hand-written WebGL aurora** — one fullscreen triangle, one fragment shader: domain-warped fBm (4 octaves) folded into the palette with a pointer-following ember. Rendered at 45 fps, below device resolution (hard cap 1100 px) and paused when the tab is hidden; a single static frame under reduced motion. CSS orbs take over when WebGL is unavailable, blocked or lost mid-session. |
-| Texture | SVG `feTurbulence` film grain (soft-light), fading dot grid, vignette |
-| Cursor | Difference-blended ring + dot that contracts over interactive elements and can print a label (`data-cursor-label`); `data-magnetic` targets lean toward the pointer. Additive only — the native cursor stays, and touch/reduced-motion users see none of it. |
-| Intro | One-time 1.15 s sequence (per session) that counts up behind a translucent panel — translucent on purpose so the hero remains the LCP element. Skipped for reduced motion or when storage is unavailable. |
-| Details | Scroll-velocity skew on marquees, scroll-linked timeline rail, terminal-style eyebrow decode, editorial outlined section numerals. |
-| Motion | Cinematic blur-and-rise reveals, word-split clip reveals on every section title, pointer spotlight, scroll parallax in the hero |
+It's also a real professional portfolio for [Santhosh Vishal](https://www.linkedin.com/in/santhosh-vishal/), a software engineer working across enterprise interfaces, AI platforms, and full-stack systems.
 
-**Theme flip:** where the browser supports the View Transitions API the new theme
-blooms as a circle from the toggle button (`--vt-x` / `--vt-y` set from the button's
-rect); otherwise it swaps instantly. Reduced motion opts out of the animation.
+| Try it | What you can inspect in the source |
+| --- | --- |
+| [**Visual flow designer**](https://vsv2014.github.io/Bolt_VSV_porfolio/#craft) | Pointer capture, SVG edges, responsive auto-layout, node manipulation, keyboard controls |
+| [**Virtualized 10,000-row table**](https://vsv2014.github.io/Bolt_VSV_porfolio/#craft) | Fixed-height windowing, overscan, `requestAnimationFrame` scroll batching |
+| [**Performance panel**](https://vsv2014.github.io/Bolt_VSV_porfolio/#craft) | `PerformanceObserver` (where supported), layout shifts, long tasks, frame-rate sampling |
+| [**Command palette**](https://vsv2014.github.io/Bolt_VSV_porfolio/) | ⌘K / Ctrl+K, fuzzy-ish keyword matching, links and section navigation |
+| [**Portfolio AI-console simulation**](https://vsv2014.github.io/Bolt_VSV_porfolio/#agent) | Deterministic **lexical retrieval** against curated facts and an *illustrative* embed → retrieve → tool → compose trace. **No real embedding model, vector database, LLM API or hosted service.** |
+| [**Light and dark themes**](https://vsv2014.github.io/Bolt_VSV_porfolio/) | CSS-first Tailwind design tokens, pre-paint theme selection, reduced-motion fallbacks |
 
-**Bundle:** below-the-fold sections (`Projects`, `FrontendCraft`, `AgentConsole`,
-`Research`, `Awards`) are `React.lazy` — entry is ~472 kB (151 kB gzip) with
-five small async chunks, so the hero paints from a lean bundle.
+> **Note on screenshots:** The live demo is the source of truth. The editor and synthetic tenant data are portfolio demonstrations, not screenshots of employer or customer products.
 
-## Tech stack
+## Technical decisions
 
-| Area        | Choice                                  |
-| ----------- | --------------------------------------- |
-| Framework   | React 19 + TypeScript 6                 |
-| Build       | Vite 8                                  |
-| Styling     | Tailwind CSS v4 (CSS-first `@theme`)    |
-| Animation   | Motion (`motion/react`)                 |
-| Icons       | lucide-react + custom brand SVGs        |
-| Linting     | ESLint 9 (flat config) + typescript-eslint |
-| Deploy      | GitHub Pages (GitHub Actions)           |
+- **React 19 + TypeScript + Vite 8** with lazy-loaded below-the-fold sections.
+- **Tailwind CSS v4** and an original dark/light design system named *Aurora*.
+- **Motion** for transitions, with `prefers-reduced-motion` respected.
+- **Native browser APIs** for flow editing, virtual scroll, performance readings, and the WebGL background. No node editor or component UI kit is bundled.
+- **Accessibility-first interactions:** visible keyboard focus, skip link, command palette, keyboard graph editing, descriptive labels, and a static-motion fallback.
+- **Tests:** Node regression tests plus Chromium desktop/mobile smoke checks in GitHub Actions.
 
-## Quick start
+## Run it locally
+
+Requirements: **Node.js 22+** and npm.
 
 ```bash
 git clone https://github.com/vsv2014/Bolt_VSV_porfolio.git
 cd Bolt_VSV_porfolio
-npm install
-npm run dev          # http://localhost:3001
+npm ci
+npm run dev
 ```
 
-## Scripts
+Open **http://localhost:3001**. To validate a change:
 
-| Script              | Description                          |
-| ------------------- | ------------------------------------ |
-| `npm run dev`       | Start the dev server                 |
-| `npm run build`     | Type-check (`tsc -b`) + production build |
-| `npm run preview`   | Preview the production build         |
-| `npm run lint`      | Lint with ESLint                     |
-| `npm run typecheck` | Type-check without emitting          |
-| `npm run deploy`    | Build + publish to GitHub Pages      |
-
-## Architecture
-
-Content is fully separated from presentation: edit the files in `src/data` to
-update the site — no component changes required.
-
+```bash
+npm run lint
+npm test
+npm run build
+npm run preview
 ```
+
+The production build uses a relative asset base, so the site can work under a GitHub Pages project subdirectory.
+
+## Customize responsibly
+
+This repository is primarily **my own portfolio and engineering showcase**, not yet a sanitized one-click portfolio template. Before republishing it as yours, replace personal data and project claims:
+
+| What to change | File |
+| --- | --- |
+| Name, contact details, biography, availability, social links | `src/data/site.ts` |
+| Experience, technical projects, awards, skills and research | `src/data/*.ts` |
+| Curated facts and answers used by the simulated agent | `src/data/agent.ts` |
+| Portrait and any other personal visuals | `src/assets/`, `public/` |
+| Page title, canonical URL, Open Graph tags, structured data | `index.html` |
+| GitHub Pages URL / project path | `package.json`, `vite.config.ts`, `public/` |
+
+**Never copy personal contact data, photographs, employer/client material, résumé claims, or research descriptions into another person's portfolio.** The code is reusable under the license below; the personal content is not included in that permission.
+
+## Explore the architecture
+
+```text
 src/
-├── main.tsx                # Entry point
-├── App.tsx                 # Page composition
-├── styles/index.css        # Tailwind v4 + design tokens (@theme) + utilities
-├── lib/
-│   ├── utils.ts            # cn() class helper
-│   ├── theme.ts             # Theme store
-│   └── agent.ts            # Lexical retriever + trace builder + cross-component events
-├── types/index.ts          # Shared types
-├── data/                   # All content (profile, experience, projects, agent KB, …)
-└── components/
-    ├── demo/               # Hand-built demos (FlowCanvas, VirtualList, PerfPanel)
-    ├── ui/                 # Primitives (Section, Card, Tag, CountUp, Typewriter, …)
-    ├── layout/             # Navbar, Footer, FloatingSocials, ScrollProgress, CommandPalette
-    └── sections/           # Page sections (Hero, About, …, Impact, AgentConsole, …)
+├── App.tsx              # section composition and lazy loading
+├── styles/index.css     # Aurora tokens, themes, typography and motion
+├── components/
+│   ├── demo/            # FlowCanvas, VirtualList, PerfPanel
+│   ├── layout/          # navbar, command palette, footer, cursor
+│   ├── sections/        # experience, work, craft, impact, agent...
+│   └── ui/              # reusable presentation primitives
+├── data/                # portfolio content and simulated agent knowledge
+├── lib/                 # layout, virtual window, theme, search and helpers
+└── types/               # shared TypeScript contracts
+tests/                   # unit and Chromium smoke tests
 ```
 
-### Design tokens
+**Keyboard:** `⌘K` / `Ctrl+K` opens the palette, `/` opens it from a non-input field, arrows select options, Enter runs one, Escape closes.
 
-The theme lives in `src/styles/index.css` under `@theme` — colors, fonts and
-motion are defined once and consumed as Tailwind utilities (`text-fg`,
-`border-line`, `text-brand-cyan`, `font-mono`, …).
+## Contribute and discuss
 
-### Adding project links
+Bug reports, accessibility findings, reproducible performance measurements, documentation improvements, and focused frontend engineering PRs are welcome. Start with [CONTRIBUTING.md](CONTRIBUTING.md), or [open an issue](https://github.com/vsv2014/Bolt_VSV_porfolio/issues/new/choose). Please don't submit screenshots or code copied from proprietary employer/client systems.
 
-Project cards hide their links until you provide them. Add `githubUrl` and/or
-`demoUrl` to any entry in `src/data/projects.ts` and the buttons appear
-automatically.
-
-### Editing the agent console
-
-The console is intentionally data-driven (19 documents covering Artemis, reliability,
-contact centre, research, solo builds, hiring). To teach it something new, append a document
-to `src/data/agent.ts`:
-
-```ts
-{
-  id: 'my-new-topic',
-  source: 'data/projects.ts#my-new-topic', // shown on the citation chip
-  keywords: ['my topic', 'my-topic', 'related phrase'], // longer phrases score higher
-  answer: 'The grounded answer the console streams back.',
-  tool: { name: 'get_fact', args: 'x="y"', detail: 'what the trace row reports' },
-}
-```
-
-`src/lib/agent.ts` scores the query against every document's keywords and picks
-the best match (or refuses politely when nothing clears the similarity floor),
-so there is no model, key or backend to configure. Chip prompts live in the same
-file as `suggestedPrompts`.
+If an implementation was useful to learn from, you can **star the repository** to find it again, or share the live interactive demos with another engineer. Genuine feedback and reproducible reports are more helpful than inflated star counts.
 
 ## Deployment
 
-Every push to `main` triggers `.github/workflows/deploy.yml`, which builds the
-site and publishes `dist/` to GitHub Pages.
+`.github/workflows/quality.yml` validates lint, unit tests, production build, and desktop/mobile browser interactions. `.github/workflows/publish-pages.yml` builds and publishes to the configured GitHub Pages source when changes are merged to `main`.
 
-## License
+## License and attribution
 
-MIT.
+**Source code:** [MIT License](LICENSE). **Personal content:** photographs, personal biography/contact information, professional résumé claims, research text, and third-party trademarks/assets are **not** licensed for copying by this repository's MIT code license. Replace them before adapting the code. Attribution is appreciated where appropriate.
+
+Built and maintained by [Santhosh Vishal](https://github.com/vsv2014).
