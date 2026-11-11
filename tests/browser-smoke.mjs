@@ -71,6 +71,35 @@ async function audit(width, height) {
       { timeout: 5000 });
     assert.ok((await viewport.locator('[role="listitem"]').count()) < 35);
 
+    // Open-source-inspired work presentation: accessible stories and a compact archive.
+    const stories = page.getByTestId('featured-stories');
+    await stories.waitFor({ state: 'visible' });
+    assert.equal(await stories.locator('article').count(), 3, 'expected three editorial stories');
+    const firstBreakdown = stories.locator('details').first();
+    assert.equal(await firstBreakdown.getAttribute('open'), null, 'case studies should start collapsed');
+    await firstBreakdown.locator('summary').click();
+    assert.ok(await firstBreakdown.getByText('The problem').isVisible(), 'breakdown did not expand');
+
+    const archiveToggle = page.getByTestId('project-archive-toggle');
+    const archive = page.getByTestId('project-archive-content');
+    assert.equal(await archive.isVisible(), false, 'full archive should start collapsed');
+    await archiveToggle.click();
+    assert.equal(await archive.isVisible(), true, 'full archive cannot be opened');
+    const allProjectCount = await archive.locator('[data-project-title]').count();
+    assert.ok(allProjectCount >= 20, `archive lost projects: ${allProjectCount}`);
+    await archive.getByRole('button', { name: /Solo builds/i }).click();
+    const soloCount = await archive.locator('[data-project-title]').count();
+    assert.ok(soloCount > 0 && soloCount < allProjectCount, 'category filtering failed');
+
+    // Return to the feature preview for the visual CI artifact.
+    await archiveToggle.click();
+    await firstBreakdown.locator('summary').click();
+    await stories.scrollIntoViewIfNeeded();
+    await page.screenshot({ path: `/tmp/portfolio-stories-${width}.png`, fullPage: false });
+    const overflow = await page.evaluate(() => ({ page: document.documentElement.scrollWidth, viewport: window.innerWidth }));
+    assert.ok(overflow.page <= overflow.viewport + 2,
+      `horizontal overflow at ${width}px: ${overflow.page} > ${overflow.viewport}`);
+
     // Privacy: phone/WhatsApp is request-only; the number must not be sent to clients.
     const phoneRequest = page.getByRole('link', { name: /Request phone \/ WhatsApp/i });
     await phoneRequest.waitFor({ state: 'attached' });

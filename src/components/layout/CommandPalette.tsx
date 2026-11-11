@@ -56,7 +56,12 @@ const baseCommands: Command[] = [
     hint: project.category,
     icon: FileText,
     keywords: `${project.stack.join(' ')} ${project.description}`,
-    action: () => goTo('projects'),
+    action: () => {
+      goTo('projects');
+      window.dispatchEvent(new CustomEvent('vsv:show-project', {
+        detail: { title: project.title, category: project.category },
+      }));
+    },
   })),
   ...socials.map<Command>((social) => ({
     id: `social-${social.label}`,
