@@ -94,25 +94,25 @@ function buildTrace(doc: AgentDoc, similarity: number): TraceStep[] {
       kind: 'embed',
       label: 'tokenize(query)',
       detail: 'local tokenization · no embeddings',
-      ms: 360,
+      ms: 100,
     },
     {
       kind: 'retrieve',
       label: 'rank_curated_facts(k=3)',
       detail: `keyword relevance · top match ${similarity.toFixed(3)}`,
-      ms: 520,
+      ms: 130,
     },
     {
       kind: 'tool',
       label: `preview_${doc.tool.name}(${doc.tool.args})`,
       detail: `illustrative local lookup · ${doc.tool.detail}`,
-      ms: 460,
+      ms: 130,
     },
     {
       kind: 'compose',
       label: 'display_curated_answer()',
       detail: `${words} words · simulated text reveal`,
-      ms: 300,
+      ms: 100,
     },
   ];
 }
