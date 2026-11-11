@@ -1,0 +1,24 @@
+name: Feature request
+description: Suggest a practical improvement to the interactive portfolio
+title: "[Feature]: "
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem to solve
+      description: What task or user experience is currently harder than it should be?
+    validations:
+      required: true
+  - type: textarea
+    id: proposed
+    attributes:
+      label: Proposed solution
+      description: Include expected interaction, accessibility and performance considerations.
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+      description: Why is this a better approach than the existing behavior?
