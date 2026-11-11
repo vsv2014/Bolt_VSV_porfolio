@@ -72,6 +72,8 @@ async function audit(width, height) {
     assert.ok((await viewport.locator('[role="listitem"]').count()) < 35);
 
     // Open-source-inspired work presentation: accessible stories and a compact archive.
+    // Projects may be deferred until the visitor approaches the section.
+    await page.evaluate(() => document.getElementById('projects')?.scrollIntoView({ block: 'start' }));
     const stories = page.getByTestId('featured-stories');
     await stories.waitFor({ state: 'visible' });
     assert.equal(await stories.locator('article').count(), 3, 'expected three editorial stories');
