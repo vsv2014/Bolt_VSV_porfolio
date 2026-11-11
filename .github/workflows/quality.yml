@@ -43,7 +43,7 @@ jobs:
           PLAYWRIGHT_BROWSER=webkit node tests/mobile-first-paint.mjs
       - name: Upload craft screenshots
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: portfolio-craft-screenshots
           path: |
