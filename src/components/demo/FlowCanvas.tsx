@@ -260,6 +260,7 @@ export function FlowCanvas() {
 
       <div
         ref={containerRef}
+        data-testid="flow-canvas"
         className="bg-grid relative w-full shrink-0 touch-none overflow-hidden"
         style={{ height }}
         onPointerMove={onNodePointerMove}
