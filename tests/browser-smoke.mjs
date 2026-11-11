@@ -110,10 +110,21 @@ async function audit(width, height) {
       const viewport = window.innerWidth;
       const outside = [...document.querySelectorAll('body *')]
         .map((el) => ({ el, rect: el.getBoundingClientRect() }))
-        .filter(({ rect }) => rect.width > 0 && (rect.right > viewport + 2 || rect.left < -2))
-        .slice(0, 18)
-        .map(({ el, rect }) => ({ tag: el.tagName, className: typeof el.className === 'string' ? el.className.slice(0, 125) : '', left: Math.round(rect.left), right: Math.round(rect.right) }));
-      return { page: document.documentElement.scrollWidth, viewport, outside };
+        .filter(({ rect }) => rect.width > 0 && rect.right > viewport + 2 && rect.right < viewport + 125)
+        .slice(0, 60)
+        .map(({ el, rect }) => ({
+          tag: el.tagName,
+          className: typeof el.className === 'string' ? el.className.slice(0, 90) : '',
+          text: el.textContent?.trim().slice(0, 45),
+          left: Math.round(rect.left),
+          right: Math.round(rect.right),
+          parents: Array.from({ length: 3 }, (_, i) => {
+            let p = el;
+            for (let step = 0; step <= i; step += 1) p = p?.parentElement;
+            return p ? `${p.tagName.toLowerCase()}[${typeof p.className === 'string' ? p.className.slice(0, 35) : ''}]/${getComputedStyle(p).overflowX}` : '';
+          }),
+        }));
+      return { page: document.documentElement.scrollWidth, bodyScroll: document.body.scrollWidth, viewport, outside };
     });
     assert.ok(overflow.page <= overflow.viewport + 2,
       `horizontal overflow at ${width}px: ${JSON.stringify(overflow)}`);
