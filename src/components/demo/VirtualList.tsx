@@ -76,7 +76,7 @@ export function VirtualList() {
         onScroll={onScroll}
         className="scrollbar-thin relative shrink-0 overflow-y-auto"
         style={{ height: VIEWPORT }}
-        role="region"
+        role="list"
         tabIndex={0}
         aria-label={`Scrollable virtualised list of ${TOTAL.toLocaleString()} tenants`}
       >
@@ -85,8 +85,10 @@ export function VirtualList() {
             {visible.map((row) => (
               <div
                 key={row.id}
-                role="row"
-                aria-rowindex={row.id + 1}
+                role="listitem"
+                aria-posinset={row.id}
+                aria-setsize={TOTAL}
+                aria-label={`${row.tenant}, ${row.agents} agents, p95 ${row.latency} milliseconds, ${row.state}`}
                 className="grid grid-cols-[1fr_auto_auto] items-center gap-x-4 border-b border-line/50 px-4 font-mono text-[11px] text-muted"
                 style={{ height: ROW_H }}
               >
