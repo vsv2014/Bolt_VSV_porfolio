@@ -22,6 +22,18 @@
       })();
     </script>
 
+    <style>
+      /* Useful fallback until React mounts; no empty app shell for non-JS visitors. */
+      .static-entry { min-height: 100vh; margin: 0 auto; max-width: 860px; padding: 80px 24px; background: #05060a; color: #edf0f8; font: 17px/1.65 system-ui, sans-serif; }
+      .static-entry .static-eyebrow { color: #c1f94d; font: 13px/1.5 monospace; letter-spacing: .13em; text-transform: uppercase; }
+      .static-entry h1 { font-size: clamp(2rem, 5vw, 3.5rem); line-height: 1.15; }
+      .static-entry h2 { margin-top: 2rem; font-size: 1.4rem; }
+      .static-entry p, .static-entry li { color: #c5cbd9; }
+      .static-entry a { color: #66dded; }
+      .static-entry a:focus-visible { outline: 2px solid #c8f65d; outline-offset: 3px; }
+      .static-entry ul { padding-left: 1.25rem; }
+      #root:has(.static-entry) { background: #05060a; }
+    </style>
     <!-- Primary Meta Tags -->
     <title>Santhosh Vishal | Software Engineer — Frontend, Full Stack & AI Platforms</title>
     <meta name="title" content="Santhosh Vishal | Software Engineer — Frontend, Full Stack & AI Platforms" />
@@ -90,10 +102,27 @@
         ]
       }
     </script>
-    <script type="module" crossorigin src="./assets/index-Bfqht1yh.js"></script>
-    <link rel="stylesheet" crossorigin href="./assets/index-BAaa_doA.css">
+    <script type="module" crossorigin src="./assets/index-BsSq5VB_.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-Di_5jHOQ.css">
   </head>
   <body>
-    <div id="root"></div>
+    <!-- Real first-response content for readers and crawlers without JavaScript.
+         React replaces this matching overview with the interactive portfolio. -->
+    <div id="root">
+      <main class="static-entry">
+        <p class="static-eyebrow">Santhosh Vishal / Engineering Portfolio</p>
+        <h1>Santhosh Vishal — Software Engineer</h1>
+        <p>I build frontend interfaces, full-stack applications and AI platforms using React, TypeScript, Node.js and modern web architecture. My work spans enterprise workflow experiences, interactive design tools, retrieval systems and practical reliability improvements.</p>
+        <p>This portfolio pairs engineering project case studies with working demonstrations, original source code and detailed implementation notes. Try a React flow editor with pointer and keyboard interactions, explore a virtualized table with 10,000 synthetic rows, or review a transparent client-side AI console that does not call a model API.</p>
+        <h2>Read the engineering notes</h2>
+        <ul>
+          <li><a href="/notes/react-flow-editor.html">A React node editor without a graph library</a> — SVG connectors, pointer capture, responsive layout, and keyboard accessibility.</li>
+          <li><a href="/notes/virtualized-10000-rows.html">Render 10,000 rows without rendering 10,000 elements</a> — windowing, overscan, ResizeObserver and animation-frame batching.</li>
+          <li><a href="/notes/honest-ai-console.html">A transparent AI-console simulation without API keys</a> — lexical retrieval, honest limitations and product UX.</li>
+        </ul>
+        <h2>Explore the work</h2>
+        <p>See the <a href="https://github.com/vsv2014/Bolt_VSV_porfolio">open-source implementation</a>, the <a href="/#projects">project case studies</a> or the <a href="/#contact">professional contact options</a>. Phone and WhatsApp details are shared privately only after review.</p>
+      </main>
+    </div>
   </body>
 </html>

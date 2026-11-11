@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="640" viewBox="0 0 1280 640" role="img" aria-labelledby="title desc">
+<title id="title">Santhosh Vishal — Engineering Portfolio</title>
+<desc id="desc">Frontend, full-stack, and AI platforms portfolio. A clean four-step engineering workflow flows from Input to Retrieve to Tool to Review.</desc>
+<defs>
+  <pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#192136" stroke-width=".6" opacity=".62"/></pattern>
+  <linearGradient id="background" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#030916"/><stop offset=".66" stop-color="#06111a"/><stop offset="1" stop-color="#081a17"/></linearGradient>
+  <linearGradient id="panel" x1="0" y1="0" x2=".8" y2="1"><stop stop-color="#101b2d"/><stop offset="1" stop-color="#0a101e"/></linearGradient>
+  <linearGradient id="link" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#38daf2"/><stop offset="1" stop-color="#bdfb41"/></linearGradient>
+  <linearGradient id="nodeBorder" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#31d7ff"/><stop offset="1" stop-color="#8175ff"/></linearGradient>
+  <radialGradient id="glowA"><stop stop-color="#b8fc37" stop-opacity=".15"/><stop offset="1" stop-color="#b8fc37" stop-opacity="0"/></radialGradient>
+  <radialGradient id="glowB"><stop stop-color="#00dfff" stop-opacity=".12"/><stop offset="1" stop-color="#00dfff" stop-opacity="0"/></radialGradient>
+  <filter id="glow" x="-70%" y="-150%" width="240%" height="400%"><feGaussianBlur stdDeviation="5"/></filter>
+  <marker id="rightArrow" viewBox="0 0 12 12" refX="11" refY="6" markerWidth="9" markerHeight="9" orient="auto"><path d="M1 1L11 6L1 11" fill="none" stroke="#b6f746" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/></marker>
+  <marker id="downArrow" viewBox="0 0 12 12" refX="11" refY="6" markerWidth="9" markerHeight="9" orient="auto"><path d="M1 1L11 6L1 11" fill="none" stroke="#b6f746" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/></marker>
+  <marker id="leftArrow" viewBox="0 0 12 12" refX="11" refY="6" markerWidth="9" markerHeight="9" orient="auto"><path d="M1 1L11 6L1 11" fill="none" stroke="#b6f746" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/></marker>
+</defs>
+<rect width="1280" height="640" fill="url(#background)"/>
+<rect width="1280" height="640" fill="url(#grid)"/>
+<ellipse cx="1100" cy="120" rx="430" ry="270" fill="url(#glowA)"/>
+<ellipse cx="120" cy="580" rx="360" ry="220" fill="url(#glowB)"/>
+<rect x="45" y="24" width="56" height="42" rx="11" fill="#111d2c" stroke="#306080" stroke-width="1.2"/>
+<text x="73" y="52" text-anchor="middle" font-family="Arial,sans-serif" font-size="26" font-weight="800" fill="#c5ff46">SV</text>
+<text x="119" y="51" font-family="monospace" font-size="17" fill="#eff4ff" letter-spacing=".5">SANTHOSH VISHAL</text>
+<text x="334" y="51" font-family="monospace" font-size="18" fill="#8796af">/</text>
+<text x="370" y="51" font-family="monospace" font-size="17" fill="#d7e1ee" letter-spacing=".3">ENGINEERING PORTFOLIO</text>
+<text x="1192" y="51" font-family="monospace" font-size="16" text-anchor="end" fill="#befb40">2026</text>
+<path d="M45 76H1234" stroke="#2c7296" stroke-width="1.4"/>
+<text x="52" y="192" font-family="Arial,Helvetica,sans-serif" font-size="80" font-weight="750" letter-spacing="-3.2" fill="#f6f8ff">Santhosh</text>
+<text x="52" y="292" font-family="Arial,Helvetica,sans-serif" font-size="95" font-weight="790" letter-spacing="-4.4" fill="#bdfb42">Vishal</text>
+<rect x="52" y="319" width="460" height="37" rx="18.5" fill="#071321" stroke="#32dcf4" stroke-width="1.7"/>
+<text x="282" y="344" text-anchor="middle" font-family="monospace" font-size="15" letter-spacing="1.2" fill="#55e6fa">BUILDING INTERACTIVE SYSTEMS</text>
+<text x="52" y="405" font-family="Arial,Helvetica,sans-serif" font-size="24" fill="#e0e8f7">Frontend  ·  Full-stack  ·  AI Platforms</text>
+<rect x="52" y="443" width="449" height="55" rx="27.5" fill="#091725" stroke="url(#nodeBorder)" stroke-width="1.8"/>
+<path d="M83 475c-12 8-25-6-14-17l9-9c11-11 24 2 17 12M101 464c8 9-5 22-15 14m-10-5 12-12" fill="none" stroke="#bbfc40" stroke-width="3" stroke-linecap="round"/>
+<text x="127" y="479" font-family="Arial,Helvetica,sans-serif" font-size="23" font-weight="700" fill="#f5f8fb">santhoshvishal.vercel.app</text>
+<rect x="640" y="99" width="600" height="424" rx="26" fill="url(#panel)" stroke="#426084" stroke-width="1.8"/>
+<rect x="641" y="100" width="598" height="56" rx="25" fill="#142033"/>
+<path d="M641 156H1238" stroke="#3c5577" stroke-width="1.4"/>
+<circle cx="669" cy="128" r="7" fill="#ff6b71"/><circle cx="693" cy="128" r="7" fill="#ffcc48"/><circle cx="717" cy="128" r="7" fill="#5cf271"/>
+<text x="748" y="134" font-family="monospace" font-size="17" fill="#bfcfe7">workflow-canvas.tsx</text>
+<rect x="1135" y="110" width="83" height="34" rx="17" fill="#082328" stroke="#286c76"/>
+<circle cx="1152" cy="127" r="5" fill="#bbfa41"/><text x="1166" y="132" font-family="monospace" font-size="13" fill="#c2ff47">LIVE</text>
+<!-- Node surfaces -->
+<rect x="673" y="207" width="206" height="107" rx="20" fill="#0c2232" stroke="#35e2f3" stroke-width="2.2"/>
+<rect x="971" y="207" width="227" height="107" rx="20" fill="#142238" stroke="#8974fe" stroke-width="2.2"/>
+<rect x="673" y="369" width="206" height="107" rx="20" fill="#0b2429" stroke="#36d6de" stroke-width="2.2"/>
+<rect x="971" y="369" width="227" height="107" rx="20" fill="#102435" stroke="#3bbdf0" stroke-width="2.2"/>
+<!-- Node icon and separators -->
+<g fill="none" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+  <ellipse cx="712" cy="245" rx="17" ry="8" stroke="#40e5f4"/><path d="M695 245v31c2 12 32 12 34 0v-31 M695 260c3 10 31 10 34 0" stroke="#40e5f4"/>
+  <path d="M1005 241l16-9 16 9-16 10-16-10zm0 13 16 9 16-9m-32 12 16 9 16-9" stroke="#947cfa"/>
+  <path d="M696 401h32v32h-32zM701 417l8 7 14-15" stroke="#bdfa49"/>
+  <path d="M1007 398l6 5 8-2 3 7 9 3-2 9 5 7-7 5-1 9-9 1-6 7-7-5-8 2-3-8-8-3 2-9-5-6 8-5z" stroke="#ffd04f"/>
+</g>
+<path d="M751 228v65 M1055 228v65 M751 390v65 M1055 390v65" stroke="#5a708b" stroke-width="1.7"/>
+<!-- Labels -->
+<g font-family="monospace">
+<text x="767" y="248" font-size="23" font-weight="700" fill="#f5f8ff">INPUT</text>
+<text x="767" y="274" font-size="16" fill="#9fb0c9">context</text>
+<text x="1069" y="248" font-size="22" font-weight="700" fill="#f5f8ff">RETRIEVE</text>
+<text x="1069" y="274" font-size="15" fill="#9fb0c9">knowledge</text>
+<text x="767" y="414" font-size="23" font-weight="700" fill="#f5f8ff">REVIEW</text>
+<text x="767" y="440" font-size="16" fill="#9fb0c9">approval</text>
+<text x="1069" y="414" font-size="23" font-weight="700" fill="#f5f8ff">TOOL</text>
+<text x="1069" y="440" font-size="16" fill="#9fb0c9">typed call</text>
+</g>
+<!-- Connectors: INPUT right → RETRIEVE left; RETRIEVE bottom → TOOL top; TOOL left → REVIEW right -->
+<path d="M885 260H964" stroke="#bbfb45" stroke-width="5" fill="none" stroke-linecap="round" marker-end="url(#rightArrow)"/>
+<path d="M1084 320V364" stroke="#bbfb45" stroke-width="5" fill="none" stroke-linecap="round" marker-end="url(#downArrow)"/>
+<path d="M965 422H884" stroke="#bbfb45" stroke-width="5" fill="none" stroke-linecap="round" marker-end="url(#leftArrow)"/>
+<g fill="#42e0f3" stroke="#052530" stroke-width="2">
+<circle cx="879" cy="260" r="8"/><circle cx="971" cy="260" r="8"/><circle cx="1084" cy="314" r="8"/><circle cx="1084" cy="369" r="8"/><circle cx="971" cy="422" r="8"/><circle cx="879" cy="422" r="8"/>
+</g>
+<path d="M52 558H1229" stroke="#426587" stroke-width="1.2"/>
+<g font-family="monospace" font-size="15" fill="#f1f6ff" letter-spacing=".25">
+<text x="52" y="597" fill="#4ae5fa">01</text><text x="88" y="597">FLOW EDITORS</text>
+<text x="421" y="597" fill="#4ae5fa">02</text><text x="457" y="597">10K-ROW VIRTUALIZATION</text>
+<text x="857" y="597" fill="#4ae5fa">03</text><text x="893" y="597">ENGINEERING NOTES</text>
+</g>
+<path d="M398 575V609 M834 575V609" stroke="#3e617f"/>
+</svg>
