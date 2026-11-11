@@ -7,6 +7,7 @@ import { FeaturedStories } from './FeaturedStories';
 import { projects } from '@/data/projects';
 import type { ProjectCategory } from '@/types';
 import { cn } from '@/lib/utils';
+import { consumePendingProjectSelection } from '@/lib/agent';
 
 type Filter = 'all' | ProjectCategory;
 
@@ -34,6 +35,7 @@ export function Projects() {
   useEffect(() => {
     const reveal = (event: Event) => {
       const detail = (event as CustomEvent<{ title?: string; category?: Filter }>).detail;
+      consumePendingProjectSelection();
       archiveRef.current?.setAttribute('open', '');
       setActive(detail?.category ?? 'all');
       requestAnimationFrame(() => {
@@ -43,6 +45,8 @@ export function Projects() {
       });
     };
     window.addEventListener('vsv:show-project', reveal);
+    const queued = consumePendingProjectSelection();
+    if (queued) reveal(new CustomEvent('vsv:show-project', { detail: queued }));
     return () => window.removeEventListener('vsv:show-project', reveal);
   }, []);
 
