@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://santhoshvishal.vercel.app/sitemap.xml

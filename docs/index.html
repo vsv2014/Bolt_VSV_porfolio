@@ -1,223 +1,26 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
-    <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png" />
-    <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png" />
-    <link rel="icon" type="image/png" sizes="16x16" href="./favicon-16x16.png" />
-    <link rel="manifest" href="./site.webmanifest" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-    <meta name="theme-color" content="#05060a" />
-    <link rel="canonical" href="https://santhoshvishal.vercel.app/" />
-    <link rel="alternate" type="application/rss+xml" title="Santhosh Vishal — Engineering Notes" href="./feed.xml" />
-    <script>
-      // Apply saved/system theme before paint to avoid a flash of the wrong theme.
-      (function () {
-        try {
-          var t = localStorage.getItem('theme');
-          if (!t) t = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
-          if (t === 'light') document.documentElement.classList.add('light');
-        } catch (e) {}
-      })();
-    </script>
-
-    <style>
-      /* Functional, readable first paint if the app bundle is delayed or blocked.
-         React replaces #root as soon as it mounts. */
-      .static-entry {
-        box-sizing: border-box;
-        min-height: 100svh;
-        max-width: 880px;
-        margin: 0 auto;
-        padding: clamp(92px, 12vh, 136px) clamp(20px, 5vw, 36px) 56px;
-        background: #05060a;
-        color: #f2f3f7;
-        font: 16px/1.65 system-ui, -apple-system, sans-serif;
-      }
-      .static-entry .static-eyebrow {
-        color: #c8f65d;
-        font: 11px/1.5 ui-monospace, monospace;
-        letter-spacing: .16em;
-        text-transform: uppercase;
-      }
-      .static-entry h1 {
-        max-width: 13ch;
-        margin: 14px 0 18px;
-        color: #f2f3f7;
-        font-size: clamp(2.45rem, 10vw, 4.7rem);
-        line-height: 1.06;
-        letter-spacing: -.045em;
-      }
-      .static-entry .static-role {
-        margin: 0 0 18px;
-        font: 12px/1.55 ui-monospace, monospace;
-        letter-spacing: .06em;
-        color: #c8f65d;
-      }
-      .static-entry .static-summary {
-        max-width: 58ch;
-        margin: 0;
-        color: #bac0cf;
-        font-size: clamp(15px, 3.6vw, 18px);
-        line-height: 1.6;
-      }
-      .static-entry a { color: #70e1ed; }
-      .static-entry a:focus-visible {
-        outline: 2px solid #c8f65d;
-        outline-offset: 4px;
-      }
-      .static-entry .static-actions {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px;
-        margin-top: 26px;
-      }
-      .static-entry .static-action {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        min-height: 44px;
-        padding: 10px 16px;
-        box-sizing: border-box;
-        border: 1px solid #424757;
-        border-radius: 10px;
-        font-size: 14px;
-        font-weight: 600;
-        text-decoration: none;
-      }
-      .static-entry .static-action-primary {
-        background: #c8f65d;
-        border-color: #c8f65d;
-        color: #101307;
-      }
-      .static-entry .static-notes {
-        margin-top: clamp(42px, 8vh, 78px);
-        border-top: 1px solid #2a2c35;
-        padding-top: 26px;
-      }
-      .static-entry h2 {
-        margin: 0 0 14px;
-        color: #f2f3f7;
-        font-size: 1.2rem;
-        letter-spacing: -.02em;
-      }
-      .static-entry ul { list-style: none; padding: 0; margin: 0; }
-      .static-entry li {
-        padding: 13px 0;
-        border-bottom: 1px solid #252934;
-        font-size: 14px;
-      }
-      .static-entry li a { text-decoration: none; }
-      .static-entry .static-caption { margin-top: 22px; color: #858b9c; font-size: 12px; }
-      #root:has(.static-entry) { background: #05060a; }
-      @media (max-width: 480px) {
-        .static-entry { padding-top: 90px; }
-        .static-entry h1 { font-size: clamp(2.45rem, 12vw, 3.3rem); }
-        .static-entry .static-summary { font-size: 15px; }
-      }
-    </style>
-    <!-- Primary Meta Tags -->
-    <title>Santhosh Vishal | Software Engineer · Frontend & AI</title>
-    <meta name="title" content="Santhosh Vishal | Software Engineer · Frontend & AI" />
-    <meta name="description" content="Santhosh Vishal builds frontend, full-stack and AI-platform systems with React and TypeScript. Explore interactive demos, real projects and technical notes." />
-    <meta name="author" content="Veerannapet Santhosh Vishal" />
-    <meta name="keywords" content="Santhosh Vishal, Veerannapet Santhosh Vishal, frontend engineer, frontend-heavy full-stack, React, Next.js, Angular, micro-frontends, Module Federation, design systems, web performance, accessibility, AI platform engineer, agentic workflows, MCP, Kore.ai, SDE 2, Hyderabad, IIIT Hyderabad" />
-    <meta name="robots" content="index, follow, max-image-preview:large" />
-    <meta property="og:site_name" content="Santhosh Vishal — Engineering Portfolio" />
-    <meta property="og:locale" content="en_IN" />
-
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://santhoshvishal.vercel.app/" />
-    <meta property="og:title" content="Santhosh Vishal | Software Engineer · Frontend & AI" />
-    <meta property="og:description" content="Santhosh Vishal builds frontend, full-stack and AI-platform systems with React and TypeScript. Explore interactive demos, real projects and technical notes." />
-    <meta property="og:image" content="https://santhoshvishal.vercel.app/assets/social-preview.png" />
-    <meta property="og:image:alt" content="Santhosh Vishal engineering portfolio: connected workflow editor, frontend, full-stack and AI platforms" />
-    <meta property="og:image:width" content="1280" />
-    <meta property="og:image:height" content="640" />
-
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image" />
-    <meta property="twitter:url" content="https://santhoshvishal.vercel.app/" />
-    <meta property="twitter:title" content="Santhosh Vishal | Software Engineer · Frontend & AI" />
-    <meta property="twitter:description" content="Santhosh Vishal builds frontend, full-stack and AI-platform systems with React and TypeScript. Explore interactive demos, real projects and technical notes." />
-    <meta property="twitter:image" content="https://santhoshvishal.vercel.app/assets/social-preview.png" />
-    <meta property="twitter:image:alt" content="Santhosh Vishal engineering portfolio with a connected workflow diagram" />
-
-    <!-- iOS Safari Specific -->
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
-
-    <!-- Structured Data -->
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "Person",
-        "name": "Veerannapet Santhosh Vishal",
-        "alternateName": "Santhosh Vishal",
-        "url": "https://santhoshvishal.vercel.app/",
-        "jobTitle": "Frontend-Heavy Full-Stack Engineer — AI/LLM Platforms, Interface Architecture",
-        "description": "Frontend-heavy full-stack engineer at Kore.ai: workflow canvases, flow designers and dashboards for 1,000+ enterprise tenants, on agentic platforms with durable execution and MCP tool calling.",
-        "worksFor": { "@type": "Organization", "name": "Kore.ai" },
-        "alumniOf": { "@type": "CollegeOrUniversity", "name": "IIIT Hyderabad" },
-        "address": { "@type": "PostalAddress", "addressLocality": "Hyderabad", "addressCountry": "IN" },
-        "knowsAbout": [
-          "Production enterprise AI",
-          "Agentic workflows and MCP tool calling",
-          "Durable execution and reliability engineering",
-          "Retrieval-augmented generation",
-          "Multi-tenant distributed systems",
-          "TypeScript, Node.js, Angular, Next.js",
-          "Kafka, Restate, Kubernetes"
-        ],
-        "award": [
-          "Kore.ai Global Spotlight (July 2026)",
-          "Kore.ai Global Spotlight (January 2026)",
-          "Kore.ai Shining Star Award (Q3 2024)",
-          "Kore.ai Outstanding Performance Award (2024)"
-        ],
-        "sameAs": [
-          "https://github.com/vsv2014",
-          "https://www.linkedin.com/in/santhosh-vishal/"
-        ]
-      }
-    </script>
-    <script type="module" crossorigin src="./assets/index-CNmEq_1W.js"></script>
-    <link rel="stylesheet" crossorigin href="./assets/index--abROiXS.css">
-  </head>
-  <body>
-    <!-- Real first-response content for readers and crawlers without JavaScript.
-         React replaces this matching overview with the interactive portfolio. -->
-    <div id="root">
-      <main class="static-entry">
-        <p class="static-eyebrow">Santhosh Vishal / Engineering Portfolio</p>
-        <h1>Santhosh Vishal</h1>
-        <p class="static-role">Software Engineer · Frontend · Full-stack · AI platforms</p>
-        <p class="static-summary">
-          I build useful interfaces and reliable AI platforms with React, TypeScript and Node.js.
-          Explore interactive workflows, performance engineering and the implementation notes
-          behind this open-source portfolio.
-        </p>
-        <div class="static-actions">
-          <a class="static-action static-action-primary" href="/notes/react-flow-editor.html">Explore engineering notes</a>
-          <a class="static-action" href="https://github.com/vsv2014/Bolt_VSV_porfolio">View source code</a>
-        </div>
-        <section class="static-notes" aria-labelledby="static-notes-title">
-          <h2 id="static-notes-title">Read the engineering notes</h2>
-          <ul>
-            <li><a href="/notes/react-flow-editor.html">React flow editor without a graph library</a> — SVG, pointer events, and keyboard support.</li>
-            <li><a href="/notes/virtualized-10000-rows.html">10,000 rows without 10,000 DOM elements</a> — windowing and scroll batching.</li>
-            <li><a href="/notes/honest-ai-console.html">A transparent AI-console simulation</a> — truthful client-side retrieval, no API keys.</li>
-          </ul>
-        </section>
-        <p class="static-caption">The interactive portfolio loads when JavaScript is available. <a href="mailto:santhoshvishalveerannapet@gmail.com">Contact by email</a>. Phone and WhatsApp contact are shared only after review.</p>
-      </main>
-    </div>
-  </body>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#05060a">
+  <link rel="canonical" href="https://santhoshvishal.vercel.app/">
+  <meta http-equiv="refresh" content="0; url=https://santhoshvishal.vercel.app/">
+  <title>Portfolio moved — Santhosh Vishal</title>
+  <script>
+    // Keep section deep links when moving from the retired GitHub Pages mirror.
+    location.replace('https://santhoshvishal.vercel.app/' + location.search + location.hash);
+  </script>
+  <style>
+    body{margin:0;min-height:100vh;display:grid;place-items:center;background:#05060a;color:#f2f3f7;font:16px/1.6 system-ui,sans-serif;padding:24px;text-align:center}
+    a{color:#70e1ed}a:focus-visible{outline:2px solid #c8f65d;outline-offset:4px}
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Portfolio moved</h1>
+    <p>Santhosh Vishal's official portfolio is now at<br><a href="https://santhoshvishal.vercel.app/">santhoshvishal.vercel.app</a>.</p>
+  </main>
+</body>
 </html>
