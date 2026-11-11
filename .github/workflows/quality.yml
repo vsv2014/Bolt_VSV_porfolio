@@ -24,6 +24,8 @@ jobs:
       - run: npm test
       - run: npm audit --omit=dev --audit-level=high
       - run: npm run build
+      - name: Enforce entry bundle size budgets
+        run: node scripts/check-bundle-budgets.mjs
       - name: Inspect GitHub Pages publishing mode
         env:
           GH_TOKEN: ${{ github.token }}
@@ -31,10 +33,11 @@ jobs:
           gh api repos/${{ github.repository }}/pages --jq '{build_type: .build_type, source: .source}' || true
       - name: Chromium browser smoke
         run: |
-          npm install --no-save --no-package-lock playwright-core@1.56.1
+          npm install --no-save --no-package-lock playwright-core@1.56.1 axe-core@4.14.0
           npm run preview -- --host 127.0.0.1 --port 4173 > /tmp/portfolio-preview.log 2>&1 &
           node tests/browser-smoke.mjs
           node tests/mobile-first-paint.mjs
+          node tests/accessibility-smoke.mjs
       - name: Install WebKit browser and dependencies for iPhone-style checks
         run: npx --yes playwright@1.56.1 install --with-deps webkit
       - name: WebKit mobile first-screen smoke

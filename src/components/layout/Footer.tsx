@@ -27,7 +27,7 @@ function LocalClock() {
   }, []);
 
   return (
-    <span className="font-mono text-[11px] text-faint tabular-nums">
+    <span className="font-mono text-[11px] text-muted tabular-nums">
       {time || '--:--'} IST · Hyderabad
     </span>
   );
@@ -44,10 +44,10 @@ export function Footer() {
         <motion.div className="animate-marquee-reverse flex w-max items-center" style={reduceMotion ? undefined : { skewY }}>
           {Array.from({ length: 8 }, (_, index) => (
             <span key={index} className="flex items-center">
-              <span className="px-6 font-display text-3xl font-bold tracking-tight whitespace-nowrap text-faint/35 sm:text-4xl">
+              <span className="px-6 font-display text-3xl font-bold tracking-tight whitespace-nowrap text-muted sm:text-4xl">
                 {profile.shortName}
               </span>
-              <span className="text-brand-lime/40">✦</span>
+              <span className="text-brand-lime">✦</span>
             </span>
           ))}
         </motion.div>
@@ -74,7 +74,7 @@ export function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={label}
-                  className="text-faint transition-colors hover:text-fg"
+                  className="text-muted transition-colors hover:text-fg"
                 >
                   <Icon className="h-[18px] w-[18px]" strokeWidth={1.75} />
                 </a>
@@ -86,11 +86,11 @@ export function Footer() {
         <div className="hairline" aria-hidden />
 
         <div className="flex flex-col items-start justify-between gap-3 sm:flex-row sm:items-center">
-          <p className="font-mono text-[11px] text-faint">
+          <p className="font-mono text-[11px] text-muted">
             © {new Date().getFullYear()} {profile.shortName}
           </p>
           <LocalClock />
-          <p className="font-mono text-[11px] text-faint">React 19 · Tailwind v4 · Motion · hand-built UI</p>
+          <p className="font-mono text-[11px] text-muted">React 19 · Tailwind v4 · Motion · hand-built UI</p>
         </div>
       </Container>
     </footer>

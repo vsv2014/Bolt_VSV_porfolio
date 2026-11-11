@@ -47,26 +47,26 @@ export function Skills() {
     >
       <div className="mb-8 flex flex-wrap items-center gap-4">
         <div className="relative w-full max-w-sm">
-          <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-faint" />
+          <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted" />
           <input
             value={query}
             onChange={(event) => setQuery(event.target.value)}
             placeholder="Filter skills — try “kafka”, “mcp”, “angular”…"
             aria-label="Filter skills"
-            className="w-full rounded-lg border border-line bg-surface py-2.5 pl-10 pr-10 font-mono text-xs text-fg outline-none transition-colors placeholder:text-faint focus:border-line-strong"
+            className="w-full rounded-lg border border-line bg-surface py-2.5 pl-10 pr-10 font-mono text-xs text-fg outline-none transition-colors placeholder:text-muted focus:border-line-strong"
           />
           {query && (
             <button
               type="button"
               onClick={() => setQuery('')}
               aria-label="Clear skill filter"
-              className="absolute right-2.5 top-1/2 -translate-y-1/2 rounded p-1 text-faint transition-colors hover:text-fg"
+              className="absolute right-2.5 top-1/2 -translate-y-1/2 rounded p-1 text-muted transition-colors hover:text-fg"
             >
               <X className="h-3.5 w-3.5" />
             </button>
           )}
         </div>
-        <p className="font-mono text-[11px] text-faint" aria-live="polite">
+        <p className="font-mono text-[11px] text-muted" aria-live="polite">
           {normalised ? `${matches} match${matches === 1 ? '' : 'es'} for “${query.trim()}”` : `${total} technologies indexed`}
         </p>
       </div>
@@ -80,7 +80,7 @@ export function Skills() {
                   <group.icon className="h-[18px] w-[18px]" strokeWidth={1.75} />
                 </span>
                 <h3 className="font-medium text-fg">{group.name}</h3>
-                <span className="ml-auto font-mono text-[10px] text-faint">{group.skills.length}</span>
+                <span className="ml-auto font-mono text-[10px] text-muted">{group.skills.length}</span>
               </div>
               <div className="mt-4 flex flex-wrap gap-2">
                 {group.skills.map((skill) => (
