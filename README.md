@@ -13,6 +13,8 @@ Hand-built workflow editor · 10,000-row virtualized table · live performance m
 
 </div>
 
+**Engineering notes:** [Flow editor](https://santhoshvishal.vercel.app/notes/react-flow-editor.html) · [10K-row virtualization](https://santhoshvishal.vercel.app/notes/virtualized-10000-rows.html) · [Honest AI console](https://santhoshvishal.vercel.app/notes/honest-ai-console.html) · [RSS feed](https://santhoshvishal.vercel.app/feed.xml)
+
 ## Why explore this project?
 
 [**Read the engineering notes**](https://santhoshvishal.vercel.app/#notes) — practical breakdowns of a lightweight node editor, 10,000-row windowing and a truthful local AI demo.
