@@ -244,7 +244,7 @@ export function Hero() {
                 )}
               </dt>
               <dd className="mt-2 font-mono text-[10px] uppercase tracking-[0.14em] text-muted">{stat.label}</dd>
-              {stat.note && <dd className="mt-1 font-mono text-[10px] text-brand-lime">{stat.note}</dd>}
+              {stat.note && <dd className="mt-1 font-mono text-[10px] text-muted">{stat.note}</dd>}
             </div>
           ))}
         </motion.dl>
