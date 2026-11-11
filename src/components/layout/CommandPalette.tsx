@@ -14,7 +14,7 @@ import {
 import { navLinks, profile, socials } from '@/data/site';
 import { projects } from '@/data/projects';
 import { suggestedPrompts } from '@/data/agent';
-import { askAgent, PALETTE_EVENT } from '@/lib/agent';
+import { askAgent, PALETTE_EVENT, selectProject } from '@/lib/agent';
 import { resumeHref, resumeIsExternal } from '@/lib/resume';
 import { getTheme, subscribe, toggleTheme } from '@/lib/theme';
 import { cn } from '@/lib/utils';
@@ -58,9 +58,7 @@ const baseCommands: Command[] = [
     keywords: `${project.stack.join(' ')} ${project.description}`,
     action: () => {
       goTo('projects');
-      window.dispatchEvent(new CustomEvent('vsv:show-project', {
-        detail: { title: project.title, category: project.category },
-      }));
+      selectProject({ title: project.title, category: project.category });
     },
   })),
   ...socials.map<Command>((social) => ({
