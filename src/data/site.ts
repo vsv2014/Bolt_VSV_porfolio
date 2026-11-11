@@ -112,7 +112,13 @@ export const contactChannels = [
   { label: 'Email', value: EMAIL, href: `mailto:${EMAIL}`, icon: Mail },
   { label: 'LinkedIn', value: 'in/santhosh-vishal', href: LINKEDIN_URL, icon: LinkedinIcon },
   { label: 'GitHub', value: 'github.com/vsv2014', href: GITHUB_URL, icon: GithubIcon },
-  { label: 'Phone / WhatsApp', value: '+91 770-277-1465', href: 'tel:+917702771465', icon: Phone },
+  // A real human approves calls/WhatsApp requests via email. Never ship the number to a static client.
+  {
+    label: 'Request phone / WhatsApp',
+    value: 'Shared privately after approval',
+    href: `mailto:${EMAIL}?subject=${encodeURIComponent('Call / WhatsApp request via portfolio')}&body=${encodeURIComponent('Hello,\n\nI would like to request a call or WhatsApp contact.\n\nMy name:\nCompany / organization:\nPurpose of contact:\nPreferred time (including time zone):\n\nThank you.')}`,
+    icon: Phone,
+  },
   { label: 'Instagram', value: '@santhoshvishal', href: 'https://www.instagram.com/santhoshvishal', icon: InstagramIcon },
   { label: 'Twitter / X', value: '@santhoshvishal3', href: 'https://twitter.com/santhoshvishal3', icon: XIcon },
 ] satisfies ContactChannel[];
