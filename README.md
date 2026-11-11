@@ -65,7 +65,7 @@ npm run build
 npm run preview
 ```
 
-The production build uses a relative asset base and is deployed from `main` to Vercel. The old GitHub Pages URL is non-canonical.
+The production build uses a relative asset base. **Vercel is the only canonical host.** The old GitHub Pages site serves a minimal noindex redirect (including legacy article URLs), not a second compiled portfolio. No workflow commits generated output to `main`.
 
 ## Customize responsibly
 
@@ -109,7 +109,7 @@ If an implementation was useful to learn from, you can **star the repository** t
 
 ## Deployment
 
-`.github/workflows/quality.yml` validates lint, unit tests, production build, and desktop/mobile browser interactions. `.github/workflows/publish-pages.yml` builds and publishes to the configured GitHub Pages source when changes are merged to `main`.
+`.github/workflows/quality.yml` validates lint, unit tests, production build, and desktop/mobile browser interactions. The historic GitHub Pages mirror is retired to a redirect; deploy changes only to the connected Vercel project after validation.
 
 ## License and attribution
 
