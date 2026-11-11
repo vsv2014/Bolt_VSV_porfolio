@@ -37,3 +37,18 @@ test('the social preview is a 2:1 editorial graphic with three real directional 
   assert.match(svg, /M965 422H884/); // tool to review
   assert.match(read('scripts/render-social-preview.mjs'), /public\/assets\/social-preview.png/);
 });
+
+test('homepage search snippets are concise and every share preview uses the checked-in PNG', () => {
+  const homepage = read('index.html');
+  const title = homepage.match(/<title>([^<]+)<\/title>/)?.[1];
+  const description = homepage.match(/<meta name="description" content="([^"]+)"/)?.[1];
+  assert.ok(title && title.length <= 60, `homepage title is too long: ${title?.length}`);
+  assert.ok(description && description.length <= 160, `description too long: ${description?.length}`);
+  for (const path of ['index.html', ...names.map(name => `public/notes/${name}.html`)]) {
+    const html = read(path);
+    assert.match(html, /og:image" content="https:\/\/santhoshvishal\.vercel\.app\/assets\/social-preview\.png"/);
+    assert.match(html, /og:image:width" content="1280"/);
+    assert.match(html, /og:image:height" content="640"/);
+    assert.match(html, /twitter:image" content="https:\/\/santhoshvishal\.vercel\.app\/assets\/social-preview\.png"/);
+  }
+});
