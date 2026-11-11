@@ -135,4 +135,14 @@ export const openPalette = () => window.dispatchEvent(new CustomEvent(PALETTE_EV
 
 /** Ask the in-page agent a question (optionally scrolling its section into view). */
 export const ASK_AGENT_EVENT = 'vsv:ask-agent';
-export const askAgent = (query: string) => window.dispatchEvent(new CustomEvent(ASK_AGENT_EVENT, { detail: { query } }));
+let pendingAgentQuery: string | null = null;
+export const askAgent = (query: string) => {
+  pendingAgentQuery = query;
+  window.dispatchEvent(new CustomEvent(ASK_AGENT_EVENT, { detail: { query } }));
+};
+/** One-shot delivery when the lazy-loaded console mounts after an ask event. */
+export const consumePendingAgentQuery = () => {
+  const query = pendingAgentQuery;
+  pendingAgentQuery = null;
+  return query;
+};
