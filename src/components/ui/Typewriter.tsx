@@ -17,7 +17,7 @@ interface TypewriterProps {
 export function Typewriter({ phrases, className, typeMs = 52, eraseMs = 24, holdMs = 1900 }: TypewriterProps) {
   const reduceMotion = useReducedMotion();
   const [index, setIndex] = useState(0);
-  const [length, setLength] = useState(0);
+  const [length, setLength] = useState(phrases[0]?.length ?? 0);
   const [mode, setMode] = useState<'typing' | 'erasing'>('typing');
 
   const phrase = phrases[index % phrases.length];
