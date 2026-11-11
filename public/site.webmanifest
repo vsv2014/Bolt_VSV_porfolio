@@ -1,6 +1,6 @@
 {
-  "name": "Vishal Veerannapet Portfolio",
-  "short_name": "VSV Portfolio",
+  "name": "Santhosh Vishal — Engineering Portfolio",
+  "short_name": "Santhosh Vishal",
   "icons": [
     {
       "src": "./android-chrome-192x192.svg",
@@ -17,9 +17,9 @@
   ],
   "start_url": ".",
   "scope": ".",
-  "theme_color": "#7928ca",
-  "background_color": "#1a0b2e",
+  "theme_color": "#05060a",
+  "background_color": "#05060a",
   "display": "standalone",
   "orientation": "portrait",
-  "description": "Professional portfolio showcasing AI/ML expertise and full-stack development"
+  "description": "Frontend, full-stack and AI-platform engineering — interactive demos and engineering notes."
 }

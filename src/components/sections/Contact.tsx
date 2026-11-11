@@ -26,15 +26,16 @@ export function Contact() {
       accent="something"
       description="Open to senior full-stack and AI-platform roles, plus collaborations on agentic systems and applied-ML problems."
     >
-      <div className="grid gap-10 md:grid-cols-[1fr_1.1fr] md:items-start">
+      <div className="grid min-w-0 grid-cols-[minmax(0,1fr)] gap-10 md:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] md:items-start">
         <Reveal>
           <p className="text-lg leading-relaxed text-muted">
             The fastest way to reach me is email — I usually reply within a day.
           </p>
 
           <div className="mt-6 flex flex-wrap items-center gap-3">
-            <ButtonLink href={`mailto:${profile.email}`} variant="primary" data-cursor data-cursor-label="email" data-magnetic>
-              {profile.email} <ArrowUpRight className="h-4 w-4" />
+            <ButtonLink href={`mailto:${profile.email}`} variant="primary" className="min-w-0 max-w-full" data-cursor data-cursor-label="email" data-magnetic>
+              <span className="min-w-0 break-all text-left sm:break-normal">{profile.email}</span>
+              <ArrowUpRight className="h-4 w-4 shrink-0" />
             </ButtonLink>
             <button
               type="button"

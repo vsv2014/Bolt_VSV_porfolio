@@ -20,6 +20,7 @@ import { Contact } from './components/sections/Contact';
    same route/component-level splitting story as the WebSDK work (2.3 MB → 920 KB). */
 const Projects = lazy(() => import('./components/sections/Projects').then((m) => ({ default: m.Projects })));
 const FrontendCraft = lazy(() => import('./components/sections/FrontendCraft').then((m) => ({ default: m.FrontendCraft })));
+const EngineeringNotes = lazy(() => import('./components/sections/EngineeringNotes').then((m) => ({ default: m.EngineeringNotes })));
 const AgentConsole = lazy(() => import('./components/sections/AgentConsole').then((m) => ({ default: m.AgentConsole })));
 const Research = lazy(() => import('./components/sections/Research').then((m) => ({ default: m.Research })));
 const Awards = lazy(() => import('./components/sections/Awards').then((m) => ({ default: m.Awards })));
@@ -56,6 +57,7 @@ export default function App() {
         <Suspense fallback={<SectionFallback />}>
           <Projects />
           <FrontendCraft />
+          <EngineeringNotes />
           <AgentConsole />
           <Research />
           <Awards />

@@ -88,6 +88,16 @@ async function audit(width, height) {
     const allProjectCount = await archive.locator('[data-project-title]').count();
     assert.ok(allProjectCount >= 20, `archive lost projects: ${allProjectCount}`);
     await archive.getByRole('button', { name: /Solo builds/i }).click();
+    // AnimatePresence keeps exiting cards in the DOM briefly. Wait for their
+    // exit transition before asserting the final filtered archive count.
+    await page.waitForFunction(
+      (before) => {
+        const rows = document.querySelectorAll('[data-testid="project-archive-content"] [data-project-title]');
+        return rows.length > 0 && rows.length < before;
+      },
+      allProjectCount,
+      { timeout: 5000 },
+    );
     const soloCount = await archive.locator('[data-project-title]').count();
     assert.ok(soloCount > 0 && soloCount < allProjectCount, 'category filtering failed');
 
@@ -96,9 +106,28 @@ async function audit(width, height) {
     await firstBreakdown.locator('summary').click();
     await stories.scrollIntoViewIfNeeded();
     await page.screenshot({ path: `/tmp/portfolio-stories-${width}.png`, fullPage: false });
-    const overflow = await page.evaluate(() => ({ page: document.documentElement.scrollWidth, viewport: window.innerWidth }));
+    const overflow = await page.evaluate(() => {
+      const viewport = window.innerWidth;
+      const outside = [...document.querySelectorAll('body *')]
+        .map((el) => ({ el, rect: el.getBoundingClientRect() }))
+        .filter(({ rect }) => rect.width > 0 && rect.right > viewport + 2 && rect.right < viewport + 125)
+        .slice(0, 60)
+        .map(({ el, rect }) => ({
+          tag: el.tagName,
+          className: typeof el.className === 'string' ? el.className.slice(0, 90) : '',
+          text: el.textContent?.trim().slice(0, 45),
+          left: Math.round(rect.left),
+          right: Math.round(rect.right),
+          parents: Array.from({ length: 3 }, (_, i) => {
+            let p = el;
+            for (let step = 0; step <= i; step += 1) p = p?.parentElement;
+            return p ? `${p.tagName.toLowerCase()}[${typeof p.className === 'string' ? p.className.slice(0, 35) : ''}]/${getComputedStyle(p).overflowX}` : '';
+          }),
+        }));
+      return { page: document.documentElement.scrollWidth, bodyScroll: document.body.scrollWidth, viewport, outside };
+    });
     assert.ok(overflow.page <= overflow.viewport + 2,
-      `horizontal overflow at ${width}px: ${overflow.page} > ${overflow.viewport}`);
+      `horizontal overflow at ${width}px: ${JSON.stringify(overflow)}`);
 
     // Privacy: phone/WhatsApp is request-only; the number must not be sent to clients.
     const phoneRequest = page.getByRole('link', { name: /Request phone \/ WhatsApp/i });

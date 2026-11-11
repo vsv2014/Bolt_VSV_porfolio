@@ -3,15 +3,13 @@
   "private": true,
   "version": "1.0.0",
   "type": "module",
-  "homepage": "https://vsv2014.github.io/Bolt_VSV_porfolio",
+  "homepage": "https://santhoshvishal.vercel.app",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint src tests",
     "test": "node --experimental-strip-types --test tests/*.test.mjs",
     "preview": "vite preview",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {

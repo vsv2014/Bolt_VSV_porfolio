@@ -37,10 +37,10 @@ const stageIcons: Record<TraceKind, typeof Search> = {
 };
 
 const pipeline: { kind: TraceKind; name: string; detail: string }[] = [
-  { kind: 'embed', name: 'embed', detail: 'query → 1536-d vector' },
-  { kind: 'retrieve', name: 'retrieve', detail: 'cosine top-k over the index' },
-  { kind: 'tool', name: 'tool', detail: 'structured fact lookup' },
-  { kind: 'compose', name: 'compose', detail: 'grounded answer, streamed' },
+  { kind: 'embed', name: 'tokenize', detail: 'client-side lexical terms' },
+  { kind: 'retrieve', name: 'rank', detail: 'curated keyword matches' },
+  { kind: 'tool', name: 'preview', detail: 'simulated structured lookup' },
+  { kind: 'compose', name: 'display', detail: 'curated answer, progressively shown' },
 ];
 
 let messageId = 0;
@@ -58,8 +58,8 @@ function finalise(messages: Message[]): Message[] {
 }
 
 /**
- * "Ask my agent" — a fully client-side simulation of a RAG agent: embed →
- * retrieve → tool call → streamed grounded answer, with citations and latency.
+ * A transparent client-side demo: lexical scoring against curated facts,
+ * an illustrative trace and progressive display. No real embedding or tool calls.
  * No API key, no network request, nothing leaves the browser.
  */
 export function AgentConsole() {
@@ -165,7 +165,7 @@ export function AgentConsole() {
       eyebrow="Ask my agent"
       title="Don’t read the résumé — interrogate it"
       accent="interrogate"
-      description="A working demo of the pattern I ship: embed, retrieve, call a tool, then stream a grounded answer with citations. It runs entirely in your browser — no API key, no backend, nothing leaves this tab."
+      description="Explore my work with a transparent local demo: keyword retrieval over curated facts, an illustrative tool trace, and sourced answers. No model API, vector database, backend, or outbound prompt requests."
     >
       <span ref={sectionRef} className="block h-px w-px" aria-hidden />
 
@@ -180,7 +180,7 @@ export function AgentConsole() {
                 <span className="h-2.5 w-2.5 rounded-full bg-brand-lime/70" />
               </span>
               <p className="flex-1 truncate font-mono text-[11px] text-faint">
-                vsv-agent · rag-console <span className="hidden sm:inline">· in-browser simulation</span>
+                vsv-agent · local-demo-console <span className="hidden sm:inline">· in-browser simulation</span>
               </p>
               <span
                 className={cn(
@@ -197,7 +197,7 @@ export function AgentConsole() {
               {messages.length === 0 && (
                 <p className="font-mono text-xs text-faint">
                   <Terminal className="mr-2 inline h-3.5 w-3.5" />
-                  Booting index: {agentDocs.length} documents, 1536-d embeddings… ask anything.
+                  Ready: {agentDocs.length} curated documents, local keyword index. Ask about my work.
                 </p>
               )}
 
@@ -264,7 +264,7 @@ export function AgentConsole() {
                             {message.sources.map((source) => (
                               <span
                                 key={source.id}
-                                title={`similarity ${source.score}`}
+                                title={`illustrative keyword relevance ${source.score}`}
                                 className="inline-flex items-center gap-1 rounded-md border border-line px-2 py-0.5 font-mono text-[10px] text-muted"
                               >
                                 <Database className="h-3 w-3 text-brand-cyan" />
@@ -371,8 +371,8 @@ export function AgentConsole() {
               <dl className="mt-4 grid grid-cols-2 gap-4">
                 {[
                   { label: 'documents', value: String(agentDocs.length) },
-                  { label: 'dimensions', value: '1536' },
-                  { label: 'retriever', value: 'lexical + cosine' },
+                  { label: 'dimensions', value: 'n/a · lexical' },
+                  { label: 'retriever', value: 'keyword ranking' },
                   { label: 'egress', value: 'none · local' },
                 ].map((item) => (
                   <div key={item.label}>
@@ -383,8 +383,8 @@ export function AgentConsole() {
               </dl>
               <p className="mt-4 flex items-start gap-2 border-t border-line pt-4 text-[11px] leading-relaxed text-muted">
                 <Layers className="mt-0.5 h-3.5 w-3.5 shrink-0 text-brand-purple" />
-                The same embed → retrieve → tool → compose loop I build in production with real LLMs, MCP tools and
-                durable execution — here it is scripted so it costs nothing to run.
+                An illustrative client-side demonstration of retrieval workflows. Production agent systems use
+                model APIs, governed tools and durable execution; this demo does not.
               </p>
             </div>
           </div>
