@@ -106,9 +106,17 @@ async function audit(width, height) {
     await firstBreakdown.locator('summary').click();
     await stories.scrollIntoViewIfNeeded();
     await page.screenshot({ path: `/tmp/portfolio-stories-${width}.png`, fullPage: false });
-    const overflow = await page.evaluate(() => ({ page: document.documentElement.scrollWidth, viewport: window.innerWidth }));
+    const overflow = await page.evaluate(() => {
+      const viewport = window.innerWidth;
+      const outside = [...document.querySelectorAll('body *')]
+        .map((el) => ({ el, rect: el.getBoundingClientRect() }))
+        .filter(({ rect }) => rect.width > 0 && (rect.right > viewport + 2 || rect.left < -2))
+        .slice(0, 18)
+        .map(({ el, rect }) => ({ tag: el.tagName, className: typeof el.className === 'string' ? el.className.slice(0, 125) : '', left: Math.round(rect.left), right: Math.round(rect.right) }));
+      return { page: document.documentElement.scrollWidth, viewport, outside };
+    });
     assert.ok(overflow.page <= overflow.viewport + 2,
-      `horizontal overflow at ${width}px: ${overflow.page} > ${overflow.viewport}`);
+      `horizontal overflow at ${width}px: ${JSON.stringify(overflow)}`);
 
     // Privacy: phone/WhatsApp is request-only; the number must not be sent to clients.
     const phoneRequest = page.getByRole('link', { name: /Request phone \/ WhatsApp/i });
