@@ -93,14 +93,15 @@ export function AgentConsole() {
       ]);
 
       for (const step of steps) {
-        if (!reduceMotion) await sleep(step.ms);
+        // Trace timings are illustrative, not network latency. Keep the demo responsive.
+        if (!reduceMotion) await sleep(Math.min(step.ms, 140));
         if (id !== generation.current) return;
         setMessages((previous) => patch(previous, answerId, (message) => ({ ...message, trace: [...(message.trace ?? []), step] })));
       }
 
       const batch = reduceMotion ? words.length : 3;
       for (let count = batch; count < words.length + batch; count += batch) {
-        if (!reduceMotion) await sleep(34 + Math.random() * 42);
+        if (!reduceMotion) await sleep(24);
         if (id !== generation.current) return;
         const revealed = Math.min(count, words.length);
         setMessages((previous) => patch(previous, answerId, (message) => ({ ...message, visible: revealed })));
