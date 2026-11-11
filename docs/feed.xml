@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Santhosh Vishal — Engineering Notes</title>
+    <link>https://santhoshvishal.vercel.app/#notes</link>
+    <description>Original, code-grounded notes on frontend architecture, performance and trustworthy AI interfaces.</description>
+    <language>en-in</language>
+    <lastBuildDate>Thu, 12 Nov 2026 00:00:00 +0530</lastBuildDate>
+    <atom:link href="https://santhoshvishal.vercel.app/feed.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>A React node editor without a graph library</title>
+      <link>https://santhoshvishal.vercel.app/notes/react-flow-editor.html</link>
+      <guid isPermaLink="true">https://santhoshvishal.vercel.app/notes/react-flow-editor.html</guid>
+      <pubDate>Thu, 12 Nov 2026 00:00:00 +0530</pubDate>
+      <category>Frontend Engineering</category>
+      <description>How pointer capture, SVG edges, responsive auto-layout, and keyboard controls power an interactive React node editor.</description>
+    </item>
+    <item>
+      <title>Render 10,000 rows without rendering 10,000 elements</title>
+      <link>https://santhoshvishal.vercel.app/notes/virtualized-10000-rows.html</link>
+      <guid isPermaLink="true">https://santhoshvishal.vercel.app/notes/virtualized-10000-rows.html</guid>
+      <pubDate>Thu, 12 Nov 2026 00:00:00 +0530</pubDate>
+      <category>Web Performance</category>
+      <description>Windowing math, overscan, ResizeObserver and requestAnimationFrame batching in a dependency-free React virtual list.</description>
+    </item>
+    <item>
+      <title>A transparent AI-console simulation without API keys</title>
+      <link>https://santhoshvishal.vercel.app/notes/honest-ai-console.html</link>
+      <guid isPermaLink="true">https://santhoshvishal.vercel.app/notes/honest-ai-console.html</guid>
+      <pubDate>Thu, 12 Nov 2026 00:00:00 +0530</pubDate>
+      <category>AI Engineering</category>
+      <description>How to demonstrate local lexical retrieval without misrepresenting embeddings, vector search, hosted model calls or tool execution.</description>
+    </item>
+  </channel>
+</rss>
