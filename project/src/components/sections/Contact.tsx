@@ -18,9 +18,9 @@ const Contact: FC = () => {
     },
     {
       icon: <Phone className="w-6 h-6 sm:w-8 sm:h-8 text-white" />,
-      href: 'tel:+917702771465',
-      label: 'Phone/WhatsApp',
-      value: '+91 770-277-1465'
+      href: 'mailto:santhoshvishalveerannapet@gmail.com?subject=Call%20request%20via%20portfolio',
+      label: 'Request phone / WhatsApp',
+      value: 'Shared upon request'
     },
     {
       icon: <Instagram className="w-6 h-6 sm:w-8 sm:h-8 text-white" />,
