@@ -8,9 +8,11 @@ interface CardProps {
   interactive?: boolean;
   /** Pointer-tracked 3D tilt + spotlight. Skipped for coarse pointers and reduced motion. */
   tilt?: boolean;
+  /** Let the contents fill a stretched card (e.g. aligned action footers). */
+  fillContent?: boolean;
 }
 
-export function Card({ children, className, interactive, tilt }: CardProps) {
+export function Card({ children, className, interactive, tilt, fillContent }: CardProps) {
   const reduceMotion = useReducedMotion();
   const rotateX = useSpring(useMotionValue(0), { stiffness: 220, damping: 24 });
   const rotateY = useSpring(useMotionValue(0), { stiffness: 220, damping: 24 });
@@ -49,7 +51,7 @@ export function Card({ children, className, interactive, tilt }: CardProps) {
       )}
     >
       {enabled && <motion.span aria-hidden style={{ background: glare }} className="pointer-events-none absolute inset-0 rounded-xl" />}
-      <div className="relative">{children}</div>
+      <div className={cn('relative', fillContent && 'flex min-h-0 flex-1 flex-col')}>{children}</div>
     </motion.div>
   );
 }
