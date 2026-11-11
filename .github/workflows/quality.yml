@@ -7,7 +7,8 @@ on:
 
 jobs:
   verify:
-    runs-on: ubuntu-latest
+    # Pin to the WebKit-supported runner image for Playwright 1.56.x.
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -28,6 +29,13 @@ jobs:
           npm install --no-save --no-package-lock playwright-core@1.56.1
           npm run preview -- --host 127.0.0.1 --port 4173 > /tmp/portfolio-preview.log 2>&1 &
           node tests/browser-smoke.mjs
+          node tests/mobile-first-paint.mjs
+      - name: Install WebKit browser and dependencies for iPhone-style checks
+        run: npx --yes playwright@1.56.1 install --with-deps webkit
+      - name: WebKit mobile first-screen smoke
+        run: |
+          npm run preview -- --host 127.0.0.1 --port 4173 > /tmp/portfolio-preview-webkit.log 2>&1 &
+          PLAYWRIGHT_BROWSER=webkit node tests/mobile-first-paint.mjs
       - name: Upload craft screenshots
         if: always()
         uses: actions/upload-artifact@v4
@@ -36,4 +44,5 @@ jobs:
           path: |
             /tmp/portfolio-craft-*.png
             /tmp/portfolio-stories-*.png
+            /tmp/portfolio-mobile-*.png
           if-no-files-found: ignore

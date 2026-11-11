@@ -23,16 +23,99 @@
     </script>
 
     <style>
-      /* Useful fallback until React mounts; no empty app shell for non-JS visitors. */
-      .static-entry { min-height: 100vh; margin: 0 auto; max-width: 860px; padding: 80px 24px; background: #05060a; color: #edf0f8; font: 17px/1.65 system-ui, sans-serif; }
-      .static-entry .static-eyebrow { color: #c1f94d; font: 13px/1.5 monospace; letter-spacing: .13em; text-transform: uppercase; }
-      .static-entry h1 { font-size: clamp(2rem, 5vw, 3.5rem); line-height: 1.15; }
-      .static-entry h2 { margin-top: 2rem; font-size: 1.4rem; }
-      .static-entry p, .static-entry li { color: #c5cbd9; }
-      .static-entry a { color: #66dded; }
-      .static-entry a:focus-visible { outline: 2px solid #c8f65d; outline-offset: 3px; }
-      .static-entry ul { padding-left: 1.25rem; }
+      /* Functional, readable first paint if the app bundle is delayed or blocked.
+         React replaces #root as soon as it mounts. */
+      .static-entry {
+        box-sizing: border-box;
+        min-height: 100svh;
+        max-width: 880px;
+        margin: 0 auto;
+        padding: clamp(92px, 12vh, 136px) clamp(20px, 5vw, 36px) 56px;
+        background: #05060a;
+        color: #f2f3f7;
+        font: 16px/1.65 system-ui, -apple-system, sans-serif;
+      }
+      .static-entry .static-eyebrow {
+        color: #c8f65d;
+        font: 11px/1.5 ui-monospace, monospace;
+        letter-spacing: .16em;
+        text-transform: uppercase;
+      }
+      .static-entry h1 {
+        max-width: 13ch;
+        margin: 14px 0 18px;
+        color: #f2f3f7;
+        font-size: clamp(2.45rem, 10vw, 4.7rem);
+        line-height: 1.06;
+        letter-spacing: -.045em;
+      }
+      .static-entry .static-role {
+        margin: 0 0 18px;
+        font: 12px/1.55 ui-monospace, monospace;
+        letter-spacing: .06em;
+        color: #c8f65d;
+      }
+      .static-entry .static-summary {
+        max-width: 58ch;
+        margin: 0;
+        color: #bac0cf;
+        font-size: clamp(15px, 3.6vw, 18px);
+        line-height: 1.6;
+      }
+      .static-entry a { color: #70e1ed; }
+      .static-entry a:focus-visible {
+        outline: 2px solid #c8f65d;
+        outline-offset: 4px;
+      }
+      .static-entry .static-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 26px;
+      }
+      .static-entry .static-action {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 44px;
+        padding: 10px 16px;
+        box-sizing: border-box;
+        border: 1px solid #424757;
+        border-radius: 10px;
+        font-size: 14px;
+        font-weight: 600;
+        text-decoration: none;
+      }
+      .static-entry .static-action-primary {
+        background: #c8f65d;
+        border-color: #c8f65d;
+        color: #101307;
+      }
+      .static-entry .static-notes {
+        margin-top: clamp(42px, 8vh, 78px);
+        border-top: 1px solid #2a2c35;
+        padding-top: 26px;
+      }
+      .static-entry h2 {
+        margin: 0 0 14px;
+        color: #f2f3f7;
+        font-size: 1.2rem;
+        letter-spacing: -.02em;
+      }
+      .static-entry ul { list-style: none; padding: 0; margin: 0; }
+      .static-entry li {
+        padding: 13px 0;
+        border-bottom: 1px solid #252934;
+        font-size: 14px;
+      }
+      .static-entry li a { text-decoration: none; }
+      .static-entry .static-caption { margin-top: 22px; color: #858b9c; font-size: 12px; }
       #root:has(.static-entry) { background: #05060a; }
+      @media (max-width: 480px) {
+        .static-entry { padding-top: 90px; }
+        .static-entry h1 { font-size: clamp(2.45rem, 12vw, 3.3rem); }
+        .static-entry .static-summary { font-size: 15px; }
+      }
     </style>
     <!-- Primary Meta Tags -->
     <title>Santhosh Vishal | Software Engineer · Frontend & AI</title>
@@ -112,17 +195,26 @@
     <div id="root">
       <main class="static-entry">
         <p class="static-eyebrow">Santhosh Vishal / Engineering Portfolio</p>
-        <h1>Santhosh Vishal — Software Engineer</h1>
-        <p>I build frontend interfaces, full-stack applications and AI platforms using React, TypeScript, Node.js and modern web architecture. My work spans enterprise workflow experiences, interactive design tools, retrieval systems and practical reliability improvements.</p>
-        <p>This portfolio pairs engineering project case studies with working demonstrations, original source code and detailed implementation notes. Try a React flow editor with pointer and keyboard interactions, explore a virtualized table with 10,000 synthetic rows, or review a transparent client-side AI console that does not call a model API.</p>
-        <h2>Read the engineering notes</h2>
-        <ul>
-          <li><a href="/notes/react-flow-editor.html">A React node editor without a graph library</a> — SVG connectors, pointer capture, responsive layout, and keyboard accessibility.</li>
-          <li><a href="/notes/virtualized-10000-rows.html">Render 10,000 rows without rendering 10,000 elements</a> — windowing, overscan, ResizeObserver and animation-frame batching.</li>
-          <li><a href="/notes/honest-ai-console.html">A transparent AI-console simulation without API keys</a> — lexical retrieval, honest limitations and product UX.</li>
-        </ul>
-        <h2>Explore the work</h2>
-        <p>See the <a href="https://github.com/vsv2014/Bolt_VSV_porfolio">open-source implementation</a>, the <a href="/#projects">project case studies</a> or the <a href="/#contact">professional contact options</a>. Phone and WhatsApp details are shared privately only after review.</p>
+        <h1>Santhosh Vishal</h1>
+        <p class="static-role">Software Engineer · Frontend · Full-stack · AI platforms</p>
+        <p class="static-summary">
+          I build useful interfaces and reliable AI platforms with React, TypeScript and Node.js.
+          Explore interactive workflows, performance engineering and the implementation notes
+          behind this open-source portfolio.
+        </p>
+        <div class="static-actions">
+          <a class="static-action static-action-primary" href="/notes/react-flow-editor.html">Explore engineering notes</a>
+          <a class="static-action" href="https://github.com/vsv2014/Bolt_VSV_porfolio">View source code</a>
+        </div>
+        <section class="static-notes" aria-labelledby="static-notes-title">
+          <h2 id="static-notes-title">Read the engineering notes</h2>
+          <ul>
+            <li><a href="/notes/react-flow-editor.html">React flow editor without a graph library</a> — SVG, pointer events, and keyboard support.</li>
+            <li><a href="/notes/virtualized-10000-rows.html">10,000 rows without 10,000 DOM elements</a> — windowing and scroll batching.</li>
+            <li><a href="/notes/honest-ai-console.html">A transparent AI-console simulation</a> — truthful client-side retrieval, no API keys.</li>
+          </ul>
+        </section>
+        <p class="static-caption">The interactive portfolio loads when JavaScript is available. <a href="mailto:santhoshvishalveerannapet@gmail.com">Contact by email</a>. Phone and WhatsApp contact are shared only after review.</p>
       </main>
     </div>
     <script type="module" src="/src/main.tsx"></script>

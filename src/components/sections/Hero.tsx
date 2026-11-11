@@ -31,8 +31,6 @@ export function Hero() {
   const skewY = useVelocitySkew(2.4);
 
   // Parallax: the copy drifts up and fades as the page scrolls away.
-  const contentY = useTransform(scrollY, [0, 700], [0, 130]);
-  const contentOpacity = useTransform(scrollY, [0, 520], [1, 0.1]);
   const portraitY = useTransform(scrollY, [0, 700], [0, -60]);
 
   // Pointer spotlight.
@@ -54,13 +52,13 @@ export function Hero() {
         <motion.div className="pointer-events-none absolute inset-0 -z-10" style={{ background: spotlight }} aria-hidden />
       )}
 
-      <Container className="relative flex min-h-screen flex-col justify-center pt-32 pb-16">
+      <Container className="relative flex min-h-[100svh] flex-col justify-start pt-24 pb-12 sm:justify-center sm:pt-32 sm:pb-16">
         {/* Ticker band */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.1 }}
-          className="mb-10 overflow-hidden border-y border-line/70 py-2.5"
+          className="mb-10 hidden overflow-hidden border-y border-line/70 py-2.5 sm:block"
           aria-hidden
         >
           <motion.div className="animate-marquee flex w-max items-center" style={reduceMotion ? undefined : { skewY }}>
@@ -73,10 +71,26 @@ export function Hero() {
           </motion.div>
         </motion.div>
 
-        <div className="grid items-center gap-14 md:grid-cols-[1.35fr_1fr]">
+        <div className="grid items-center gap-9 md:grid-cols-[1.35fr_1fr] md:gap-14">
           {/* Left — copy */}
-          <motion.div style={reduceMotion ? undefined : { y: contentY, opacity: contentOpacity }}>
-            <motion.div custom={0} variants={fadeUp} initial="hidden" animate="show" className="flex flex-wrap items-center gap-3">
+          <div className="min-w-0" data-testid="hero-content">
+            <div className="mb-5 flex items-center gap-4 md:hidden">
+              <img
+                src={profilePic}
+                alt={profile.name}
+                width={72}
+                height={72}
+                decoding="async"
+                fetchPriority="high"
+                className="h-[72px] w-[72px] shrink-0 rounded-2xl border border-line object-cover"
+                data-testid="hero-mobile-portrait"
+              />
+              <div className="min-w-0">
+                <span className="block font-mono text-[10px] uppercase tracking-wider text-brand-lime">Hyderabad, India</span>
+                <span className="mt-1 block text-xs leading-relaxed text-muted">Available for senior engineering opportunities</span>
+              </div>
+            </div>
+            <motion.div custom={0} variants={fadeUp} initial={false} animate="show" className="hidden flex-wrap items-center gap-3 md:flex">
               <span className="inline-flex items-center gap-2 rounded-full border border-line bg-surface px-3 py-1 font-mono text-[11px] text-muted backdrop-blur">
                 <span className="relative flex h-1.5 w-1.5">
                   <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-brand-lime opacity-75" />
@@ -93,14 +107,15 @@ export function Hero() {
             <motion.p
               custom={1}
               variants={fadeUp}
-              initial="hidden"
+              initial={false}
               animate="show"
-              className="mt-8 font-mono text-[11px] uppercase tracking-[0.28em] text-brand-cyan"
+              className="mt-5 font-mono text-[10px] uppercase leading-relaxed tracking-[0.15em] text-brand-cyan sm:mt-8 sm:text-[11px] sm:tracking-[0.28em]"
             >
-              {profile.role}
+              <span className="md:hidden">Frontend · Full-stack · AI platforms</span>
+              <span className="hidden md:inline">{profile.role}</span>
             </motion.p>
 
-            <h1 className="mt-5 font-display text-[3.4rem] leading-[0.92] font-bold tracking-[-0.04em] text-fg sm:text-7xl lg:text-[5.6rem]">
+            <h1 data-testid="hero-heading" className="mt-3 font-display text-[clamp(3rem,13vw,3.4rem)] leading-[0.96] font-bold tracking-[-0.04em] text-fg sm:mt-5 sm:text-7xl lg:text-[5.6rem]">
               <SplitWords text="Santhosh" immediate delay={0.45} className="block" />
               <span className="block">
                 <SplitWords
@@ -115,9 +130,9 @@ export function Hero() {
             <motion.p
               custom={3}
               variants={fadeUp}
-              initial="hidden"
+              initial={false}
               animate="show"
-              className="mt-7 max-w-2xl font-display text-xl leading-snug tracking-tight text-muted sm:text-2xl"
+              className="mt-5 max-w-2xl font-display text-lg leading-snug tracking-tight text-muted sm:mt-7 sm:text-2xl"
             >
               I build{' '}
               <Typewriter phrases={[...profile.heroPhrases]} className="font-serif text-2xl font-normal italic text-fg sm:text-3xl" />
@@ -126,14 +141,17 @@ export function Hero() {
             <motion.p
               custom={4}
               variants={fadeUp}
-              initial="hidden"
+              initial={false}
               animate="show"
-              className="mt-6 max-w-xl text-base leading-relaxed text-muted"
+              className="mt-4 max-w-xl text-sm leading-relaxed text-muted sm:mt-6 sm:text-base"
             >
-              {profile.tagline}
+              <span className="sm:hidden">
+                I build reliable AI platforms, intuitive workflow interfaces, and full-stack systems that scale.
+              </span>
+              <span className="hidden sm:inline">{profile.tagline}</span>
             </motion.p>
 
-            <motion.div custom={5} variants={fadeUp} initial="hidden" animate="show" className="mt-9 flex flex-wrap items-center gap-3">
+            <motion.div custom={5} variants={fadeUp} initial={false} animate="show" className="mt-6 flex flex-wrap items-center gap-3 sm:mt-9">
               <ButtonLink href="#projects" variant="primary" data-cursor data-cursor-label="work" data-magnetic>
                 Explore selected work <ArrowUpRight className="h-4 w-4" />
               </ButtonLink>
@@ -148,7 +166,7 @@ export function Hero() {
               </ButtonLink>
             </motion.div>
 
-            <motion.div custom={6} variants={fadeUp} initial="hidden" animate="show" className="mt-7 flex flex-wrap items-center gap-3">
+            <motion.div custom={6} variants={fadeUp} initial={false} animate="show" className="mt-7 hidden flex-wrap items-center gap-3 sm:flex">
               <div className="flex items-center gap-1">
                 {socials.map(({ label, href, icon }) => (
                   <IconLink key={label} href={href} label={label} icon={icon} className="border-transparent hover:border-line" />
@@ -165,16 +183,16 @@ export function Hero() {
                 to explore
               </button>
             </motion.div>
-          </motion.div>
+          </div>
 
           {/* Right — portrait */}
           <motion.div
             custom={2}
             variants={fadeUp}
-            initial="hidden"
+            initial={false}
             animate="show"
             style={reduceMotion ? undefined : { y: portraitY }}
-            className="order-first mx-auto md:order-none"
+            className="mx-auto hidden md:block"
           >
             <div className="relative w-48 sm:w-60 md:w-full md:max-w-xs">
               <div
@@ -212,9 +230,9 @@ export function Hero() {
         <motion.dl
           custom={7}
           variants={fadeUp}
-          initial="hidden"
+          initial={false}
           animate="show"
-          className="mt-16 grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-line bg-line sm:grid-cols-4"
+          className="mt-12 grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-line bg-line sm:mt-16 sm:grid-cols-4"
         >
           {stats.map((stat) => (
             <div key={stat.label} className="group bg-bg/70 px-5 py-5 backdrop-blur transition-colors hover:bg-surface">
@@ -236,7 +254,7 @@ export function Hero() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.5, duration: 0.8 }}
-          className="mt-10 flex items-center justify-center gap-2 font-mono text-[10px] uppercase tracking-[0.28em] text-faint"
+          className="mt-10 hidden items-center justify-center gap-2 font-mono text-[10px] uppercase tracking-[0.28em] text-faint sm:flex"
           aria-hidden
         >
           <span className="animate-scroll-cue">↓</span> scroll

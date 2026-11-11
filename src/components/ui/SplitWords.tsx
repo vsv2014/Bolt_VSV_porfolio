@@ -25,7 +25,7 @@ export function SplitWords({ text, className, wordClassName, delay = 0, immediat
         <span key={`${word}-${index}`} className="inline-block overflow-hidden pb-[0.12em] align-bottom">
           <motion.span
             className={cn('inline-block', wordClassName?.(word, index))}
-            initial={{ y: '110%', opacity: 0 }}
+            initial={immediate ? false : { y: '110%', opacity: 0 }}
             {...(immediate
               ? { animate: { y: '0%', opacity: 1 } }
               : { whileInView: { y: '0%', opacity: 1 }, viewport: { once: true, margin: '0px 0px -10% 0px' } })}

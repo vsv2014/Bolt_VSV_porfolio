@@ -8,14 +8,16 @@ const names = ['react-flow-editor', 'virtualized-10000-rows', 'honest-ai-console
 test('the first homepage HTML response contains an accessible engineering overview', () => {
   const index = read('index.html');
   const firstResponse = index.slice(index.indexOf('<main class="static-entry">'), index.indexOf('</main>') + 7);
-  assert.match(firstResponse, /<h1>Santhosh Vishal — Software Engineer<\/h1>/);
-  assert.match(firstResponse, /React, TypeScript, Node\.js/);
-  assert.match(firstResponse, /Phone and WhatsApp details are shared privately only after review/);
+  assert.match(firstResponse, /<h1>Santhosh Vishal<\/h1>/);
+  assert.match(firstResponse, /Software Engineer · Frontend/);
+  assert.match(firstResponse, /React, TypeScript and Node\.js/);
+  assert.match(firstResponse, /Phone and WhatsApp contact are shared only after review/);
   assert.equal((firstResponse.match(/<h1>/g) || []).length, 1);
   for (const name of names) {
     assert.ok(firstResponse.includes(`href="/notes/${name}.html"`), `missing crawlable HTML link: ${name}`);
   }
-  assert.ok(firstResponse.replace(/<[^>]+>/g, ' ').split(/\s+/).length > 120);
+  // Short, actionable fallback copy is intentional: avoid a wall of text on phones.
+  assert.ok(firstResponse.replace(/<[^>]+>/g, ' ').split(/\s+/).length >= 65);
 });
 
 test('article titles fit snippet guidance while article headlines remain descriptive', () => {
