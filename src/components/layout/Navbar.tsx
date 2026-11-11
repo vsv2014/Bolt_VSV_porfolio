@@ -87,7 +87,7 @@ export function Navbar() {
       )}
     >
       <nav className="mx-auto flex h-16 w-full max-w-6xl items-center justify-between gap-4 px-6 sm:px-8">
-        <a href="#home" className="flex shrink-0 items-center gap-3" aria-label="Back to top">
+        <a href="#home" className="flex shrink-0 items-center gap-3" aria-label="SV. — back to top">
           <span className="font-mono text-sm font-semibold tracking-tight text-fg">
             {profile.initials}
             <span className="text-brand-cyan">.</span>
