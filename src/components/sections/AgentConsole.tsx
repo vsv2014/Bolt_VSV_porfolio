@@ -134,8 +134,10 @@ export function AgentConsole() {
     const queued = consumePendingAgentQuery();
     if (queued) {
       booted.current = true;
-      requestAnimationFrame(() => document.getElementById('agent')?.scrollIntoView({ behavior: 'smooth' }));
-      void run(queued);
+      requestAnimationFrame(() => {
+        document.getElementById('agent')?.scrollIntoView({ behavior: 'smooth' });
+        void run(queued);
+      });
     }
     return () => window.removeEventListener(ASK_AGENT_EVENT, handler);
   }, [run]);
