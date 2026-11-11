@@ -88,6 +88,16 @@ async function audit(width, height) {
     const allProjectCount = await archive.locator('[data-project-title]').count();
     assert.ok(allProjectCount >= 20, `archive lost projects: ${allProjectCount}`);
     await archive.getByRole('button', { name: /Solo builds/i }).click();
+    // AnimatePresence keeps exiting cards in the DOM briefly. Wait for their
+    // exit transition before asserting the final filtered archive count.
+    await page.waitForFunction(
+      (before) => {
+        const rows = document.querySelectorAll('[data-testid="project-archive-content"] [data-project-title]');
+        return rows.length > 0 && rows.length < before;
+      },
+      allProjectCount,
+      { timeout: 5000 },
+    );
     const soloCount = await archive.locator('[data-project-title]').count();
     assert.ok(soloCount > 0 && soloCount < allProjectCount, 'category filtering failed');
 
