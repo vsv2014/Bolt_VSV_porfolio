@@ -1,73 +1,47 @@
-name: Publish portfolio to GitHub Pages
+name: Publish portfolio to GitHub Pages (artifact only)
 on:
   push:
     branches: [main]
+    paths-ignore:
+      - '**/*.md'
   workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
   pages: write
   id-token: write
 
 concurrency:
   group: portfolio-pages
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
   publish:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
         with:
-          persist-credentials: true
+          persist-credentials: false
       - uses: actions/setup-node@v4
         with:
-          node-version: '22'
-          cache: 'npm'
+          node-version: '24'
+          cache: npm
       - run: npm ci
       - run: npm run lint
       - run: npm test
       - run: npm run build
-      - name: Detect the existing Pages source
-        id: pages
+      - name: Configure existing Pages source for artifact deployment
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          gh api repos/"${{ github.repository }}"/pages --jq '.build_type' | xargs -I{} echo "type={}" >> "$GITHUB_OUTPUT"
-          gh api repos/"${{ github.repository }}"/pages --jq '.source.branch // ""' | xargs -I{} echo "branch={}" >> "$GITHUB_OUTPUT"
-          gh api repos/"${{ github.repository }}"/pages --jq '.source.path // ""' | xargs -I{} echo "path={}" >> "$GITHUB_OUTPUT"
-      - name: Update compiled /docs for the existing branch-based Pages site
-        if: steps.pages.outputs.type == 'legacy' && steps.pages.outputs.branch == 'main' && steps.pages.outputs.path == '/docs'
-        run: |
-          mkdir -p docs
-          rsync --archive --delete dist/ docs/
-          touch docs/.nojekyll
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -A docs
-          if ! git diff --cached --quiet; then
-            git commit -m "build(pages): publish verified portfolio"
-            git push origin HEAD:main
+          mode="$(gh api "repos/${{ github.repository }}/pages" --jq '.build_type')"
+          if [ "$mode" != "workflow" ]; then
+            # Migrate from main:/docs. No generated files or commits are pushed to main.
+            gh api --method PUT "repos/${{ github.repository }}/pages" -f build_type=workflow
           fi
-      - name: Explicitly request Pages build after GITHUB_TOKEN docs update
-        if: steps.pages.outputs.type == 'legacy' && steps.pages.outputs.branch == 'main' && steps.pages.outputs.path == '/docs'
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: gh api --method POST repos/"${{ github.repository }}"/pages/builds
-      - name: Refuse unsupported branch source without changing its publishing configuration
-        if: steps.pages.outputs.type == 'legacy' && (steps.pages.outputs.branch != 'main' || steps.pages.outputs.path != '/docs')
-        run: |
-          echo "::error::Existing Pages source is not main:/docs. Keeping it unchanged. Configure a matching publishing workflow first."
-          exit 1
-      - name: Configure GitHub Actions Pages publishing
-        if: steps.pages.outputs.type == 'workflow'
-        uses: actions/configure-pages@v5
-      - name: Upload GitHub Pages artifact
-        if: steps.pages.outputs.type == 'workflow'
-        uses: actions/upload-pages-artifact@v3
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
         with:
-          path: './dist'
-      - name: Deploy GitHub Pages artifact
-        if: steps.pages.outputs.type == 'workflow'
+          path: dist
+      - uses: actions/deploy-pages@v4
         id: deployment
-        uses: actions/deploy-pages@v4

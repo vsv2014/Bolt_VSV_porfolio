@@ -10,7 +10,8 @@
     "lint": "eslint src tests",
     "test": "node --experimental-strip-types --test tests/*.test.mjs",
     "preview": "vite preview",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc -b",
+    "audit:prod": "npm audit --omit=dev --audit-level=high"
   },
   "dependencies": {
     "clsx": "^2.1.1",
@@ -36,5 +37,8 @@
     "typescript": "^6.0.3",
     "typescript-eslint": "^8.61.1",
     "vite": "^8.0.16"
+  },
+  "engines": {
+    "node": ">=24 <25"
   }
 }

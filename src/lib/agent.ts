@@ -94,25 +94,25 @@ function buildTrace(doc: AgentDoc, similarity: number): TraceStep[] {
       kind: 'embed',
       label: 'tokenize(query)',
       detail: 'local tokenization · no embeddings',
-      ms: 360,
+      ms: 100,
     },
     {
       kind: 'retrieve',
       label: 'rank_curated_facts(k=3)',
       detail: `keyword relevance · top match ${similarity.toFixed(3)}`,
-      ms: 520,
+      ms: 130,
     },
     {
       kind: 'tool',
       label: `preview_${doc.tool.name}(${doc.tool.args})`,
       detail: `illustrative local lookup · ${doc.tool.detail}`,
-      ms: 460,
+      ms: 130,
     },
     {
       kind: 'compose',
       label: 'display_curated_answer()',
       detail: `${words} words · simulated text reveal`,
-      ms: 300,
+      ms: 100,
     },
   ];
 }
@@ -146,3 +146,19 @@ export const consumePendingAgentQuery = () => {
   pendingAgentQuery = null;
   return query;
 };
+
+/** A cold command-palette navigation can precede the projects chunk mounting. */
+export interface PendingProjectSelection {
+  title: string;
+  category: string;
+}
+let pendingProjectSelection: PendingProjectSelection | null = null;
+export function selectProject(selection: PendingProjectSelection): void {
+  pendingProjectSelection = selection;
+  window.dispatchEvent(new CustomEvent('vsv:show-project', { detail: selection }));
+}
+export function consumePendingProjectSelection(): PendingProjectSelection | null {
+  const pending = pendingProjectSelection;
+  pendingProjectSelection = null;
+  return pending;
+}

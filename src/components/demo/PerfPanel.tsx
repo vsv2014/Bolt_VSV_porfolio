@@ -14,6 +14,7 @@ interface Metrics {
 export function PerfPanel() {
   const reduceMotion = useReducedMotion();
   const [metrics, setMetrics] = useState<Metrics>({ lcp: null, cls: 0, longTasks: 0, fps: 0 });
+  const containerRef = useRef<HTMLDivElement>(null);
   const frames = useRef(0);
   const last = useRef(0);
 
@@ -49,10 +50,17 @@ export function PerfPanel() {
     return () => observers.forEach((observer) => observer.disconnect());
   }, []);
 
-  // Frame meter — sampled twice a second.
+  // Only sample frame cadence while this particular panel is visible.
   useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
     let frame = 0;
+    let active = false;
+    let visible = false;
+
     const tick = (now: number) => {
+      frame = 0;
+      if (!active) return;
       frames.current += 1;
       if (last.current && now - last.current >= 500) {
         const fps = Math.round((frames.current * 1000) / (now - last.current));
@@ -64,8 +72,37 @@ export function PerfPanel() {
       }
       frame = requestAnimationFrame(tick);
     };
-    frame = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(frame);
+
+    const stop = () => {
+      active = false;
+      cancelAnimationFrame(frame);
+      frame = 0;
+      frames.current = 0;
+      last.current = 0;
+    };
+
+    const update = () => {
+      if (visible && !document.hidden) {
+        if (!active) {
+          active = true;
+          frame = requestAnimationFrame(tick);
+        }
+      } else {
+        stop();
+      }
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      visible = entries[0]?.isIntersecting ?? false;
+      update();
+    });
+    observer.observe(container);
+    document.addEventListener('visibilitychange', update);
+    return () => {
+      observer.disconnect();
+      document.removeEventListener('visibilitychange', update);
+      stop();
+    };
   }, []);
 
   const vitals = [
@@ -83,7 +120,7 @@ export function PerfPanel() {
   ];
 
   return (
-    <div className="flex h-full flex-col">
+    <div ref={containerRef} className="flex h-full flex-col">
       <div className="flex items-center gap-2 border-b border-line px-4 py-3">
         <Gauge className="h-3.5 w-3.5 text-brand-cyan" />
         <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-faint">performance-observer · live</p>

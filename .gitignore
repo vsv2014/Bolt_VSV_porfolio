@@ -26,3 +26,8 @@ dist-ssr
 
 # TypeScript build info
 tsconfig.*.tsbuildinfo
+
+# Generated pages and transient tool output
+/docs/
+/vite.config.ts.timestamp-*.js
+/wget-log

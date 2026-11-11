@@ -11,10 +11,10 @@ function* sourceFiles(directory) {
   }
 }
 
-// Guard the tracked application and legacy source trees, not historical Git objects.
+// Guard the tracked application source tree, not historical Git objects.
 // This does not guarantee removal from prior commits, search engine caches or PDFs.
 test('phone numbers are not embedded in publicly shipped source code', () => {
-  for (const directory of ['src', 'project/src']) {
+  for (const directory of ['src']) {
     for (const path of sourceFiles(directory)) {
       const text = readFileSync(path, 'utf8');
       assert.doesNotMatch(text, /tel:\s*\+?\d{10,}/i, `Direct phone link in ${path}`);

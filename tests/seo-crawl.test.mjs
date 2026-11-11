@@ -14,7 +14,7 @@ test('the first homepage HTML response contains an accessible engineering overvi
   assert.match(firstResponse, /Phone and WhatsApp contact are shared only after review/);
   assert.equal((firstResponse.match(/<h1>/g) || []).length, 1);
   for (const name of names) {
-    assert.ok(firstResponse.includes(`href="/notes/${name}.html"`), `missing crawlable HTML link: ${name}`);
+    assert.ok(firstResponse.includes(`href="./notes/${name}.html"`), `missing crawlable HTML link: ${name}`);
   }
   // Short, actionable fallback copy is intentional: avoid a wall of text on phones.
   assert.ok(firstResponse.replace(/<[^>]+>/g, ' ').split(/\s+/).length >= 65);

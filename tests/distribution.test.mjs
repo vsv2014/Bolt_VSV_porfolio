@@ -26,7 +26,8 @@ test('homepage and each standalone article advertise the public feed', () => {
   for (const path of paths) {
     const html = read(path);
     assert.ok(html.includes('type="application/rss+xml"'), `no feed discovery in ${path}`);
-    assert.ok(html.includes('href="/feed.xml"'), `wrong feed path in ${path}`);
+    const href = path === 'index.html' ? './feed.xml' : '../feed.xml';
+    assert.ok(html.includes(`href="${href}"`), `wrong feed path in ${path}`);
   }
   assert.ok(read('src/components/sections/EngineeringNotes.tsx').includes('Subscribe to RSS'));
   assert.ok(read('README.md').includes(`${origin}/feed.xml`));
