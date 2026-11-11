@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#05060a">
+<title>Render 10,000 rows without rendering 10,000 elements | Santhosh Vishal</title>
+<meta name="description" content="Windowing math, overscan and scroll batching in a dependency-free React table. Original engineering notes by Santhosh Vishal.">
+<meta name="author" content="Santhosh Vishal">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://santhoshvishal.vercel.app/notes/virtualized-10000-rows.html">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Santhosh Vishal — Engineering Portfolio">
+<meta property="og:url" content="https://santhoshvishal.vercel.app/notes/virtualized-10000-rows.html">
+<meta property="og:title" content="Render 10,000 rows without rendering 10,000 elements">
+<meta property="og:description" content="Windowing math, overscan and scroll batching in a dependency-free React table. Original engineering notes by Santhosh Vishal.">
+<meta property="og:image" content="https://santhoshvishal.vercel.app/assets/VSV-portfolio-pp.jpeg">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Render 10,000 rows without rendering 10,000 elements","description":"Windowing math, overscan and scroll batching in a dependency-free React table. Original engineering notes by Santhosh Vishal.","datePublished":"2026-11-12","dateModified":"2026-11-12","mainEntityOfPage":{"@type":"WebPage","@id":"https://santhoshvishal.vercel.app/notes/virtualized-10000-rows.html"},"author":{"@type":"Person","name":"Santhosh Vishal","url":"https://santhoshvishal.vercel.app/"},"publisher":{"@type":"Person","name":"Santhosh Vishal"}}</script>
+<style>
+:root{color-scheme:dark;font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:#05060a;color:#f2f3f7;font-size:16px}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 85% 0%,rgba(124,92,255,.12),transparent 42%),#05060a;line-height:1.75}
+a{color:#35e0ff;text-decoration-thickness:1px;text-underline-offset:3px}a:hover{color:#c8f65d}a:focus-visible{outline:2px solid #c8f65d;outline-offset:4px}
+header{border-bottom:1px solid #30313b;background:#090a10}header .frame{max-width:920px;margin:auto;padding:17px 24px;display:flex;justify-content:space-between;align-items:center;gap:16px}
+.brand{font-weight:750;letter-spacing:-.035em;text-decoration:none;color:#f2f3f7}.brand b{color:#c8f65d}
+.nav{font-size:.84rem;display:flex;gap:18px;flex-wrap:wrap}
+main{max-width:800px;margin:0 auto;padding:56px 24px 88px}
+.eyebrow{font:600 .72rem/1.4 ui-monospace,monospace;letter-spacing:.19em;text-transform:uppercase;color:#c8f65d}
+h1{font-size:clamp(2.25rem,7vw,4.2rem);line-height:1.08;letter-spacing:-.055em;margin:17px 0 20px} .subtitle{font-size:1.1rem;line-height:1.6;color:#c5cad8;max-width:650px}
+.meta{font:.76rem ui-monospace,monospace;color:#9398ab;margin:22px 0 40px}
+.article{padding-top:16px;border-top:1px solid #2a2d38}h2{font-size:1.5rem;line-height:1.25;letter-spacing:-.025em;margin:2.3rem 0 .7rem}
+p,li{color:#c1c5d3}p{margin:1.1rem 0}strong{color:#f4f5fb}code{font: .9em ui-monospace,SFMono-Regular,Consolas,monospace;color:#d4fa9b}pre{padding:22px;border:1px solid #343849;background:#11131c;border-radius:13px;overflow:auto;line-height:1.55;font-size:.82rem;tab-size:2}
+pre code{color:#deecf6}footer{max-width:800px;margin:0 auto;padding:26px 24px 50px;border-top:1px solid #2a2d38;font-size:.82rem;color:#8c91a5}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;animation:none!important}}
+</style>
+</head>
+<body>
+<header><div class="frame"><a class="brand" href="/">SV<b>.</b> Santhosh Vishal</a><nav class="nav" aria-label="Primary navigation"><a href="/#projects">Work</a><a href="/#craft">Live demos</a><a href="/#notes">Notes</a><a href="/#contact">Contact</a></nav></div></header>
+<main><article>
+<p class="eyebrow">Web performance / Engineering notes</p>
+<h1>Render 10,000 rows without rendering 10,000 elements</h1>
+<p class="subtitle">Windowing math, overscan and scroll batching in a dependency-free React table</p>
+<p class="meta">By Santhosh Vishal · 2026-11-12 · 5 min read</p>
+<div class="article"><p>If a table contains 10,000 records, mounting 10,000 row elements is usually unnecessary. The interactive <a href="/#craft">portfolio table</a> demonstrates fixed-height list virtualization: all 10,000 synthetic data rows are available in memory, but only a small slice is rendered into the DOM.</p>
+<h2>Why fixed-height windowing is tractable</h2>
+<p>The demo uses a 30-pixel row, a 260-pixel viewport and six overscan rows on each side. With known row height, the visible interval can be calculated from <code>scrollTop</code> without measuring each item. Clamp the viewport and scroll position to avoid negative ranges, and cap the resulting end index at <code>total</code>.</p>
+<pre><code>const start = Math.max(0,
+  Math.floor(scrollTop / rowHeight) - overscan);
+const end = Math.min(total,
+  Math.ceil((scrollTop + viewportHeight) / rowHeight) + overscan);</code></pre>
+<p>This gives a predictable number of elements: usually roughly <code>ceil(viewportHeight / rowHeight) + 2 × overscan</code>, rather than 10,000. The underlying <a href="https://github.com/vsv2014/Bolt_VSV_porfolio/blob/main/src/lib/virtualWindow.ts">visibleRange()</a> helper additionally clamps scroll positions near the end of the list.</p>
+<h2>The illusion of a full-height list</h2>
+<p>A tall inner spacer remains at <code>total × rowHeight</code> so the browser scrollbar knows the full scrollable distance. The rendered window is translated by <code>start × rowHeight</code>. As you scroll, the window changes, but the scroll bar behaves as though every row exists in the document.</p>
+<pre><code>&lt;div style={{ height: TOTAL * ROW_H, position: 'relative' }}&gt;
+  &lt;div style={{ transform: `translateY(${start * ROW_H}px)` }}&gt;
+    {rows.slice(start, end).map(renderRow)}
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+<h2>Batch updates, measure the actual viewport</h2>
+<p>The scroll handler stores the latest <code>scrollTop</code>, then requests a single <code>requestAnimationFrame</code> callback to commit React state. <code>ResizeObserver</code> measures the real viewport height. That avoids assuming that the CSS layout will always match a hard-coded constant, a bug that previously left blank space below the visible table.</p>
+<h2>Accessibility has trade-offs</h2>
+<p>The scroll container is keyboard focusable and describes itself as a list of 10,000 tenants. Each rendered item exposes its position and total set size through <code>aria-posinset</code> and <code>aria-setsize</code>. For production data grids, assess roving focus, sortable headers, variable-height rows, screen-reader compatibility, virtualization during rapid keyboard navigation, and server-side loading. A fast list is not automatically an accessible grid.</p>
+<p><strong>Try it:</strong> <a href="/#craft">Scroll the 10K-row demo</a>. <strong>Inspect:</strong> <a href="https://github.com/vsv2014/Bolt_VSV_porfolio/blob/main/src/components/demo/VirtualList.tsx">VirtualList.tsx</a> and its <a href="https://github.com/vsv2014/Bolt_VSV_porfolio/blob/main/tests/craft.test.mjs">window boundary tests</a>.</p></div>
+</article>
+</main>
+<footer><p>© 2026 Santhosh Vishal · <a href="/">Portfolio</a> · <a href="https://github.com/vsv2014/Bolt_VSV_porfolio">GitHub source</a> · <a href="/#contact">Get in touch</a></p></footer>
+</body></html>
