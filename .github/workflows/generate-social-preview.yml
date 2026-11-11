@@ -1,0 +1,37 @@
+name: Generate portfolio social-preview PNG
+on:
+  push:
+    branches: [main]
+    paths:
+      - public/assets/social-preview.svg
+      - scripts/render-social-preview.mjs
+      - .github/workflows/generate-social-preview.yml
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+      - run: npm ci
+      - run: npm install --no-save --no-package-lock playwright-core@1.56.1
+      - name: Render verified social image
+        run: node scripts/render-social-preview.mjs
+      - name: Persist generated PNG in repository
+        env:
+          TARGET_BRANCH: ${{ github.ref_name }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add public/assets/social-preview.png
+          if git diff --cached --quiet; then
+            echo "Preview image unchanged"
+          else
+            git commit -m "chore: refresh social-preview PNG from vector source [skip ci]"
+            git push origin "HEAD:${TARGET_BRANCH}"
+          fi
