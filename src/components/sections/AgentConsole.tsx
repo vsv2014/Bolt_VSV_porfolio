@@ -94,7 +94,7 @@ export function AgentConsole() {
 
       for (const step of steps) {
         // Trace timings are illustrative, not network latency. Keep the demo responsive.
-        if (!reduceMotion) await sleep(Math.min(step.ms, 140));
+        if (!reduceMotion) await sleep(step.ms);
         if (id !== generation.current) return;
         setMessages((previous) => patch(previous, answerId, (message) => ({ ...message, trace: [...(message.trace ?? []), step] })));
       }
