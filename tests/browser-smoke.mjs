@@ -71,6 +71,14 @@ async function audit(width, height) {
       { timeout: 5000 });
     assert.ok((await viewport.locator('[role="listitem"]').count()) < 35);
 
+    // Privacy: phone/WhatsApp is request-only; the number must not be sent to clients.
+    const phoneRequest = page.getByRole('link', { name: /Request phone \/ WhatsApp/i });
+    await phoneRequest.waitFor({ state: 'attached' });
+    const phoneRequestHref = await phoneRequest.getAttribute('href');
+    assert.ok(phoneRequestHref?.startsWith('mailto:'), 'phone requests must go through a human-reviewed email');
+    assert.ok(phoneRequestHref?.includes('subject='), 'request needs context for human review');
+    assert.equal(await page.locator('a[href^="tel:"]').count(), 0, 'public call link leaks a phone number');
+
     assert.deepEqual(pageErrors, [], `page errors at ${width}px`);
     console.log(`PASS ${width}x${height}: canvas ${Math.round(data.width)}x${Math.round(data.height)}, 5 nodes, edge reset, keyboard nudge, 10k-row scroll`);
     await page.screenshot({ path: `/tmp/portfolio-craft-${width}.png`, fullPage: false });
