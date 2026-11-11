@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { ListTree } from 'lucide-react';
+import { visibleRange } from '@/lib/virtualWindow';
 
 const ROW_H = 30;
 const VIEWPORT = 260;
@@ -30,8 +31,7 @@ export function VirtualList() {
     [],
   );
 
-  const start = Math.max(0, Math.floor(scrollTop / ROW_H) - OVERSCAN);
-  const end = Math.min(TOTAL, Math.ceil((scrollTop + viewportHeight) / ROW_H) + OVERSCAN);
+  const { start, end } = visibleRange(scrollTop, viewportHeight, TOTAL, ROW_H, OVERSCAN);
   const visible = rows.slice(start, end);
 
   useEffect(() => () => cancelAnimationFrame(frame.current), []);
