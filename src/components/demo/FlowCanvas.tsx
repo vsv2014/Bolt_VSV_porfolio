@@ -1,18 +1,13 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { LayoutGrid, MousePointer2, Plus, RotateCcw } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { autoLayout, canvasHeight, columnsFor, NODE_W, NODE_H, PAD, GAP_X, GAP_Y } from '@/lib/craftLayout';
 
 /* ------------------------------------------------------------------ *
  * A miniature node-graph editor — the interaction model behind the
  * workflow canvases I build at work (Monaco/ELK/ReteJS in production),
  * hand-rolled here with pointer events + SVG so it ships in ~6 kB.
  * ------------------------------------------------------------------ */
-
-const NODE_W = 178;
-const NODE_H = 58;
-const PAD = 14;
-const GAP_X = 62;
-const GAP_Y = 22;
 
 type Kind = 'llm' | 'tool' | 'api' | 'human' | 'loop';
 
@@ -40,8 +35,6 @@ const KINDS: Record<Kind, { accent: string; badge: string; step: number }> = {
 
 const DEFAULT_W = 640;
 
-const columnsFor = (width: number) => Math.max(1, Math.floor((Math.max(width, NODE_W + PAD * 2) - PAD * 2 + GAP_X) / (NODE_W + GAP_X)));
-
 const seed = (): { nodes: GraphNode[]; edges: GraphEdge[] } => {
   const nodes: GraphNode[] = [
     { id: 'n1', label: 'Parse intent', kind: 'llm', x: 0, y: 0 },
@@ -59,31 +52,6 @@ const seed = (): { nodes: GraphNode[]; edges: GraphEdge[] } => {
   return { nodes, edges };
 };
 
-/** Longest-path order, wrapped into readable rows instead of clipping nodes offscreen. */
-function autoLayout(nodes: GraphNode[], edges: GraphEdge[], width: number): GraphNode[] {
-  if (nodes.length === 0) return nodes;
-  const depth = new Map<string, number>(nodes.map((node) => [node.id, 0]));
-  for (let pass = 0; pass < nodes.length; pass += 1) {
-    let changed = false;
-    for (const edge of edges) {
-      const from = depth.get(edge.from) ?? 0;
-      const to = depth.get(edge.to) ?? 0;
-      if (from + 1 > to && from + 1 < nodes.length) {
-        depth.set(edge.to, from + 1);
-        changed = true;
-      }
-    }
-    if (!changed) break;
-  }
-  const columns = columnsFor(width);
-  const ordered = nodes.map((node, index) => ({ node, index }))
-    .sort((a, b) => (depth.get(a.node.id) ?? 0) - (depth.get(b.node.id) ?? 0) || a.index - b.index);
-  const positions = new Map(ordered.map(({ node }, index) => [
-    node.id,
-    { x: PAD + (index % columns) * (NODE_W + GAP_X), y: PAD + Math.floor(index / columns) * (NODE_H + GAP_Y) },
-  ]));
-  return nodes.map((node) => ({ ...node, ...positions.get(node.id)! }));
-}
 
 export function FlowCanvas() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -92,7 +60,7 @@ export function FlowCanvas() {
     const base = seed();
     return { nodes: autoLayout(base.nodes, base.edges, DEFAULT_W), edges: base.edges };
   });
-  const height = Math.max(380, PAD * 2 + Math.ceil(graph.nodes.length / columnsFor(width)) * (NODE_H + GAP_Y));
+  const height = canvasHeight(graph.nodes.length, width);
   const hasManualPosition = useRef(false);
   const previousWidth = useRef(DEFAULT_W);
   const [connecting, setConnecting] = useState<string | null>(null);
