@@ -16,7 +16,7 @@ function ProgressBar({ from, to, fromLabel, toLabel }: { from: number; to: numbe
     <div className="mt-4 space-y-2">
       {bars.map((bar, index) => (
         <div key={bar.label}>
-          <p className="mb-1 font-mono text-[10px] text-faint">{bar.label}</p>
+          <p className="mb-1 font-mono text-[10px] text-muted">{bar.label}</p>
           <div className="h-1.5 overflow-hidden rounded-full bg-surface-hover">
             <motion.span
               className={`block h-full rounded-full ${bar.tone}`}
@@ -52,7 +52,7 @@ export function Impact() {
                 <span className="flex h-9 w-9 items-center justify-center rounded-lg border border-line text-brand-cyan">
                   <metric.icon className="h-[18px] w-[18px]" strokeWidth={1.75} />
                 </span>
-                <span className="font-mono text-[10px] uppercase tracking-wider text-faint">{metric.label}</span>
+                <span className="font-mono text-[10px] uppercase tracking-wider text-muted">{metric.label}</span>
               </div>
 
               <p className="mt-5 font-display text-4xl font-semibold tracking-tight text-fg">
@@ -93,7 +93,7 @@ export function Impact() {
                 {scopeFacts.map((fact) => (
                   <div key={fact.label} className="rounded-xl border border-line bg-surface p-3">
                     <dt className="font-display text-xl font-semibold text-fg">{fact.value}</dt>
-                    <dd className="mt-1 text-[11px] leading-relaxed text-faint">{fact.label}</dd>
+                    <dd className="mt-1 text-[11px] leading-relaxed text-muted">{fact.label}</dd>
                   </div>
                 ))}
               </dl>
@@ -101,21 +101,21 @@ export function Impact() {
 
             <ul className="grid gap-3">
               {recognitions.map((award, index) => (
-                <Reveal key={award.title} delay={0.05 + index * 0.05}>
-                  <li className="flex gap-4 rounded-xl border border-line bg-surface p-4">
+                <li key={award.title} className="rounded-xl border border-line bg-surface p-4">
+                  <Reveal delay={0.05 + index * 0.05} className="flex gap-4">
                     <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-line text-brand-purple">
                       <award.icon className="h-[18px] w-[18px]" strokeWidth={1.75} />
                     </span>
                     <div>
                       <p className="text-sm font-medium text-fg">{award.title}</p>
-                      <p className="mt-0.5 font-mono text-[10px] text-faint">{award.period}</p>
+                      <p className="mt-0.5 font-mono text-[10px] text-muted">{award.period}</p>
                       <p className="mt-1 text-xs leading-relaxed text-muted">{award.description}</p>
                     </div>
-                  </li>
-                </Reveal>
+                  </Reveal>
+                </li>
               ))}
               <li className="flex items-center justify-between rounded-xl border border-line bg-surface p-4">
-                <span className="font-mono text-[11px] text-faint">Current role</span>
+                <span className="font-mono text-[11px] text-muted">Current role</span>
                 <span className="text-sm text-fg">{experiences[0].role} · {experiences[0].company}</span>
               </li>
             </ul>

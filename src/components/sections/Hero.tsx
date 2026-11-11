@@ -243,8 +243,8 @@ export function Hero() {
                   stat.value
                 )}
               </dt>
-              <dd className="mt-2 font-mono text-[10px] uppercase tracking-[0.14em] text-faint">{stat.label}</dd>
-              {stat.note && <dd className="mt-1 font-mono text-[10px] text-brand-lime/80">{stat.note}</dd>}
+              <dd className="mt-2 font-mono text-[10px] uppercase tracking-[0.14em] text-muted">{stat.label}</dd>
+              {stat.note && <dd className="mt-1 font-mono text-[10px] text-muted">{stat.note}</dd>}
             </div>
           ))}
         </motion.dl>
@@ -254,7 +254,7 @@ export function Hero() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.5, duration: 0.8 }}
-          className="mt-10 hidden items-center justify-center gap-2 font-mono text-[10px] uppercase tracking-[0.28em] text-faint sm:flex"
+          className="mt-10 hidden items-center justify-center gap-2 font-mono text-[10px] uppercase tracking-[0.28em] text-muted sm:flex"
           aria-hidden
         >
           <span className="animate-scroll-cue">↓</span> scroll
