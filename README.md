@@ -36,7 +36,7 @@ It's also a real professional portfolio for [Santhosh Vishal](https://www.linked
 
 ## Technical decisions
 
-- **React 19 + TypeScript + Vite 8** with lazy-loaded below-the-fold sections.
+- **React 19 + TypeScript + Vite 8** with viewport-deferred sections and recovery boundaries.
 - **Tailwind CSS v4** and an original dark/light token system, internally named *Aurora*.
 - **Motion** for transitions, with `prefers-reduced-motion` respected.
 - **Native browser APIs** for flow editing, virtual scroll, performance readings, and the WebGL background. No node editor or component UI kit is bundled.
@@ -45,7 +45,7 @@ It's also a real professional portfolio for [Santhosh Vishal](https://www.linked
 
 ## Run it locally
 
-Requirements: **Node.js 22+** and npm.
+Requirements: **Node.js 24** (see `.nvmrc`) and npm.
 
 ```bash
 git clone https://github.com/vsv2014/Bolt_VSV_porfolio.git
@@ -58,7 +58,9 @@ Open **http://localhost:3001**. To validate a change:
 
 ```bash
 npm run lint
+npm run typecheck
 npm test
+npm run audit:prod
 npm run build
 npm run preview
 ```
@@ -94,7 +96,7 @@ src/
 ├── data/                # portfolio content and simulated agent knowledge
 ├── lib/                 # layout, virtual window, theme, search and helpers
 └── types/               # shared TypeScript contracts
-tests/                   # unit and Chromium smoke tests
+tests/                   # unit, Chromium and WebKit smoke tests
 ```
 
 **Keyboard:** `⌘K` / `Ctrl+K` opens the palette, `/` opens it from a non-input field, arrows select options, Enter runs one, Escape closes.
