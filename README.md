@@ -1,12 +1,12 @@
 <div align="center">
 
-# Aurora — Interactive Developer Portfolio
+# Santhosh Vishal — Interactive Engineering Portfolio
 
-**A React + TypeScript portfolio where the interfaces are the engineering proof.**
+**Interactive frontend engineering, production AI platforms, and the implementation details behind them.**
 
 Hand-built workflow editor · 10,000-row virtualized table · live performance metrics · keyboard command palette · accessible motion
 
-[**Explore the live site**](https://vsv2014.github.io/Bolt_VSV_porfolio/) · [**See the source**](https://github.com/vsv2014/Bolt_VSV_porfolio) · [**Report an issue**](https://github.com/vsv2014/Bolt_VSV_porfolio/issues/new/choose)
+[**Explore the live site**](https://santhoshvishal.vercel.app/) · [**See the source**](https://github.com/vsv2014/Bolt_VSV_porfolio) · [**Report an issue**](https://github.com/vsv2014/Bolt_VSV_porfolio/issues/new/choose)
 
 [![Portfolio quality](https://github.com/vsv2014/Bolt_VSV_porfolio/actions/workflows/quality.yml/badge.svg)](https://github.com/vsv2014/Bolt_VSV_porfolio/actions/workflows/quality.yml)
 [![License: MIT (code)](https://img.shields.io/badge/code_license-MIT-blue.svg)](LICENSE)
@@ -15,25 +15,27 @@ Hand-built workflow editor · 10,000-row virtualized table · live performance m
 
 ## Why explore this project?
 
+[**Read the engineering notes**](https://santhoshvishal.vercel.app/#notes) — practical breakdowns of a lightweight node editor, 10,000-row windowing and a truthful local AI demo.
+
 Most portfolio templates *describe* frontend skills. This portfolio makes several of them **interactive**: move nodes in the workflow editor, scroll ten thousand simulated tenant rows without rendering them all, inspect performance readings in your own browser, or navigate the whole experience from the keyboard.
 
 It's also a real professional portfolio for [Santhosh Vishal](https://www.linkedin.com/in/santhosh-vishal/), a software engineer working across enterprise interfaces, AI platforms, and full-stack systems.
 
 | Try it | What you can inspect in the source |
 | --- | --- |
-| [**Visual flow designer**](https://vsv2014.github.io/Bolt_VSV_porfolio/#craft) | Pointer capture, SVG edges, responsive auto-layout, node manipulation, keyboard controls |
-| [**Virtualized 10,000-row table**](https://vsv2014.github.io/Bolt_VSV_porfolio/#craft) | Fixed-height windowing, overscan, `requestAnimationFrame` scroll batching |
-| [**Performance panel**](https://vsv2014.github.io/Bolt_VSV_porfolio/#craft) | `PerformanceObserver` (where supported), layout shifts, long tasks, frame-rate sampling |
-| [**Command palette**](https://vsv2014.github.io/Bolt_VSV_porfolio/) | ⌘K / Ctrl+K, fuzzy-ish keyword matching, links and section navigation |
-| [**Portfolio AI-console simulation**](https://vsv2014.github.io/Bolt_VSV_porfolio/#agent) | Deterministic **lexical retrieval** against curated facts and an *illustrative* embed → retrieve → tool → compose trace. **No real embedding model, vector database, LLM API or hosted service.** |
-| [**Light and dark themes**](https://vsv2014.github.io/Bolt_VSV_porfolio/) | CSS-first Tailwind design tokens, pre-paint theme selection, reduced-motion fallbacks |
+| [**Visual flow designer**](https://santhoshvishal.vercel.app/#craft) | Pointer capture, SVG edges, responsive auto-layout, node manipulation, keyboard controls |
+| [**Virtualized 10,000-row table**](https://santhoshvishal.vercel.app/#craft) | Fixed-height windowing, overscan, `requestAnimationFrame` scroll batching |
+| [**Performance panel**](https://santhoshvishal.vercel.app/#craft) | `PerformanceObserver` (where supported), layout shifts, long tasks, frame-rate sampling |
+| [**Command palette**](https://santhoshvishal.vercel.app/) | ⌘K / Ctrl+K, fuzzy-ish keyword matching, links and section navigation |
+| [**Portfolio AI-console simulation**](https://santhoshvishal.vercel.app/#agent) | Deterministic **lexical retrieval** against curated facts and an *illustrative* embed → retrieve → tool → compose trace. **No real embedding model, vector database, LLM API or hosted service.** |
+| [**Light and dark themes**](https://santhoshvishal.vercel.app/) | CSS-first Tailwind design tokens, pre-paint theme selection, reduced-motion fallbacks |
 
 > **Note on screenshots:** The live demo is the source of truth. The editor and synthetic tenant data are portfolio demonstrations, not screenshots of employer or customer products.
 
 ## Technical decisions
 
 - **React 19 + TypeScript + Vite 8** with lazy-loaded below-the-fold sections.
-- **Tailwind CSS v4** and an original dark/light design system named *Aurora*.
+- **Tailwind CSS v4** and an original dark/light token system, internally named *Aurora*.
 - **Motion** for transitions, with `prefers-reduced-motion` respected.
 - **Native browser APIs** for flow editing, virtual scroll, performance readings, and the WebGL background. No node editor or component UI kit is bundled.
 - **Accessibility-first interactions:** visible keyboard focus, skip link, command palette, keyboard graph editing, descriptive labels, and a static-motion fallback.
@@ -59,7 +61,7 @@ npm run build
 npm run preview
 ```
 
-The production build uses a relative asset base, so the site can work under a GitHub Pages project subdirectory.
+The production build uses a relative asset base and is deployed from `main` to Vercel. The old GitHub Pages URL is non-canonical.
 
 ## Customize responsibly
 
