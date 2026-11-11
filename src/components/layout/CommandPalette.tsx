@@ -111,6 +111,7 @@ export function CommandPalette() {
   const [query, setQuery] = useState('');
   const [activeIndex, setActiveIndex] = useState(0);
   const inputRef = useRef<HTMLInputElement>(null);
+  const dialogRef = useRef<HTMLDivElement>(null);
   const theme = useSyncExternalStore(subscribe, getTheme, () => 'dark' as const);
 
   // Global shortcuts: ⌘K / Ctrl+K toggles, "/" opens, Esc closes.
@@ -155,11 +156,28 @@ export function CommandPalette() {
   useEffect(() => {
     if (!open) return;
     const previous = document.body.style.overflow;
+    const previousFocus = document.activeElement as HTMLElement | null;
     document.body.style.overflow = 'hidden';
     const focus = requestAnimationFrame(() => inputRef.current?.focus());
+    const trapFocus = (event: KeyboardEvent) => {
+      if (event.key !== 'Tab' || !dialogRef.current) return;
+      const focusable = [...dialogRef.current.querySelectorAll<HTMLElement>('input, button, [href], [tabindex]:not([tabindex="-1"])')]
+        .filter((item) => !item.hasAttribute('disabled'));
+      if (!focusable.length) return;
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (event.shiftKey && (document.activeElement === first || !dialogRef.current.contains(document.activeElement))) {
+        event.preventDefault(); last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault(); first.focus();
+      }
+    };
+    document.addEventListener('keydown', trapFocus);
     return () => {
       document.body.style.overflow = previous;
+      document.removeEventListener('keydown', trapFocus);
       cancelAnimationFrame(focus);
+      previousFocus?.focus();
     };
   }, [open]);
 
@@ -195,7 +213,7 @@ export function CommandPalette() {
         icon: Sparkles,
         action: () => {
           goTo('agent');
-          window.setTimeout(() => askAgent(query.trim()), 420);
+          askAgent(query.trim());
         },
       });
     } else {
@@ -208,7 +226,7 @@ export function CommandPalette() {
           icon: Sparkles,
           action: () => {
             goTo('agent');
-            window.setTimeout(() => askAgent(prompt), 420);
+            askAgent(prompt);
           },
         });
       });
@@ -261,11 +279,13 @@ export function CommandPalette() {
           <button
             type="button"
             aria-label="Close command palette"
+            tabIndex={-1}
             onClick={close}
             className="absolute inset-0 cursor-default bg-black/55 backdrop-blur-sm"
           />
 
           <motion.div
+            ref={dialogRef}
             role="dialog"
             aria-modal="true"
             aria-label="Command palette"
