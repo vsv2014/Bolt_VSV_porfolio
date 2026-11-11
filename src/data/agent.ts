@@ -165,8 +165,8 @@ export const agentDocs: AgentDoc[] = [
     source: 'data/site.ts#contact',
     keywords: ['hire', 'hiring', 'contact', 'email', 'reach', 'available', 'availability', 'resume', 'cv', 'interview', 'relocate', 'relocation', 'remote', 'hybrid', 'notice', 'salary', 'phone', 'call', 'meeting', 'opportunity', 'role', 'opening'],
     answer:
-      'He is open to senior AI-platform and full-stack roles. Fastest channel: santhoshvishalveerannapet@gmail.com — or +91 770-277-1465 for a call. The résumé PDF downloads from the hero and LinkedIn (in/santhosh-vishal) is current. Based in Hyderabad, India; happy to discuss remote, hybrid or relocation for the right team.',
-    tool: { name: 'get_contact', args: 'channel="all"', detail: 'email · phone · LinkedIn · résumé' },
+      'He is open to senior AI-platform and full-stack roles. Fastest channel: santhoshvishalveerannapet@gmail.com. For a call or WhatsApp number, please send an email request with your name, organization, and purpose; Santhosh will decide whether to share it privately. The résumé PDF downloads from the hero and LinkedIn (in/santhosh-vishal) is current. Based in Hyderabad, India; happy to discuss remote, hybrid or relocation for the right team.',
+    tool: { name: 'get_contact', args: 'channel="all"', detail: 'email · LinkedIn · human-approved call requests · résumé' },
   },
 ];
 
