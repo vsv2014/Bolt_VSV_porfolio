@@ -146,3 +146,19 @@ export const consumePendingAgentQuery = () => {
   pendingAgentQuery = null;
   return query;
 };
+
+/** A cold command-palette navigation can precede the projects chunk mounting. */
+export interface PendingProjectSelection {
+  title: string;
+  category: string;
+}
+let pendingProjectSelection: PendingProjectSelection | null = null;
+export function selectProject(selection: PendingProjectSelection): void {
+  pendingProjectSelection = selection;
+  window.dispatchEvent(new CustomEvent('vsv:show-project', { detail: selection }));
+}
+export function consumePendingProjectSelection(): PendingProjectSelection | null {
+  const pending = pendingProjectSelection;
+  pendingProjectSelection = null;
+  return pending;
+}
