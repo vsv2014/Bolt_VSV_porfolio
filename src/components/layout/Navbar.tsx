@@ -32,19 +32,32 @@ export function Navbar() {
   }, []);
 
   useEffect(() => {
-    const els = sectionIds
-      .map((id) => document.getElementById(id))
-      .filter((el): el is HTMLElement => el !== null);
+    // Lazy sections are not necessarily mounted when this effect first runs.
+    const observed = new Set<HTMLElement>();
     const observer = new IntersectionObserver(
       (entries) => {
         for (const entry of entries) {
           if (entry.isIntersecting) setActive(entry.target.id);
         }
       },
-      { rootMargin: '-45% 0px -55% 0px' },
+      { rootMargin: '-35% 0px -50% 0px' },
     );
-    els.forEach((el) => observer.observe(el));
-    return () => observer.disconnect();
+    const observeSections = () => {
+      for (const id of sectionIds) {
+        const element = document.getElementById(id);
+        if (element && !observed.has(element)) {
+          observed.add(element);
+          observer.observe(element);
+        }
+      }
+    };
+    observeSections();
+    const mutations = new MutationObserver(observeSections);
+    mutations.observe(document.querySelector('main') ?? document.body, { childList: true, subtree: true });
+    return () => {
+      mutations.disconnect();
+      observer.disconnect();
+    };
   }, []);
 
   // Close the overflow menu on outside click or Escape.

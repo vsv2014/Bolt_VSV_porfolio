@@ -32,14 +32,14 @@ export function FrontendCraft() {
       accent="product"
       description="Frontend-heavy by choice: I spend most of my time where rendering, state and interaction meet. Below are three live demos I built for this page — pointer events, SVG, virtualisation and PerformanceObserver, no UI kit and no canvas library."
     >
-      <div className="grid gap-4 lg:grid-cols-[1.45fr_1fr]">
+      <div className="grid min-w-0 items-start gap-4 lg:grid-cols-[minmax(0,1.45fr)_minmax(0,1fr)]">
         <Reveal>
-          <Card className="flex h-full flex-col overflow-hidden p-0">
+          <Card className="overflow-hidden p-0">
             <FlowCanvas />
           </Card>
         </Reveal>
 
-        <div className="grid gap-4">
+        <div className="grid min-w-0 gap-4">
           <Reveal delay={0.06}>
             <Card className="overflow-hidden p-0">
               <VirtualList />

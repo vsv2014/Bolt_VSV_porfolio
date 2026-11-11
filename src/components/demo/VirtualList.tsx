@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { ListTree } from 'lucide-react';
+import { visibleRange } from '@/lib/virtualWindow';
 
 const ROW_H = 30;
 const VIEWPORT = 260;
@@ -13,6 +14,8 @@ const OVERSCAN = 6;
  */
 export function VirtualList() {
   const [scrollTop, setScrollTop] = useState(0);
+  const [viewportHeight, setViewportHeight] = useState(VIEWPORT);
+  const viewportRef = useRef<HTMLDivElement>(null);
   const frame = useRef(0);
   const pending = useRef(0);
 
@@ -28,11 +31,20 @@ export function VirtualList() {
     [],
   );
 
-  const start = Math.max(0, Math.floor(scrollTop / ROW_H) - OVERSCAN);
-  const end = Math.min(TOTAL, start + Math.ceil(VIEWPORT / ROW_H) + OVERSCAN * 2);
+  const { start, end } = visibleRange(scrollTop, viewportHeight, TOTAL, ROW_H, OVERSCAN);
   const visible = rows.slice(start, end);
 
   useEffect(() => () => cancelAnimationFrame(frame.current), []);
+
+  useEffect(() => {
+    const viewport = viewportRef.current;
+    if (!viewport) return;
+    const measure = () => setViewportHeight(viewport.clientHeight || VIEWPORT);
+    measure();
+    const observer = new ResizeObserver(measure);
+    observer.observe(viewport);
+    return () => observer.disconnect();
+  }, []);
 
   const onScroll = (event: React.UIEvent<HTMLDivElement>) => {
     pending.current = event.currentTarget.scrollTop;
@@ -44,7 +56,7 @@ export function VirtualList() {
   };
 
   return (
-    <div className="flex h-full flex-col">
+    <div className="flex min-w-0 flex-col">
       <div className="flex items-center gap-2 border-b border-line px-4 py-3">
         <ListTree className="h-3.5 w-3.5 text-brand-cyan" />
         <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-faint">virtualised table</p>
@@ -60,17 +72,24 @@ export function VirtualList() {
       </div>
 
       <div
+        ref={viewportRef}
+        data-testid="virtual-viewport"
         onScroll={onScroll}
-        className="scrollbar-thin relative flex-1 overflow-y-auto"
+        className="scrollbar-thin relative shrink-0 overflow-y-auto"
         style={{ height: VIEWPORT }}
-        role="region"
-        aria-label={`Virtualised list of ${TOTAL.toLocaleString()} tenants`}
+        role="list"
+        tabIndex={0}
+        aria-label={`Scrollable virtualised list of ${TOTAL.toLocaleString()} tenants`}
       >
         <div style={{ height: TOTAL * ROW_H, position: 'relative' }}>
           <div style={{ transform: `translateY(${start * ROW_H}px)` }}>
             {visible.map((row) => (
               <div
                 key={row.id}
+                role="listitem"
+                aria-posinset={row.id}
+                aria-setsize={TOTAL}
+                aria-label={`${row.tenant}, ${row.agents} agents, p95 ${row.latency} milliseconds, ${row.state}`}
                 className="grid grid-cols-[1fr_auto_auto] items-center gap-x-4 border-b border-line/50 px-4 font-mono text-[11px] text-muted"
                 style={{ height: ROW_H }}
               >

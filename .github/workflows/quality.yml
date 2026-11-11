@@ -1,0 +1,36 @@
+name: Portfolio quality
+on:
+  push:
+    branches: [main, 'fix/**']
+  pull_request:
+    branches: [main]
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+      - run: npm ci
+      - run: npm run lint
+      - run: npm test
+      - run: npm run build
+      - name: Inspect GitHub Pages publishing mode
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh api repos/${{ github.repository }}/pages --jq '{build_type: .build_type, source: .source}' || true
+      - name: Chromium browser smoke
+        run: |
+          npm install --no-save --no-package-lock playwright-core@1.56.1
+          npm run preview -- --host 127.0.0.1 --port 4173 > /tmp/portfolio-preview.log 2>&1 &
+          node tests/browser-smoke.mjs
+      - name: Upload craft screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: portfolio-craft-screenshots
+          path: /tmp/portfolio-craft-*.png
+          if-no-files-found: ignore

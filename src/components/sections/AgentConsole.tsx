@@ -13,7 +13,7 @@ import {
 } from 'lucide-react';
 import { Section, Reveal } from '@/components/ui';
 import { agentDocs, suggestedPrompts } from '@/data/agent';
-import { ASK_AGENT_EVENT, retrieve, sleep, sourceLabel } from '@/lib/agent';
+import { ASK_AGENT_EVENT, consumePendingAgentQuery, retrieve, sleep, sourceLabel } from '@/lib/agent';
 import { cn } from '@/lib/utils';
 import type { AgentSource, TraceKind, TraceStep } from '@/types';
 
@@ -126,10 +126,19 @@ export function AgentConsole() {
     const handler = (event: Event) => {
       const query = (event as CustomEvent<{ query?: string }>).detail?.query;
       if (!query) return;
+      consumePendingAgentQuery();
       booted.current = true;
       void run(query);
     };
     window.addEventListener(ASK_AGENT_EVENT, handler);
+    const queued = consumePendingAgentQuery();
+    if (queued) {
+      booted.current = true;
+      requestAnimationFrame(() => {
+        document.getElementById('agent')?.scrollIntoView({ behavior: 'smooth' });
+        void run(queued);
+      });
+    }
     return () => window.removeEventListener(ASK_AGENT_EVENT, handler);
   }, [run]);
 
@@ -142,7 +151,8 @@ export function AgentConsole() {
   const stop = () => {
     generation.current += 1;
     setBusy(false);
-    setMessages((previous) => finalise(previous));
+    // Stop means stop: preserve the words already streamed, do not reveal the rest.
+    setMessages((previous) => previous.map((message) => message.pending ? { ...message, pending: false } : message));
   };
 
   const lastAgent = useMemo(() => [...messages].reverse().find((message) => message.role === 'agent'), [messages]);
