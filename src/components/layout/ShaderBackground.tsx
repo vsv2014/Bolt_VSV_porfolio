@@ -120,6 +120,8 @@ export function ShaderBackground() {
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
+    // Mobile and touch devices get the CSS aurora instead of a continuous GPU loop.
+    if (window.matchMedia('(max-width: 767px), (pointer: coarse), (prefers-reduced-data: reduce)').matches) return;
 
     let gl: WebGLRenderingContext | null = null;
     try {
