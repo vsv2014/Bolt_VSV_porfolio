@@ -1,0 +1,42 @@
+name: Bug report
+description: Report a reproducible frontend, UX or accessibility defect
+title: "[Bug]: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting a bug. Please exclude secrets, personal data and proprietary employer/customer screenshots or logs.
+  - type: textarea
+    id: summary
+    attributes:
+      label: What went wrong?
+      description: Describe the expected and actual behavior.
+      placeholder: Expected... Actual...
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. Open the site
+        2. Go to ...
+        3. Click ...
+    validations:
+      required: true
+  - type: input
+    id: platform
+    attributes:
+      label: Browser, version and device
+      placeholder: "Chrome 152, Windows 11 desktop (1253x960)"
+  - type: dropdown
+    id: theme
+    attributes:
+      label: Theme
+      options: ["Dark", "Light", "Both", "Unknown"]
+  - type: textarea
+    id: notes
+    attributes:
+      label: Additional context
+      description: Only non-sensitive screenshots, logs or links.
