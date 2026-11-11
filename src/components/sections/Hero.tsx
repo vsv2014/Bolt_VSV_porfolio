@@ -134,17 +134,17 @@ export function Hero() {
             </motion.p>
 
             <motion.div custom={5} variants={fadeUp} initial="hidden" animate="show" className="mt-9 flex flex-wrap items-center gap-3">
-              <ButtonLink href="#agent" variant="primary" data-cursor data-cursor-label="ask" data-magnetic>
-                Ask my AI console <Sparkles className="h-4 w-4" />
+              <ButtonLink href="#projects" variant="primary" data-cursor data-cursor-label="work" data-magnetic>
+                Explore selected work <ArrowUpRight className="h-4 w-4" />
               </ButtonLink>
-              <ButtonLink href="#craft" variant="secondary" data-cursor data-cursor-label="demos">
-                Frontend craft <ArrowDown className="h-4 w-4" />
-              </ButtonLink>
-              <ButtonLink href={resumeHref} target="_blank" rel="noopener noreferrer" variant="ghost">
+              <ButtonLink href={resumeHref} target="_blank" rel="noopener noreferrer" variant="secondary">
                 Résumé <FileText className="h-4 w-4" />
               </ButtonLink>
-              <ButtonLink href="#contact" variant="ghost">
-                Get in touch <ArrowUpRight className="h-4 w-4" />
+              <ButtonLink href="#craft" variant="ghost" data-cursor data-cursor-label="demos">
+                Try live demos <ArrowDown className="h-4 w-4" />
+              </ButtonLink>
+              <ButtonLink href="#agent" variant="ghost" data-cursor data-cursor-label="ask">
+                Ask AI <Sparkles className="h-4 w-4" />
               </ButtonLink>
             </motion.div>
 
