@@ -53,7 +53,7 @@ function keywordScore(query: string, tokens: string[], keywords: string[]): numb
 export interface Retrieval {
   doc: AgentDoc;
   sources: AgentSource[];
-  /** Top-hit similarity in the 0–1 range, as displayed on the source chips. */
+  /** Illustrative keyword-relevance score in 0–1 range, not vector similarity. */
   similarity: number;
   steps: TraceStep[];
 }
@@ -92,26 +92,26 @@ function buildTrace(doc: AgentDoc, similarity: number): TraceStep[] {
   return [
     {
       kind: 'embed',
-      label: 'embed(query)',
-      detail: 'text-embedding-3-large · 1536d · local',
+      label: 'tokenize(query)',
+      detail: 'local tokenization · no embeddings',
       ms: 360,
     },
     {
       kind: 'retrieve',
-      label: 'vector_search(index="vsv_profile", k=3)',
-      detail: `cosine similarity · top hit ${similarity.toFixed(3)}`,
+      label: 'rank_curated_facts(k=3)',
+      detail: `keyword relevance · top match ${similarity.toFixed(3)}`,
       ms: 520,
     },
     {
       kind: 'tool',
-      label: `${doc.tool.name}(${doc.tool.args})`,
-      detail: doc.tool.detail,
+      label: `preview_${doc.tool.name}(${doc.tool.args})`,
+      detail: `illustrative local lookup · ${doc.tool.detail}`,
       ms: 460,
     },
     {
       kind: 'compose',
-      label: 'compose_answer(grounded=true)',
-      detail: `${words} tokens · streaming`,
+      label: 'display_curated_answer()',
+      detail: `${words} words · simulated text reveal`,
       ms: 300,
     },
   ];
