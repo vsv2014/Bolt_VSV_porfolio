@@ -21,7 +21,8 @@ jobs:
       - name: Inspect GitHub Pages publishing mode
         env:
           GH_TOKEN: ${{ github.token }}
-        run: gh api repos/${{ github.repository }}/pages --jq '{build_type: .build_type, source: .source}' || true
+        run: |
+          gh api repos/${{ github.repository }}/pages --jq '{build_type: .build_type, source: .source}' || true
       - name: Chromium browser smoke
         run: |
           npm install --no-save --no-package-lock playwright-core@1.56.1
