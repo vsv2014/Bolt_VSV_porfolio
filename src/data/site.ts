@@ -9,7 +9,7 @@ const GITHUB_URL = 'https://github.com/vsv2014';
 
 export const profile = {
   name: 'Veerannapet Santhosh Vishal',
-  shortName: 'Santhosh Veerannapet',
+  shortName: 'Santhosh Vishal',
   initials: 'SV',
   role: 'Frontend-Heavy Full-Stack Engineer · AI/LLM Platforms · Interface Architecture',
   /** Factual recognition line shown as a chip in the hero (source: résumé awards). */
@@ -56,6 +56,7 @@ export const navLinks: NavLink[] = [
   { id: 'impact', label: 'Impact' },
   { id: 'projects', label: 'Work' },
   { id: 'craft', label: 'Craft' },
+  { id: 'notes', label: 'Notes' },
   { id: 'agent', label: 'Ask AI' },
   { id: 'research', label: 'Research' },
   { id: 'awards', label: 'Awards' },
