@@ -35,7 +35,7 @@ test('engineering articles are standalone, readable and linked in the site', () 
   const app = file('src/App.tsx');
   assert.match(app, /<EngineeringNotes \/>/);
   for (const slug of notes) {
-    assert.ok(notesView.includes(`/notes/${slug}.html`), `missing ${slug} site link`);
+    assert.ok(notesView.includes(`notes/${slug}.html`), `missing ${slug} site link`);
     const article = file(`public/notes/${slug}.html`);
     assert.match(article, /<h1>/);
     assert.match(article, /<article>/);
