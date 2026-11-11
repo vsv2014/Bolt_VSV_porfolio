@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, type ReactNode } from 'react';
+import { Suspense, useEffect, useRef, useState, type ReactNode } from 'react';
 import { SectionErrorBoundary } from './SectionErrorBoundary';
 
 /**
@@ -46,7 +46,9 @@ export function DeferredSection({ id, children }: { id: string; children: ReactN
     <div ref={host} id={ready ? undefined : id} data-testid={`deferred-${id}`}>
       {ready ? (
         <SectionErrorBoundary>
-          {children}
+          <Suspense fallback={<div className="mx-auto h-52 max-w-5xl animate-pulse rounded-xl bg-surface" aria-label="Loading portfolio section" />}>
+            {children}
+          </Suspense>
         </SectionErrorBoundary>
       ) : (
         <div className="mx-auto min-h-52 max-w-5xl px-6 py-16 sm:px-8" aria-hidden="true">
