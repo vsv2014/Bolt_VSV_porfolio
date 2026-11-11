@@ -3,7 +3,7 @@ import { Section } from '@/components/ui';
 
 const posts = [
   {
-    href: '/notes/react-flow-editor.html',
+    href: 'notes/react-flow-editor.html',
     category: 'UI engineering',
     read: '6 min',
     title: 'A React node editor without a graph library',
@@ -12,7 +12,7 @@ const posts = [
     tags: ['React', 'Pointer Events', 'SVG', 'Accessibility'],
   },
   {
-    href: '/notes/virtualized-10000-rows.html',
+    href: 'notes/virtualized-10000-rows.html',
     category: 'Web performance',
     read: '5 min',
     title: 'Render 10,000 rows without rendering 10,000 elements',
@@ -21,7 +21,7 @@ const posts = [
     tags: ['Virtualization', 'TypeScript', 'Rendering'],
   },
   {
-    href: '/notes/honest-ai-console.html',
+    href: 'notes/honest-ai-console.html',
     category: 'AI interfaces',
     read: '4 min',
     title: 'A transparent AI-console simulation without API keys',
@@ -55,14 +55,14 @@ export function EngineeringNotes() {
             <ul className="mt-5 flex flex-wrap gap-2" aria-label="Topics">
               {tags.map((tag) => <li key={tag} className="rounded-md border border-line px-2 py-1 font-mono text-[10px] text-faint">{tag}</li>)}
             </ul>
-            <a className="mt-6 inline-flex min-h-11 items-center gap-2 border-t border-line pt-4 text-sm font-semibold text-fg transition-colors hover:text-brand-cyan focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-cyan" href={href}>
+            <a className="mt-6 inline-flex min-h-11 items-center gap-2 border-t border-line pt-4 text-sm font-semibold text-fg transition-colors hover:text-brand-cyan focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-cyan" href={`${import.meta.env.BASE_URL}${href}`}>
               Read the engineering note <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
             </a>
           </article>
         ))}
       </div>
       <div className="mt-5 flex flex-wrap items-center justify-between gap-3">
-        <a href="/feed.xml" className="inline-flex min-h-11 items-center gap-2 rounded-lg border border-line px-3 py-2 text-xs text-muted transition-colors hover:border-brand-cyan/50 hover:text-brand-cyan focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-cyan" aria-label="Subscribe to engineering notes via RSS">
+        <a href={`${import.meta.env.BASE_URL}feed.xml`} className="inline-flex min-h-11 items-center gap-2 rounded-lg border border-line px-3 py-2 text-xs text-muted transition-colors hover:border-brand-cyan/50 hover:text-brand-cyan focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-cyan" aria-label="Subscribe to engineering notes via RSS">
           <Rss className="h-4 w-4" aria-hidden="true" />
           Subscribe to RSS
         </a>
