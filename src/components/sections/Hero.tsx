@@ -104,7 +104,7 @@ export function Hero() {
               <SplitWords text="Santhosh" immediate delay={0.45} className="block" />
               <span className="block">
                 <SplitWords
-                  text="Veerannapet"
+                  text="Vishal"
                   immediate
                   delay={0.6}
                   className="text-gradient-animated"
