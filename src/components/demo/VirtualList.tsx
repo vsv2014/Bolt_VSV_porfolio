@@ -73,6 +73,7 @@ export function VirtualList() {
 
       <div
         ref={viewportRef}
+        data-testid="virtual-viewport"
         onScroll={onScroll}
         className="scrollbar-thin relative shrink-0 overflow-y-auto"
         style={{ height: VIEWPORT }}
