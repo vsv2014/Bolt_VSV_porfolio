@@ -1,4 +1,4 @@
-import { ArrowUpRight, BookOpen, Code2, Database, Network } from 'lucide-react';
+import { ArrowUpRight, BookOpen, Code2, Database, Network, Rss } from 'lucide-react';
 import { Section } from '@/components/ui';
 
 const posts = [
@@ -60,6 +60,12 @@ export function EngineeringNotes() {
             </a>
           </article>
         ))}
+      </div>
+      <div className="mt-5 flex flex-wrap items-center justify-between gap-3">
+        <a href="/feed.xml" className="inline-flex min-h-11 items-center gap-2 rounded-lg border border-line px-3 py-2 text-xs text-muted transition-colors hover:border-brand-cyan/50 hover:text-brand-cyan focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-cyan" aria-label="Subscribe to engineering notes via RSS">
+          <Rss className="h-4 w-4" aria-hidden="true" />
+          Subscribe to RSS
+        </a>
       </div>
       <p className="mt-5 flex items-center gap-2 text-xs leading-relaxed text-muted">
         <BookOpen className="h-4 w-4 shrink-0 text-brand-lime" aria-hidden="true" />
