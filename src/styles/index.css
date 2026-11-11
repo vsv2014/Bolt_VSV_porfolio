@@ -21,7 +21,7 @@
   --color-line-strong: rgba(255, 255, 255, 0.2);
   --color-fg: #f2f3f7;
   --color-muted: #a3a7ba;
-  --color-faint: #7d8296;
+  --color-faint: #a5aabc;
 
   /* Signature accents */
   --color-brand-purple: #7c5cff; /* violet — the primary */
@@ -314,7 +314,7 @@ html.light {
   --color-line-strong: rgba(12, 13, 18, 0.24);
   --color-fg: #0b0c11;
   --color-muted: #4c5063;
-  --color-faint: #6f7488;
+  --color-faint: #525568;
   --color-brand-purple: #5b3df5;
   --color-brand-pink: #d6246e;
   --color-brand-cyan: #0a7f96;
