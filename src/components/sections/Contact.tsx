@@ -33,8 +33,9 @@ export function Contact() {
           </p>
 
           <div className="mt-6 flex flex-wrap items-center gap-3">
-            <ButtonLink href={`mailto:${profile.email}`} variant="primary" data-cursor data-cursor-label="email" data-magnetic>
-              {profile.email} <ArrowUpRight className="h-4 w-4" />
+            <ButtonLink href={`mailto:${profile.email}`} variant="primary" className="min-w-0 max-w-full" data-cursor data-cursor-label="email" data-magnetic>
+              <span className="min-w-0 break-all text-left sm:break-normal">{profile.email}</span>
+              <ArrowUpRight className="h-4 w-4 shrink-0" />
             </ButtonLink>
             <button
               type="button"
